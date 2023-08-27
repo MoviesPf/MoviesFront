@@ -23,9 +23,7 @@ function App() {
   return (
     <>
       <div className='cards'>
-      {data && data.length > 0 && data.map((item) => (
-          <p key={item.id}>{item.title}</p>
-        ))}
+       <h1>HOLA MUNDO</h1>
       </div>
     </>
   )
