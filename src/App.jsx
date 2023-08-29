@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css';
+import { Home } from './views/Home/Home';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
   return (
     <>
       <div className='cards'>
-       <h1>HOLA MUNDO</h1>
+       <Home/>
       </div>
     </>
   )
