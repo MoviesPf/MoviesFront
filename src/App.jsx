@@ -7,21 +7,21 @@ import { Route, Routes } from 'react-router-dom';
 
 function App() {
 
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001');
+  // // useEffect(() => {
+  // //   const fetchData = async () => {
+  // //     try {
+  // //       const response = await axios.get('http://localhost:3001');
 
-        console.log(response)
-        setData(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchData();
-  }, []);
+  // //       console.log(response)
+  // //       setData(response.data);
+  // //     } catch (error) {
+  // //       console.error(error);
+  // //     }
+  // //   }
+  // //   fetchData();
+  // // }, []);
 
   return (
     <>
