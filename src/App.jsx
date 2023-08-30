@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css';
 import { Home } from './views/Home/Home';
+import { Route, Routes } from 'react-router-dom';
+// import Detail from './views/Detail/Detail'
 
 function App() {
 
@@ -23,9 +25,9 @@ function App() {
 
   return (
     <>
-      <div className='cards'>
-       <Home/>
-      </div>
+      <Routes>
+        <Route path='/home' element={<Home/>}/>
+      </Routes>
     </>
   )
 }

@@ -11,7 +11,6 @@ export const Home = () => {
         <Genders/>
         <Platforms/>
         <Cards/>
-        <Genders/>
     </div>
   )
 }
