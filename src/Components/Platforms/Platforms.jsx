@@ -13,7 +13,7 @@ const Platforms = ({ handleFilters }) => {
     <div>
       <select name="platforms" value={selectedPlatform} onChange={handlePlatformChange}>
         <option value="platforms" disabled>
-            Platforms
+        Platforms
         </option>
         {platforms.map((platform) => (
           <option key={platform.id} value={platform.name}>
@@ -24,83 +24,35 @@ const Platforms = ({ handleFilters }) => {
     </div>
   );
 };
-const platforms = [
-    {
-      "id": 28,
-      "name": "Action"
-    },
-    {
-      "id": 12,
-      "name": "Adventure"
-    },
-    {
-      "id": 16,
-      "name": "Animation"
-    },
-    {
-      "id": 35,
-      "name": "Comedy"
-    },
-    {
-      "id": 80,
-      "name": "Crime"
-    },
-    {
-      "id": 99,
-      "name": "Documentary"
-    },
-    {
-      "id": 18,
-      "name": "Drama"
-    },
-    {
-      "id": 10751,
-      "name": "Family"
-    },
-    {
-      "id": 14,
-      "name": "Fantasy"
-    },
-    {
-      "id": 36,
-      "name": "History"
-    },
-    {
-      "id": 27,
-      "name": "Horror"
-    },
-    {
-      "id": 10402,
-      "name": "Music"
-    },
-    {
-      "id": 9648,
-      "name": "Mystery"
-    },
-    {
-      "id": 10749,
-      "name": "Romance"
-    },
-    {
-      "id": 878,
-      "name": "Science Fiction"
-    },
-    {
-      "id": 10770,
-      "name": "TV Movie"
-    },
-    {
-      "id": 53,
-      "name": "Thriller"
-    },
-    {
-      "id": 10752,
-      "name": "War"
-    },
-    {
-      "id": 37,
-      "name": "Western"
-    }
-  ]
+const platforms =  [
+      { "id": 1, "name": "Netflix" },
+      { "id": 2, "name": "Star Plus" },
+      { "id": 3, "name": "HBO Max" },
+      { "id": 4, "name": "Disney+" },
+      { "id": 5, "name": "Apple TV+" },
+      { "id": 6, "name": "Amazon Prime Video" },
+      { "id": 7, "name": "Paramount+" },
+      { "id": 8, "name": "AMC+" },
+      { "id": 9, "name": "BritBox" },
+      { "id": 10, "name": "CuriosityStream" },
+      { "id": 11, "name": "Discovery+" },
+      { "id": 12, "name": "FlixNow" },
+      { "id": 13, "name": "IMDb TV" },
+      { "id": 14, "name": "Mubi" },
+      { "id": 15, "name": "Shudder" },
+      { "id": 16, "name": "Sling TV" },
+      { "id": 17, "name": "TCM Classic Movies" },
+      { "id": 18, "name": "The Criterion Channel" },
+      { "id": 19, "name": "The Roku Channel" },
+      { "id": 20, "name": "Tubi" },
+      { "id": 21, "name": "Vudu" },
+      { "id": 22, "name": "YouTube Premium" },
+      { "id": 23, "name": "Hulu" },
+      { "id": 24, "name": "Peacock" },
+      { "id": 25, "name": "Google Play Movies & TV" },
+      { "id": 26, "name": "Crave" },
+      { "id": 27, "name": "Starz" }
+    ]
+
 
 export default Platforms;
