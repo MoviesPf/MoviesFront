@@ -5,15 +5,17 @@ import { Portrait } from '../../Components/Portrait/Portrait';
 import { Genres } from '../../Components/Genres/Genres';
 import Platforms from '../../Components/Platforms/Platforms';
 import { Cards } from '../../Components/Cards/Cards';
-import { getAllMovies } from '../../Redux/actions';
+import { getAllPrograms } from '../../Redux/actions';
 import css from './Home.module.css';
+import { getAllPrograms } from '../../Redux/actions';
+
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movies);
+  const programs = useSelector((state) => state.programs);
 
   useEffect(() => {
-    dispatch(getAllMovies());
+    dispatch(getAllPrograms());
   }, [dispatch]);
 
   return (
@@ -23,7 +25,7 @@ export const Home = () => {
       <Genres />
       <Platforms />
       <h1 className={css.subTitle}>Latest Releases</h1>
-      <Cards movies={movies} />
+      <Cards programs={programs} />
     </div>
   );
 };

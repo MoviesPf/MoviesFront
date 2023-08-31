@@ -15,8 +15,12 @@ export const NavBar = () => {
       </div>
       <div className={css.contLeft}>
         <SearchBar/>
+        <Link to='/login'>
         <button className={css.sesion}>Sign In</button>
+        </Link>
+        <Link to='/signin'>
         <button className={css.sesion}>Log In</button>
+        </Link>
       </div>
     </div>
   )
