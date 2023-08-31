@@ -1,16 +1,16 @@
-import { GET_ALL_MOVIES, GET_PROGRAM_DETAIL } from "./actions-type";
+import { GET_ALL_PROGRAMS, GET_PROGRAM_DETAIL } from "./actions-type";
 
 const initialState = {
-  movies: [],
+  programs: [],
   programDetail: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_MOVIES:
+    case GET_ALL_PROGRAMS:
       return {
         ...state,
-        movies: action.payload,
+        programs: action.payload,
       };
 
     case GET_PROGRAM_DETAIL:

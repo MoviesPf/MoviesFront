@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Card = ({ movie }) => {
+export const Card = ({ program }) => {
   return (
     <div className="card">
-      <img src={movie.poster} alt={movie.title} />
+      <img src={program.poster} alt={program.title} />
     </div>
   );
 };
