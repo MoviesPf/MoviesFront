@@ -11,14 +11,13 @@ export const getAllPrograms = () => {
     }
   };
 };
+//CAMBIAR LO DE CONSOLE.LOG
 
 export const getProgramDetail = (ProgramsId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/programs/${ProgramsId}`
-      );
-      return dispatch({ type: GET_PROGRAM_DETAIL, payload: data });
+      const { data } = await axios.get(`http://localhost:3001/programs/${ProgramsId}`);
+      return dispatch({ type: GET_PROGRAM_DETAIL, payload: data.data });
     } catch (error) {
       console.log(error);
     }

@@ -1,32 +1,32 @@
 
 import React from 'react';
 
-const UserProfile = () => {
+const Profile = () => {
 //   const user = useSelector(state => state.user);
+
 
   return (
     <div className="profile">
       <img src={user.avatar} alt="Avatar" className="avatar" />
       <img src={user.background} alt="Background" className="background" />
       <h1>{user.name}</h1>
-      <p>{user.description}</p>
+      <p>{user.status}</p>
     </div>
   );
 };
 
-export default UserProfile;
+export default Profile;
 
 const user = {
-	"id": "fd846e69-9779-4a2b-af7a-ccee3a80cd32",
-	"admin": false,
-	"banned": false,
-	"name": "Jorge",
-	"nickname": "ElJorge123",
-	"avatar": "https://randomuser.me/api/portraits/men/75.jpg",
-    "background": "https://random.imagecdn.app/500/150",
-    "description": "may the fourth be with you",
-	"password": "123456",
-	"status": "caminando",
-	"email": "hola@gmail.com",
-	"PlaylistId": null
+    "id": "df76d866-783a-4f23-8a9d-18e715fa1ebc",
+		"name": "Marcelo",
+		"nickname": "ElMariano123",
+		"avatar": "https://randomuser.me/api/portraits/men/75.jpg",
+		"email": "chau@gmail.com",
+		"password": "123456",
+		"status": "may the fourth be with you",
+		"admin": false,
+		"banned": false,
+		"PlaylistId": null,
+        "background": "https://random.imagecdn.app/500/150",
 }
