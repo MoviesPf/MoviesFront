@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProgramDetail } from "../../Redux/actions";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Detail.module.css";
 
 const Detail = () => {
-  const { ProgramsId } = useParams(); // Obtiene el ID del programa desde la URL
-  const [program, setProgram] = useState(null);
+  const { ProgramsId } = useParams();
+  const dispatch = useDispatch();
+  const programDetail = useSelector((state) => state.programDetail); 
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/programs/${ProgramsId}`)
-      .then((response) => {
-        setProgram(response.data.data); 
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching program details:", error);
-      });
-  }, [ProgramsId]);
+    dispatch(getProgramDetail(ProgramsId));
+  }, [dispatch, ProgramsId]);
 
-
-  if (!program) {
+  if (!programDetail) {
     return <div>Loading...</div>;
   }
 
@@ -29,33 +24,33 @@ const Detail = () => {
       <div className={`${styles.backdropContainer} row`}>
         <img
           className={`col-12 ${styles.backdropImage}`}
-          src={program.backdrop}
-          alt={`Backdrop of ${program.title}`}
+          src={programDetail.backdrop}
+          alt={`Backdrop of ${programDetail.title}`}
         />
       <div className={`${styles.programInfo} mt-4`}> 
       <h1 className="mb-4">Program Details</h1>
-      <p>ID: {program.id}</p>
-      <p>Title: {program.title}</p>
-      <img src={program.poster} alt={`Poster of ${program.title}`} />
-      <p>Overview: {program.overview}</p>
-      <p>Release Date: {program.release_date}</p>
-      <p>Popularity: {program.popularity}</p>
-      <p>Adult Content: {program.adult ? "Yes" : "No"}</p>
-      {program.Genres && program.Genres.length > 0 && (
+      <p>ID: {programDetail.id}</p>
+      <p>Title: {programDetail.title}</p>
+      <img src={programDetail.poster} alt={`Poster of ${programDetail.title}`} />
+      <p>Overview: {programDetail.overview}</p>
+      <p>Release Date: {programDetail.release_date}</p>
+      <p>Popularity: {programDetail.popularity}</p>
+      <p>Adult Content: {programDetail.adult ? "Yes" : "No"}</p>
+      {programDetail.Genres && programDetail.Genres.length > 0 && (
         <div>
           <p>Genres:</p>
           <ul>
-            {program.Genres.map((genre) => (
+            {programDetail.Genres.map((genre) => (
               <li key={genre.id}>{genre.name}</li>
             ))}
           </ul>
         </div>
       )}
-      {program.Platforms && program.Platforms.length > 0 && (
+      {programDetail.Platforms && programDetail.Platforms.length > 0 && (
         <div>
           <p>Platforms:</p>
           <ul>
-            {program.Platforms.map((platform) => (
+            {programDetail.Platforms.map((platform) => (
               <li key={platform.id}>{platform.name}</li>
             ))}
           </ul>
