@@ -1,0 +1,12 @@
+body {
+    background-size: cover;
+    background-color: gray;
+}
+
+.cover {
+    width: 100%;
+    height: 250px;
+}
+
+
+

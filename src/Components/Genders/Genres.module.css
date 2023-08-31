@@ -1,0 +1,19 @@
+.backGen {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0);
+    width: 100%;
+    height: auto;
+    color: white;
+}
+
+.contGen {
+    display: flex;
+    flex-direction: row;
+}
+
+.genres {
+    color: grey;
+    margin: 0 5px;
+}
