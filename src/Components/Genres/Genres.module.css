@@ -6,6 +6,7 @@
     width: 100%;
     height: auto;
     color: white;
+    z-index: 100;
 }
 
 .contGen {

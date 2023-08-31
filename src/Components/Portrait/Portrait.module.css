@@ -1,0 +1,8 @@
+.container {
+    position: relative;
+    height: 75vh; 
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    z-index: -1;
+}
