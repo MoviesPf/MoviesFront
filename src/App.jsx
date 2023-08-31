@@ -5,7 +5,7 @@ import { Home } from './views/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import { Signin } from './views/Signin/Signin';
 import Profile from './views/Profile/Profile'
-// import Detail from './views/Detail/Detail'
+import Detail from './views/Detail/Detail'
 
 function App() {
 
@@ -31,6 +31,7 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/signin' element={<Signin/>}/>
         <Route path='/profile' element={<Profile/>}/>
+        <Route path='/detail' element={<Detail/>}/>
       </Routes>
     </>
   )
