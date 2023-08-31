@@ -1,1 +1,2 @@
 export const GET_ALL_MOVIES = "GET_ALL_MOVIES";
+export const GET_PROGRAM_DETAIL = "GET_PROGRAM_DETAIL";
