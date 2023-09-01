@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_PROGRAMS, GET_PROGRAM_DETAIL, GET_PROGRAMS_BY_GENRE } from "./actions-type";
+import { GET_ALL_PROGRAMS, GET_PROGRAM_DETAIL, FILTER_PROGRAMS_BY_GENRE, FILTER_PROGRAMS_BY_PLATFORM } from "./actions-type";
 
 export const getAllPrograms = () => {
   return async (dispatch) => {
@@ -11,25 +11,36 @@ export const getAllPrograms = () => {
     }
   };
 };
-//CAMBIAR LO DE CONSOLE.LOG
+
 export const getProgramDetail = (ProgramsId) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`http://localhost:3001/programs/${ProgramsId}`);
-      return dispatch({ type: GET_PROGRAM_DETAIL, payload: data.data });
+      dispatch({ type: GET_PROGRAM_DETAIL, payload: data.data });
     } catch (error) {
       console.log(error);
     }
   };
 };
-export const getProgramsByGenre = (genreName) => {
+
+export const filterProgramsByGenre = (genreName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`http://localhost:3001/programs/filter/${genreName}`);
-      dispatch({ type: GET_PROGRAMS_BY_GENRE, payload: data });
+      dispatch({ type: FILTER_PROGRAMS_BY_GENRE, payload: data });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 };
 
+export const filterProgramsByPlatform = (platformName) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/programs/filter/platform/${platformName}`);
+      dispatch({ type: FILTER_PROGRAMS_BY_PLATFORM, payload: data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

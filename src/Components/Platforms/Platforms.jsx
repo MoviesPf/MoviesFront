@@ -1,58 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPrograms, filterProgramsByGenre, filterProgramsByPlatform } from '../../Redux/actions';
 
-const Platforms = ({ handleFilters }) => {
-  const [selectedPlatform, setSelectedPlatform] = useState('platforms');
+const Platforms = () => {
+  const dispatch = useDispatch();
+  const programs = useSelector((state) => state.programs); // Accede al estado de las películas
+
+  const [selectedPlatform, setSelectedPlatform] = useState('');
+
+  useEffect(() => {
+    dispatch(getAllPrograms());
+  }, [dispatch]);
 
   const handlePlatformChange = (event) => {
-    const selectedValue = event.target.value;
-    setSelectedPlatform(selectedValue);
-    handleFilters(selectedValue); 
+    const selectedPlatform = event.target.value;
+    setSelectedPlatform(selectedPlatform);
+    if (selectedPlatform === '') {
+      dispatch(getAllPrograms());
+    } else {
+      dispatch(filterProgramsByPlatform(selectedPlatform));
+    }
   };
 
   return (
     <div>
-      <select name="platforms" value={selectedPlatform} onChange={handlePlatformChange}>
-        <option value="platforms" disabled>
-        Platforms
-        </option>
-        {platforms.map((platform) => (
-          <option key={platform.id} value={platform.name}>
-            {platform.name}
-          </option>
-        ))}
+      <h2>Plataformas</h2>
+      <select value={selectedPlatform} onChange={handlePlatformChange}>
+        <option value="">Todas las plataformas</option>
+        {/* Asegúrate de tener un estado para las plataformas y mapea las opciones aquí */}
       </select>
     </div>
   );
 };
-const platforms =  [
-      { "id": 1, "name": "Netflix" },
-      { "id": 2, "name": "Star Plus" },
-      { "id": 3, "name": "HBO Max" },
-      { "id": 4, "name": "Disney+" },
-      { "id": 5, "name": "Apple TV+" },
-      { "id": 6, "name": "Amazon Prime Video" },
-      { "id": 7, "name": "Paramount+" },
-      { "id": 8, "name": "AMC+" },
-      { "id": 9, "name": "BritBox" },
-      { "id": 10, "name": "CuriosityStream" },
-      { "id": 11, "name": "Discovery+" },
-      { "id": 12, "name": "FlixNow" },
-      { "id": 13, "name": "IMDb TV" },
-      { "id": 14, "name": "Mubi" },
-      { "id": 15, "name": "Shudder" },
-      { "id": 16, "name": "Sling TV" },
-      { "id": 17, "name": "TCM Classic Movies" },
-      { "id": 18, "name": "The Criterion Channel" },
-      { "id": 19, "name": "The Roku Channel" },
-      { "id": 20, "name": "Tubi" },
-      { "id": 21, "name": "Vudu" },
-      { "id": 22, "name": "YouTube Premium" },
-      { "id": 23, "name": "Hulu" },
-      { "id": 24, "name": "Peacock" },
-      { "id": 25, "name": "Google Play Movies & TV" },
-      { "id": 26, "name": "Crave" },
-      { "id": 27, "name": "Starz" }
-    ]
-
 
 export default Platforms;

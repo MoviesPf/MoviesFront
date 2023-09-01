@@ -1,13 +1,16 @@
+// reducer.js
+
 import {
   GET_ALL_PROGRAMS,
   GET_PROGRAM_DETAIL,
-  GET_PROGRAMS_BY_GENRE,
+  FILTER_PROGRAMS_BY_GENRE,
+  FILTER_PROGRAMS_BY_PLATFORM,
 } from "./actions-type";
 
 const initialState = {
   programs: [],
   programDetail: [],
-  filterPrograms: [],
+  filteredPrograms: [], // Nuevo estado para las películas filtradas
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,6 +19,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         programs: action.payload,
+        filteredPrograms: action.payload, // Inicializa filteredPrograms con todas las películas
       };
 
     case GET_PROGRAM_DETAIL:
@@ -23,11 +27,19 @@ const reducer = (state = initialState, action) => {
         ...state,
         programDetail: action.payload,
       };
-    case GET_PROGRAMS_BY_GENRE:
+
+    case FILTER_PROGRAMS_BY_GENRE:
       return {
         ...state,
-        filterPrograms: action.payload,
-      }
+        filteredPrograms: action.payload,
+      };
+
+    case FILTER_PROGRAMS_BY_PLATFORM:
+      return {
+        ...state,
+        filteredPrograms: action.payload,
+      };
+
     default:
       return state;
   }
