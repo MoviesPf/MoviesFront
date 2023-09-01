@@ -7,7 +7,6 @@ import Platforms from '../../Components/Platforms/Platforms';
 import { Cards } from '../../Components/Cards/Cards';
 import { getAllPrograms } from '../../Redux/actions';
 import css from './Home.module.css';
-import { getAllPrograms } from '../../Redux/actions';
 
 
 export const Home = () => {
@@ -21,11 +20,11 @@ export const Home = () => {
   return (
     <div className={css.background}>
       <NavBar />
-      <Portrait movies={movies}/>
+      <Portrait programs={programs} />
       <Genres />
       <Platforms />
       <h1 className={css.subTitle}>Latest Releases</h1>
       <Cards programs={programs} />
     </div>
   );
-};
+}; 
