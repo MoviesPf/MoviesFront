@@ -1,17 +1,49 @@
-import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { getProgramsByGenre } from './actions';
 
-export const Genders = () => {
+const Genders = () => {
+  const dispatch = useDispatch();
+  const programs = useSelector((state) => state.filterPrograms); // Usamos el estado filterPrograms para mostrar los programas filtrados
+  const allGenres = useSelector((state) => state.programs); // Usamos el estado programs para obtener todos los géneros disponibles
+
+  const handleGenreClick = (genreName) => {
+    dispatch(getProgramsByGenre(genreName));
+  };
+
+  const handleShowAll = () => {
+    // Para mostrar todos los programas sin filtrar, puedes llamar a la acción con un valor nulo o vacío.
+    dispatch(getProgramsByGenre('')); // Esto podría variar según cómo esté configurada tu API en el backend.
+  };
+
   return (
     <div>
-      <h1>Genders</h1>
+      <h1>Géneros</h1>
       <div>
-        {genders.map((gender) => (
-          <h3 key={gender.id}>{gender.name}</h3>
+        <button onClick={handleShowAll}>Mostrar Todos</button>
+        {allGenres.map((genre) => (
+          <button
+            key={genre.id}
+            onClick={() => handleGenreClick(genre.name)}
+          >
+            {genre.name}
+          </button>
+        ))}
+      </div>
+
+      <h2>Programas</h2>
+      <div>
+        {programs.map((program) => (
+          <div key={program.id}>
+            <h3>{program.title}</h3>
+            <p>{program.description}</p>
+          </div>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Genders;
 
 
 const genders = [

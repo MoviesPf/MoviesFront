@@ -1,8 +1,13 @@
-import { GET_ALL_PROGRAMS, GET_PROGRAM_DETAIL } from "./actions-type";
+import {
+  GET_ALL_PROGRAMS,
+  GET_PROGRAM_DETAIL,
+  GET_PROGRAMS_BY_GENRE,
+} from "./actions-type";
 
 const initialState = {
   programs: [],
   programDetail: [],
+  filterPrograms: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,7 +23,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         programDetail: action.payload,
       };
-
+    case GET_PROGRAMS_BY_GENRE:
+      return {
+        ...state,
+        filterPrograms: action.payload,
+      }
     default:
       return state;
   }
