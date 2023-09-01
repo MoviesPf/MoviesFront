@@ -1,0 +1,21 @@
+.backPlt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0);
+    width: 100%;
+    height: auto;
+    color: white;
+    z-index: 100;
+}
+
+.selectPlt {
+    background: transparent;
+    border: 2px solid transparent;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    border-radius: 4px; 
+    padding: 5px; 
+    margin: 5px;
+  }

@@ -1,0 +1,15 @@
+.container {
+    padding: 7px;
+}
+
+.img {
+    width: 200px;
+    height: 300px;
+    border-radius: 15px;
+    transition: all 0.25s;
+    overflow: hidden;
+}
+
+.img:hover {
+    transform: scale(1.05);
+}

@@ -1,0 +1,64 @@
+.background {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.contRight {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    left: 15px;
+}
+
+.logo {
+    color: green;
+}
+
+.contMid {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    left: 30%;
+}
+
+.types {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 5px;
+    font-size: 16px;
+    background: transparent;
+    border: 2px solid transparent;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.contLeft {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 15px;
+}
+
+.sesion {
+    display: inline-block;
+    padding: 10px 0;
+    margin: 0 5px;
+    background: transparent;
+    border: 2px solid transparent;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+
+

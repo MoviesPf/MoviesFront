@@ -1,9 +1,13 @@
 import React from 'react';
+import css from './Card.module.css';
+import { Link } from "react-router-dom";
 
 export const Card = ({ program }) => {
   return (
-    <div className="card">
-      <img src={program.poster} alt={program.title} />
+    <div className={css.container}>
+      <Link>
+      <img className={css.img} src={program.poster} alt={program.title} />
+      </Link>
     </div>
   );
 };

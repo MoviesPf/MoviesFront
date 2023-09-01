@@ -1,20 +1,21 @@
 import React from 'react'
+import css from './Genres.module.css'
+import { Link } from "react-router-dom";
 
-export const Genders = () => {
+export const Genres = () => {
   return (
-    <div>
-      <h1>Genders</h1>
-      <div>
-        {genders.map((gender) => (
-          <h3 key={gender.id}>{gender.name}</h3>
-        ))}
-      </div>
+    <div className={css.backGen}>
+        {genres.map((genre) => (
+        <Link style={{ textDecoration: 'none' }}>
+          <h3 className={css.genres} key={genre.id}>{genre.name}</h3>
+        </Link>
+          ))}
     </div>
   )
 }
 
 
-const genders = [
+const genres = [
     {
       "id": 28,
       "name": "Action"
