@@ -23,6 +23,7 @@ export const Home = () => {
       <NavBar />
       <Portrait programs={programs} />
       <Genres />
+      <br/>
       <Platforms />
       <h1 className={css.subTitle}>Latest Releases</h1>
       <Cards programs={programs} />

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import css from './Platforms.module.css';
 
 const Platforms = ({ handleFilters }) => {
   const [selectedPlatform, setSelectedPlatform] = useState('platforms');
@@ -10,8 +11,8 @@ const Platforms = ({ handleFilters }) => {
   };
 
   return (
-    <div>
-      <select name="platforms" value={selectedPlatform} onChange={handlePlatformChange}>
+    <div className={css.backPlt}>
+      <select className={css.selectPlt} name="platforms" value={selectedPlatform} onChange={handlePlatformChange}>
         <option value="platforms" disabled>
         Platforms
         </option>

@@ -1,4 +1,4 @@
-.backGen {
+.backPlt {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,12 +9,11 @@
     z-index: 100;
 }
 
-.genres {
-    color: grey;
-    font-size: 17px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
-}
+.selectPlt {
+    background-color: #333;
+    color: white;
+    border: 1px solid #666;
+    border-radius: 4px; 
+    padding: 5px; 
+    margin: 5px;
+  }

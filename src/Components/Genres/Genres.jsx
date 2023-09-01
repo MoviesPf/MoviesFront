@@ -5,13 +5,11 @@ import { Link } from "react-router-dom";
 export const Genres = () => {
   return (
     <div className={css.backGen}>
-      <div className={css.contGen}>
         {genres.map((genre) => (
         <Link style={{ textDecoration: 'none' }}>
           <h3 className={css.genres} key={genre.id}>{genre.name}</h3>
         </Link>
           ))}
-      </div>
     </div>
   )
 }
