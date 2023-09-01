@@ -1,5 +1,6 @@
 
 import React from 'react';
+import NavProfile from '../../Components/NavProfile/NavProfile';
 
 const Profile = () => {
 //   const user = useSelector(state => state.user);
@@ -11,6 +12,7 @@ const Profile = () => {
       <img src={user.background} alt="Background" className="background" />
       <h1>{user.name}</h1>
       <p>{user.status}</p>
+      <NavProfile/>
     </div>
   );
 };
