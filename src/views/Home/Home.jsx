@@ -14,9 +14,10 @@ export const Home = () => {
   const programs = useSelector((state) => state.programs);
 
   useEffect(() => {
+    console.log("UseEffect")
     dispatch(getAllPrograms());
   }, [dispatch]);
-
+  console.log("Home");
   return (
     <div className={css.background}>
       <NavBar />

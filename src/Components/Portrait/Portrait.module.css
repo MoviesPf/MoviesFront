@@ -1,8 +1,41 @@
 .container {
     position: relative;
     height: 75vh; 
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     filter: blur(10px);
     z-index: -1;
+}
+
+.portrait {
+    display: flex;
+    padding: 10vh 0;
+}
+
+.divCard {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.divCard img{
+    width: 200px;
+    height: 300px;
+    border-radius: 15px;
+}
+
+.info {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color:white;
 }
