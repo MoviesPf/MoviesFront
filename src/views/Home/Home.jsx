@@ -6,14 +6,13 @@ import Genders from '../../Components/Genders/Genders';
 import { Cards } from '../../Components/Cards/Cards';
 
 const Home = () => {
-  const filteredPrograms = useSelector((state) => state.filteredPrograms); // Asume que tienes un estado para las películas filtradas
 
   return (
     <div>
       <NavBar />
       <Genders />
       <Platforms />
-      <Cards programs={filteredPrograms} />
+      <Cards/>
     </div>
   );
 };
