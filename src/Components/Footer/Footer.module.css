@@ -1,0 +1,22 @@
+.footer {
+    display: flex;
+    position: sticky;
+    background: black;
+    bottom: 0;
+    width: 100%;
+}
+
+.linkInfo {
+    right: 0;
+    color: white;
+    padding: 0 2vw;
+    margin: 1rem;
+}
+
+.linkDono {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    color: white;
+    margin: 1rem;
+}
