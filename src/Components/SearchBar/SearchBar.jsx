@@ -19,10 +19,6 @@ export const SearchBar = () => {
   };
 
   return (
-    // <form className={css.container} onSubmit={handleSearch}>
-    //   <input type="text" id="movieName" className={css.input} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} required />
-    //   <button className={css.icon} type="submit"> &#128270; </button>
-    // </form>
     <form class={css.searchBar} onSubmit={handleSubmit}>
 
       <input 
