@@ -16,13 +16,12 @@ export const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("UseEffect")
     dispatch(getAllPrograms())
     .then(() => {
       setLoading(false);
     });
   }, [dispatch]);
-  console.log("Home");
+  
   return (
     <div className={css.background}>
       <NavBar />
@@ -35,8 +34,12 @@ export const Home = () => {
       <br/>
       <Platforms />
       <br/>
-      <h1 className={css.subTitle}>Latest Releases</h1>
+      <h1 className={css.subTitle}>Latest Releases</h1>{loading? (
+        <p></p>
+      ):(
       <Cards programs={programs} />
+      )}
+      <br/>
     </div>
   );
 }; 
