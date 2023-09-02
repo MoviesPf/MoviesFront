@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import { Portrait } from '../../Components/Portrait/Portrait';
 import { Genres } from '../../Components/Genres/Genres';
-import Platforms from '../../Components/Platforms/Platforms';
+import  Platforms  from '../../Components/Platforms/Platforms';
 import { Cards } from '../../Components/Cards/Cards';
+import Footer from '../../Components/Footer/Footer';
 import { getAllPrograms } from '../../Redux/actions';
 import css from './Home.module.css';
 
@@ -40,6 +41,7 @@ export const Home = () => {
       <Cards programs={programs} />
       )}
       <br/>
+      <Footer/>
     </div>
   );
 }; 
