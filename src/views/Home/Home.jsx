@@ -8,9 +8,15 @@ import { Cards } from '../../Components/Cards/Cards';
 const Home = () => {
 
   return (
-    <div>
+    <div className={css.background}>
       <NavBar />
-      <Genders />
+      {loading? (
+        <p></p>
+      ):(
+      <Portrait programs={programs} />
+      )}
+      <Genres />
+      <br/>
       <Platforms />
       <Cards/>
     </div>
