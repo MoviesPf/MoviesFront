@@ -1,15 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import css from './Footer.module.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-links">
-        <Link to="/about">About</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/donate">¡You can donate us a popcorn!</Link>
-      </div>
-    </footer>
+    <div className={css.footer}>
+        <Link className={css.linkInfo} style={{ textDecoration: 'none' }} to="/about">About</Link>
+        <Link className={css.linkInfo} style={{ textDecoration: 'none' }} to="/contact">Contact</Link>
+        <Link className={css.linkDono} style={{ textDecoration: 'none' }} to="/donate">¡You can donate us a popcorn! 🍿</Link>
+    </div>
   );
 };
 
