@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import css from './SearchBar.module.css'
 
 export const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,15 +10,16 @@ export const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSearch}>
+    <form className={css.container} onSubmit={handleSearch}>
       <input
         type="text"
         id="movieName"
+        className={css.input}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         required
       />
-      <button type="submit">Buscar</button>
+      <button className={css.icon} type="submit">&#128270;</button>
     </form>
   );
 };
