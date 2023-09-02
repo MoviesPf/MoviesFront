@@ -1,0 +1,3 @@
+export const GET_ALL_PROGRAMS = "GET_ALL_PROGRAMS";
+export const GET_PROGRAM_DETAIL = "GET_PROGRAM_DETAIL";
+
