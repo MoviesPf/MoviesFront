@@ -112,3 +112,11 @@
     overflow-y:scroll;
 }
 
+.cartas::-webkit-scrollbar {
+    width: 7px;
+}
+
+.cartas::-webkit-scrollbar-thumb{
+    background: #03ab30;
+}
+
