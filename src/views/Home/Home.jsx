@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavBar } from '../../Components/NavBar/NavBar';
-import { Portrait } from '../../Components/Portrait/Portrait';
-// import { Genres } from '../../Components/Genres/Genres';
-// import  Platforms  from '../../Components/Platforms/Platforms';
+// import { Genders } from '../../Components/Genders/Genders';
+// import Platforms from '../../Components/Platforms/Platforms';
 import { Cards } from '../../Components/Cards/Cards';
 import Footer from '../../Components/Footer/Footer';
 import { getAllPrograms } from '../../Redux/actions';
 import css from './Home.module.css';
 import Filters from '../../Filters/Filters';
+import  {Portrait } from '../../Components/Portrait/Portrait'
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,6 @@ export const Home = () => {
         <Portrait programs={programs} />
       )}
       <Filters/> {/* Agrega el componente Filters aquí */}
-      {/* <Cards programs={filteredPrograms.length > 0 ? filteredPrograms : programs.data} /> */}
       {/* <Genres />
       <br/>
       <Platforms />*/}

@@ -6,20 +6,20 @@ import css from './Detail.module.css';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
-import {Header} from "./Detail.Styled";
+import { Header } from "./Detail.Styled";
 
-const Detail = () => {
+export const Detail = () => {
   const { ProgramsId } = useParams();
   const dispatch = useDispatch();
   const programDetail = useSelector((state) => state.programDetail);
 
-//   useEffect(() => {
-//     dispatch(getProgramDetail(ProgramsId));
-//   }, [dispatch, ProgramsId]);
+  useEffect(() => {
+    dispatch(getProgramDetail(ProgramsId));
+  }, [dispatch, ProgramsId]);
 
-//   if (!programDetail) {
-//     return <div>Loading...</div>;
-//   }
+  if (!programDetail) {
+    return <div>Loading...</div>;
+  }
 
   const releaseDate = programDetail.release_date;
   const year = new Date(releaseDate).getFullYear();
@@ -32,14 +32,14 @@ const Detail = () => {
   } else {
     runtimeFormatted = `${programDetail.seasons} Seasons ${programDetail.episodes} Episodes`;
   }
- 
+
   return (
     <div className={css.container}>
       <NavBar />
-      <Header backgroundurl= {`url(${programDetail.backdrop})`} />
-      <ProgramDetailTopAreaC programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}/>
+      <Header backgroundurl={`url(${programDetail.backdrop})`} />
+      <ProgramDetailTopAreaC programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted} />
     </div>
   );
 };
 
-// export default Detail;
+

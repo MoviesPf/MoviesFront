@@ -6,7 +6,7 @@ import css from './filters.module.css';
 const Filters = () => {
     const dispatch = useDispatch();
     const [selectedGenre, setSelectedGenre] = useState('');
-    const [selectedPlatform, setSelectedPlatform] = useState('');
+    const [selectedPlatform, setSelectedPlatform] = useState('all'); // Inicialmente, "All Platforms" está seleccionado
 
     const genres = useSelector((state) => state.genres);
     const platforms = useSelector((state) => state.platforms);
@@ -21,32 +21,37 @@ const Filters = () => {
         setSelectedGenre(genreName);
 
         if (genreName) {
-            if (selectedPlatform) {
+            if (selectedPlatform !== 'all') {
                 dispatch(filterProgramsCombined(genreName, selectedPlatform));
             } else {
                 dispatch(filterProgramsByGenre(genreName));
             }
-        } else if (selectedPlatform) {
-            dispatch(filterProgramsByPlatform(selectedPlatform));
+        } else {
+            if (selectedPlatform !== 'all') {
+                dispatch(filterProgramsByPlatform(selectedPlatform));
+            } else {
+                dispatch(getAllPrograms()); // Si no se selecciona género ni plataforma, muestra todas las películas
+            }
         }
     };
 
     const handlePlatformFilter = (platformName) => {
         setSelectedPlatform(platformName);
         setSelectedGenre(''); // Limpiar la selección de género
-        if (platformName === 'all') {
 
-          dispatch(getAllPrograms());
+        if (platformName === 'all') {
+            // Si se selecciona "All Platforms," muestra todas las películas
+            dispatch(getAllPrograms());
         } else {
-          if (platformName && !selectedGenre) {
-            dispatch(filterProgramsByPlatform(platformName));
-          } else if (!platformName && selectedGenre) {
-            dispatch(filterProgramsByGenre(selectedGenre));
-          } else if (platformName && selectedGenre) {
-            dispatch(filterProgramsCombined(selectedGenre, platformName));
-          }
+            if (platformName && !selectedGenre) {
+                dispatch(filterProgramsByPlatform(platformName));
+            } else if (!platformName && selectedGenre) {
+                dispatch(filterProgramsByGenre(selectedGenre));
+            } else if (platformName && selectedGenre) {
+                dispatch(filterProgramsCombined(selectedGenre, platformName));
+            }
         }
-      };
+    };
 
     return (
         <div>
