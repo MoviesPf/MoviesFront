@@ -1,5 +1,5 @@
 import React from 'react';
-import NavProfile from './NavProfile';
+import NavProfile from './NavProfile'
 import styled from 'styled-components'
 import PresentationLine from "./PresentationLine"
 import NavBar from "../../Components/NavBar/NavBar"
