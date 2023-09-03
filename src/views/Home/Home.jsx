@@ -1,24 +1,36 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavBar } from '../../Components/NavBar/NavBar';
-import Platforms from '../../Components/Platforms/Platforms';
-import Genders from '../../Components/Genders/Genders';
+import { Portrait } from '../../Components/Portrait/Portrait';
 import { Cards } from '../../Components/Cards/Cards';
+import { getAllPrograms } from '../../Redux/actions';
+import css from './Home.module.css';
+import Filters from '../../Filters/Filters';
 
-const Home = () => {
+export const Home = () => {
+  const dispatch = useDispatch();
+  const programs = useSelector((state) => state.programs);
+  const filteredPrograms = useSelector((state) => state.filteredPrograms);
+  console.log('filteredPrograms', filteredPrograms)
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(getAllPrograms())
+      .then(() => {
+        setLoading(false);
+      });
+  }, [dispatch]);
 
   return (
     <div className={css.background}>
       <NavBar />
-      {loading? (
+      {loading ? (
         <p></p>
-      ):(
-      <Portrait programs={programs} />
+      ) : (
+        <Portrait programs={programs} />
       )}
-      <Genres />
-      <br/>
-      <Platforms />
-      <Cards/>
+      <Filters/> {/* Agrega el componente Filters aquí */}
+      <Cards programs={filteredPrograms.length > 0 ? filteredPrograms : programs.data} />
     </div>
   );
 };
