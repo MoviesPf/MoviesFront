@@ -1,0 +1,44 @@
+.link {
+    text-decoration: none;
+}
+
+.container {
+    margin: 10px;
+    border-radius: 15px;
+    background-color: rgb(41, 41, 41);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.allInfo {
+    margin: 10px;
+    border-radius: 15px;
+    background-color: rgb(41, 41, 41);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.titleOverview {
+    color: aliceblue;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+.img {
+    margin: 10px;
+    width: 200px;
+    height: 300px;
+    border-radius: 15px;
+    transition: all 0.25s;
+    overflow: hidden;
+}
+
+.img:hover {
+    transform: scale(1.05);
+}

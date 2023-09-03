@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_PROGRAMS, GET_PROGRAM_DETAIL } from "./actions-type";
+import { GET_ALL_PROGRAMS, GET_PROGRAM_DETAIL, GET_BYNAME } from "./actions-type";
 
 export const getAllPrograms = () => {
   return async (dispatch) => {
@@ -22,6 +22,17 @@ export const getProgramDetail = (ProgramsId) => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const getProgramByName = (title) => {
+  return async (dispatch) => {
+      const { data } = await axios(`http://localhost:3001/programs?title=${title}`)
+      console.log( data.data)
+      return dispatch({ 
+          type: GET_BYNAME, 
+          payload: data.data
+      });
   };
 };
 
