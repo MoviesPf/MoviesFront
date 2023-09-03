@@ -1,8 +1,9 @@
-.background {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.allNavbar {
     background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     position: fixed;
     width: 100%;
     top: 0;
@@ -10,10 +11,23 @@
     z-index: 100;
 }
 
+.background {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+
 .contRight {
     display: flex;
     flex-direction: row;
-    position: absolute;
+    /* position: absolute; */
     left: 15px;
 }
 
@@ -24,7 +38,7 @@
 .contMid {
     display: flex;
     flex-direction: row;
-    position: relative;
+    /* position: relative; */
     left: 30%;
 }
 
@@ -44,13 +58,13 @@
 .contLeft {
     display: flex;
     flex-direction: row;
-    position: absolute;
+    /* position: absolute; */
     right: 15px;
 }
 
 .sesion {
     display: inline-block;
-    padding: 10px 0;
+    /* padding: 10px 0; */
     margin: 0 5px;
     background: transparent;
     border: 2px solid transparent;
@@ -60,5 +74,49 @@
     cursor: pointer;
 }
 
+.searchButton {
+    border: 0;
+    border-radius: 8px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 15px;
+    background: #03ab30;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 0px;
+}
 
+.searchButton:hover {
+    background: #265400;
+}
+
+.searchComponent {
+    border-radius: 20px;
+    width: 99%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #000000e0;
+}
+
+.cartas{
+    color: #03ab30;
+    align-items: center;
+    position: relative;
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y:scroll;
+}
+
+.cartas::-webkit-scrollbar {
+    width: 7px;
+}
+
+.cartas::-webkit-scrollbar-thumb{
+    background: #03ab30;
+}
 

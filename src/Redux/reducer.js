@@ -6,6 +6,7 @@ import {
   FILTER_PROGRAMS_BY_GENRE,
   FILTER_PROGRAMS_BY_PLATFORM,
   FILTER_PROGRAMS_COMBINED,
+  GET_BYNAME,
 } from "./actions-type";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
   filteredPrograms: [],
   genres: [],      // Agrega un arreglo para almacenar los géneros
   platforms: [], 
+  searchedPrograms: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -45,6 +47,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         filteredPrograms: action.payload,
       };
+
+    case GET_BYNAME:
+      return {
+        ...state,
+        searchedPrograms: action.payload,
+      }
+
     default:
       return state;
   }

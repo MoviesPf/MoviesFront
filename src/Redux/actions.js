@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_PROGRAMS, GET_PLATFORMS, GET_GENRES, GET_PROGRAM_DETAIL, FILTER_PROGRAMS_BY_GENRE, FILTER_PROGRAMS_BY_PLATFORM, FILTER_PROGRAMS_COMBINED } from "./actions-type";
+import { GET_ALL_PROGRAMS, GET_PLATFORMS, GET_GENRES, GET_PROGRAM_DETAIL, FILTER_PROGRAMS_BY_GENRE, FILTER_PROGRAMS_BY_PLATFORM, FILTER_PROGRAMS_COMBINED, GET_BYNAME } from "./actions-type";
 
 export const getAllPrograms = () => {
   return async (dispatch) => {
@@ -80,3 +80,14 @@ export const filterProgramsCombined = (genreName, platformName) => {
     }
   };
 };
+export const getProgramByName = (title) => {
+  return async (dispatch) => {
+      const { data } = await axios(`http://localhost:3001/programs?title=${title}`)
+      console.log( data.data)
+      return dispatch({ 
+          type: GET_BYNAME, 
+          payload: data.data
+      });
+  };
+};
+
