@@ -30,10 +30,10 @@ export const NavBar = () => {
           </svg>
         </button>
         <Link to='/login'>
-        <button className={css.sesion}>Sign In</button>
+        <button className={css.sesion}>Login</button>
         </Link>
         <Link to='/signin'>
-        <button className={css.sesion}>Log In</button>
+        <button className={css.sesion}>Sign In</button>
         </Link>
       </div>
     </div>
