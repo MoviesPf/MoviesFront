@@ -2,9 +2,9 @@ import React from 'react';
 import NavProfile from './NavProfile'
 import styled from 'styled-components'
 import PresentationLine from "./PresentationLine"
-import {NavBar} from "../../Components/NavBar/NavBar"
+import {NavBar}from "../../Components/NavBar/NavBar"
 import ProgCardDetail from "../Profile/ProgCardDetail"
-import { Card } from 'react-bootstrap';
+import {Card} from '../../Components/Card/Card'
 
 
 const ViewContainer = styled.div`
@@ -109,21 +109,21 @@ const Profile = () => {
              la seleccion que se haga en la barra de navegacion del usuario (fav/list/profile/etc..) */}
             <IconLabel>Reviews</IconLabel>
             <LineHR/>
-            <ProgCardDetail
+            {/* <ProgCardDetail
               year={2023}
               genreA={"Ci-fi"}
               genreB={"Action"}
               lenguage={"Spanish"}
               overview={temporalOverview}
-              starVal={5}/>
+              starVal={5}/> */}
             <LineSubHR/>
-            <ProgCardDetail
+            {/* <ProgCardDetail
               year={2023}
               genreA={"Ci-fi"}
               genreB={"Action"}
               lenguage={"Spanish"}
               overview={temporalOverview}
-              starVal={5}/>
+              starVal={5}/> */}
             <LineSubHR/>
             <IconLabel>Likes</IconLabel>
             <LineHR/>
