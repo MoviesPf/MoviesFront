@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export const Card = ({ program }) => {
   return (
     <div className={css.container}>
-      <Link>
+      <Link to={`/detail/${program.id}`}>
       <img className={css.img} src={program.poster} alt={program.title} />
       </Link>
     </div>

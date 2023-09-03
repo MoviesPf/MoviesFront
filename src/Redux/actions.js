@@ -6,6 +6,7 @@ export const getAllPrograms = () => {
     try {
       const { data } = await axios.get("http://localhost:3001/programs");
       dispatch({ type: GET_ALL_PROGRAMS, payload: data });
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
