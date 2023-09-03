@@ -1,25 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components'
-
-const SearchInput = styled.input `
-  border: none; 
-  background-color: #5353534e; 
-  padding: 2px;
-  color: white;
-  border-radius: 10px; 
-  outline: none;
-  margin-bottom: 5px;
-`
-const SearchButton = styled.button`
-  background: #0f8071; 
-  border-radius: 10px; 
-  border: 2px solid transparent;
-  color: #ffffff;
-  margin-left: 5px;
-  margin-right: 35px;
-  font-size: 16px;
-`
-
+import { getProgramByName } from '../../Redux/actions';
+import { useDispatch } from 'react-redux';
+import css from './SearchBar.module.css'
 
 export const SearchBar = () => {
   const dispatch = useDispatch();
@@ -37,15 +19,23 @@ export const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSearch}>
-      <SearchInput
-        type="text"
-        id="movieName"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        required
+    <form class={css.searchBar} onSubmit={handleSubmit}>
+
+      <input 
+      class="form-control form-control-sm ml-3 w-75" 
+      type="text" 
+      placeholder="Search" 
+      aria-label="Search" 
+      onChange={handleInputChange} 
+      value={title} 
+      required 
       />
-      <SearchButton type="submit">Search</SearchButton>
+
+      <button 
+      class="btn btn-outline-success btn-rounded btn-sm my-0" 
+      type="submit"
+      >Search</button>
+
     </form>
   );
 };

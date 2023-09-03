@@ -11,7 +11,7 @@ margin-left: 15px;
 border-radius: 30px;
 `
 
-const Card = ({ program }) => {
+export const Card = ({ program }) => {
 
   let image =  defaultImg
   if (program.poster){image = program.poster}
@@ -20,5 +20,3 @@ const Card = ({ program }) => {
       <ProgramCard src={image} alt={program.title} />
   );
 };
-
-export default Card;

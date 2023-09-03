@@ -2,9 +2,9 @@ import React from 'react';
 import NavProfile from './NavProfile'
 import styled from 'styled-components'
 import PresentationLine from "./PresentationLine"
-import NavBar from "../../Components/NavBar/NavBar"
+import {NavBar} from "../../Components/NavBar/NavBar"
 import ProgCardDetail from "../Profile/ProgCardDetail"
-import Card from '../../Components/Card/Card'
+import { Card } from 'react-bootstrap';
 
 
 const ViewContainer = styled.div`

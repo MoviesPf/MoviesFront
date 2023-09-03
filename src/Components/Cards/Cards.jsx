@@ -1,12 +1,15 @@
 import React from 'react';
-import { Card } from '../Card/Card';
+import { Carousel } from 'react-bootstrap';
+import { Card } from '../Card/Card'
+import { css } from 'styled-components';
+
 
 export const Cards = ({ programs }) => {
   
   const chunkSize = 5;
   const cardChunks = [];
 
-  for (let i = 0; i < programs.data.length; i += chunkSize) {
+  for (let i = 0; i < programs?.data?.length; i += chunkSize) {
     const chunk = programs.data.slice(i, i + chunkSize);
 
     cardChunks.push(

@@ -1,52 +1,58 @@
 import React, { useState } from 'react'
 import { SearchBar } from '../SearchBar/SearchBar'
-import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import css from './NavBar.module.css'
+import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { SearchedCard } from '../SearchedCard/SearchedCard';
 
-const NavContainer = styled.div`
-background-color: #131212;
-display: flex;
-width: 100%;
-height: 6vh;
-background: linear-gradient(to top,#1312127d, transparent  );
-backdrop-filter: blur(10px);
+export const NavBar = () => {
+  const searchedPrograms = useSelector((state) => state.searchedPrograms)
 
-position: absolute;
-justify-content: flex-end;
-align-items: center;
-z-index: 6;
-`
-const ComponentsC = styled.div`
-display: flex;
-position: relative;
-margin-right: 60px;
-`
-const Buttons = styled.button`
-background: transparent; 
-border: 2px solid transparent;
-color: #19D576;
-font-size: 16px;
-margin-bottom: 5px;
-`
+  const [ show, setShow ] = useState( false );
 
-const NavBar = () => {
-
-  const navigate = useNavigate()
-  function redirectTo(event){
-    navigate(event.input.value);
+  const toggleShow = () => {
+    setShow(!show)
   }
-
   return (
-    <NavContainer>
-      <ComponentsC>
+    <div className={css.allNavbar}>
+    <div className={css.background}>
+      <div className={css.contRight}>
+        <h1 className={css.logo}>GreenScreen</h1>
+      </div>
+      <div className={css.contMid}>
+        <button className={css.types}>Movies</button>
+        <button className={css.types}>Series</button>
+      </div>
+      <div className={css.contLeft}>
+        <button type="button" className={css.searchButton} onClick={ toggleShow }>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
+        <Link to='/login'>
+        <button className={css.sesion}>Sign In</button>
+        </Link>
+        <Link to='/signin'>
+        <button className={css.sesion}>Log In</button>
+        </Link>
+      </div>
+    </div>
+      { show && 
+      <div className={css.searchComponent}>
         <SearchBar/>
-
-       <Buttons value="/login" onClick={redirectTo}>Loguin</Buttons>
-
-       <Buttons value="/signin" onClick={redirectTo}>Signin</Buttons>
-
-      </ComponentsC>
-    </NavContainer>
+        {
+          <div className={css.cartas}>
+            {
+             !searchedPrograms.length ? <h1> Search for a Movie/Serie </h1> : searchedPrograms.map((program) => {
+               return (
+                 <SearchedCard key={program.id} program={program} />
+                 )
+                })
+            }
+          </div>
+        }
+      </div>
+      }
+    </div>
   )
 }
-export default NavBar;
