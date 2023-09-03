@@ -17,6 +17,8 @@ export const Card = ({ program }) => {
   if (program.poster){image = program.poster}
 
   return (
+    <Link to={`/detail/${program.id}`} >
       <ProgramCard src={image} alt={program.title} />
+    </Link>
   );
 };
