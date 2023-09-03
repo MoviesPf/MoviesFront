@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import css from './Singup.module.css'
+import css from './Login.module.css'
 import { BsGoogle } from 'react-icons/bs'
 import { BsTwitter } from 'react-icons/bs'
 import { BsFacebook } from 'react-icons/bs'
@@ -56,7 +56,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type="submit" className={css.btn}>Sing Up</button>
+        <button type="submit" className={css.btn}>Login</button>
       </form>
       <div className={css.policy}>
       <AiOutlineCheckCircle className={css.icon}/> 

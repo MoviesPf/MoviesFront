@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './Singin.module.css'
+import css from './Signin.module.css'
 import { BsGoogle } from 'react-icons/bs'
 import { BsTwitter } from 'react-icons/bs'
 import { BsFacebook } from 'react-icons/bs'
