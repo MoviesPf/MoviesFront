@@ -1,4 +1,9 @@
 import React from 'react'
+import css from './Singin.module.css'
+import { BsGoogle } from 'react-icons/bs'
+import { BsTwitter } from 'react-icons/bs'
+import { BsFacebook } from 'react-icons/bs'
+import { BsGithub } from 'react-icons/bs'
 
 export const Signin = () => {
 
@@ -7,35 +12,32 @@ export const Signin = () => {
     }
 
   return (
-    <div>
-        <h1>Create an account</h1>
-        <form onSubmit={handleSubmit} >
-        <div>
-            <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Your name"
-          />
-        </div>
-        <div>
-            <label htmlFor="">Email</label>
+    <div className={css.section}>
+        <h1>Sing In</h1> 
+        <ul className={css.list}>
+        <li><BsGoogle/></li>
+        <li><BsTwitter/></li>
+        <li><BsFacebook/></li>
+        <li><BsGithub/></li>
+      </ul>
+        
+        <form onSubmit={handleSubmit} className={css.form}>
+        <div className={css.form_group}>
             <input
+            placeholder='Email'
             type= "text"
             name= "email"
-            placeholder='your email'
             />
         </div>
-        <div>
-            <label htmlFor="">Password</label>
+        <div className={css.form_group2}>
             <input
             type= "text"
             name= "password"
-            placeholder='your password'
+            placeholder='Password'
             />
         </div>
         </form>
-        <button>Sign up</button>
+        <button className={css.btn}>Sign up</button>
     </div>
   )
 }
