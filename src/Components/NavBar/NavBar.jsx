@@ -3,9 +3,7 @@ import { SearchBar } from '../SearchBar/SearchBar'
 import css from './NavBar.module.css'
 import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { Card } from '../Card/Card';
 import { SearchedCard } from '../SearchedCard/SearchedCard';
-
 
 export const NavBar = () => {
   const searchedPrograms = useSelector((state) => state.searchedPrograms)
