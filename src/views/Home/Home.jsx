@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavBar } from '../../Components/NavBar/NavBar';
-import { Portrait } from '../../Components/Portrait/Portrait';
-// import { Genres } from '../../Components/Genres/Genres';
-// import  Platforms  from '../../Components/Platforms/Platforms';
+import NavBar from '../../Components/NavBar/NavBar';
+import { Genders } from '../../Components/Genders/Genders';
+import Platforms from '../../Components/Platforms/Platforms';
 import { Cards } from '../../Components/Cards/Cards';
 import Footer from '../../Components/Footer/Footer';
 import { getAllPrograms } from '../../Redux/actions';
