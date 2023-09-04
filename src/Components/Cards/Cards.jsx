@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import { Card } from '../Card/Card'
-import { css } from 'styled-components';
+import css from './Cards.module.css';
 
 
 export const Cards = ({ programs }) => {
