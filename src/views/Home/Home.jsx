@@ -8,7 +8,7 @@ import Footer from '../../Components/Footer/Footer';
 import { getAllPrograms } from '../../Redux/actions';
 import css from './Home.module.css';
 import Filters from '../../Filters/Filters';
-import  {Portrait } from '../../Components/Portrait/Portrait'
+import { Portrait } from '../../Components/Portrait/Portrait'
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export const Home = () => {
       });
   }, [dispatch]);
 
-  
+
   return (
     <div className={css.background}>
       <NavBar />
@@ -33,18 +33,19 @@ export const Home = () => {
       ) : (
         <Portrait programs={programs} />
       )}
-      <Filters/> {/* Agrega el componente Filters aquí */}
+      <Filters /> {/* Agrega el componente Filters aquí */}
       {/* <Genres />
       <br/>
       <Platforms />*/}
-      <br/> 
-      <h1 className={css.subTitle}>Latest Releases</h1>{loading? (
+      <br />
+      <h1 className={css.subTitle}>Latest Releases</h1>
+      {loading ? (
         <p></p>
-      ):(
-      <Cards programs={filteredPrograms.length > 0 ? filteredPrograms : programs.data} />
+      ) : (
+        <Cards programs={filteredPrograms.length ? filteredPrograms : programs.data} />
       )}
-      <br/>
-      <Footer/>
+      <br />
+      <Footer />
     </div>
   );
 };
