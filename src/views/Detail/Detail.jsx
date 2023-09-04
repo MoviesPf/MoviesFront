@@ -7,6 +7,7 @@ import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
 import { Header } from "./Detail.Styled";
+import Footer from "../../Components/Footer/Footer"
 
 export const Detail = () => {
   const { ProgramsId } = useParams();
@@ -38,6 +39,7 @@ export const Detail = () => {
       <NavBar />
       <Header backgroundurl={`url(${programDetail.backdrop})`} />
       <ProgramDetailTopAreaC programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted} />
+      <Footer />
     </div>
   );
 };
