@@ -32,7 +32,7 @@ export const SearchBar = () => {
       />
 
       <button 
-      class="btn btn-outline-success btn-rounded btn-sm my-0" 
+      class="btn btn-outline-success btn-rounded btn-sm my-0 mx-3" 
       type="submit"
       >Search</button>
 
