@@ -12,6 +12,7 @@ export const Signin = () => {
     }
 
   return (
+    <div className={css.background}>
     <div className={css.section}>
         <h1>Sing In</h1> 
         <ul className={css.list}>
@@ -38,6 +39,7 @@ export const Signin = () => {
         </div>
         </form>
         <button className={css.btn}>Sign up</button>
+    </div>
     </div>
   )
 }
