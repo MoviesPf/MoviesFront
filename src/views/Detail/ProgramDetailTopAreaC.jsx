@@ -15,6 +15,7 @@ const AreaC = styled.div`
   flex-wrap: nowrap;
   margin-top: 200px;
   width: 100%;
+  height: 100%;
   justify-content: space-around;
 `
 

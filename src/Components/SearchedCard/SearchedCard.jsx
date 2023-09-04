@@ -13,6 +13,13 @@ export const SearchedCard = ({ program }) => {
           <div className={css.titleOverview}>
             <h1>{program.title}</h1>
             <p>{program.overview}</p>
+            <div className={css.genres}>
+              {
+                program.Genres.map((genre) => {
+                  return <p key={genre.name}>{genre.name}</p>
+                })
+              }
+            </div>
           </div>
         </div>
       </Link>
