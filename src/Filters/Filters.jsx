@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Carousel } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterProgramsByGenre, filterProgramsByPlatform, filterProgramsCombined, getAllPrograms, getGenres, getPlatforms } from '../Redux/actions';
 import css from './filters.module.css';
@@ -10,6 +11,9 @@ const Filters = () => {
 
     const genres = useSelector((state) => state.genres);
     const platforms = useSelector((state) => state.platforms);
+
+    const chunkSize = 10;
+    const genresChunks = [];
 
     useEffect(() => {
         dispatch(getAllPrograms());
@@ -53,23 +57,60 @@ const Filters = () => {
         }
     };
 
+    for (let i = 0; i < genres.length; i += chunkSize) {
+        const chunk = genres.slice(i, i + chunkSize);
+
+    genresChunks.push(
+      <Carousel.Item>
+        <div className={css.backGen}>
+            {chunk.map((genre) => (
+                <h3
+                    key={genre.id}
+                    onClick={() => handleGenreFilter(genre.name)}
+                    style={{ cursor: 'pointer' }}
+                    className={css.genres}
+                >
+                    {genre.name}
+                </h3>
+            ))}
+        </div>
+      </Carousel.Item>
+    );
+    }
+
+    const CustomNextArrow = (
+    <button
+        className={css.nextIcon}
+        aria-hidden="true"
+        >{">"}</button>
+    );
+    
+    const CustomPrevArrow = (
+    <button
+        className={css.prevIcon}
+        aria-hidden="true"
+    >{"<"}</button>
+    );
+
+
     return (
         <div>
-            <div className={css.backGen}>
-                {genres.map((genre) => (
-                    <h3
-                        key={genre.id}
-                        onClick={() => handleGenreFilter(genre.name)}
-                        style={{ cursor: 'pointer' }}
-                    >
-                        {genre.name}
-                    </h3>
-                ))}
-            </div>
+            <Carousel 
+                wrap={false} 
+                indicators={false} 
+                className={css.container} 
+                interval={null} 
+                nextIcon={CustomNextArrow}
+                prevIcon={CustomPrevArrow}>
+
+                {genresChunks}
+            </Carousel>
+            <br/>
             <div className={css.backPlt}>
                 <select
                     value={selectedPlatform}
                     onChange={(e) => handlePlatformFilter(e.target.value)}
+                    className={css.selectPlt}
                 >
                     <option value="all">All Platforms</option>
                     {platforms.map((platform) => (
