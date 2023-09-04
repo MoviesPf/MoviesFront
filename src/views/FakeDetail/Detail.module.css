@@ -4,9 +4,8 @@
     background-color: rgb(50, 50, 50); 
     color: rgb(255, 254, 254); 
     min-height: 100vh;
-    contain: content;
   }
-
+  
   .background {
     position: absolute;
     width: 100%;
@@ -30,3 +29,4 @@
     opacity: 0.5;
     z-index: 1; 
   }
+  

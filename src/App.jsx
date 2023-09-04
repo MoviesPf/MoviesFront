@@ -2,12 +2,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import './App.css';
-import { Home } from './views/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import { Signin } from './views/Signin/Signin';
 import Profile from './views/Profile/Profile'
-import Detail from './views/Detail/Detail'
+import { Detail } from './views/Detail/Detail'
 import Login from './views/Login/Login';
+import Home from './views/Home/Home';
+
+
 
 function App() {
 
@@ -21,7 +23,7 @@ function App() {
   // //       console.log(response)
   // //       setData(response.data);
   // //     } catch (error) {
-  // //       console.error(error);
+  // //       console.error(error); 
   // //     }
   // //   }
   // //   fetchData();
