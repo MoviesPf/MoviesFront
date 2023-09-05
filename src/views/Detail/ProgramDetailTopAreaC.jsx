@@ -30,7 +30,10 @@ z-index: 2;
 
 const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted}  ) => {
   console.log(programDetail, year, runtimeFormatted, "Data1" );
-  let imageP =  programDetail.poster
+
+  let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
+  ? defaultImg
+  : programDetail.poster
   
   return (
     <AreaC>
