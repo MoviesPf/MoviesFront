@@ -8,7 +8,7 @@ import { BiSolidCameraMovie } from 'react-icons/bi'
 
 export const NavBar = () => {
   const { pathname } = useLocation();
-  const searchedPrograms = useSelector((state) => state.searchedPrograms)
+  const searchedPrograms = useSelector((state) => state.searchedPrograms);
 
   const [ show, setShow ] = useState( false );
   const [ searched, setSearched ] = useState(false);
@@ -20,19 +20,15 @@ export const NavBar = () => {
   return (
     <div className={css.allNavbar}>
     <div className={css.background}>
-
       <div className={css.contRight}>
-        <Link to="/" className={css.logo}>
-          <BiSolidCameraMovie/>
-          <h1>GreenScreen</h1>
+        <Link to="/" className={css.link}>
+        <h1 className={css.logo}>GreenScreen</h1>
         </Link>
       </div>
-
       <div className={css.contMid}>
         <button className={css.types}>Movies</button>
         <button className={css.types}>Series</button>
       </div>
-
       <div className={css.contLeft}>
         { pathname === "/" &&
         <button type="button" className={css.searchButton} onClick={ toggleShow }>
@@ -51,23 +47,15 @@ export const NavBar = () => {
     </div>
       { show && 
       <div className={css.searchComponent}>
-        <SearchBar setSearched={setSearched} searched={searched}/>
+        <SearchBar/>
         {
           <div className={css.cartas}>
             {
-              !searched
-
-              ? <h1> Search for a Movie/Serie here ↑↑</h1>
-
-              : searchedPrograms.length
-
-              ? searchedPrograms.map((program) => {
-                  return (
-                    <SearchedCard key={program.id} program={program}/>
-                  )
+             !searchedPrograms.length ? <h1> Search for a Movie/Serie </h1> : searchedPrograms.map((program) => {
+               return (
+                 <SearchedCard key={program.id} program={program} />
+                 )
                 })
-                
-              : <h1> Movie/Serie Not Found </h1>
             }
           </div>
         }

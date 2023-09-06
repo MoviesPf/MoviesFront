@@ -15,7 +15,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    width: 30%;
+    width: 30%; 
     height: 60%;
     padding-bottom: 1rem;
     backdrop-filter: blur(10px); 
@@ -84,6 +84,23 @@
     border: none;
     background: white;
 }
+
+.policy {
+    grid-row: 3/4;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+  }
+  
+  .icon:hover {
+    color: rgba(3, 47, 3, 0.632);
+    transition: background-color 0.5s;
+  }
 
 .btn{
     height: 3rem;

@@ -1,14 +1,38 @@
-import React, { useState } from 'react';
-import css from './Login.module.css'
-import { BsGoogle } from 'react-icons/bs'
-import { BsTwitter } from 'react-icons/bs'
-import { BsFacebook } from 'react-icons/bs'
-import { BsGithub } from 'react-icons/bs'
-import { AiOutlineCheckCircle } from 'react-icons/ai' 
-import { BiSolidCameraMovie } from 'react-icons/bi'
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import css from './Login.module.css';
+import { BiSolidCameraMovie } from 'react-icons/bi';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import GoogleLogin from 'react-google-login';
+import { gapi } from 'gapi-script';
 
 const Login = () => {
+
+  // Configuracion de AUTH
+  const clientId = '999804940641-tot1597ldrpej0q6vf7khjsg5ak3buhl.apps.googleusercontent.com'
+
+  const navigate = useNavigate()
+  const [ user, setUser ] = useState({})
+
+  useEffect(() => {
+    const start = () => {
+      gapi.auth2.init({
+        clientId
+      })
+    }
+    gapi.load('client:auth2', start)
+  }, [])
+
+  const onSuccess = (res) => {
+    setUser(res.profileObj)
+    console.log(res.profileObj)
+    navigate('/')
+  }
+
+  const onFailure = () => {
+    console.log('fail')
+  }
+
+  /////////////////////////////////////////////////////////////////
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,49 +44,67 @@ const Login = () => {
   return (
     <div className={css.section}>
       <div className={css.logo}>
-        <Link to='/'>
-        <BiSolidCameraMovie className={css.icon2}/>
-        <h3>GreenScreen</h3>
+        <Link to="/">
+          <BiSolidCameraMovie className={css.icon2} />
+          <h3>GreenScreen</h3>
         </Link>
       </div>
       <div className={css.txt}>
         <h1>Welcome!</h1>
-        <p>¡Bienvenido a GreenScreen! Aquí puedes encontrar reseñas y calificaciones de películas. Puedes buscar películas por género, fecha de estreno, artista.</p>
+        <p>
+          Welcome to GreenScreen! Here you can find reviews and
+          movie ratings. You can search for movies by genre, release date
+          release date, artist.
+        </p>
       </div>
-    <div className={css.login}>
-      <h1>Create Account</h1>
-      <ul className={css.list}>
-        <li><BsGoogle/></li>
-        <li><BsTwitter/></li>
-        <li><BsFacebook/></li>
-        <li><BsGithub/></li>
-      </ul>
+      <div className={css.login}>
+        <h1>LOGIN</h1>
 
-      <p>Or use your email for registration</p>
-      <form onSubmit={handleSubmit} className={css.form}>
-        <div className={css.form_group}>
-          <input
-            placeholder='Email'
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+
+        <form onSubmit={handleSubmit} className={css.form}>
+          <div className={css.form_group}>
+            <input
+              placeholder="Email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className={css.form_group2}>
+            <input
+              placeholder="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button
+            type="submit"
+            className={css.btn}
+          >
+            Login
+          </button>
+        </form>
+
+        <span className={css.span}>Create account?
+          <NavLink to='/signin' className={css.singin}>Sing in</NavLink>
+        </span>
+
+        <div className={css.or}>
+          <span className={css.line}></span>
+          <span className={css.textOr}>
+            OR
+          </span>
+          <span className={css.line}></span>
         </div>
-        <div className={css.form_group2}>
-          <input
-          placeholder='password'
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+
+        <div className={css.auth}>
+          <p>Use your email for registration</p>
+
+          <GoogleLogin className={css.authGoogle} buttonText='Login with Google' clientId={clientId} onSuccess={onSuccess} onFailure={onFailure} cookiePolicy='single_host_policy' />
+
         </div>
-        <button type="submit" className={css.btn}>Login</button>
-      </form>
-      <div className={css.policy}>
-      <AiOutlineCheckCircle className={css.icon}/> 
-      <p>I agree to the Terms and Privacy Policy</p>
       </div>
-    </div>
     </div>
   );
 };
