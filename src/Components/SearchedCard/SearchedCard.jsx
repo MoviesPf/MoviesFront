@@ -3,9 +3,13 @@ import css from './SearchedCard.module.css';
 import { Link } from "react-router-dom";
 import defaultImg from "../../assets/defaultMovie.png"
 
-export const SearchedCard = ({ program }) => {
+export const SearchedCard = ({ program, setshow, show }) => {
+
+  const togleShow = () => {
+    setshow(false)
+  }
   return (
-      <Link className={css.link} to={`/detail/${program.id}`}>
+      <Link className={css.link}  onClick={togleShow} to={`/detail/${program.id}`}>
         <div className={css.allInfo}>
 
           <div className={css.imagen}>

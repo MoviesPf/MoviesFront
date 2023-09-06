@@ -2,22 +2,26 @@
     display: flex;
     position: sticky;
     background: black;
-    bottom: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    bottom:0%;
     width: 100%;
     z-index: 100;
 }
 
-.linkInfo {
-    right: 0;
-    color: white;
-    padding: 0 2vw;
-    margin: 1rem;
+.link {
+    margin: 10px;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #ffffff;
+    background: transparent;
+    transition: all 0.25s;
 }
 
-.linkDono {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    color: white;
-    margin: 1rem;
+.link:hover {
+    background-color: rgb(70, 70, 70);
 }

@@ -7,7 +7,7 @@ import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
 import { Header } from "./Detail.Styled";
-import Footer from "../../Components/Footer/Footer"
+import { Footer } from "../../Components/Footer/Footer"
 
 export const Detail = () => {
   const { ProgramsId } = useParams();

@@ -1,26 +1,9 @@
-
-.crsl {
-    display: flex;
-    background-color: black;
-    padding: 1rem;
-    flex-direction: row;
-    overflow-x: auto;
-    scrollbar-width: none;
-    justify-content: center;
-    align-items: center;
-}
-
 .container {
-    width: 100%;
+    padding-top: 1em;
+    padding-right: 5em;
+    padding-left: 5em;
     display: flex;
-    align-items: center;
-}
-
-.prevIcon, .nextIcon{
-    height: 20px;
-    width: 20px ;
-    font-size: 24px;
-    background: transparent;
-    border: 2px solid transparent;
-    color: #ffffff;
+    flex-wrap: wrap;
+    justify-content:center;
+    background-color: black;
 }
