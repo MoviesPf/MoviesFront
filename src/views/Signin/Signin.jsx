@@ -4,9 +4,11 @@ import { BsGoogle } from 'react-icons/bs'
 import { BsTwitter } from 'react-icons/bs'
 import { BsFacebook } from 'react-icons/bs'
 import { BsGithub } from 'react-icons/bs'
+import { AiOutlineCheckCircle } from 'react-icons/ai';
+
 
 export const Signin = () => {
-
+ 
     const handleSubmit = (event) => {
         
     }
@@ -37,6 +39,10 @@ export const Signin = () => {
             />
         </div>
         </form>
+        <div className={css.policy}>
+          <AiOutlineCheckCircle className={css.icon} />
+          <p>I agree to the Terms and Privacy Policy</p>
+        </div>
         <button className={css.btn}>Sign up</button>
     </div>
   )

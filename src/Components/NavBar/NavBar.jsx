@@ -4,15 +4,8 @@ import css from './NavBar.module.css'
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { SearchedCard } from '../SearchedCard/SearchedCard';
-import { useAuth0 } from '@auth0/auth0-react';
 
 export const NavBar = () => {
-  //Configuracion de AUTH0
-  const { loginWithRedirect } = useAuth0();
-
-  // const { user } = useAuth0()
-
-  ////
   const { pathname } = useLocation();
   const searchedPrograms = useSelector((state) => state.searchedPrograms);
 
@@ -55,14 +48,22 @@ export const NavBar = () => {
             </svg>
           </button>
 
-          <button className={css.sesion} onClick={() => loginWithRedirect()}>
-            Log In
-          </button>
-
-          <Link to="/signin">
-            <button className={css.sesion}>Sign In</button>
-          </Link>
-
+          {/* {pathname ?
+            <button className={css.sesion} onClick={() => logout()}>
+              Log Out
+            </button>
+            : */}
+            <div>
+              <Link to="/login">
+                <button className={css.sesion} onClick={() => loginWithRedirect()}>
+                  Log In
+                </button>
+              </Link>
+              <Link to="/signin">
+                <button className={css.sesion}>Sign In</button>
+              </Link>
+            </div>
+          {/* } */}
         </div>
 
       </div>
