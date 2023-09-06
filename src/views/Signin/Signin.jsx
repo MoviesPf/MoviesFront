@@ -36,7 +36,7 @@ export const Signin = () => {
             <input
             type= "text"
             name= "password"
-            placeholder='Passwoord'
+            placeholder='Password'
             />
         </div>
         </form>
