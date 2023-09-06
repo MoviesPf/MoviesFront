@@ -9,7 +9,7 @@ import { getAllPrograms, getGenres, getAllMovies, getMovieGenres, getAllSeries, 
 
 export const NavBar = () => {
   const { pathname } = useLocation();
-  const searchedPrograms = useSelector((state) => state.searchedPrograms)
+  const searchedPrograms = useSelector((state) => state.searchedPrograms);
 
   const dispatch = useDispatch()
 
@@ -42,11 +42,9 @@ export const NavBar = () => {
   return (
     <div className={css.allNavbar}>
     <div className={css.background}>
-
       <div className={css.contRight}>
-        <Link to="/" className={css.logo}>
-          <BiSolidCameraMovie/>
-          <h1>GreenScreen</h1>
+        <Link to="/" className={css.link}>
+        <h1 className={css.logo}>GreenScreen</h1>
         </Link>
       </div>
 
