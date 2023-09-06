@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterProgramsByGenre, filterProgramsByPlatform, filterProgramsCombined, getAllPrograms, getGenres, getPlatforms } from '../Redux/actions';
+import { filterProgramsByGenre, filterProgramsByPlatform, filterProgramsCombined, getAllPrograms, getGenres, getPlatforms } from '../../Redux/actions';
 import css from './filters.module.css';
 
-const Filters = () => {
+export const Filters = () => {
     const dispatch = useDispatch();
-    const [selectedGenre, setSelectedGenre] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState('all');
     const [selectedPlatform, setSelectedPlatform] = useState('all'); // Inicialmente, "All Platforms" está seleccionado
 
     const genres = useSelector((state) => state.genres);
@@ -80,14 +80,14 @@ const Filters = () => {
 
     const CustomNextArrow = (
     <button
-        className={css.nextIcon}
+        className={css.icon}
         aria-hidden="true"
         >{">"}</button>
     );
     
     const CustomPrevArrow = (
     <button
-        className={css.prevIcon}
+        className={css.icon}
         aria-hidden="true"
     >{"<"}</button>
     );
@@ -123,5 +123,3 @@ const Filters = () => {
         </div>
     );
 };
-
-export default Filters;

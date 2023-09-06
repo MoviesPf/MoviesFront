@@ -59,6 +59,17 @@
     background-color: rgb(70, 70, 70);
 }
 
+.typesP {
+    border-radius: 5px;
+    border: 2px solid;
+    padding: 2px;
+    font-size: 18px;
+    cursor:context-menu;
+    color: green;
+    background: transparent;
+    transition: all 0.25s;
+}
+
 .contLeft {
     display: flex;
     flex-direction: row;
@@ -118,6 +129,10 @@
     position: relative;
     align-items: center;
     flex-direction: column;
+}
+
+.message {
+    margin: 5em;
 }
 
 .bottom {
