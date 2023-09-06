@@ -1,7 +1,6 @@
 .container {
     position: relative;
-    height: 75vh; 
-    overflow: hidden;
+    height: 75%;
     z-index: 1;
 }
 
@@ -18,7 +17,8 @@
 
 .portrait {
     display: flex;
-    padding: 10vh 0;
+    flex-direction: row;
+    padding: 10vh;
 }
 
 .divCard {
@@ -35,9 +35,24 @@
 
 .info {
     flex: 2;
-    padding: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     color:white;
+}
+
+.info p{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.genres {
+    display: flex;
+    flex-direction: row;
+}
+
+.genres p{
+    padding: 10px;
 }

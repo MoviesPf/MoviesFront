@@ -14,6 +14,7 @@ export const Signin = () => {
     }
 
   return (
+    <div className={css.background}>
     <div className={css.section}>
         <h1>Sing In</h1> 
         <ul className={css.list}>
@@ -44,6 +45,7 @@ export const Signin = () => {
           <p>I agree to the Terms and Privacy Policy</p>
         </div>
         <button className={css.btn}>Sign up</button>
+    </div>
     </div>
   )
 }

@@ -3,9 +3,13 @@ import { getProgramByName } from '../../Redux/actions';
 import { useDispatch } from 'react-redux';
 import css from './SearchBar.module.css'
 
-export const SearchBar = () => {
+export const SearchBar = ({setSearched, searched}) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
+
+  const toggleSearched = () => {
+    setSearched(true)
+  }
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -16,6 +20,7 @@ export const SearchBar = () => {
     event.preventDefault();
     dispatch(getProgramByName(title));
     setTitle("");
+    toggleSearched();
   };
 
   return (
@@ -31,10 +36,9 @@ export const SearchBar = () => {
       required 
       />
 
-      <button 
-      class="btn btn-outline-success btn-rounded btn-sm my-0 mx-3" 
-      type="submit"
-      >Search</button>
+      <button className={css.button}
+      >Search
+      </button>
 
     </form>
   );

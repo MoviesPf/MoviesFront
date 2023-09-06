@@ -1,3 +1,14 @@
+.background {
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-image: url('src/assets/background.jpg'); /* Ruta a la imagen de fondo */
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
+}
+
 .section{
     position: absolute;
     display: flex;
