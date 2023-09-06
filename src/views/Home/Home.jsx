@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavBar } from '../../Components/NavBar/NavBar';
-import { Cards } from '../../Components/Cards/Cards';
-import Footer from '../../Components/Footer/Footer';
-import { getAllPrograms } from '../../Redux/actions';
 import css from './Home.module.css';
-import Filters from '../../Filters/Filters';
-import { Portrait } from '../../Components/Portrait/Portrait'
-import LoadingG from '../../Components/Loading/Loading';
+import { useEffect, useState } from 'react';
+import { Cards } from '../../Components/Cards/Cards'
+import { getAllPrograms } from '../../Redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { Footer } from '../../Components/Footer/Footer';
+import { NavBar } from '../../Components/NavBar/NavBar';
+import { Filters } from '../../Components/Filters/Filters';
+import { Carrusel } from '../../Components/Carrusel/Carrusel';
+import { Portrait } from '../../Components/Portrait/Portrait';
+import { LoadingG } from '../../Components/LoadingG/LoadingG';
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -26,23 +27,26 @@ export const Home = () => {
 
   return (
     <div className={css.background}>
-      <NavBar />
-      {loading ? (
-        <LoadingG/>
-      ) : (
-        <Portrait programs={programs} />
-      )}
-      <Filters /> {/* Agrega el componente Filters aquí */}
+      <NavBar/>
+      {
+        loading 
+        ? <LoadingG/>
+        : <Portrait programs={programs} />
+      }
+      <Filters/>
       <h1 className={css.subTitle}>Latest Releases</h1>
-      {loading ? (
-        <p></p>
-      ) : (
-        <Cards programs={filteredPrograms.length ? filteredPrograms : programs.data} />
-      )}
-      <br />
-      <Footer />
+      {
+        loading 
+        ? <LoadingG/>
+        : <Carrusel programs={filteredPrograms.length ? filteredPrograms : programs.data} />
+      }
+      <h1 className={css.subTitle}> All Programs </h1>
+      {
+        loading
+        ? <loadingG/>
+        : <Cards programs={filteredPrograms.length ? filteredPrograms : programs.data}/>
+      }  
+      <Footer/>
     </div>
   );
 };
-
-export default Home;
