@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './Portrait.module.css';
-import defaultImg from "../../assets/defaultMovie.png"
-import defaultBg from "../../assets/programBg.png"
+import defaultPortrait from "../../assets/defaultMovie.png"
+import defaultBackground from "../../assets/defaultBackground.png"
 import {minutesToHoursAndMinutes} from "../../utils/minutesToHoursAndMinutes"
 import { Link } from 'react-router-dom';
 
@@ -9,8 +9,8 @@ export const Portrait = ({ programs }) => {
     const randomIndex = Math.floor(Math.random() * programs.length);
     const randomMovie = programs.length ? programs[randomIndex] : {
       title: "Not Programs Found, try another genre/platform.",
-      poster: defaultImg,
-      backdrop: defaultBg,
+      poster: defaultPortrait,
+      backdrop: defaultPortrait,
       overview: "",
       release_date: "",
       Genres: [],
@@ -18,11 +18,11 @@ export const Portrait = ({ programs }) => {
     };
 
     let imageP =  randomMovie.poster === "https://image.tmdb.org/t/p/w500null"  
-    ? defaultImg
+    ? defaultPortrait
     : randomMovie.poster
 
     let imageBack = randomMovie.backdrop === "https://image.tmdb.org/t/p/w500null" 
-    ? defaultBg
+    ? defaultBackground
     : randomMovie.backdrop
 
     const year = new Date(randomMovie.release_date).getFullYear();
