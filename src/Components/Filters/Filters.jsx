@@ -1,40 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterProgramsByGenre, filterProgramsByPlatform, filterProgramsCombined, getAllPrograms, getGenres, getPlatforms } from '../../Redux/actions';
+import { filterProgramsByGenre, filterProgramsByPlatform, filterProgramsCombined, getAllMovies, getAllPrograms, getAllSeries, getGenres, getPlatforms } from '../../Redux/actions';
 import css from './filters.module.css';
 
 export const Filters = () => {
     const dispatch = useDispatch();
-    const [selectedGenre, setSelectedGenre] = useState('all');
+    const [selectedGenre, setSelectedGenre] = useState('');
     const [selectedPlatform, setSelectedPlatform] = useState('all'); // Inicialmente, "All Platforms" está seleccionado
 
     const genres = useSelector((state) => state.genres);
     const platforms = useSelector((state) => state.platforms);
+    const type = useSelector((state) => state.type);
 
     const chunkSize = 10;
     const genresChunks = [];
 
     useEffect(() => {
-        dispatch(getAllPrograms());
         dispatch(getGenres());
         dispatch(getPlatforms()); 
     }, [dispatch]);
 
     const handleGenreFilter = (genreName) => {
         setSelectedGenre(genreName);
-
         if (genreName) {
             if (selectedPlatform !== 'all') {
-                dispatch(filterProgramsCombined(genreName, selectedPlatform));
+                dispatch(filterProgramsCombined(genreName, selectedPlatform, type));
             } else {
-                dispatch(filterProgramsByGenre(genreName));
+                dispatch(filterProgramsByGenre(genreName, type));
             }
         } else {
             if (selectedPlatform !== 'all') {
-                dispatch(filterProgramsByPlatform(selectedPlatform));
+                dispatch(filterProgramsByPlatform(selectedPlatform, type));
             } else {
-                dispatch(getAllPrograms()); // Si no se selecciona género ni plataforma, muestra todas las películas
+                // Si no se selecciona género ni plataforma, muestra todas las películas
+                type === "main"
+                ? dispatch(getAllPrograms())
+                : type === "movie"
+                ? dispatch(getAllMovies())
+                : dispatch(getAllSeries())
             }
         }
     };
@@ -45,14 +49,18 @@ export const Filters = () => {
 
         if (platformName === 'all') {
             // Si se selecciona "All Platforms," muestra todas las películas
-            dispatch(getAllPrograms());
+            type === "main"
+            ? dispatch(getAllPrograms())
+            : type === "movie"
+            ? dispatch(getAllMovies())
+            : dispatch(getAllSeries())
         } else {
             if (platformName && !selectedGenre) {
-                dispatch(filterProgramsByPlatform(platformName));
+                dispatch(filterProgramsByPlatform(platformName, type));
             } else if (!platformName && selectedGenre) {
-                dispatch(filterProgramsByGenre(selectedGenre));
+                dispatch(filterProgramsByGenre(selectedGenre, type));
             } else if (platformName && selectedGenre) {
-                dispatch(filterProgramsCombined(selectedGenre, platformName));
+                dispatch(filterProgramsCombined(selectedGenre, platformName, type));
             }
         }
     };
@@ -64,14 +72,7 @@ export const Filters = () => {
       <Carousel.Item>
         <div className={css.backGen}>
             {chunk.map((genre) => (
-                <h3
-                    key={genre.id}
-                    onClick={() => handleGenreFilter(genre.name)}
-                    style={{ cursor: 'pointer' }}
-                    className={css.genres}
-                >
-                    {genre.name}
-                </h3>
+                <h3 key={genre.id} onClick={() => handleGenreFilter(genre.name)} style={{ cursor: 'pointer' }} className={css.genres}> {genre.name} </h3>
             ))}
         </div>
       </Carousel.Item>
@@ -80,6 +81,7 @@ export const Filters = () => {
 
     const CustomNextArrow = (
     <button
+        key={"next"}
         className={css.icon}
         aria-hidden="true"
         >{">"}</button>
@@ -87,37 +89,36 @@ export const Filters = () => {
     
     const CustomPrevArrow = (
     <button
+        key={"prev"}
         className={css.icon}
         aria-hidden="true"
     >{"<"}</button>
     );
 
-
     return (
         <div>
-            <Carousel 
+            <Carousel
+                key={"genres"}
                 wrap={false} 
                 indicators={false} 
                 className={css.container} 
                 interval={null} 
                 nextIcon={CustomNextArrow}
-                prevIcon={CustomPrevArrow}>
-
+                prevIcon={CustomPrevArrow}
+            >
                 {genresChunks}
             </Carousel>
             <br/>
             <div className={css.backPlt}>
-                <select
-                    value={selectedPlatform}
-                    onChange={(e) => handlePlatformFilter(e.target.value)}
-                    className={css.selectPlt}
-                >
+                <select value={selectedPlatform} onChange={(e) => handlePlatformFilter(e.target.value)} className={css.selectPlt}>
                     <option value="all">All Platforms</option>
-                    {platforms.map((platform) => (
-                        <option key={platform.id} value={platform.name}>
-                            {platform.name}
-                        </option>
-                    ))}
+                    {
+                        platforms.map((platform) => (
+                            <option key={platform.id} value={platform.name}>
+                                {platform.name}
+                            </option>
+                        ))
+                    }
                 </select>
             </div>
         </div>
