@@ -3,7 +3,7 @@ import { getProgramByName } from '../../Redux/actions';
 import { useDispatch } from 'react-redux';
 import css from './SearchBar.module.css'
 
-export const SearchBar = ({setSearched, searched}) => {
+export const SearchBar = ({setSearched}) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
 

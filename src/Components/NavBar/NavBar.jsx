@@ -1,22 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SearchBar } from '../SearchBar/SearchBar'
 import css from './NavBar.module.css'
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { SearchedCard } from '../SearchedCard/SearchedCard';
 import { BiSolidCameraMovie } from 'react-icons/bi'
-import { getAllPrograms, getGenres, getAllMovies, getMovieGenres, getAllSeries, getSeriesGenres } from "../../Redux/actions"
+import { getAllPrograms, getGenres, getAllMovies, getMovieGenres, getAllSeries, getSeriesGenres, changeTypeMain, changeTypeMovie, changeTypeSerie} from "../../Redux/actions"
 
 export const NavBar = () => {
-  const { pathname } = useLocation();
-  const searchedPrograms = useSelector((state) => state.searchedPrograms)
-
   const dispatch = useDispatch()
-
+  const { pathname } = useLocation();
+  const type = useSelector((state) => state.type)
+  const searchedPrograms = useSelector((state) => state.searchedPrograms)
+  
   const [ show, setShow ] = useState( false );
   const [ searched, setSearched ] = useState(false);
-  const [ category, setCategory ] = useState("main");
-
+  
+  console.log(type)
+  
   const toggleShow = () => {
     setShow(!show)
   }
@@ -24,19 +25,19 @@ export const NavBar = () => {
   const AllPrograms = () => {
     dispatch(getAllPrograms())
     dispatch(getGenres())
-    setCategory("main")
+    dispatch(changeTypeMain())
   }
 
   const Movies = () => {
     dispatch(getAllMovies())
     dispatch(getMovieGenres())
-    setCategory("movies")
+    dispatch(changeTypeMovie())
   }
 
   const Series = () => {
     dispatch(getAllSeries())
     dispatch(getSeriesGenres())
-    setCategory("series")
+    dispatch(changeTypeSerie())
   }
 
   return (
@@ -52,9 +53,9 @@ export const NavBar = () => {
 
       { pathname === "/" &&
       <div className={css.contMid}>
-        <button className={category === "main" ? css.typesP : css.types} onClick={AllPrograms}>Main</button>
-        <button className={category === "movies" ? css.typesP : css.types} onClick={Movies}>Movies</button>
-        <button className={category === "series" ? css.typesP : css.types} onClick={Series}>Series</button>
+        <button className={type === "main" ? css.typesP : css.types} onClick={AllPrograms}>Main</button>
+        <button className={type === "movie" ? css.typesP : css.types} onClick={Movies}>Movies</button>
+        <button className={type === "serie" ? css.typesP : css.types} onClick={Series}>Series</button>
       </div>
       }
 
