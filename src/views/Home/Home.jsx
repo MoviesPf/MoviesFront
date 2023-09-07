@@ -43,7 +43,7 @@ export const Home = () => {
       <h1 className={css.subTitle}> All Programs </h1>
       {
         loading
-        ? <loadingG/>
+        ? <LoadingG/>
         : <Cards programs={filteredPrograms.length ? filteredPrograms : programs.data}/>
       }  
       <Footer/>
