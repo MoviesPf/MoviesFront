@@ -8,7 +8,7 @@ import { NavBar } from '../../Components/NavBar/NavBar';
 import { Filters } from '../../Components/Filters/Filters';
 import { Carrusel } from '../../Components/Carrusel/Carrusel';
 import { Portrait } from '../../Components/Portrait/Portrait';
-import { LoadingGif } from '../../Components/loadingGif/loadingGif';
+import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -28,20 +28,20 @@ export const Home = () => {
       <NavBar/>
       {
         loading 
-        ? <LoadingGif/>
+        ? <GreenLoading/>
         : <Portrait programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
       }
       <Filters/>
       <h1 className={css.subTitle}>Latest Releases</h1>
       {
         loading 
-        ? <LoadingGif/>
+        ? <GreenLoading/>
         : <Carrusel programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
       }
       <h1 className={css.subTitle}> All Programs </h1>
       {
         loading
-        ? <LoadingGif/>
+        ? <GreenLoading/>
         : <Cards programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
       }  
       <Footer/>

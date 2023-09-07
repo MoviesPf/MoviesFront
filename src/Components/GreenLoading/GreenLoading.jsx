@@ -1,7 +1,7 @@
-import css from "./LoadingGif.module.css"
+import css from "./GreenLoading.module.css"
 import gif from "../../assets/loading.gif"
 
-export const LoadingGif = () => {
+export const GreenLoading = () => {
   return (
     <div className={css.contenedor}>
       <img src={gif}alt="Loading"/>
