@@ -1,4 +1,4 @@
-import useState from 'react';
+import {useState} from 'react';
 import css from "./Cards.module.css"
 import { Card } from "../Card/Card.jsx"
 
