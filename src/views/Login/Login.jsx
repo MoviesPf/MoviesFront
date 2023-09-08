@@ -87,7 +87,7 @@ const Login = () => {
         </form>
 
         <span className={css.span}>Create account?
-          <NavLink to='/signin' className={css.singin}>Sing in</NavLink>
+          <NavLink to='/signin' className={css.singin}>Sing Up</NavLink>
         </span>
 
         <div className={css.or}>
