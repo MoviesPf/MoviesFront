@@ -26,3 +26,4 @@ export const RESET_MESSAGE = 'RESET_MESSAGE'
 export const MAIN_TYPE = "MAIN_TYPE";
 export const MOVIE_TYPE = "MOVIE_TYPE";
 export const SERIE_TYPE = "SERIE_TYPE";
+

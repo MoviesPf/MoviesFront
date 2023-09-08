@@ -1,18 +1,26 @@
-import axios from "axios";
-import { 
-  GET_ALL_PROGRAMS, 
-  GET_PROGRAM_BY_NAME, 
-  GET_PLATFORMS, 
-  GET_GENRES, 
-  GET_PROGRAM_DETAIL, 
-  FILTER_PROGRAMS_BY_GENRE, 
-  FILTER_PROGRAMS_BY_PLATFORM, 
-  FILTER_PROGRAMS_COMBINED, 
-  GET_MOVIES, 
-  GET_SERIES, 
-  GET_MOVIES_GENRES, 
-  GET_SERIES_GENRES 
-} from "./actions-type";
+import axios from 'axios';
+import {
+  GET_ALL_PROGRAMS,
+  GET_PROGRAM_BY_NAME,
+  GET_PLATFORMS,
+  GET_GENRES,
+  GET_PROGRAM_DETAIL,
+  FILTER_PROGRAMS_BY_GENRE,
+  FILTER_PROGRAMS_BY_PLATFORM,
+  FILTER_PROGRAMS_COMBINED,
+  GET_MOVIES,
+  GET_SERIES,
+  GET_MOVIES_GENRES,
+  GET_SERIES_GENRES,
+  LOGIN_USER,
+  LOGOUT_USER,
+  ERROR_LOGIN,
+  RESET_MESSAGE,
+  POST_USER,
+  MAIN_TYPE,
+  MOVIE_TYPE,
+  SERIE_TYPE
+} from './actions-type';
 
 export const getAllPrograms = () => {
   return async (dispatch) => {
@@ -138,7 +146,7 @@ export const getProgramDetail = (ProgramsId) => {
 export const filterProgramsByGenre = (genreName, type) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/programs/filter/genre/${genreName}`);
+      const { data } = await axios.get(`http://localhost:3001/programs/filter/genre/${genreName}/${type}`)
       dispatch({ 
         type: FILTER_PROGRAMS_BY_GENRE, 
         payload: data 
@@ -152,7 +160,8 @@ export const filterProgramsByGenre = (genreName, type) => {
 export const filterProgramsByPlatform = (platformName, type) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/programs/filter/platform/${platformName}`);
+      const { data } = await axios.get(`http://localhost:3001/programs/filter/platform/${platformName}/${type}`);
+      console.log(data)
       dispatch({ 
         type: FILTER_PROGRAMS_BY_PLATFORM, 
         payload: data 
@@ -166,16 +175,86 @@ export const filterProgramsByPlatform = (platformName, type) => {
 export const filterProgramsCombined = (genreName, platformName, type) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/programs/filter/genre/${genreName}/platform/${platformName}`
-      );
+      const { data } = await axios.get(`http://localhost:3001/programs/filter/genre/${genreName}/platform/${platformName}/${type}`);
+      console.log(data)
       dispatch({ 
         type: FILTER_PROGRAMS_COMBINED, 
         payload: data 
       });
     } catch (error) {
       console.log(error);
-    };
+    }
   };
 };
 
+export const createUsers = ({ email, avatar, nickname, name, password, source }) => {
+  console.log(email, avatar, nickname, name, password);
+  return async (dispatch) => {
+    try {
+      const res = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, avatar, nickname, name, password, source })
+      });
+      const data = await res.json();
+      console.log(data);
+      dispatch({
+        type: POST_USER,
+        payload: data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const loginUser = (email, password) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch('http://localhost:3001/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      dispatch({
+        type: LOGIN_USER,
+        payload: data
+      });
+    } catch (error) {
+      dispatch({
+        type: ERROR_LOGIN,
+        payload: 'Incorrect password or email'
+      });
+    }
+  };
+};
+
+export const logoutUser = () => {
+  return (dispatch) => {
+    dispatch({
+      type: LOGOUT_USER,
+      payload: ''
+    });
+  };
+};
+
+export const resetMessage = () => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_MESSAGE,
+      payload: ''
+    });
+  };
+};
+export const changeTypeMain = () => {
+  return { type: MAIN_TYPE, payload: "main" };
+};
+
+export const changeTypeMovie = () => {
+  return { type: MOVIE_TYPE, payload: "movie" };
+};
+
+export const changeTypeSerie = () => {
+  return { type: SERIE_TYPE, payload: "serie" };
+};

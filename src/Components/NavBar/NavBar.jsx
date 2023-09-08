@@ -1,46 +1,58 @@
-import { useEffect, useState } from 'react';
-import { SearchBar } from '../SearchBar/SearchBar'
-import css from './NavBar.module.css'
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { SearchBar } from '../SearchBar/SearchBar';
+import css from './NavBar.module.css';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SearchedCard } from '../SearchedCard/SearchedCard';
-import { BiSolidCameraMovie } from 'react-icons/bi'
-import { getAllPrograms, getGenres, getAllMovies, getMovieGenres, getAllSeries, getSeriesGenres, changeTypeMain, changeTypeMovie, changeTypeSerie, logoutUser} from "../../Redux/actions"
+import { BiSolidCameraMovie } from 'react-icons/bi';
+import {
+  getAllPrograms,
+  getGenres,
+  getAllMovies,
+  getMovieGenres,
+  getAllSeries,
+  getSeriesGenres,
+  logoutUser,
+  changeTypeMain,
+  changeTypeMovie,
+  changeTypeSerie
+} from '../../Redux/actions';
 
 export const NavBar = () => {
-  const dispatch = useDispatch()
-  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const searchedPrograms = useSelector((state) => state.searchedPrograms);
-  const type = useSelector((state) => state.type)
   const user = useSelector((state) => state.user);
+
+  const [category, setCategory] = useState('main');
+
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const type = useSelector((state) => state.type);
+  const searchedPrograms = useSelector((state) => state.searchedPrograms);
 
   const [show, setShow] = useState(false);
   const [searched, setSearched] = useState(false);
-  const [category, setCategory] = useState('main');
 
   const toggleShow = () => {
     setShow(!show);
   };
 
   const AllPrograms = () => {
-    dispatch(getAllPrograms())
-    dispatch(getGenres())
-    dispatch(changeTypeMain())
-    setCategory("main")
-  }
+    dispatch(getAllPrograms());
+    dispatch(getGenres());
+    dispatch(changeTypeMain());
+  };
 
   const Movies = () => {
-    dispatch(getAllMovies())
-    dispatch(getMovieGenres())
-    setCategory("movies")
-  }
+    dispatch(getAllMovies());
+    dispatch(getMovieGenres());
+    dispatch(changeTypeMovie());
+  };
 
   const Series = () => {
-    dispatch(getAllSeries())
-    dispatch(getSeriesGenres())
-    setCategory("series")
-  }
+    dispatch(getAllSeries());
+    dispatch(getSeriesGenres());
+    dispatch(changeTypeSerie());
+  };
 
   return (
     <div className={css.allNavbar}>
@@ -91,7 +103,7 @@ export const NavBar = () => {
               <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' />
             </svg>
           </button>
-          {user.name ? (
+          {user.name !== '' && user.name ? (
             <button
               onClick={() => dispatch(logoutUser())}
               className={css.sesion}

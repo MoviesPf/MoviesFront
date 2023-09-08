@@ -10,8 +10,16 @@ import {
   GET_MOVIES,
   GET_SERIES,
   GET_MOVIES_GENRES,
-  GET_SERIES_GENRES 
-} from "./actions-type";
+  GET_SERIES_GENRES,
+  LOGIN_USER,
+  LOGOUT_USER,
+  ERROR_LOGIN,
+  RESET_MESSAGE,
+  POST_USER,
+  MAIN_TYPE,
+  MOVIE_TYPE,
+  SERIE_TYPE
+} from './actions-type';
 
 const initialState = {
   programs: [],
@@ -19,8 +27,10 @@ const initialState = {
   searchedPrograms: [],
   programDetail: [],
   genres: [],
-  platforms: [], 
-  searchedPrograms: [],
+  platforms: [],
+  user: {},
+  message: '',
+  type: 'main'
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -28,19 +38,22 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_ALL_PROGRAMS:
       return {
         ...state,
-        programs: action.payload,
+        programs: payload,
+        filteredPrograms: []
       };
 
     case GET_MOVIES:
       return {
         ...state,
-        programs: action.payload,
+        programs: payload,
+        filteredPrograms: []
       };
 
     case GET_SERIES:
       return {
         ...state,
-        programs: action.payload,
+        programs: payload,
+        filteredPrograms: []
       };
 
     case GET_PROGRAM_BY_NAME:
@@ -84,9 +97,55 @@ const reducer = (state = initialState, { type, payload }) => {
     case FILTER_PROGRAMS_COMBINED:
       return {
         ...state,
-        filteredPrograms: action.payload,
+        filteredPrograms: payload
       };
 
+    //USERS
+    case LOGIN_USER:
+      return {
+        ...state,
+        user: payload.data,
+        message: payload.message
+      };
+    case POST_USER:
+      console.log(payload);
+      return {
+        ...state,
+        user: payload.data
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        user: {},
+        message: payload
+      };
+    case ERROR_LOGIN:
+      return {
+        ...state,
+        message: payload
+      };
+    case RESET_MESSAGE:
+      return {
+        ...state,
+        message: ''
+      };
+    case MAIN_TYPE:
+      return {
+        ...state,
+        type: 'main'
+      };
+
+    case MOVIE_TYPE:
+      return {
+        ...state,
+        type: 'movie'
+      };
+
+    case SERIE_TYPE:
+      return {
+        ...state,
+        type: 'serie'
+      };
 
     default:
       return state;

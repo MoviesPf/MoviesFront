@@ -18,10 +18,10 @@ const Login = () => {
     '999804940641-tot1597ldrpej0q6vf7khjsg5ak3buhl.apps.googleusercontent.com';
 
   useEffect(() => {
-    if (user.name) {
-      navigate('/');
-    }
     const start = () => {
+      if (user.name) {
+        navigate('/');
+      }
       gapi.auth2.init({
         clientId
       });
@@ -34,20 +34,17 @@ const Login = () => {
   }, [user]);
 
   const onSuccess = ({ profileObj }) => {
-    //guardar los datos de la sesion en el local
-    console.log(profileObj);
-
     const data = {
       nickname: profileObj.givenName,
       email: profileObj.email,
       name: profileObj.name,
       avatar: profileObj.imageUrl,
-      source: "gmail"
-    }
+      source: 'gmail'
+    };
 
     dispatch(createUsers(data));
 
-    // navigate('/');
+    navigate('/');
   };
 
   const onFailure = () => {
@@ -66,7 +63,6 @@ const Login = () => {
 
     if (user.name) {
       navigate('/');
-    } else {
     }
   };
 
