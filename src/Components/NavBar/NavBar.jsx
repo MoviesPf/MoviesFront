@@ -1,27 +1,19 @@
-import { useState } from 'react';
-import { SearchBar } from '../SearchBar/SearchBar';
-import css from './NavBar.module.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { SearchBar } from '../SearchBar/SearchBar'
+import css from './NavBar.module.css'
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { SearchedCard } from '../SearchedCard/SearchedCard';
-import { BiSolidCameraMovie } from 'react-icons/bi';
-import {
-  getAllPrograms,
-  getGenres,
-  getAllMovies,
-  getMovieGenres,
-  getAllSeries,
-  getSeriesGenres,
-  logoutUser
-} from '../../Redux/actions';
+import { BiSolidCameraMovie } from 'react-icons/bi'
+import { getAllPrograms, getGenres, getAllMovies, getMovieGenres, getAllSeries, getSeriesGenres, changeTypeMain, changeTypeMovie, changeTypeSerie, logoutUser} from "../../Redux/actions"
 
 export const NavBar = () => {
+  const dispatch = useDispatch()
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const searchedPrograms = useSelector((state) => state.searchedPrograms);
+  const type = useSelector((state) => state.type)
   const user = useSelector((state) => state.user);
-
-  const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
   const [searched, setSearched] = useState(false);
@@ -32,22 +24,23 @@ export const NavBar = () => {
   };
 
   const AllPrograms = () => {
-    dispatch(getAllPrograms());
-    dispatch(getGenres());
-    setCategory('main');
-  };
+    dispatch(getAllPrograms())
+    dispatch(getGenres())
+    dispatch(changeTypeMain())
+    setCategory("main")
+  }
 
   const Movies = () => {
-    dispatch(getAllMovies());
-    dispatch(getMovieGenres());
-    setCategory('movies');
-  };
+    dispatch(getAllMovies())
+    dispatch(getMovieGenres())
+    setCategory("movies")
+  }
 
   const Series = () => {
-    dispatch(getAllSeries());
-    dispatch(getSeriesGenres());
-    setCategory('series');
-  };
+    dispatch(getAllSeries())
+    dispatch(getSeriesGenres())
+    setCategory("series")
+  }
 
   return (
     <div className={css.allNavbar}>
@@ -62,19 +55,19 @@ export const NavBar = () => {
         {pathname === '/' && (
           <div className={css.contMid}>
             <button
-              className={category === 'main' ? css.typesP : css.types}
+              className={type === 'main' ? css.typesP : css.types}
               onClick={AllPrograms}
             >
               Main
             </button>
             <button
-              className={category === 'movies' ? css.typesP : css.types}
+              className={type === 'movie' ? css.typesP : css.types}
               onClick={Movies}
             >
               Movies
             </button>
             <button
-              className={category === 'series' ? css.typesP : css.types}
+              className={type === 'serie' ? css.typesP : css.types}
               onClick={Series}
             >
               Series
