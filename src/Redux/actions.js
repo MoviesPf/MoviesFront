@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
+import { URL_API } from '../URLS';
+
 import {
   GET_ALL_PROGRAMS,
   GET_PROGRAM_BY_NAME,
@@ -24,7 +26,7 @@ import {
 
 export const getAllPrograms = () => {
   return async (dispatch) => {
-    const { data } = await axios.get("http://localhost:3001/programs");
+    const { data } = await axios.get(URL_API + 'programs');
     console.log(data);
     return dispatch({
       type: GET_ALL_PROGRAMS,
@@ -35,9 +37,7 @@ export const getAllPrograms = () => {
 
 export const getProgramByName = (title) => {
   return async (dispatch) => {
-    const { data } = await axios(
-      `http://localhost:3001/programs?title=${title}`
-    );
+    const { data } = await axios(URL_API + `programs?title=${title}`);
     console.log(data);
     return dispatch({
       type: GET_PROGRAM_BY_NAME,
@@ -48,7 +48,7 @@ export const getProgramByName = (title) => {
 
 export const getAllMovies = () => {
   return async (dispatch) => {
-    const { data } = await axios(`http://localhost:3001/programs/movies`);
+    const { data } = await axios(URL_API + `programs/movies`);
     console.log(data);
     return dispatch({
       type: GET_MOVIES,
@@ -59,7 +59,7 @@ export const getAllMovies = () => {
 
 export const getAllSeries = () => {
   return async (dispatch) => {
-    const { data } = await axios(`http://localhost:3001/programs/series`);
+    const { data } = await axios(URL_API + `programs/series`);
     console.log(data);
     return dispatch({
       type: GET_SERIES,
@@ -71,7 +71,7 @@ export const getAllSeries = () => {
 export const getGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/genres");
+      const { data } = await axios.get(URL_API + 'genres');
       console.log(data);
       dispatch({
         type: GET_GENRES,
@@ -86,7 +86,7 @@ export const getGenres = () => {
 export const getMovieGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/genres/movies");
+      const { data } = await axios.get(URL_API + 'genres/movies');
       console.log(data);
       dispatch({
         type: GET_MOVIES_GENRES,
@@ -101,7 +101,7 @@ export const getMovieGenres = () => {
 export const getSeriesGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/genres/series");
+      const { data } = await axios.get(URL_API + 'genres/series');
       console.log(data);
       dispatch({
         type: GET_SERIES_GENRES,
@@ -116,7 +116,7 @@ export const getSeriesGenres = () => {
 export const getPlatforms = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/platforms");
+      const { data } = await axios.get(URL_API + 'platforms');
       dispatch({
         type: GET_PLATFORMS,
         payload: data,
@@ -130,9 +130,7 @@ export const getPlatforms = () => {
 export const getProgramDetail = (ProgramsId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/programs/${ProgramsId}`
-      );
+      const { data } = await axios.get(URL_API + `programs/${ProgramsId}`);
       dispatch({
         type: GET_PROGRAM_DETAIL,
         payload: data.data,
@@ -147,12 +145,11 @@ export const filterProgramsByGenre = (genreName, type) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/programs/filter/genre/${genreName}/${type}`
+        URL_API + `programs/filter/genre/${genreName}/${type}`
       );
-      console.log(data, "data");
       dispatch({
         type: FILTER_PROGRAMS_BY_GENRE,
-        payload: data,
+        payload: data
       });
     } catch (error) {
       console.log(error);
@@ -164,12 +161,12 @@ export const filterProgramsByPlatform = (platformName, type) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/programs/filter/platform/${platformName}/${type}`
+        URL_API + `programs/filter/platform/${platformName}/${type}`
       );
       console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_BY_PLATFORM,
-        payload: data,
+        payload: data
       });
     } catch (error) {
       console.log(error);
@@ -181,12 +178,13 @@ export const filterProgramsCombined = (genreName, platformName, type) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:3001/programs/filter/genre/${genreName}/platform/${platformName}/${type}`
+        URL_API +
+          `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
       );
       console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_COMBINED,
-        payload: data,
+        payload: data
       });
     } catch (error) {
       console.log(error);
@@ -202,20 +200,28 @@ export const createUsers = ({
   password,
   source,
 }) => {
+export const createUsers = ({
+  email,
+  avatar,
+  nickname,
+  name,
+  password,
+  source
+}) => {
   console.log(email, avatar, nickname, name, password);
   return async (dispatch) => {
     try {
-      const res = await fetch("http://localhost:3001/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch(URL_API + 'users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
           avatar,
           nickname,
           name,
           password,
-          source,
-        }),
+          source
+        })
       });
       const data = await res.json();
       console.log(data);
@@ -232,10 +238,10 @@ export const createUsers = ({
 export const loginUser = (email, password) => {
   return async (dispatch) => {
     try {
-      const res = await fetch("http://localhost:3001/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const res = await fetch(URL_API + 'users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
       });
       const data = await res.json();
       dispatch({
@@ -269,15 +275,15 @@ export const resetMessage = () => {
   };
 };
 export const changeTypeMain = () => {
-  return { type: MAIN_TYPE, payload: "main" };
+  return { type: MAIN_TYPE, payload: 'main' };
 };
 
 export const changeTypeMovie = () => {
-  return { type: MOVIE_TYPE, payload: "movie" };
+  return { type: MOVIE_TYPE, payload: 'movie' };
 };
 
 export const changeTypeSerie = () => {
-  return { type: SERIE_TYPE, payload: "serie" };
+  return { type: SERIE_TYPE, payload: 'serie' };
 };
 
 export const createReview = (reviewData, userId, ProgramsId) => {
