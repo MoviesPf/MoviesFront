@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { URL_API } from '../URLS';
+import axios from "axios";
+import { URL_API } from "../URLS";
 
 import {
   GET_ALL_PROGRAMS,
@@ -26,7 +26,7 @@ import {
 
 export const getAllPrograms = () => {
   return async (dispatch) => {
-    const { data } = await axios.get(URL_API + 'programs');
+    const { data } = await axios.get(URL_API + "programs");
     console.log(data);
     return dispatch({
       type: GET_ALL_PROGRAMS,
@@ -71,7 +71,7 @@ export const getAllSeries = () => {
 export const getGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(URL_API + 'genres');
+      const { data } = await axios.get(URL_API + "genres");
       console.log(data);
       dispatch({
         type: GET_GENRES,
@@ -86,7 +86,7 @@ export const getGenres = () => {
 export const getMovieGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(URL_API + 'genres/movies');
+      const { data } = await axios.get(URL_API + "genres/movies");
       console.log(data);
       dispatch({
         type: GET_MOVIES_GENRES,
@@ -101,7 +101,7 @@ export const getMovieGenres = () => {
 export const getSeriesGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(URL_API + 'genres/series');
+      const { data } = await axios.get(URL_API + "genres/series");
       console.log(data);
       dispatch({
         type: GET_SERIES_GENRES,
@@ -116,7 +116,7 @@ export const getSeriesGenres = () => {
 export const getPlatforms = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(URL_API + 'platforms');
+      const { data } = await axios.get(URL_API + "platforms");
       dispatch({
         type: GET_PLATFORMS,
         payload: data,
@@ -149,7 +149,7 @@ export const filterProgramsByGenre = (genreName, type) => {
       );
       dispatch({
         type: FILTER_PROGRAMS_BY_GENRE,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -166,7 +166,7 @@ export const filterProgramsByPlatform = (platformName, type) => {
       console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_BY_PLATFORM,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -184,7 +184,7 @@ export const filterProgramsCombined = (genreName, platformName, type) => {
       console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_COMBINED,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -200,28 +200,20 @@ export const createUsers = ({
   password,
   source,
 }) => {
-export const createUsers = ({
-  email,
-  avatar,
-  nickname,
-  name,
-  password,
-  source
-}) => {
   console.log(email, avatar, nickname, name, password);
   return async (dispatch) => {
     try {
-      const res = await fetch(URL_API + 'users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch(URL_API + "users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
           avatar,
           nickname,
           name,
           password,
-          source
-        })
+          source,
+        }),
       });
       const data = await res.json();
       console.log(data);
@@ -238,10 +230,10 @@ export const createUsers = ({
 export const loginUser = (email, password) => {
   return async (dispatch) => {
     try {
-      const res = await fetch(URL_API + 'users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+      const res = await fetch(URL_API + "users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
       dispatch({
@@ -275,15 +267,15 @@ export const resetMessage = () => {
   };
 };
 export const changeTypeMain = () => {
-  return { type: MAIN_TYPE, payload: 'main' };
+  return { type: MAIN_TYPE, payload: "main" };
 };
 
 export const changeTypeMovie = () => {
-  return { type: MOVIE_TYPE, payload: 'movie' };
+  return { type: MOVIE_TYPE, payload: "movie" };
 };
 
 export const changeTypeSerie = () => {
-  return { type: SERIE_TYPE, payload: 'serie' };
+  return { type: SERIE_TYPE, payload: "serie" };
 };
 
 export const createReview = (reviewData, userId, ProgramsId) => {
