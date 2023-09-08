@@ -10,7 +10,8 @@ import {
   GET_MOVIES,
   GET_SERIES,
   GET_MOVIES_GENRES,
-  GET_SERIES_GENRES 
+  GET_SERIES_GENRES,
+  SELECT_DONATION_OPTION,
 } from "./actions-type";
 
 const initialState = {
@@ -18,8 +19,9 @@ const initialState = {
   programDetail: [],
   filteredPrograms: [],
   genres: [],
-  platforms: [], 
+  platforms: [],
   searchedPrograms: [],
+  selectedOption: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,25 +32,25 @@ const reducer = (state = initialState, action) => {
         ...state,
         programs: action.payload,
       };
-      
+
     case GET_MOVIES:
       return {
         ...state,
         programs: action.payload,
       };
-        
+
     case GET_SERIES:
       return {
         ...state,
         programs: action.payload,
       };
-          
+
     case GET_PROGRAM_BY_NAME:
       return {
         ...state,
         searchedPrograms: action.payload,
       };
-          
+
     case GET_GENRES:
       return {
         ...state,
@@ -86,7 +88,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         filteredPrograms: action.payload,
       };
-
+    case SELECT_DONATION_OPTION:
+      return {
+        ...state,
+        selectedOption: action.payload,
+      };
 
     default:
       return state;

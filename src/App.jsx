@@ -5,7 +5,7 @@ import Profile from './views/Profile/Profile';
 import { Detail } from './views/Detail/Detail';
 import Login from './views/Login/Login';
 import { Home } from './views/Home/Home';
-import { Donation } from './views/Donation/Donation';
+import Donation from './views/Donation/Donation'
 
 function App() {
   return (
