@@ -6,6 +6,7 @@ const Donations = () => {
   const dispatch = useDispatch();
   const selectedOption = useSelector((state) => state.selectedOption);
   const [sandboxInitPoint, setSandboxInitPoint] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleOptionSelect = (amount) => {
     dispatch(selectDonationOption(amount));
@@ -33,8 +34,21 @@ const Donations = () => {
     }
   };
 
+  // obtengo el mensaje de éxito de los query params
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const successMsg = urlParams.get('message');
+    
+    // muestro el mensaje de éxito si está presente
+    if (successMsg) {
+      console.log('Mensaje de éxito recibido:', successMsg);
+      setSuccessMessage(successMsg);
+    }
+  }, []);
+  
   useEffect(() => {
     if (sandboxInitPoint) {
+      console.log('Redirigiendo al sandboxInitPoint:', sandboxInitPoint);
       window.location.href = sandboxInitPoint;
     }
   }, [sandboxInitPoint]);
@@ -42,13 +56,49 @@ const Donations = () => {
   return (
     <div>
       <h2>Selecciona una opción de donación:</h2>
-      <button onClick={() => handleOptionSelect(10)}>10 pesos</button>
-      <button onClick={() => handleOptionSelect(30)}>30 pesos</button>
-      <button onClick={() => handleOptionSelect(50)}>50 pesos</button>
+      <label>
+        <input
+          type="radio"
+          name="donationOption"
+          value={10}
+          checked={selectedOption === 10}
+          onChange={() => handleOptionSelect(10)}
+        />
+        $10
+      </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          name="donationOption"
+          value={30}
+          checked={selectedOption === 30}
+          onChange={() => handleOptionSelect(30)}
+        />
+        $30
+      </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          name="donationOption"
+          value={50}
+          checked={selectedOption === 50}
+          onChange={() => handleOptionSelect(50)}
+        />
+        $50
+      </label>
+      <br />
+
       <button onClick={handleDonation}>Donar</button>
+
+      {successMessage && (
+        <div className="success-message">
+          <p>{successMessage}</p>
+        </div>
+      )}
     </div>
   );
 };
 
 export default Donations;
-

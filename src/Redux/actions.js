@@ -279,10 +279,9 @@ export const initiatePayment = (donationData) => async (dispatch) => {
 
     console.log('Respuesta de MercadoPago:', response.data);
 
-    const initPoint = response.data?.response?.body?.init_point;
-    console.log('init_point', initPoint);
-    if (initPoint) {
-      window.location.href = initPoint;
+    const sandbox_init_point = response.data?.response?.body?.sandbox_init_point;
+    if (sandbox_init_point) {
+      window.location.href = sandbox_init_point;
     } else {
       console.error('URL de redirección no válida');
     }

@@ -106,7 +106,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case SELECT_DONATION_OPTION:
       return {
         ...state,
-        selectedOption: action.payload,
+        selectedOption: payload,
       }
     //USERS
     case LOGIN_USER:
