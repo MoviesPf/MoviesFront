@@ -9,7 +9,7 @@ export const Cards = ({ programs }) => {
     : ["No hay mas programas"]
 
     const [currentPage, setCurrentPage] = useState(1);
-    const programsForPage = 64;
+    const programsForPage = 32;
   
     const lastProgramIndex = currentPage * programsForPage;
     const fisrtProgramIndex = lastProgramIndex - programsForPage;

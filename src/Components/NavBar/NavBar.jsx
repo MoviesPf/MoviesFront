@@ -104,12 +104,17 @@ export const NavBar = () => {
             </svg>
           </button>
           {user.name !== '' && user.name ? (
-            <button
-              onClick={() => dispatch(logoutUser())}
-              className={css.sesion}
-            >
+            <div>
+              <button
+                onClick={() => dispatch(logoutUser())}
+                className={css.sesion}
+              >
               Logout
-            </button>
+              </button>
+              <button onClick={()=> navigate('/profile')} className={css.sesion}>
+                {user.nickname}
+              </button>
+            </div>
           ) : (
             <div>
               <button onClick={() => navigate('/login')} className={css.sesion}>

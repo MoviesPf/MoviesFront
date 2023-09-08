@@ -72,7 +72,7 @@ export const Filters = () => {
       <Carousel.Item>
         <div className={css.backGen}>
             {chunk.map((genre) => (
-                <h3 key={genre.id} onClick={() => handleGenreFilter(genre.name)} style={{ cursor: 'pointer' }} className={css.genres}> {genre.name} </h3>
+                <h3 key={genre.name} onClick={() => handleGenreFilter(genre.name)} style={{ cursor: 'pointer' }} className={selectedGenre === genre.name ? css.selected : css.genres}> {genre.name} </h3>
             ))}
         </div>
       </Carousel.Item>

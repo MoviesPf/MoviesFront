@@ -23,6 +23,19 @@
     transition: all 0.25s;
 }
 
+.selected {
+    background-color: green;
+    border-radius: 5px;
+    color: white;
+    font-size: 17px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px;
+    padding: 1rem;
+    transition: all 0.25s;
+}
 .genres:hover {
     background-color: rgb(70, 70, 70);
 }

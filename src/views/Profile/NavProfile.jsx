@@ -8,50 +8,44 @@ import PendingIcon from "../../assets/Icons/icons8-delivery-time-96.png"
 
 const NavContainer = styled.div`
 background-color: #131212;
-width: 100%;
-padding-top: 10px;
 padding-bottom: 10px;
+padding-top: 10px;
 display: flex;
-justify-content: space-around;
-position: relative;
-z-index: 3;
+justify-content: center;
+width: 100%;
 `
+// #131212
 const LinksContainer = styled.div`
-background-color: #131212;
 width: 100%;
 display: flex;
-justify-content: space-evenly;
-position: relative;
+justify-content: center;
 align-items: center;
-left: 42px;
-margin-right: 460px;
-z-index: 3;
 `
+
+const IconsC = styled.div`
+margin-right: 100px;
+display: flex;
+`
+
 const IconContainer = styled.div`
+margin-right: 10px;
 display: flex;
 flex-wrap: nowrap;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-margin-right: 10px;
-
-
 `
-const IconsC = styled.div`
-width: 250px;
-display: flex;
-justify-content: space-evenly;
-margin-right: 120px;
 
-`
 const IconImg = styled.img`
 width: 30px;
 height: 30px;
 `
+
 const IconLabel = styled.label`
 color: white;
 font-size: 16px;
 `
+
 const ViewButton = styled.button`
 width: 140px;
 height: 50px;
@@ -73,8 +67,8 @@ cursor: pointer;
 const NavProfile = () => {
   return (
     <NavContainer>
-      <LinksContainer >
 
+      <LinksContainer >
           <ViewButton>Profile</ViewButton>
 
           <ViewButton>Reviews</ViewButton>
@@ -84,8 +78,8 @@ const NavProfile = () => {
           <ViewButton>Watched</ViewButton>
 
           <ViewButton>Watchlist</ViewButton>
-      
       </LinksContainer>
+
       <IconsC>
         <IconContainer>
           <IconImg src={ViewsIcon}></IconImg>
@@ -100,7 +94,6 @@ const NavProfile = () => {
           <IconLabel>400</IconLabel>
         </IconContainer>
       </IconsC>
-
 
     </NavContainer>
 

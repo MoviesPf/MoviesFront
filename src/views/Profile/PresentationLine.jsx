@@ -1,43 +1,66 @@
 import styled from 'styled-components'
 
 const UserBarr = styled.div` 
-background-color: #1C1C1C;
-width: 100%;
-height: 120px;
-display: flex;
+background-color: 1C1C1C;
 position: relative;
+align-items: center;
+height: max-content;
+display: flex;
+width: 100%;
 z-index: 2;
 `
-const UserNameContainer = styled.div` 
+
+const UserPicture = styled.img`
+border-radius: 300px;
+position: relative;
+margin-left: 50px;
+height: 200px;
+top: -95px;
+`
+
+const UserNameContainer = styled.div`
+margin-right: 20px;
+margin-left: 20px;
+height: max-content;
+width: 80%;
 display: flex;
 color: white;
-margin-left: 220px;
-position: relative;
 flex-direction: column;
 z-index: 2;
 `
-const UserPicture = styled.img` 
-position: absolute;
-top: -95px;
-border-radius: 300px;
-height: 200px;
-`
-const UserCard = styled.div` 
-display: flex;
-margin-left: 120px;
 
+const NameAndNickname = styled.div`
+width: 100%;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
 `
-const PresentationLine = ({avatar,name,status}) => {
+const AliasAndNick = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+`
+const Alias = styled.h1`
+margin-right: 10px;
+color: green;
+`
+
+const PresentationLine = ({avatar,name,nickname,status}) => {
 
     return (
         <UserBarr>
-            <UserCard>
-                <UserPicture src={avatar}/>
-                <UserNameContainer>
+            <UserPicture src={avatar}/>
+            <UserNameContainer>
+                <NameAndNickname>
                     <h1>{name}</h1>
-                    <p>{status}</p>
-                </UserNameContainer>
-            </UserCard>
+                    <AliasAndNick>
+                        <Alias>Alias:</Alias>
+                        <h1>{nickname}</h1>
+                    </AliasAndNick>
+                </NameAndNickname>
+                <p>{status}</p>
+            </UserNameContainer>
         </UserBarr>
     );
 };

@@ -5,11 +5,13 @@ import PresentationLine from "./PresentationLine"
 import {NavBar}from "../../Components/NavBar/NavBar"
 import ProgCardDetail from "../Profile/ProgCardDetail"
 import {Card} from '../../Components/Card/Card'
-import defaultImg from "../../assets/defaultMovie.png"
+import { useDispatch, useSelector } from 'react-redux';
+import defaultBackground from "../../assets/background.jpg"
+
 
 
 const ViewContainer = styled.div`
-  background-color:  #1C1C1C;
+  background-color: #1C1C1C;
   display: flex;
   width: 100%;
   height: 100%;
@@ -18,24 +20,24 @@ const ViewContainer = styled.div`
 `
 const UserBackground = styled.img`
   width: 100%;
-  height: 34vh;
+  height: 50vh;
   object-fit: cover;
-  object-position: center top;
-  position: absolute;
+  position: relative;
   z-index: 1;
 `
+const AreaContainer = styled.div`
+  display: flex;
+  position: relative;
+  flex-direction: column;
+`
+
 const ElementsBarr = styled.div`
   width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
 `
-const AreaContainer = styled.div`
-  margin-top: 260px;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-`
+
 const IconLabel = styled.label`
   color: white;
   font-size: 26px;
@@ -86,19 +88,20 @@ const CardsContainer = styled.div`
 const Profile = () => {
 //   const user = useSelector(state => state.user);
   const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
+  const user = useSelector((state) => state.user);
 
   return (
     <ViewContainer>
-     
+
         {/* NavBar y background ⬇ */}
-          <NavBar></NavBar>
-          <UserBackground src={user.background}/>
+          <NavBar/>
+          <UserBackground src={user.background ? user.background : defaultBackground}/>
 
         {/* Area de contenido -/Usuario/Barra de navegacion/Peliculas- ⬇ */}
           <AreaContainer>
             <ElementsBarr>
               {/* Usuario/Barra de navegacion ⬇ */}
-              <PresentationLine avatar={user.avatar} name={user.name} status={user.status}/>
+              <PresentationLine avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
               <NavProfile/>
             </ElementsBarr>
             
@@ -173,16 +176,16 @@ const Profile = () => {
 
 export default Profile;
 
-const user = {
-    "id": "df76d866-783a-4f23-8a9d-18e715fa1ebc",
-		"name": "Marcelo",
-		"nickname": "ElMariano123",
-		"avatar": "https://randomuser.me/api/portraits/men/75.jpg",
-		"email": "chau@gmail.com",
-		"password": "123456",
-		"status": "may the fourth be with you",
-		"admin": false,
-		"banned": false,
-		"PlaylistId": null,
-        "background": "https://random.imagecdn.app/500/150",
-}
+// const user = {
+//     "id": "df76d866-783a-4f23-8a9d-18e715fa1ebc",
+// 		"name": "Marcelo",
+// 		"nickname": "ElMariano123",
+// 		"avatar": "https://randomuser.me/api/portraits/men/75.jpg",
+// 		"email": "chau@gmail.com",
+// 		"password": "123456",
+// 		"status": "may the fourth be with you",
+// 		"admin": false,
+// 		"banned": false,
+// 		"PlaylistId": null,
+//         "background": "https://random.imagecdn.app/500/150",
+// }

@@ -38,7 +38,7 @@ export const Home = () => {
         ? <GreenLoading/>
         : <Carrusel programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
       }
-      <h1 className={css.subTitle}> All Programs </h1>
+      <h1 className={css.subTitle}> More Programs </h1>
       {
         loading
         ? <GreenLoading/>

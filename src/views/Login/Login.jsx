@@ -85,11 +85,6 @@ const Login = () => {
         <h1>LOGIN</h1>
 
         <form onSubmit={handleSubmit} className={css.form}>
-          {message === 'Incorrect password' || 'Incorrect password or email' ? (
-            <span className={css.errorLogin}>{message}</span>
-          ) : (
-            ''
-          )}
           <div className={css.form_group}>
             <input
               placeholder='Email'
@@ -106,6 +101,11 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {message === 'Incorrect password' || 'Incorrect password or email' ? (
+            <span className={css.errorLogin}>{message}</span>
+          ) : (
+            ''
+          )}
           <button type='submit' className={css.btn}>
             Login
           </button>
