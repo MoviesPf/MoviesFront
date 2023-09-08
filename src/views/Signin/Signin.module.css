@@ -1,6 +1,6 @@
 .background {
   height: 100vh;
-  background-image: url('src/assets/background.jpg'); /* Ruta a la imagen de fondo */
+  background-image: url('https://github.com/MoviesPf/MoviesFront/blob/main/src/assets/background.jpg'); /* Ruta a la imagen de fondo */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;

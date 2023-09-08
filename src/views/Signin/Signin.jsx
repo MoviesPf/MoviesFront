@@ -13,7 +13,7 @@ export const Signin = () => {
   const [user, setUser] = useState({
     name: '',
     nickname: '',
-    avatar: "src/assets/Avatars/user-removebg-preview.png",
+    avatar: "https://github.com/MoviesPf/MoviesFront/blob/main/src/assets/Avatars/user-removebg-preview.png",
     email: '',
     password: ''
   })
@@ -150,7 +150,9 @@ export const Signin = () => {
               ...user,
               avatar: gatoBodyAvatar
             })}>
-            <img className={css.avatarImg} src={gatoBodyAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={gatoBodyAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -158,7 +160,9 @@ export const Signin = () => {
               ...user,
               avatar: monoBodyAvatar
             })}>
-            <img className={css.avatarImg} src={monoBodyAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={monoBodyAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -166,7 +170,9 @@ export const Signin = () => {
               ...user,
               avatar: osoBodyAvatar
             })}>
-            <img className={css.avatarImg} src={osoBodyAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={osoBodyAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -174,7 +180,9 @@ export const Signin = () => {
               ...user,
               avatar: perroBodyAvatar
             })}>
-            <img className={css.avatarImg} src={perroBodyAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={perroBodyAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -182,7 +190,9 @@ export const Signin = () => {
               ...user,
               avatar: rinoceronteBodyAvatar
             })}>
-            <img className={css.avatarImg} src={rinoceronteBodyAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={rinoceronteBodyAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -190,7 +200,9 @@ export const Signin = () => {
               ...user,
               avatar: zorroBodyAvatar
             })}>
-            <img className={css.avatarImg} src={zorroBodyAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={zorroBodyAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -198,7 +210,9 @@ export const Signin = () => {
               ...user,
               avatar: elefanteAvatar
             })}>
-            <img className={css.avatarImg} src={elefanteAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={elefanteAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -206,7 +220,9 @@ export const Signin = () => {
               ...user,
               avatar: gatoAvatar
             })}>
-            <img className={css.avatarImg} src={gatoAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={gatoAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -214,7 +230,9 @@ export const Signin = () => {
               ...user,
               avatar: leonAvatar
             })}>
-            <img className={css.avatarImg} src={leonAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={leonAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -222,7 +240,9 @@ export const Signin = () => {
               ...user,
               avatar: osoAvatar
             })}>
-            <img className={css.avatarImg} src={osoAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={osoAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -230,7 +250,9 @@ export const Signin = () => {
               ...user,
               avatar: tigreAvatar
             })}>
-            <img className={css.avatarImg} src={tigreAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={tigreAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -238,7 +260,9 @@ export const Signin = () => {
               ...user,
               avatar: unicornioAvatar
             })}>
-            <img className={css.avatarImg} src={unicornioAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={unicornioAvatar}
+              alt="avatar" />
           </div>
 
           <div className={css.avatarContainer}
@@ -246,7 +270,9 @@ export const Signin = () => {
               ...user,
               avatar: zorroAvatar
             })}>
-            <img className={css.avatarImg} src={zorroAvatar} alt="avatar" />
+            <img className={css.avatarImg}
+              src={zorroAvatar}
+              alt="avatar" />
           </div>
 
         </div>
