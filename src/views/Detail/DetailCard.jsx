@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 
 const ProgramData = styled.div`
-  width: 40%;
+  width: 100%;
   height: auto;
   padding-bottom: 40px;
   display: flex;

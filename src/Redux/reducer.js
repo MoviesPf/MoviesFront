@@ -18,8 +18,9 @@ import {
   POST_USER,
   MAIN_TYPE,
   MOVIE_TYPE,
-  SERIE_TYPE
-} from './actions-type';
+  SERIE_TYPE,
+  POST_REVIEW,
+} from "./actions-type";
 
 const initialState = {
   programs: [],
@@ -29,8 +30,8 @@ const initialState = {
   genres: [],
   platforms: [],
   user: {},
-  message: '',
-  type: 'main'
+  message: "",
+  type: "main",
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -39,57 +40,57 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         programs: payload,
-        filteredPrograms: []
+        filteredPrograms: [],
       };
 
     case GET_MOVIES:
       return {
         ...state,
         programs: payload,
-        filteredPrograms: []
+        filteredPrograms: [],
       };
 
     case GET_SERIES:
       return {
         ...state,
         programs: payload,
-        filteredPrograms: []
+        filteredPrograms: [],
       };
 
     case GET_PROGRAM_BY_NAME:
       return {
         ...state,
-        searchedPrograms: payload
+        searchedPrograms: payload,
       };
 
     case GET_GENRES:
       return {
         ...state,
-        genres: payload
+        genres: payload,
       };
 
     case GET_MOVIES_GENRES:
       return {
         ...state,
-        genres: payload
+        genres: payload,
       };
 
     case GET_SERIES_GENRES:
       return {
         ...state,
-        genres: payload
+        genres: payload,
       };
 
     case GET_PLATFORMS:
       return {
         ...state,
-        platforms: payload
+        platforms: payload,
       };
 
     case GET_PROGRAM_DETAIL:
       return {
         ...state,
-        programDetail: payload
+        programDetail: payload,
       };
 
     case FILTER_PROGRAMS_BY_GENRE:
@@ -97,7 +98,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case FILTER_PROGRAMS_COMBINED:
       return {
         ...state,
-        filteredPrograms: payload
+        filteredPrograms: payload,
       };
 
     //USERS
@@ -105,46 +106,51 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: payload.data,
-        message: payload.message
+        message: payload.message,
       };
     case POST_USER:
       console.log(payload);
       return {
         ...state,
-        user: payload.data
+        user: payload.data,
       };
     case LOGOUT_USER:
       return {
         ...state,
         user: {},
-        message: payload
+        message: payload,
       };
     case ERROR_LOGIN:
       return {
         ...state,
-        message: payload
+        message: payload,
       };
     case RESET_MESSAGE:
       return {
         ...state,
-        message: ''
+        message: "",
       };
     case MAIN_TYPE:
       return {
         ...state,
-        type: 'main'
+        type: "main",
       };
 
     case MOVIE_TYPE:
       return {
         ...state,
-        type: 'movie'
+        type: "movie",
       };
 
     case SERIE_TYPE:
       return {
         ...state,
-        type: 'serie'
+        type: "serie",
+      };
+
+    case POST_REVIEW:
+      return {
+        ...state,
       };
 
     default:

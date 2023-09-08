@@ -58,7 +58,6 @@ color: rgb(25, 213, 118);
 background: #6161611c;
 font-size: 25px;
 font-weight: bold;
-pointer-events: none;
 
 
 cursor: pointer; 
@@ -77,7 +76,7 @@ const LineSubHR = styled.hr`
 
 
 
-export default function LogUserProgramOptions() {
+export default function LogUserProgramOptions({setShowModal}) {
   return (
     <ScoreContainer >
             <IconsC>
@@ -105,7 +104,7 @@ export default function LogUserProgramOptions() {
             </EmptStarC>
 
         
-        <ReviewButton>Review</ReviewButton>
+        <ReviewButton onClick={()=> setShowModal(true)}>Review</ReviewButton>
     </ScoreContainer>
   )
 }
