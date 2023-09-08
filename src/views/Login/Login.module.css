@@ -75,6 +75,12 @@
   text-shadow: -4px 4px 7px #000;
 }
 
+.errorLogin{
+  position: absolute;
+  top: 10rem;
+  color: rgb(173, 15, 15);
+}
+
 .form {
   grid-row: 2/3;
   display: flex;
