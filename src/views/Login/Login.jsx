@@ -77,7 +77,7 @@ const Login = () => {
         </p>
       </div>
       <div className={css.login}>
-        <h1>LOGIN</h1>
+        <h1>SIGN IN</h1>
 
         <form onSubmit={handleSubmit} className={css.form}>
           {message === 'Incorrect password' || 'Incorrect password or email' ? (
@@ -109,7 +109,7 @@ const Login = () => {
         <span className={css.span}>
           Create account?
           <NavLink to='/signin' className={css.singin}>
-            Sing in
+            Sing up
           </NavLink>
         </span>
 
