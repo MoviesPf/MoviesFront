@@ -76,6 +76,12 @@
   letter-spacing: 5px;
 }
 
+.errorLogin{
+  position: absolute;
+  top: 10rem;
+  color: rgb(173, 15, 15);
+}
+
 .form {
   grid-row: 2/3;
   display: flex;

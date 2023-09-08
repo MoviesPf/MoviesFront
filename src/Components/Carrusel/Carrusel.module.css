@@ -1,4 +1,4 @@
-.crsl {
+/* .crsl {
     display: flex;
     background-color: black;
     padding: 1rem;
@@ -23,4 +23,41 @@
     background: transparent;
     border: 0;
     color: #ffffff;
+} */
+
+.contenedor {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+.crsl {
+    display: flex;
+    width:fit-content;
+    padding: 20%;
+    background-color: black;
+    padding: 1rem;
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.prevIcon, .nextIcon{
+    background-color: red;
+    height: 50px;
+    width: 50px ;
+    font-size: 24px;
+    background: transparent;
+    border: 0;
+    color: #ffffff;
+}
+
+.crsl::-webkit-scrollbar {
+    width: 7px;
+}
+
+.crsl::-webkit-scrollbar-thumb{
+    background: green;
 }
