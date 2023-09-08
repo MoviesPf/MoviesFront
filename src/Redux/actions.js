@@ -20,7 +20,7 @@ import {
   MAIN_TYPE,
   MOVIE_TYPE,
   SERIE_TYPE,
-  SELECT_DONATION_OPTION,
+  SELECT_DONATION_OPTION
 } from './actions-type';
 
 export const getAllPrograms = () => {
@@ -187,7 +187,6 @@ export const filterProgramsCombined = (genreName, platformName, type) => {
     }
   };
 };
-
 
 export const createUsers = ({ email, avatar, nickname, name, password, source }) => {
   console.log(email, avatar, nickname, name, password);

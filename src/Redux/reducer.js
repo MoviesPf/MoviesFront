@@ -20,7 +20,8 @@ import {
   MOVIE_TYPE,
   SERIE_TYPE,
   SELECT_DONATION_OPTION,
-} from './actions-type';
+} from "./actions-type";
+
 
 const initialState = {
   programs: [],
@@ -33,6 +34,7 @@ const initialState = {
   message: '',
   type: 'main',
   selectedOption: null,
+
 };
 
 const reducer = (state = initialState, { type, payload }) => {
