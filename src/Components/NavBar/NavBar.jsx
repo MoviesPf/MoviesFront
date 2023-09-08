@@ -108,19 +108,19 @@ export const NavBar = () => {
               onClick={() => dispatch(logoutUser())}
               className={css.sesion}
             >
-              Logout
+              Sign Out
             </button>
           ) : (
             <div>
               <button onClick={() => navigate('/login')} className={css.sesion}>
-                Login
+                Sign In
               </button>
 
               <button
                 onClick={() => navigate('/signin')}
                 className={css.sesion}
               >
-                Sign In
+                Sign Up
               </button>
             </div>
           )}

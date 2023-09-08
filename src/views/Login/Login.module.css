@@ -10,25 +10,6 @@
   user-select: none;
 }
 
-.logo {
-  position: absolute;
-  justify-content: center;
-  margin: 1rem;
-  cursor: pointer;
-}
-
-.logo a {
-  display: flex;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: white;
-  flex-direction: row;
-}
-
-.icon2 {
-  font-size: 2rem;
-}
-
 .txt {
   width: 40%;
   height: 40%;
@@ -68,11 +49,12 @@
 }
 
 .login h1 {
-    margin: auto;
+  margin: auto;
   grid-row: 1/2;
   font-size: 3.5rem;
   margin-bottom: 3rem;
   text-shadow: -4px 4px 7px #000;
+  letter-spacing: 5px;
 }
 
 .errorLogin{
@@ -124,7 +106,6 @@
   opacity: 0.8;
 }
 
-
 /* Estilos del AUTH */
 
 .span {
@@ -135,7 +116,6 @@
   font-weight: 700;
   font-size: 1.1rem;
   color: #ffffffb7;
-
 }
 
 .singin {
@@ -183,7 +163,7 @@
 .authGoogle {
   margin: auto;
   box-shadow: -2px 2px 5px #000000a6 !important;
-  border-radius: .3rem !important;
+  border-radius: 0.3rem !important;
 }
 
 .authGoogle:hover {
