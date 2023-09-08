@@ -11,74 +11,87 @@ import {
   GET_SERIES,
   GET_MOVIES_GENRES,
   GET_SERIES_GENRES,
+  LOGIN_USER,
+  LOGOUT_USER,
+  ERROR_LOGIN,
+  RESET_MESSAGE,
+  POST_USER,
+  MAIN_TYPE,
+  MOVIE_TYPE,
+  SERIE_TYPE,
   SELECT_DONATION_OPTION,
-} from "./actions-type";
+} from './actions-type';
 
 const initialState = {
   programs: [],
-  programDetail: [],
   filteredPrograms: [],
+  searchedPrograms: [],
+  programDetail: [],
   genres: [],
   platforms: [],
-  searchedPrograms: [],
+  user: {},
+  message: '',
+  type: 'main',
   selectedOption: null,
 };
 
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-
+const reducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case GET_ALL_PROGRAMS:
       return {
         ...state,
-        programs: action.payload,
+        programs: payload,
+        filteredPrograms: []
       };
 
     case GET_MOVIES:
       return {
         ...state,
-        programs: action.payload,
+        programs: payload,
+        filteredPrograms: []
       };
 
     case GET_SERIES:
       return {
         ...state,
-        programs: action.payload,
+        programs: payload,
+        filteredPrograms: []
       };
 
     case GET_PROGRAM_BY_NAME:
       return {
         ...state,
-        searchedPrograms: action.payload,
+        searchedPrograms: payload
       };
 
     case GET_GENRES:
       return {
         ...state,
-        genres: action.payload,
+        genres: payload
       };
 
     case GET_MOVIES_GENRES:
       return {
         ...state,
-        genres: action.payload,
+        genres: payload
       };
 
     case GET_SERIES_GENRES:
       return {
         ...state,
-        genres: action.payload,
+        genres: payload
       };
 
     case GET_PLATFORMS:
       return {
         ...state,
-        platforms: action.payload,
+        platforms: payload
       };
 
     case GET_PROGRAM_DETAIL:
       return {
         ...state,
-        programDetail: action.payload,
+        programDetail: payload
       };
 
     case FILTER_PROGRAMS_BY_GENRE:
@@ -86,12 +99,58 @@ const reducer = (state = initialState, action) => {
     case FILTER_PROGRAMS_COMBINED:
       return {
         ...state,
-        filteredPrograms: action.payload,
+        filteredPrograms: payload
       };
     case SELECT_DONATION_OPTION:
       return {
         ...state,
         selectedOption: action.payload,
+      }
+    //USERS
+    case LOGIN_USER:
+      return {
+        ...state,
+        user: payload.data,
+        message: payload.message
+      };
+    case POST_USER:
+      console.log(payload);
+      return {
+        ...state,
+        user: payload.data
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        user: {},
+        message: payload
+      };
+    case ERROR_LOGIN:
+      return {
+        ...state,
+        message: payload
+      };
+    case RESET_MESSAGE:
+      return {
+        ...state,
+        message: ''
+      };
+    case MAIN_TYPE:
+      return {
+        ...state,
+        type: 'main'
+      };
+
+    case MOVIE_TYPE:
+      return {
+        ...state,
+        type: 'movie'
+      };
+
+    case SERIE_TYPE:
+      return {
+        ...state,
+        type: 'serie'
       };
 
     default:
