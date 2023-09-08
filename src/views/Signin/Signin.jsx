@@ -2,39 +2,34 @@ import { useState } from 'react'
 import css from './Signin.module.css'
 import { useDispatch } from 'react-redux'
 import { caballoAvatar, conejoAvatar, elefanteAvatar, gatoAvatar, gatoBodyAvatar, leonAvatar, monoBodyAvatar, osoAvatar, osoBodyAvatar, perroBodyAvatar, rinoceronteBodyAvatar, tigreAvatar, unicornioAvatar, zorroAvatar, zorroBodyAvatar } from './Images'
+import { useNavigate } from 'react-router-dom'
+import { createUsers } from '../../Redux/actions'
 
 
 export const Signin = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [user, setUser] = useState({
     name: '',
     nickname: '',
-    avatar: '',
+    avatar: "src/assets/Avatars/user-removebg-preview.png",
     email: '',
     password: ''
   })
-  console.log(user)
 
   const handleChange = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value
     })
-
-    // if(avatar){
-    //   setUser({
-    //     ...user,
-    //     avatar: src
-    //   })
-    // }
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(event.target.name)
-
-
+    console.log(user)
+    dispatch(createUsers(user))
+    navigate('/')
   }
 
   return (
@@ -43,7 +38,7 @@ export const Signin = () => {
         className={css.form}
         onSubmit={handleSubmit}>
 
-        <h1 className={css.title}>SING UP</h1>
+        <h1 className={css.title}>SIGN UP</h1>
 
         <div className={css.section}>
 
@@ -51,7 +46,7 @@ export const Signin = () => {
 
             <div className={css.avatarUser}>
               <img className={css.avatarUserImg}
-                src="src\assets\Avatars\user-removebg-preview.png" alt="avatar" />
+                src={user.avatar} alt="avatar" />
             </div>
 
             <label className={css.label}>
@@ -122,7 +117,7 @@ export const Signin = () => {
             <p>I agree to the Terms and Privacy Policy</p>
           </div>
 
-          <button className={css.btn}>Sign up</button>
+          <button type='submit' className={css.btn}>Sign up</button>
 
         </div>
 
