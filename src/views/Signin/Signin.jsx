@@ -13,7 +13,7 @@ export const Signin = () => {
   const [user, setUser] = useState({
     name: '',
     nickname: '',
-    avatar: "https://github.com/MoviesPf/MoviesFront/blob/main/src/assets/Avatars/user-removebg-preview.png",
+    avatar: "https://i.ibb.co/4KWqYTS/user-removebg-preview-1.png",
     email: '',
     password: ''
   })
