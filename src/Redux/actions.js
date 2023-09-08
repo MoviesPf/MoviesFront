@@ -11,7 +11,10 @@ import {
   GET_MOVIES, 
   GET_SERIES, 
   GET_MOVIES_GENRES, 
-  GET_SERIES_GENRES 
+  GET_SERIES_GENRES,
+  MAIN_TYPE,
+  MOVIE_TYPE,
+  SERIE_TYPE
 } from "./actions-type";
 
 export const getAllPrograms = () => {
@@ -131,10 +134,11 @@ export const getProgramDetail = (ProgramsId) => {
   };
 };
 
-export const filterProgramsByGenre = (genreName) => {
+export const filterProgramsByGenre = (genreName, type) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/programs/filter/genre/${genreName}`);
+      const { data } = await axios.get(`http://localhost:3001/programs/filter/genre/${genreName}/${type}`);
+      console.log(data)
       dispatch({ 
         type: FILTER_PROGRAMS_BY_GENRE, 
         payload: data 
@@ -145,10 +149,11 @@ export const filterProgramsByGenre = (genreName) => {
   };
 };
 
-export const filterProgramsByPlatform = (platformName) => {
+export const filterProgramsByPlatform = (platformName, type) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/programs/filter/platform/${platformName}`);
+      const { data } = await axios.get(`http://localhost:3001/programs/filter/platform/${platformName}/${type}`);
+      console.log(data)
       dispatch({ 
         type: FILTER_PROGRAMS_BY_PLATFORM, 
         payload: data 
@@ -159,12 +164,11 @@ export const filterProgramsByPlatform = (platformName) => {
   };
 };
 
-export const filterProgramsCombined = (genreName, platformName) => {
+export const filterProgramsCombined = (genreName, platformName, type) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(
-        `http://localhost:3001/programs/filter/genre/${genreName}/platform/${platformName}`
-      );
+      const { data } = await axios.get(`http://localhost:3001/programs/filter/genre/${genreName}/platform/${platformName}/${type}`);
+      console.log(data)
       dispatch({ 
         type: FILTER_PROGRAMS_COMBINED, 
         payload: data 
@@ -175,3 +179,14 @@ export const filterProgramsCombined = (genreName, platformName) => {
   };
 };
 
+export const changeTypeMain = () => {
+  return { type: MAIN_TYPE, payload: "main" };
+};
+
+export const changeTypeMovie = () => {
+  return { type: MOVIE_TYPE, payload: "movie" };
+};
+
+export const changeTypeSerie = () => {
+  return { type: SERIE_TYPE, payload: "serie" };
+};
