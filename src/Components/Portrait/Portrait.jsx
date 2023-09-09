@@ -37,7 +37,7 @@ export const Portrait = ({ programs }) => {
     }
     
     return (
-    <div className={css.all}>
+    <div className={css.all}> 
       <div className={css.background} style={{ backgroundImage: `url(${imageBack})`}}></div>
       <div className={css.container}>
           <div className={css.divCard}>
