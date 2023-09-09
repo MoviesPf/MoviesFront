@@ -33,7 +33,7 @@ export const Detail = () => {
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
-    if (programDetail && programDetail.Genres) {
+    if (programDetail && programDetail.Genres && programDetail.Genres.name) {
       const genre = programDetail.Genres[0].name;
 
       dispatch(filterProgramsByGenre(genre, programDetail.type));
