@@ -11,10 +11,8 @@ import { store, persistor } from './Redux/store.js';
 // el AuthPrvider es para la configuracion de AUTH0
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <PersistGate loading={<GreenLoading/>} persistor={persistor}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </PersistGate>
   </Provider>
 );
