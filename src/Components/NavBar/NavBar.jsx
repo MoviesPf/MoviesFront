@@ -65,13 +65,7 @@ export const NavBar = () => {
         </div>
 
         {pathname === '/' && (
-          <div className={css.contMid}>
-            <button
-              className={type === 'main' ? css.typesP : css.types}
-              onClick={AllPrograms}
-            >
-              Main
-            </button>
+          <div className={css.contMid}> 
             <button
               className={type === 'movie' ? css.typesP : css.types}
               onClick={Movies}
@@ -118,14 +112,14 @@ export const NavBar = () => {
           ) : (
             <div>
               <button onClick={() => navigate('/login')} className={css.sesion}>
-                Login
+                Sign In
               </button>
 
               <button
                 onClick={() => navigate('/signin')}
                 className={css.sesion}
               >
-                Sign In
+                Sign Up
               </button>
             </div>
           )}

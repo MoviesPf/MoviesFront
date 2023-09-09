@@ -1,115 +1,115 @@
 .all {
-    position: relative;
-    width: 100%;
-    height:fit-content;
-    display: flex;
-    flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
 }
 
 .background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0.5;
-    filter: blur(5px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  filter: blur(5px);
 }
 
 .container {
-    position:relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 3em;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 3em;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
 
 .divCard {
-    margin-left: 10em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin-left: 10em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .img {
-    width: 200px;
-    height: 300px;
-    border-radius: 15px;
-    transition: all 0.25s;
-    overflow: hidden;
+  width: 200px;
+  height: 300px;
+  border-radius: 15px;
+  transition: all 0.25s;
+  overflow: hidden;
 }
 
 .img:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .info {
-    flex: 2;
-    padding-left: 100px;
-    padding-right: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    color:white;
-    text-align: justify;
+  flex: 2;
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  text-align: justify;
 }
 
-.info p{
-    padding-top: 20px;
-    padding-bottom: 20px;
+.info p {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .firstInfo {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .yearRuntime {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.yearRuntime h5{
-    padding: 10px;
+.yearRuntime h5 {
+  padding: 10px;
 }
 
 .etiquetas {
-    /* background-color: red; */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .genres {
-    /* background-color: yellow; */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
 }
 
 .platforms {
-    /* background-color: aqua; */
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    justify-content: end;
+  /* background-color: aqua; */
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
 }
 
-.genres p{
-    padding: 15px;
+.genres p {
+  padding: 15px;
 }
 
-.platforms p{
-    padding: 15px;
+.platforms p {
+  padding: 15px;
 }
