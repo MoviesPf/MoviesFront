@@ -20,6 +20,7 @@ import {
   MOVIE_TYPE,
   SERIE_TYPE,
   SELECT_DONATION_OPTION,
+  GET_USER_PLAYLISTS
 } from "./actions-type";
 
 
@@ -31,6 +32,7 @@ const initialState = {
   genres: [],
   platforms: [],
   user: {},
+  userPlaylists: {},
   message: '',
   type: 'main',
   selectedOption: null,
@@ -137,6 +139,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         message: ''
       };
+
+    case GET_USER_PLAYLISTS:
+      return {
+        ...state,
+        userPlaylists:payload
+      }
     case MAIN_TYPE:
       return {
         ...state,

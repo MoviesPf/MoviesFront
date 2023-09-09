@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavProfile from './NavProfile'
 import styled from 'styled-components'
 import PresentationLine from "./PresentationLine"
-import {NavBar}from "../../Components/NavBar/NavBar"
+import { NavBar }from "../../Components/NavBar/NavBar"
 import ProgCardDetail from "../Profile/ProgCardDetail"
-import {Card} from '../../Components/Card/Card'
+import { Card } from '../../Components/Card/Card'
 import { useDispatch, useSelector } from 'react-redux';
 import defaultBackground from "../../assets/background.jpg"
-
-
+import { getUserPlaylists } from '../../Redux/actions';
+import { CardFake } from "./CardFake/CardFake.jsx";
 
 const ViewContainer = styled.div`
   background-color: #1C1C1C;
@@ -89,9 +89,20 @@ const CardsContainer = styled.div`
 `;
 
 const Profile = () => {
-//   const user = useSelector(state => state.user);
+
   const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getUserPlaylists(user.id));
+  },[]);
+
+  const playlistData = useSelector((state) => state.userPlaylists)
+
+  const playlists = playlistData.finalPlaylists
+
+  const totalPlaylist = playlistData.totalPlaylist
 
   return (
     <ViewContainer>
@@ -106,6 +117,7 @@ const Profile = () => {
               {/* Usuario/Barra de navegacion ⬇ */}
               <PresentationLine avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
               <NavProfile/>
+              <h3> {totalPlaylist} </h3>
             </ElementsBarr>
             
           <div>
@@ -133,41 +145,39 @@ const Profile = () => {
               overview={temporalOverview}
               starVal={5}
             />
-            <LineSubHR />
-            <IconLabel>Likes</IconLabel>
-            <LineHR />
+              {
+                playlists.map((playlist)=> (
+                  <div>
+                    {
+                      playlist.programs.length 
+                      ?
+                      <IconLabel>{playlist.name}</IconLabel>
+                      :
+                      <IconLabel>{playlist.name} is empty</IconLabel>
+                    }
 
-            <CardsContainer>
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-            </CardsContainer>
-
-            <LineHR />
-            <IconLabel>Watchlist</IconLabel>
-            <LineHR />
-
-            <CardsContainer>
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-            </CardsContainer>
-
-            <LineHR />
-            <IconLabel>Watched</IconLabel>
-            <LineHR />
-
-            <CardsContainer>
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-              <Card program={{ program: { poster: null, title: null } }} />
-            </CardsContainer>
+                    <LineHR />
+                      {
+                        playlist.programs.length 
+                        ?
+                        <CardsContainer>
+                          {
+                            playlist.programs.map((program)=> (
+                              <Card program={program}></Card>
+                            ))
+                          }
+                        </CardsContainer>
+                        :
+                        <CardsContainer>
+                          <CardFake/><CardFake/><CardFake/><CardFake/>
+                        </CardsContainer>
+                    
+                      }
+                    
+                  </div>
+                )
+                )
+              }
 
             <LineHR />
           </BodyContainer>

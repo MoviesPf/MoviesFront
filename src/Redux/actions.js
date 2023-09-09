@@ -22,7 +22,8 @@ import {
   MAIN_TYPE,
   MOVIE_TYPE,
   SERIE_TYPE,
-  SELECT_DONATION_OPTION
+  SELECT_DONATION_OPTION,
+  GET_USER_PLAYLISTS
 } from './actions-type';
 
 export const getAllPrograms = () => {
@@ -57,6 +58,7 @@ export const getAllMovies = () => {
     });
   };
 };
+
 
 export const getAllSeries = () => {
   return async (dispatch) => {
@@ -306,5 +308,16 @@ export const initiatePayment = (donationData) => async (dispatch) => {
     }
   } catch (error) {
     console.error('Error al iniciar el pago:', error);
+  }
+}
+
+export const getUserPlaylists = (UserId) => {
+  return async (dispatch) => {
+    const { data } = await axios(URL_API + `playlists/user/${UserId}`);
+    console.log(data);
+    return dispatch({
+      type: GET_USER_PLAYLISTS,
+      payload: data
+    })
   }
 }

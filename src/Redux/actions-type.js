@@ -15,13 +15,14 @@ export const FILTER_PROGRAMS_COMBINED = 'FILTER_PROGRAMS_COMBINED';
 
 export const SELECT_DONATION_OPTION = 'SELECT_DONATION_OPTION';
 
-export const GET_USER_BY_ID = 'GET_USER_BY_ID'
-export const GET_USER_BY_EMAIL = 'GET_USER_BY_EMAIL'
-export const POST_USER = 'POST_USER'
-export const LOGIN_USER = 'LOGIN_USER'
-export const ERROR_LOGIN = 'ERROR_LOGIN'
-export const LOGOUT_USER = 'LOGOUT_USER'
-export const DELETE_USER = 'DELETE_USER'
+export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+export const GET_USER_BY_EMAIL = 'GET_USER_BY_EMAIL';
+export const POST_USER = 'POST_USER';
+export const LOGIN_USER = 'LOGIN_USER';
+export const ERROR_LOGIN = 'ERROR_LOGIN';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const DELETE_USER = 'DELETE_USER';
+export const GET_USER_PLAYLISTS ="GET_USER_PLAYLISTS";
 
 export const RESET_MESSAGE = 'RESET_MESSAGE'
 
