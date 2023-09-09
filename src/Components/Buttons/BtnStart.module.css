@@ -1,0 +1,27 @@
+.content{
+  background-color: #000;
+  font-size: 4rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #008000;
+  outline: 3px solid #008000;
+  position: sticky;
+  top: 32rem;
+  left: 95%;
+  z-index: 99;
+  margin: 1rem 0;
+}
+
+.content:hover{
+  opacity: .8;
+  scale: 1.05;
+
+}
+
+.content:active{
+  scale: .85;
+}

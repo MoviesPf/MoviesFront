@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { caballoAvatar, conejoAvatar, elefanteAvatar, gatoAvatar, gatoBodyAvatar, leonAvatar, monoBodyAvatar, osoAvatar, osoBodyAvatar, perroBodyAvatar, rinoceronteBodyAvatar, tigreAvatar, unicornioAvatar, zorroAvatar, zorroBodyAvatar } from './Images'
 import { useNavigate } from 'react-router-dom'
 import { createUsers } from '../../Redux/actions'
+import BtnHome from '../../Components/Buttons/BtnHome'
 
 
 export const Signin = () => {
@@ -37,6 +38,7 @@ export const Signin = () => {
       <form
         className={css.form}
         onSubmit={handleSubmit}>
+      <BtnHome className={css.btnHome}/>
 
         <h1 className={css.title}>SIGN UP</h1>
 
