@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavProfile from './NavProfile'
 import styled from 'styled-components'
 import PresentationLine from "./PresentationLine"
@@ -93,6 +93,7 @@ const Profile = () => {
   const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [ menu, setMenu ] = useState("profile")
   
   useEffect(() => {
     dispatch(getUserPlaylists(user.id));
@@ -116,7 +117,7 @@ const Profile = () => {
             <ElementsBarr>
               {/* Usuario/Barra de navegacion ⬇ */}
               <PresentationLine avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
-              <NavProfile/>
+              <NavProfile setMenu={setMenu}/>
               <h3> {totalPlaylist} </h3>
             </ElementsBarr>
             
@@ -148,15 +149,8 @@ const Profile = () => {
               {
                 playlists.map((playlist)=> (
                   <div>
-                    {
-                      playlist.programs.length 
-                      ?
                       <IconLabel>{playlist.name}</IconLabel>
-                      :
-                      <IconLabel>{playlist.name} is empty</IconLabel>
-                    }
-
-                    <LineHR />
+                      <LineHR />
                       {
                         playlist.programs.length 
                         ?
@@ -169,7 +163,8 @@ const Profile = () => {
                         </CardsContainer>
                         :
                         <CardsContainer>
-                          <CardFake/><CardFake/><CardFake/><CardFake/>
+                          <CardFake/>
+                          <h1>This list is empty</h1>
                         </CardsContainer>
                     
                       }

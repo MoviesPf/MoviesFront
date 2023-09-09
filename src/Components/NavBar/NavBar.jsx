@@ -65,19 +65,10 @@ export const NavBar = () => {
         </div>
 
         {pathname === '/' && (
-          <div className={css.contMid}> 
-            <button
-              className={type === 'movie' ? css.typesP : css.types}
-              onClick={Movies}
-            >
-              Movies
-            </button>
-            <button
-              className={type === 'serie' ? css.typesP : css.types}
-              onClick={Series}
-            >
-              Series
-            </button>
+          <div className={css.contMid}>
+            <button className={type === 'main' ? css.typesP : css.types} onClick={AllPrograms}>All</button>
+            <button className={type === 'movie' ? css.typesP : css.types} onClick={Movies}>Movies</button>
+            <button className={type === 'serie' ? css.typesP : css.types} onClick={Series}>Series</button>
           </div>
         )}
 
@@ -129,9 +120,6 @@ export const NavBar = () => {
         <div className={css.searchComponent}>
           <SearchBar
             setSearched={setSearched}
-            searched={searched}
-            setShow={setShow}
-            show={show}
           />
           {
             <div className={css.cartas}>
