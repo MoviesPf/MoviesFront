@@ -22,6 +22,8 @@ import {
   MAIN_TYPE,
   MOVIE_TYPE,
   SERIE_TYPE,
+  POST_REVIEW,
+  SELECT_DONATION_OPTION,
 } from "./actions-type";
 
 export const getAllPrograms = () => {
@@ -293,4 +295,35 @@ export const createReview = (reviewData, userId, ProgramsId) => {
       console.log(error);
     }
   };
+};
+
+export const selectDonationOption = (amount) => ({
+  type: SELECT_DONATION_OPTION,
+  payload: amount,
+});
+
+export const initiatePayment = (donationData) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3001/donations/create-order",
+      donationData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("Respuesta de MercadoPago:", response.data);
+
+    const sandbox_init_point =
+      response.data?.response?.body?.sandbox_init_point;
+    if (sandbox_init_point) {
+      window.location.href = sandbox_init_point;
+    } else {
+      console.error("URL de redirección no válida");
+    }
+  } catch (error) {
+    console.error("Error al iniciar el pago:", error);
+  }
 };

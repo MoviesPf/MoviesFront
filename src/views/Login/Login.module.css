@@ -10,25 +10,6 @@
   user-select: none;
 }
 
-.logo {
-  position: absolute;
-  justify-content: center;
-  margin: 1rem;
-  cursor: pointer;
-}
-
-.logo a {
-  display: flex;
-  gap: 0.5rem;
-  text-decoration: none;
-  color: white;
-  flex-direction: row;
-}
-
-.icon2 {
-  font-size: 2rem;
-}
-
 .txt {
   width: 40%;
   height: 40%;

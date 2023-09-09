@@ -20,6 +20,7 @@ import {
   MOVIE_TYPE,
   SERIE_TYPE,
   POST_REVIEW,
+  SELECT_DONATION_OPTION,
 } from "./actions-type";
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
   user: {},
   message: "",
   type: "main",
+  selectedOption: null,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -100,7 +102,11 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         filteredPrograms: payload,
       };
-
+    case SELECT_DONATION_OPTION:
+      return {
+        ...state,
+        selectedOption: payload,
+      };
     //USERS
     case LOGIN_USER:
       return {
