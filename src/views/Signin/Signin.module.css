@@ -7,6 +7,11 @@
   
 }
 
+.btnHome{
+  position: relative;
+  z-index: 1000;
+}
+
 .form {
   backdrop-filter: blur(3px);
   background-color: #49484847;
