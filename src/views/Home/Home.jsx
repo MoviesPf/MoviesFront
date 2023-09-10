@@ -16,8 +16,8 @@ export const Home = () => {
   const programs = useSelector((state) => state.programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
   const [loading, setLoading] = useState(true);
-
-  useEffect(
+  
+    useEffect(
     () => {
       dispatch(getAllPrograms()).then(() => {
         setLoading(false);
