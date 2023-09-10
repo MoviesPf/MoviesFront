@@ -41,7 +41,8 @@ const IconsC = styled.div`
 width: 250px;
 display: flex;
 justify-content: space-evenly;
-margin-right: 120px;
+margin-right: 1.5rem;
+gap: .5rem;
 
 `
 const IconImg = styled.img`
