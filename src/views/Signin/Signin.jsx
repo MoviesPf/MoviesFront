@@ -68,13 +68,6 @@ export const Signin = () => {
 
         <div className={css.section}>
           <div className={css.formUser}>
-            <div className={css.avatarUser}>
-              <img
-                className={css.avatarUserImg}
-                src={user.avatar}
-                alt='avatar'
-              />
-            </div>
 
             <label className={css.label}>
               Name <span className={css.span}>*</span>
@@ -160,7 +153,13 @@ export const Signin = () => {
         </div>
 
         <div className={css.sectionAvatar}>
-          <p className={css.titleAvatar}>Choose your avatar</p>
+
+          <div className={css.avatarUser}>
+            <img className={css.avatarUserImg}
+              src={user.avatar} alt="avatar" />
+          </div>
+            <p className={css.titleAvatar}>Choose your avatar</p>
+
 
           <div
             className={css.avatarContainer}
