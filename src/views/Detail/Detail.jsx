@@ -6,7 +6,7 @@ import css from './Detail.module.css';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
-import { Header, ModalReview, CloseButton, Comments, Submit, IconImg, ContainerModalImg, ModalImg, SpanModalImg, SpanError, StarsConteiner } from "./Detail.Styled";
+import { Header, ModalReview, CloseButton, Comments, Submit, IconImg, ContainerModalImg, ModalImg, SpanModalImg, SpanError, StarsContainer } from "./Detail.Styled";
 import { Footer } from "../../Components/Footer/Footer"
 import moment from 'moment';
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
@@ -110,14 +110,14 @@ export const Detail = () => {
           {showError && 
             <SpanError>must be logged in to add a review</SpanError>
           }
-          <StarsConteiner>
+          <StarsContainer>
             <div>
               {
                 new Array(5).fill('').map((_, index) => <IconImg onClick={() => handleRating(index + 1)} src={review.rating > index ? fullStar : emptyStar } />)
               }
             </div>
             <Submit onClick= {handleCreate} >Save</Submit >
-          </StarsConteiner>
+          </StarsContainer>
         </ModalReview>}
         <Footer />
     </div>
