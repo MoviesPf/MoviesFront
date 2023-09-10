@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import css from './Cards.module.css';
 import { Card } from '../Card/Card.jsx';
 
@@ -17,9 +17,14 @@ export const Cards = ({ programs }) => {
 
   const allPrograms = programList.slice(fisrtProgramIndex, lastProgramIndex);
 
-  !allPrograms.length ? setCurrentPage(1) : allPrograms;
+  useEffect(() => {
+    if (!allPrograms.length) {
+      setCurrentPage(1);
+    }
+  }, [allPrograms]);
 
   const paginate = (numeroPagina) => setCurrentPage(numeroPagina);
+
   return !programList.length ? (
     <h1></h1>
   ) : (
