@@ -1,0 +1,88 @@
+.section{
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    background: url('../../assets/donation.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.txt h1{
+    display: flex;
+    font-size: 3rem;
+    width: 65%;
+    height: 40%;
+    margin: auto;
+    margin-top: .5rem;
+    font-size: 4rem;
+    color: rgb(5, 6, 5);
+    font-weight: 800;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    height: 55vh;
+    width: 70%;
+    margin: auto;
+    margin-top: .5rem;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.card{
+    width: 11rem;
+    height: 15rem;
+    display: flex;
+    border-radius: 1rem;
+    flex-direction: row;
+    justify-content: center;
+    border: 2px solid rgb(0, 0, 0);
+    background: url('../../assets/popcorn.png');
+    background-size: 10rem;
+    background-repeat: no-repeat;
+    background-position-y: 5rem;
+    background-position-x: 3rem;
+}
+
+.card input{
+    width: 20rem;
+    height: 3rem;
+    background-color: red;
+    margin-top: 42%;
+    margin-left: 5rem;
+}
+
+.card h2{
+    position: absolute;
+    font-size: 5rem;
+    bottom: 37%;
+    color: green;
+    gap: 1rem;
+    margin-left: 9.5%;
+}
+
+.content button{
+    height: 10%;
+    width: 20%;
+    border-radius:2rem ;
+    border: none;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.content button:hover{
+    color: white;
+    background-color: green;
+}
+
