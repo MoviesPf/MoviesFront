@@ -76,7 +76,7 @@ const LineSubHR = styled.hr`
 
 
 
-export default function LogUserProgramOptions({setShowModal}) {
+export default function LogUserProgramOptions({setShowModal, setShowError}) {
   return (
     <ScoreContainer >
             <IconsC>
@@ -104,7 +104,14 @@ export default function LogUserProgramOptions({setShowModal}) {
             </EmptStarC>
 
         
-        <ReviewButton onClick={()=> setShowModal(true)}>Review</ReviewButton>
+        <ReviewButton onClick={()=> { 
+           setShowError(false)
+           setShowModal(true)
+          } 
+        }
+        >
+          Review
+        </ReviewButton>
     </ScoreContainer>
   )
 }

@@ -6,34 +6,36 @@ import css from './Detail.module.css';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
-import { Header, ModalReview, CloseButton, Comments, Submit } from "./Detail.Styled";
+import { Header, ModalReview, CloseButton, Comments, Submit, IconImg, ContainerModalImg, ModalImg, SpanModalImg, SpanError, StarsConteiner } from "./Detail.Styled";
 import { Footer } from "../../Components/Footer/Footer"
 import moment from 'moment';
+import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
+import emptyStar from "../../assets/Icons/icons8-star-52.png"
+import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 
 export const Detail = () => {
   const { ProgramsId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const programDetail = useSelector((state) => state.programDetail);
+  const user = useSelector((state) => state.user);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
   const [showModal, setShowModal] = useState(false);
+  const [showError, setShowError] = useState(false);
   const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
 
+  console.log(user, "user");
+
   const randomElements = useMemo(() => {
-    return similarMovies? Array.from({ length: 2 }, () => similarMovies[Math.floor(Math.random() * similarMovies.length)]) : []; 
+    return similarMovies && similarMovies.length > 0 ? Array.from({ length: 2 }, () => similarMovies[Math.floor(Math.random() * similarMovies.length)]) : []; 
   }, [similarMovies]);
 
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId));
-    if (programDetail && programDetail.Genres) {
-      const genre = programDetail.Genres[0].name;
-
-      dispatch(filterProgramsByGenre(genre, programDetail.type));
-    }
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
-    if (programDetail && programDetail.Genres && programDetail.Genres.name) {
+    if (programDetail && programDetail.Genres) {
       const genre = programDetail.Genres[0].name;
 
       dispatch(filterProgramsByGenre(genre, programDetail.type));
@@ -69,9 +71,11 @@ export const Detail = () => {
   }
 
   const handleCreate = async () => {
-    await dispatch(createReview(review, 1, programDetail.id ));
-    dispatch(getProgramDetail(ProgramsId));
-    setShowModal(false);
+    if (user.id) {
+      await dispatch(createReview(review, user.id, programDetail.id ));
+      dispatch(getProgramDetail(ProgramsId));
+      setShowModal(false);
+    } else setShowError(true);
   }
 
   const handleMovieClick = (ProgramsId) => {
@@ -90,25 +94,32 @@ export const Detail = () => {
         year={year} 
         runtimeFormatted={runtimeFormatted} 
         setShowModal={setShowModal}
+        setShowError={setShowError}
         similarMovies={randomElements}
         handleMovieClick={handleMovieClick}
+        GreenLoading={GreenLoading}
       />
       {showModal && 
         <ModalReview>
-          <CloseButton onClick={() => setShowModal(false)}> X </CloseButton>
-          <Comments onChange={(e) => handleComment(e.target.value)}/>
-          {
-            new Array(5).fill('').map((_, index) =>
-            <span
-              key={`key-${index}`}
-              onClick={() => handleRating(index + 1)}
-            >
-              {review.rating > index ? '★' : '☆'}
-            </span>)
+          <ContainerModalImg>
+            <ModalImg  src={programDetail.poster} alt="" />
+            <SpanModalImg> {`${programDetail.title} (${year})`} </SpanModalImg>
+          </ContainerModalImg>
+          <CloseButton onClick={() => setShowModal(false)}> x </CloseButton>
+          <Comments placeholder='Add a review...' onChange={(e) => handleComment(e.target.value)}/>
+          {showError && 
+            <SpanError>must be logged in to add a review</SpanError>
           }
-          <Submit onClick= {handleCreate} >Save</Submit >
+          <StarsConteiner>
+            <div>
+              {
+                new Array(5).fill('').map((_, index) => <IconImg onClick={() => handleRating(index + 1)} src={review.rating > index ? fullStar : emptyStar } />)
+              }
+            </div>
+            <Submit onClick= {handleCreate} >Save</Submit >
+          </StarsConteiner>
         </ModalReview>}
-      <Footer />
+        <Footer />
     </div>
   );
 };

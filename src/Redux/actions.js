@@ -283,9 +283,9 @@ export const changeTypeSerie = () => {
 export const createReview = (reviewData, userId, ProgramsId) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`http://localhost:3001/review`, {
+      const { data } = await axios.post(URL_API + `review`, {
         reviewData,
-        userId: "b7e7467a-e7cf-4997-9443-9a682dc6037f",
+        userId,
         ProgramsId,
       });
       dispatch({
