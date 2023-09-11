@@ -86,6 +86,7 @@ const LineNavHR = styled.hr`
   box-shadow: inset 0 22px 30px -29px rgb(0, 128, 0);
 `;
 
+
 const BodyContainer = styled.div`
   width: 100%;
   height: auto; // Esto haco que la altura cubra toda la pantalla

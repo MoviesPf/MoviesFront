@@ -40,18 +40,16 @@ export const Home = () => {
     <div className={css.background}>
       <span id='start' />
       <NavBar />
-      {loading ? (
+      {programs.length === 0 ? (
         <GreenLoading />
       ) : (
         <div className={css.content}>
           <Portrait programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
           <Filters />
-
+          
           <LineHR />
           <h1 className={css.subTitle}>Latest Releases</h1>
           <LineHR />
-
-          <br/>
           <Carrusel programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
           <LineHR />
           <h1 className={css.subTitle}>More Programs</h1>

@@ -69,15 +69,31 @@ export const NavBar = () => {
               <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' />
             </svg>
           </button>
-          {
-            user.name !== '' && user.name 
-            ? <div>
-                <button onClick={LogOut} className={css.sesion}>Logout</button>
-                <button onClick={()=> navigate('/profile')} className={css.sesion}>{user.nickname}</button>
+          {user.name !== '' && user.name ? (
+            <div className={css.user}>
+              <button
+                onClick={() => dispatch(logoutUser())}
+                className={css.sesion}
+              >
+                Sign Out
+              </button>
+              <div className={css.avatarUser} onClick={() => navigate('/profile')}>
+                <img className={css.avatarUserImg}
+                  src={user.avatar} alt="avatar" />
+              </div>
             </div>
-            : <div>
-                <button onClick={() => navigate('/login')} className={css.sesion}>Sign In</button>
-                <button onClick={() => navigate('/signin')} className={css.sesion}>Sign Up</button>
+          ) : (
+            <div>
+              <button onClick={() => navigate('/login')} className={css.sesion}>
+                Sign In
+              </button>
+
+              <button
+                onClick={() => navigate('/signin')}
+                className={css.sesion}
+              >
+                Sign Up
+              </button>
             </div>
           }
         </div>

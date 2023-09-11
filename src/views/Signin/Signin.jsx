@@ -1,20 +1,36 @@
-import { useState } from 'react'
-import css from './Signin.module.css'
-import { useDispatch } from 'react-redux'
-import { caballoAvatar, conejoAvatar, elefanteAvatar, gatoAvatar, gatoBodyAvatar, leonAvatar, monoBodyAvatar, osoAvatar, osoBodyAvatar, perroBodyAvatar, rinoceronteBodyAvatar, tigreAvatar, unicornioAvatar, zorroAvatar, zorroBodyAvatar } from './Images'
-import { useNavigate } from 'react-router-dom'
-import { createUsers } from '../../Redux/actions'
-import BtnHome from '../../Components/Buttons/BtnHome'
-
+import { useState } from 'react';
+import css from './Signin.module.css';
+import { useDispatch } from 'react-redux';
+import {
+  caballoAvatar,
+  conejoAvatar,
+  elefanteAvatar,
+  gatoAvatar,
+  gatoBodyAvatar,
+  leonAvatar,
+  monoBodyAvatar,
+  osoAvatar,
+  osoBodyAvatar,
+  perroBodyAvatar,
+  rinoceronteBodyAvatar,
+  tigreAvatar,
+  unicornioAvatar,
+  zorroAvatar,
+  zorroBodyAvatar
+} from './Images';
+import { useNavigate } from 'react-router-dom';
+import { createUsers } from '../../Redux/actions';
+import BtnHome from '../../Components/Buttons/BtnHome';
+import { validations } from './validations';
 
 export const Signin = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [user, setUser] = useState({
     name: '',
     nickname: '',
-    avatar: "https://i.ibb.co/4KWqYTS/user-removebg-preview-1.png",
+    avatar: 'https://i.ibb.co/4KWqYTS/user-removebg-preview-1.png',
     email: '',
     password: '',
     status: ''
@@ -24,71 +40,80 @@ export const Signin = () => {
     setUser({
       ...user,
       [event.target.name]: event.target.value
-    })
-  }
+    });
+    setError(
+      validations({
+        ...user,
+        [event.target.name]: event.target.value
+      })
+    );
+    console.log(error);
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    console.log(user)
-    dispatch(createUsers(user))
-    navigate('/')
-  }
+    event.preventDefault();
+    console.log(user);
+    dispatch(createUsers(user));
+    navigate('/');
+  };
 
   return (
     <div className={css.background}>
-      <form
-        className={css.form}
-        onSubmit={handleSubmit}>
-      <BtnHome className={css.btnHome}/>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <BtnHome className={css.btnHome} />
 
         <h1 className={css.title}>SIGN UP</h1>
 
         <div className={css.section}>
-
           <div className={css.formUser}>
-
-            <div className={css.avatarUser}>
-              <img className={css.avatarUserImg}
-                src={user.avatar} alt="avatar" />
-            </div>
 
             <label className={css.label}>
               Name <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
+                value={user.name}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Name'
                 type='text'
-                name='name' />
+                name='name'
+              />
             </label>
+              {error.name && <span className={css.Error}>{error.name}</span>}
 
             <label className={css.label}>
               Nickname <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
+                value={user.nickname}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Nickname'
                 type='text'
-                name='nickname' />
+                name='nickname'
+              />
             </label>
+              {error.nickname && <span className={css.Error}>{error.nickname}</span>}
 
             <label className={css.label}>
               Email <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
+                value={user.email}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Email'
                 type='email'
-                name='email' />
+                name='email'
+              />
             </label>
+              {error.email && <span className={css.Error}>{error.email}</span>}
 
             <label className={css.label}>
               Password <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
+                value={user.password}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Password'
@@ -96,16 +121,31 @@ export const Signin = () => {
                 name='password'
               />
             </label>
+              {error.password && <span className={css.Error}>{error.password}</span>}
 
             <label className={css.label}>
               Confirm Password <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
+                value={user.confirm}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Confirm Password'
                 type='password'
-                name='confirm password' />
+                name='confirm'
+              />
+            </label>
+
+
+            <label className={css.label}>
+              Status <span className={css.span}>*</span>
+              <input
+                onChange={handleChange}
+                autoComplete='none'
+                className={css.input}
+                placeholder='Status'
+                type='text'
+                name='status' />
             </label>
 
 
@@ -125,173 +165,208 @@ export const Signin = () => {
 
         <div className={css.containBtn}>
           <div className={css.policy}>
-            <input
-              className={css.checkbox}
-              type="checkbox"
-              name="policy" />
+            <input className={css.checkbox} type='checkbox' name='policy' />
             <p>I agree to the Terms and Privacy Policy</p>
           </div>
 
-          <button type='submit' className={css.btn}>Sign up</button>
-
+          <button type='submit' className={css.btn}>
+            Sign up
+          </button>
         </div>
 
         <div className={css.sectionAvatar}>
 
+          <div className={css.avatarUser}>
+            <img className={css.avatarUserImg}
+              src={user.avatar} alt="avatar" />
+          </div>
           <p className={css.titleAvatar}>Choose your avatar</p>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: caballoAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={caballoAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: caballoAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={caballoAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: conejoAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={conejoAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: conejoAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={conejoAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: gatoBodyAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={gatoBodyAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: gatoBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={gatoBodyAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: monoBodyAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={monoBodyAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: monoBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={monoBodyAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: osoBodyAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={osoBodyAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: osoBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={osoBodyAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: perroBodyAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={perroBodyAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: perroBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={perroBodyAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: rinoceronteBodyAvatar
-            })}>
-            <img className={css.avatarImg}
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: rinoceronteBodyAvatar
+              })
+            }
+          >
+            <img
+              className={css.avatarImg}
               src={rinoceronteBodyAvatar}
-              alt="avatar" />
+              alt='avatar'
+            />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: zorroBodyAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={zorroBodyAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: zorroBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={zorroBodyAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: elefanteAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={elefanteAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: elefanteAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={elefanteAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: gatoAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={gatoAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: gatoAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={gatoAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: leonAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={leonAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: leonAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={leonAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: osoAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={osoAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: osoAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={osoAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: tigreAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={tigreAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: tigreAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={tigreAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: unicornioAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={unicornioAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: unicornioAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={unicornioAvatar} alt='avatar' />
           </div>
 
-          <div className={css.avatarContainer}
-            onClick={() => setUser({
-              ...user,
-              avatar: zorroAvatar
-            })}>
-            <img className={css.avatarImg}
-              src={zorroAvatar}
-              alt="avatar" />
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setUser({
+                ...user,
+                avatar: zorroAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={zorroAvatar} alt='avatar' />
           </div>
-
         </div>
       </form>
     </div>
-  )
-}
+  );
+};

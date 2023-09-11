@@ -47,7 +47,12 @@ background-color: black;
 position: relative;
 margin-left: 50px;
 top: -95px;
+`
 
+const UserCard = styled.div` 
+height: 100%;
+// display: flex;
+margin-left: 120px;
 `
 const UserPicture = styled.img`
 border-radius: 100%;
