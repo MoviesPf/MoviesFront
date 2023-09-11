@@ -47,11 +47,14 @@ export const Home = () => {
               filteredPrograms.data ? filteredPrograms.data : programs.data
             }
           />
-          <div className={css.subTitle}> All Programs </div>
+          <div id='programs' className={css.subTitle}> All Programs </div>
           <BtnStart />
           <Cards
             programs={
               filteredPrograms.data ? filteredPrograms.data : programs.data
+            }
+            total={
+              filteredPrograms.data ? filteredPrograms.total : programs.total
             }
           />
           <Footer />
