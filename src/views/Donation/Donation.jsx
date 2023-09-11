@@ -59,24 +59,22 @@ const Donations = () => {
     <div className={css.section}>
       <NavBar />
       <div className={css.txt}>
-        <h1>Help us keep the service free!</h1>
+        <h1 className={css.title}>Help us keep the service free!</h1>
       </div>
       <div className={css.content}>
-        <div className={css.img}></div>
-        <h2>Make your donation</h2>
+        <h2 className={css.subtitle}>Make your donation</h2>
 
         <div className={css.cards}>
           <div className={css.card}>
-            <label>
               <input
                 type='radio'
                 name='donationOption'
+                className={css.chckMark}
                 value={10}
                 checked={selectedOption === 10}
                 onChange={() => handleOptionSelect(10)}
               />
-              <h2>10$</h2>
-            </label>
+              <h2 className={css.monto}>10$</h2>
           </div>
 
           <div className={css.card}>
@@ -84,11 +82,12 @@ const Donations = () => {
               <input
                 type='radio'
                 name='donationOption'
+                className={css.chckMark}
                 value={30}
                 checked={selectedOption === 30}
                 onChange={() => handleOptionSelect(30)}
               />
-              <h2>30$</h2>
+              <h2 className={css.monto}>30$</h2>
             </label>
           </div>
 
@@ -97,15 +96,16 @@ const Donations = () => {
               <input
                 type='radio'
                 name='donationOption'
+                className={css.chckMark}
                 value={50}
                 checked={selectedOption === 50}
                 onChange={() => handleOptionSelect(50)}
               />
-              <h2>50$</h2>
+              <h2 className={css.monto}>50$</h2>
             </label>
           </div>
         </div>
-        <button onClick={handleDonation}>Donate</button>
+        <button className={css.btnDono} onClick={handleDonation}>Donate</button>
       </div>
 
       {successMessage && (
