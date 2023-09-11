@@ -1,13 +1,23 @@
 import React from 'react'
 import { useState ,useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios'
+import { handleList } from '../../Redux/actions'
 import favIcon from "../../assets/Icons/icons8-love-90.png"
 import ViewsIcon from "../../assets/Icons/icons8-view-90.png"
 import PendingIcon from "../../assets/Icons/icons8-delivery-time-96.png"
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
-import styled from 'styled-components'
+import {styled ,keyframes, css }from 'styled-components'
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
+import {getUserPlaylists} from "../../Redux/actions"
+
+const scaleUp = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+`
 
 const ScoreContainer = styled.div`
   visibility: ${(props) => props.$isLogin ? 'visible' : 'hidden'};
@@ -52,6 +62,7 @@ const IconImg = styled.img`
     ${    
     (props) => (props.$check ? css` animation: ${scaleUp} 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;` : null )
   }
+    
   }
 `
 const IconLabel = styled.label`
@@ -106,27 +117,27 @@ export default function LogUserProgramOptions({setShowModal, setShowError, progr
   const playlists = playlistData.finalPlaylists;
 
   const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
-  let isFav = playlists ? favorites.programs.filter(program => program.id === programId) ? true : false : false;
+  let isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
 
   console.log(isFav);
 
   const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
-  let isWatchL = playlists ? watchlist.programs.filter(program => program.id === programId) ? true : false : false;
+  let isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
 
   console.log(isWatchL);
 
   const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
-  let isWatch = playlists ? watched.programs.filter(program => program.id === programId) ? true : false : false;
+  let isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
 
   console.log(isWatch);
 
 
-  const [checkButtonState,setCheckButtonsSTate] =  useState(
-    {
-    watched: isWatch,
-    favs: isFav,
-    watchlist: isWatchL,
-    })
+
+ const [checkButtonState,setCheckButtonsSTate] =  useState({
+   watched: !isWatch,
+   favs: !isFav,
+   watchlist: !isWatchL,
+ })
 
 
   function scoreHandler(event){
@@ -168,7 +179,6 @@ export default function LogUserProgramOptions({setShowModal, setShowError, progr
       } 
     }
   }
-
 
   return (
     <ScoreContainer $isLogin={user.id? true : false}> {/* Cambiar por: {user.id? true:false} */}

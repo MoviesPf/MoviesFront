@@ -149,7 +149,7 @@ const Profile = () => {
   const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
   
   useEffect(() => {
-    dispatch(getUserReviews(user.id)).then(()=> {setLoading(false)})
+    // dispatch(getUserReviews(user.id)).then(()=> {setLoading(false)})
     dispatch(getUserPlaylists(user.id)).then(()=> {setLoading(false)})
   },[dispatch]);
   
@@ -171,7 +171,7 @@ const Profile = () => {
   }
   
   const playlists = playlistData.finalPlaylists;
-  const reviews = reviewsData.reviewsAndPrograms;
+  // const reviews = reviewsData.reviewsAndPrograms;
   const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
   const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
   const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
@@ -201,7 +201,7 @@ const Profile = () => {
               <div>
                 <IconLabel>Reviews</IconLabel>
                 <LineSubHR />
-                  {
+                  {/* {
                     reviews.length 
                     ? <div>
                       {
@@ -214,7 +214,7 @@ const Profile = () => {
                       }
                     </div>
                     : <EmptyMessage>Try to review some movies</EmptyMessage>
-                  }
+                  } */}
                 {
                   playlists.map((playlist)=> (
                     <div>
@@ -253,7 +253,7 @@ const Profile = () => {
               <div>
                 <IconLabel>All Reviews</IconLabel>
                 <LineHR />
-                {
+                {/* {
                     reviews.length 
                     ? <div>
                       {
@@ -266,7 +266,7 @@ const Profile = () => {
                       }
                     </div>
                     : <EmptyMessage>Try to review some movies</EmptyMessage>
-                  }
+                  } */}
               </div>
 
               : menu === "Favorites" ?

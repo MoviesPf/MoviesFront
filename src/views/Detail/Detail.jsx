@@ -27,15 +27,17 @@ export const Detail = () => {
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
 
   useEffect(() => {
-    dispatch(getUserPlaylists(user.id))
+    if (user.id) {dispatch(getUserPlaylists(user.id))}
     dispatch(getProgramDetail(ProgramsId));
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
-    if (programDetail && programDetail.Genres) {
-      const genre = programDetail.Genres[0].name;
+    if (programDetail.Genres[0]) {
 
-      dispatch(filterProgramsByGenre(genre, programDetail.type));
+      const genre = programDetail.Genres[0].name ? programDetail.Genres[0].name : "";
+
+      if (genre !== "")dispatch(filterProgramsByGenre(genre, programDetail.type))
+
     }
   }, [dispatch, programDetail]);
 
