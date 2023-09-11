@@ -93,7 +93,7 @@ const LineSubHR = styled.hr`
  background-image: linear-gradient(to right, #ccc, #333, #ccc);
 `
 
-export default function LogUserProgramOptions({setShowModal, setShowError, programId}) {
+export default function LogUserProgramOptions({setShowModal, setShowError, programId, rating}) {
   const user = useSelector( (state) => state.user )
   
   const dispatch = useDispatch()
