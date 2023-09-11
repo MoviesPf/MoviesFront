@@ -109,7 +109,7 @@ export default function LogUserProgramOptions({setShowModal, setShowError, progr
   
   const dispatch = useDispatch()
   useEffect(()=> {
-    dispatch(getUserPlaylists(user.id))
+    if (user && user.id ) (dispatch(getUserPlaylists(user.id)))
   },[dispatch])
   
   const playlistData = useSelector( (state) => state.userPlaylists )
@@ -141,7 +141,7 @@ export default function LogUserProgramOptions({setShowModal, setShowError, progr
 
 
   function scoreHandler(event){
-    if (user.id) {
+    if (user) {
       switch (event.target.id) {
 
         case "Watched":

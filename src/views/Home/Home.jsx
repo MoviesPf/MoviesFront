@@ -28,15 +28,18 @@ const LineHR = styled.hr`
 export const Home = () => {
   const dispatch = useDispatch();
   const programs = useSelector((state) => state.programs);
+  const user = useSelector( (state)=> state.user)
   console.log(programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
-  const user = useSelector( (state)=> state.user)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getUserPlaylists(user.id))
     dispatch(getAllPrograms()).then(() => {setLoading(false)});
-  },[]);
+  },[dispatch]);
+
+  useEffect(() => {
+    dispatch(getUserPlaylists(user.id))
+  },[dispatch]);
 
   return (
     <div className={css.background}>
