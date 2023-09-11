@@ -5,7 +5,8 @@ import PresentationLine from './PresentationLine';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import ProgCardDetail from '../Profile/ProgCardDetail';
 import { Card } from '../../Components/Card/Card';
-import defaultImg from '../../assets/defaultMovie.png';
+// import defaultImg from '../../assets/defaultMovie.png';
+import { useSelector } from 'react-redux';
 
 const ViewContainer = styled.div`
   background-color: #1c1c1c;
@@ -15,26 +16,42 @@ const ViewContainer = styled.div`
   flex-wrap: nowrap;
   flex-direction: column;
 `;
-const UserBackground = styled.img`
+const UserBackground = styled.div`
+background-image: url('https://i.ibb.co/PhcQXyq/background.jpg');
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
   width: 100%;
-  height: 34vh;
+  height: 50vh;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   position: absolute;
-  z-index: 1;
+  top: 3rem;
+  z-index: 1;  
 `;
+
+const BackgroundColor = styled.div`
+backdrop-filter: blur(4px);
+padding-top: 15rem;
+height: 100%;
+z-index: 1;
+`
+
 const ElementsBarr = styled.div`
   width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
 `;
+
 const AreaContainer = styled.div`
-  margin-top: 260px;
   display: flex;
   position: relative;
+  padding-top: 9rem;
+  top: 9rem;
   flex-direction: column;
 `;
+
 const IconLabel = styled.label`
   color: white;
   font-size: 26px;
@@ -68,6 +85,7 @@ const LineNavHR = styled.hr`
   height: 22px;
   box-shadow: inset 0 22px 30px -29px rgba(23, 255, 139, 222);
 `;
+
 const BodyContainer = styled.div`
   width: 57%;
   height: auto; // Esto haco que la altura cubra toda la pantalla
@@ -78,6 +96,7 @@ const BodyContainer = styled.div`
   padding-bottom: 5%;
   margin-top: 2%;
 `;
+
 // Temporal Card Container
 const CardsContainer = styled.div`
   display: flex;
@@ -86,7 +105,7 @@ const CardsContainer = styled.div`
 `;
 
 const Profile = () => {
-  //   const user = useSelector(state => state.user);
+  const user = useSelector(state => state.user);
   const temporalOverview =
     'An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon.';
 
@@ -94,20 +113,30 @@ const Profile = () => {
     <ViewContainer>
       {/* NavBar y background ⬇ */}
       <NavBar></NavBar>
-      <UserBackground src={user.background} />
+
+
+      <UserBackground>
+        <BackgroundColor>
+          <ElementsBarr>
+            {/* Usuario/Barra de navegacion ⬇ */}
+            <PresentationLine
+              avatar={user.avatar}
+              name={user.nickname}
+              status={
+                user.status ?
+                  user.status
+                  :
+                  'may the fourth be with you'
+              }
+            />
+          </ElementsBarr>
+        </BackgroundColor>
+      </UserBackground>
+
 
       {/* Area de contenido -/Usuario/Barra de navegacion/Peliculas- ⬇ */}
       <AreaContainer>
-        <ElementsBarr>
-          {/* Usuario/Barra de navegacion ⬇ */}
-          <PresentationLine
-            avatar={user.avatar}
-            name={user.name}
-            status={user.status}
-          />
-          <NavProfile />
-        </ElementsBarr>
-
+        <NavProfile />
         <div>
           {/* Peliculas ⬇ */}
           <LineNavHR />
@@ -173,22 +202,22 @@ const Profile = () => {
           </BodyContainer>
         </div>
       </AreaContainer>
-    </ViewContainer>
+    </ViewContainer >
   );
 };
 
 export default Profile;
 
-const user = {
-  id: 'df76d866-783a-4f23-8a9d-18e715fa1ebc',
-  name: 'Marcelo',
-  nickname: 'ElMariano123',
-  avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
-  email: 'chau@gmail.com',
-  password: '123456',
-  status: 'may the fourth be with you',
-  admin: false,
-  banned: false,
-  PlaylistId: null,
-  background: 'https://random.imagecdn.app/500/150'
-};
+// const user = {
+//   id: 'df76d866-783a-4f23-8a9d-18e715fa1ebc',
+//   name: 'Marcelo',
+//   nickname: 'ElMariano123',
+//   avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
+//   email: 'chau@gmail.com',
+//   password: '123456',
+//   status: 'may the fourth be with you',
+//   admin: false,
+//   banned: false,
+//   PlaylistId: null,
+//   background: 'https://random.imagecdn.app/500/150'
+// };

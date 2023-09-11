@@ -158,3 +158,29 @@
 .cartas::-webkit-scrollbar-thumb {
   background: green;
 }
+
+.user{
+  display: flex;
+  margin: 0 1rem;
+  gap: .5rem;
+}
+
+.avatarUser{
+  outline: 2px solid #ffffff;
+  border-radius: 50%;
+  padding: .2rem;
+  cursor: pointer;
+}
+
+.avatarUser:hover{
+  scale: 1.1;
+}
+
+.avatarUser:active{
+  scale: .9;
+}
+
+.avatarUserImg{
+  height: 2rem;
+  border-radius: 50%;
+}
