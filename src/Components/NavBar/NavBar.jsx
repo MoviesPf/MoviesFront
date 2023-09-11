@@ -65,7 +65,7 @@ export const NavBar = () => {
         </div>
 
         {pathname === '/' && (
-          <div className={css.contMid}> 
+          <div className={css.contMid}>
             <button
               className={type === 'movie' ? css.typesP : css.types}
               onClick={Movies}
@@ -98,12 +98,18 @@ export const NavBar = () => {
             </svg>
           </button>
           {user.name !== '' && user.name ? (
-            <button
-              onClick={() => dispatch(logoutUser())}
-              className={css.sesion}
-            >
-              Sign Out
-            </button>
+            <div className={css.user}>
+              <button
+                onClick={() => dispatch(logoutUser())}
+                className={css.sesion}
+              >
+                Sign Out
+              </button>
+              <div className={css.avatarUser} onClick={() => navigate('/profile')}>
+                <img className={css.avatarUserImg}
+                  src={user.avatar} alt="avatar" />
+              </div>
+            </div>
           ) : (
             <div>
               <button onClick={() => navigate('/login')} className={css.sesion}>

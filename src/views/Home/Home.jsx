@@ -16,23 +16,20 @@ export const Home = () => {
   const programs = useSelector((state) => state.programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
   const [loading, setLoading] = useState(true);
-  
-    useEffect(
-    () => {
+
+  useEffect(() => {
+    if (programs.length === 0) {
       dispatch(getAllPrograms()).then(() => {
         setLoading(false);
       });
-    },
-    [
-      // dispatch,
-    ]
-  );
+    }
+  }, []);
 
   return (
     <div className={css.background}>
       <span id='start' />
       <NavBar />
-      {loading ? (
+      {programs.length === 0 ? (
         <GreenLoading />
       ) : (
         <div>

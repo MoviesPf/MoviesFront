@@ -1,42 +1,56 @@
 import styled from 'styled-components'
 
-const UserBarr = styled.div` 
-background-color: #1C1C1C;
+const UserBarr = styled.div`
+height: 100%;
 width: 100%;
-height: 120px;
 display: flex;
-position: relative;
-z-index: 2;
 `
-const UserNameContainer = styled.div` 
-display: flex;
-color: white;
-margin-left: 220px;
+
+const UserNameContainer = styled.div`
+font-size: 2rem;
+color: #000;
+font-weight: bold;
+margin-left: 20rem;
 position: relative;
-flex-direction: column;
-z-index: 2;
+bottom: 8rem;
 `
+
+const UserStatusContainer = styled.div`
+color: #000;
+font-size: 1.5rem;
+margin-left: 20rem;
+position: relative;
+bottom: 8rem;
+`
+
 const UserPicture = styled.img` 
 position: absolute;
-top: -95px;
-border-radius: 300px;
+bottom: 5.5rem;
+border-radius: 50%;
+outline: 2px solid #fff;
+padding: .2rem;
+background: #000;
 height: 200px;
 `
-const UserCard = styled.div` 
-display: flex;
-margin-left: 120px;
 
+const UserCard = styled.div` 
+height: 100%;
+// display: flex;
+margin-left: 120px;
 `
-const PresentationLine = ({avatar,name,status}) => {
+
+const PresentationLine = ({ avatar, name, status }) => {
 
     return (
         <UserBarr>
             <UserCard>
-                <UserPicture src={avatar}/>
+                <UserPicture src={avatar} />
                 <UserNameContainer>
                     <h1>{name}</h1>
-                    <p>{status}</p>
                 </UserNameContainer>
+                <UserStatusContainer>
+                    <p>{status}</p>
+                </UserStatusContainer>
             </UserCard>
         </UserBarr>
     );
