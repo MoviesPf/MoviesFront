@@ -25,7 +25,8 @@ import {
   POST_REVIEW,
   SELECT_DONATION_OPTION,
   GET_USER_PLAYLISTS,
-  GET_USER_REVIEWS
+  GET_USER_REVIEWS,
+  HANDLE_FAV_WATCHED_WATCHLIST
 } from "./actions-type";
 
 export const getAllPrograms = () => {
@@ -203,7 +204,8 @@ export const createUsers = ({
   nickname,
   name,
   password,
-  source
+  source,
+  status
 }) => {
   console.log(email, avatar, nickname, name, password, status);
   return async (dispatch) => {
@@ -217,7 +219,8 @@ export const createUsers = ({
           nickname,
           name,
           password,
-          source
+          source,
+          status
         })
       });
       const data = await res.json();
@@ -348,6 +351,17 @@ export const getUserReviews = (UserId) => {
     console.log(data);
     return dispatch({
       type: GET_USER_REVIEWS,
+      payload: data
+    })
+  }
+}
+
+export const handleList = (UserId, PlaylistName, ProgramId) => {
+  return async (dispatch) => {
+    const { data } = await axios.patch(URL_API + `playlists/user/${UserId}/name/${PlaylistName}/program/${ProgramId}`);
+    console.log(data);
+    return dispatch({
+      type: HANDLE_FAV_WATCHED_WATCHLIST,
       payload: data
     })
   }

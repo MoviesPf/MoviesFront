@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProgramDetail, createReview, filterProgramsByGenre } from '../../Redux/actions';
+import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists } from '../../Redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import css from './Detail.module.css';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
@@ -31,6 +31,7 @@ export const Detail = () => {
   }, [similarMovies]);
 
   useEffect(() => {
+    dispatch(getUserPlaylists(user.id))
     dispatch(getProgramDetail(ProgramsId));
   }, [dispatch, ProgramsId]);
 

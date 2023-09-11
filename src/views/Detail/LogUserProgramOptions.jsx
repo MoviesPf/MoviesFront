@@ -7,6 +7,7 @@ import ViewsIcon from "../../assets/Icons/icons8-view-90.png"
 import PendingIcon from "../../assets/Icons/icons8-delivery-time-96.png"
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import {styled ,keyframes, css }from 'styled-components'
+import { getUserPlaylists, handleList } from "../../Redux/actions"
 
 const scaleUp = keyframes`
   0% {
@@ -102,59 +103,73 @@ const LineSubHR = styled.hr`
 `
 
 export default function LogUserProgramOptions({setShowModal, setShowError, programId}) {
+  const user = useSelector( (state) => state.user )
+  
+  const dispatch = useDispatch()
+  useEffect(()=> {
+    dispatch(getUserPlaylists(user.id))
+  },[dispatch])
+  
+  const playlistData = useSelector( (state) => state.userPlaylists )
+
+  const playlists = playlistData.finalPlaylists;
+
+  const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
+  let isFav = favorites.programs.filter(program => program.id === programId) ? true : false;
+
+  console.log(isFav);
+
+  const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
+  let isWatchL = watchlist.programs.filter(program => program.id === programId) ? true : false;
+
+  console.log(isWatchL);
+
+  const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
+  let isWatch = watched.programs.filter(program => program.id === programId) ? true : false;
+
+  console.log(isWatch);
+
 
   const [checkButtonState,setCheckButtonsSTate] =  useState(
     {
-    watched: true,
-    favs: true,
-    watchlist: false,
+    watched: isWatch,
+    favs: isFav,
+    watchlist: isWatchL,
     })
 
-    const user = useSelector( (state) => state.user )
-    const detailProgram = useSelector( (state) => state.programDetail )
 
-    const call = async(endPoint)=>{
-      await axios.post(endPoint)
-    }
- 
   function scoreHandler(event){
-    const endPointList = `/playlists/user/${user.id}/name/WatchList/program/${detailProgram.id}`
-    const endPointWatch = `/playlists/user/${user.id}/name/Wached/program/${detailProgram.id}`
-    const endPointFav = `/playlists/user/${user.id}/name/Favorites/program/${detailProgram.id}`
-
     if (user.id) {
-      
       switch (event.target.id) {
 
-        case "watched":
+        case "Watched":
           if(checkButtonState.watched === true){
              // Lo quita de watchd
              setCheckButtonsSTate({...checkButtonState, watched: false})
           } else {
             setCheckButtonsSTate({...checkButtonState, watched: true})
           }
-          call(endPointWatch)
+          dispatch(handleList(user.id, event.target.id, programId))
         break;
     
-        case "favs":
+        case "Favorites":
           if(checkButtonState.favs === true){
             // Lo quita de favs
             setCheckButtonsSTate({...checkButtonState, favs: false})
-      
          } else {
            setCheckButtonsSTate({...checkButtonState, favs: true})
          }
-         call(endPointFav)
+         dispatch(handleList(user.id, event.target.id, programId))
         break;
     
-        case "watchlist":
+        case "WatchList":
           if(checkButtonState.watchlist === true){
             // Lo quita de watchlist
             setCheckButtonsSTate({...checkButtonState, watchlist: false})
          } else {
            setCheckButtonsSTate({...checkButtonState, watchlist: true})
          }
-         call(endPointList)
+         dispatch(handleList(user.id, event.target.id, programId))
         break;
       
         default:
@@ -163,19 +178,20 @@ export default function LogUserProgramOptions({setShowModal, setShowError, progr
     }
   }
 
+
   return (
-    <ScoreContainer $isLogin={true}> {/* Cambiar por: {user.id? true:false} */}
+    <ScoreContainer $isLogin={user.id? true : false}> {/* Cambiar por: {user.id? true:false} */}
             <IconsC>
                 <IconContainer>
-                    <IconImg src={ViewsIcon} id={"watched"} $check={checkButtonState.watched}  onClick={scoreHandler}></IconImg>
+                    <IconImg src={ViewsIcon} id={"Watched"} $check={checkButtonState.watched}  onClick={scoreHandler}></IconImg>
                     <IconLabel>Watched</IconLabel>
                 </IconContainer>
                 <IconContainer>
-                    <IconImg src={favIcon} id={"favs"} $check={checkButtonState.favs} onClick={scoreHandler}></IconImg>
+                    <IconImg src={favIcon} id={"Favorites"} $check={checkButtonState.favs} onClick={scoreHandler}></IconImg>
                     <IconLabel>Favs</IconLabel>
                 </IconContainer>
                 <IconContainer>
-                    <IconImg src={PendingIcon} id={"watchlist"} $check={checkButtonState.watchlist} onClick={scoreHandler}></IconImg>
+                    <IconImg src={PendingIcon} id={"WatchList"} $check={checkButtonState.watchlist} onClick={scoreHandler}></IconImg>
                     <IconLabel>Watchlist</IconLabel>
                 </IconContainer>
             </IconsC>

@@ -150,7 +150,7 @@ const Profile = () => {
   
   useEffect(() => {
     dispatch(getUserReviews(user.id)).then(()=> {setLoading(false)})
-    dispatch(getUserPlaylists(user.id)).then(()=> {setLoading2(false)})
+    dispatch(getUserPlaylists(user.id)).then(()=> {setLoading(false)})
   },[dispatch]);
   
   const playlistData = useSelector((state) => state.userPlaylists);
@@ -172,7 +172,6 @@ const Profile = () => {
   
   const playlists = playlistData.finalPlaylists;
   const reviews = reviewsData.reviewsAndPrograms;
-  console.log(reviews)
   const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
   const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
   const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
@@ -180,7 +179,7 @@ const Profile = () => {
   return (
     <ViewContainer>
       <NavBar/>
-      {loading  || loading2 ? (
+      {loading ? (
         <GreenLoading />
       ) : (
         <div>

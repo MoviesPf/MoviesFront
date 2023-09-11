@@ -23,6 +23,7 @@ import {
   SELECT_DONATION_OPTION,
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
+  HANDLE_FAV_WATCHED_WATCHLIST
 } from "./actions-type";
 
 const initialState = {
@@ -175,6 +176,11 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
+
+    case HANDLE_FAV_WATCHED_WATCHLIST:
+      return {
+        ...state,
+      }
 
     default:
       return state;

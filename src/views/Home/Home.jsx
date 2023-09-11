@@ -1,7 +1,7 @@
 import css from './Home.module.css';
 import { useEffect, useState } from 'react';
 import { Cards } from '../../Components/Cards/Cards';
-import { getAllPrograms } from '../../Redux/actions';
+import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Footer } from '../../Components/Footer/Footer';
 import { NavBar } from '../../Components/NavBar/NavBar';
@@ -30,9 +30,11 @@ export const Home = () => {
   const dispatch = useDispatch();
   const programs = useSelector((state) => state.programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
+  const user = useSelector( (state)=> state.user)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    dispatch(getUserPlaylists(user.id))
     dispatch(getAllPrograms()).then(() => {setLoading(false)});
   },[]);
 

@@ -27,6 +27,8 @@ export const GET_USER_REVIEWS = "GET_USER_REVIEWS";
 
 export const RESET_MESSAGE = "RESET_MESSAGE";
 
+export const HANDLE_FAV_WATCHED_WATCHLIST = "HANDLE_FAV_WATCHED_WATCHLIST";
+
 export const MAIN_TYPE = "MAIN_TYPE";
 export const MOVIE_TYPE = "MOVIE_TYPE";
 export const SERIE_TYPE = "SERIE_TYPE";
