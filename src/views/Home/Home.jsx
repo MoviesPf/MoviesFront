@@ -12,7 +12,6 @@ import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import BtnStart from '../../Components/Buttons/BtnStart';
 import styled from 'styled-components'
 
-
 const LineHR = styled.hr`
   border: 0;
   height: 2px;
@@ -29,6 +28,7 @@ const LineHR = styled.hr`
 export const Home = () => {
   const dispatch = useDispatch();
   const programs = useSelector((state) => state.programs);
+  console.log(programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
   const user = useSelector( (state)=> state.user)
   const [loading, setLoading] = useState(true);
@@ -48,17 +48,22 @@ export const Home = () => {
         <div className={css.content}>
           <Portrait programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
           <Filters />
-          
-          <LineHR />
           <h1 className={css.subTitle}>Latest Releases</h1>
-          <LineHR />
-          <Carrusel programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
-          <LineHR />
-          <h1 className={css.subTitle}>More Programs</h1>
-          <LineHR />
-
+          <Carrusel
+            programs={
+              filteredPrograms.data ? filteredPrograms.data : programs.data
+            }
+          />
+          <div id='programs' className={css.subTitle}> All Programs </div>
           <BtnStart />
-          <Cards programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
+          <Cards
+            programs={
+              filteredPrograms.data ? filteredPrograms.data : programs.data
+            }
+            total={
+              filteredPrograms.data ? filteredPrograms.total : programs.total
+            }
+          />
           <Footer />
         </div>
       )}
