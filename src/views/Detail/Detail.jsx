@@ -143,7 +143,6 @@ export const Detail = () => {
             <SpanError>must be logged in to add a review</SpanError>
           }
           <StarsContainer>
-          <StarsContainer>
             <div>
               {new Array(5).fill('').map((_, index) => (
                 <IconImg
