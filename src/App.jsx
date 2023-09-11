@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import { Signin } from './views/Signin/Signin';
 import Profile from './views/Profile/Profile';
 import { Detail } from './views/Detail/Detail';
@@ -20,8 +20,12 @@ import {
   Users
 } from './Admin/index';
 import ProtectedRoute from './utils/ProtectedRoute';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const user = useSelector((state) => state.user)
+  console.log(user)
+
   return (
     <>
       <Routes>
@@ -34,7 +38,7 @@ function App() {
         <Route path='/about' element={<About />} />
 
         {/* rutas Admin Dashboard */}
-        <Route element={<ProtectedRoute canActivate={false}/>}>
+        <Route element={<ProtectedRoute canActivate={true}/>}>
           <Route path='admin' element={<Start />}>
             <Route path='users' element={<Users />} />
             <Route path='users/:id' element={<DetailUsers />} />
