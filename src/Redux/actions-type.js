@@ -23,6 +23,7 @@ export const ERROR_LOGIN = 'ERROR_LOGIN';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const GET_USER_PLAYLISTS ="GET_USER_PLAYLISTS";
+export const GET_USER_REVIEWS = "GET_USER_REVIEWS";
 
 export const RESET_MESSAGE = "RESET_MESSAGE";
 

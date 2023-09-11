@@ -7,7 +7,7 @@ import ProgCardDetail from "../Profile/ProgCardDetail"
 import { Card } from '../../Components/Card/Card'
 import { useDispatch, useSelector } from 'react-redux';
 import defaultBackground from "../../assets/background.jpg"
-import { getUserPlaylists } from '../../Redux/actions';
+import { getUserPlaylists, getUserReviews } from '../../Redux/actions';
 import { CardFake } from "./CardFake/CardFake.jsx";
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 
@@ -143,16 +143,20 @@ const TitleAndButton = styled.div`
 const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const playlistData = useSelector((state) => state.userPlaylists);
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const [ menu, setMenu ] = useState("Profile")
   const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
-
+  
   useEffect(() => {
-    dispatch(getUserPlaylists(user.id)).then(()=> {setLoading(false)})
+    dispatch(getUserReviews(user.id)).then(()=> {setLoading(false)})
+    dispatch(getUserPlaylists(user.id)).then(()=> {setLoading2(false)})
   },[dispatch]);
   
+  const playlistData = useSelector((state) => state.userPlaylists);
+  const reviewsData = useSelector((state) => state.userReviews);
   console.log(playlistData)
+  console.log(reviewsData)
 
   const setFavorites = ()=> {
     setMenu("Favorites")
@@ -167,6 +171,8 @@ const Profile = () => {
   }
   
   const playlists = playlistData.finalPlaylists;
+  const reviews = reviewsData.reviewsAndPrograms;
+  console.log(reviews)
   const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
   const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
   const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
@@ -174,7 +180,7 @@ const Profile = () => {
   return (
     <ViewContainer>
       <NavBar/>
-      {loading ? (
+      {loading  || loading2 ? (
         <GreenLoading />
       ) : (
         <div>
@@ -195,10 +201,21 @@ const Profile = () => {
               menu === "Profile" ?
               <div>
                 <IconLabel>Reviews</IconLabel>
-                <LineHR />
-                <ProgCardDetail year={2023} genreA={'Ci-fi'} genreB={'Action'} overview={temporalOverview} starVal={5}/>
                 <LineSubHR />
-                <ProgCardDetail year={2023} genreA={'Ci-fi'} genreB={'Action'} overview={temporalOverview} starVal={5}/>
+                  {
+                    reviews.length 
+                    ? <div>
+                      {
+                      reviews.map((e)=> (
+                        <div>
+                          <ProgCardDetail year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ProgCardDetail>
+                          <LineSubHR />
+                        </div>
+                      ))
+                      }
+                    </div>
+                    : <EmptyMessage>Try to review some movies</EmptyMessage>
+                  }
                 {
                   playlists.map((playlist)=> (
                     <div>
@@ -237,9 +254,20 @@ const Profile = () => {
               <div>
                 <IconLabel>All Reviews</IconLabel>
                 <LineHR />
-                <ProgCardDetail year={2023} genreA={'Ci-fi'} genreB={'Action'} overview={temporalOverview} starVal={5}/>
-                <LineSubHR />
-                <ProgCardDetail year={2023} genreA={'Ci-fi'} genreB={'Action'} overview={temporalOverview} starVal={5}/>
+                {
+                    reviews.length 
+                    ? <div>
+                      {
+                      reviews.map((e)=> (
+                        <div>
+                          <ProgCardDetail year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ProgCardDetail>
+                          <LineSubHR />
+                        </div>
+                      ))
+                      }
+                    </div>
+                    : <EmptyMessage>Try to review some movies</EmptyMessage>
+                  }
               </div>
 
               : menu === "Favorites" ?

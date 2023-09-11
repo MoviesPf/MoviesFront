@@ -40,7 +40,7 @@ export const Home = () => {
     <div className={css.background}>
       <span id='start' />
       <NavBar />
-      {programs.length === 0 ? (
+      {loading ? (
         <GreenLoading />
       ) : (
         <div className={css.content}>

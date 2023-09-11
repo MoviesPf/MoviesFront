@@ -25,6 +25,7 @@ import {
   POST_REVIEW,
   SELECT_DONATION_OPTION,
   GET_USER_PLAYLISTS,
+  GET_USER_REVIEWS
 } from "./actions-type";
 
 export const getAllPrograms = () => {
@@ -336,6 +337,17 @@ export const getUserPlaylists = (UserId) => {
     console.log(data);
     return dispatch({
       type: GET_USER_PLAYLISTS,
+      payload: data
+    })
+  }
+}
+
+export const getUserReviews = (UserId) => {
+  return async (dispatch) => {
+    const { data } = await axios(URL_API + `review/user/${UserId}`);
+    console.log(data);
+    return dispatch({
+      type: GET_USER_REVIEWS,
       payload: data
     })
   }

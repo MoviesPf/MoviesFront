@@ -4,27 +4,35 @@ import defaultImg from "../../assets/defaultMovie.png"
 import StarPoint from '../../Components/StarPoint'
 
 const CardContainer = styled.div`
+border-radius: 30px;
+background-color: #131212;
 height: auto;
+width: 90%;
 display: flex;
-position: relative;
 flex-direction: row;
 padding-top: 20px;
 padding-bottom: 20px;
+margin-bottom: 30px;
 `
 const MoviePoster = styled.img`
+margin-left: 30px;
 border-radius: 30px;
+height: 350px;
 `
 const DetailContainer = styled.div`
+padding: 20px;
 height: auto;
+width: 100%;
 display: flex;
 margin-left: 30px;
 position: relative;
 flex-direction: column;
+justify-content: space-between;
 `
 const ContextRow = styled.div`
+padding:20px;
 height: auto;
 display: flex;
-position: relative;
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
@@ -45,6 +53,7 @@ font-size: 20px;
 position: relative;  
 `
 const StarsRow = styled.div`
+padding-right: 20px;
 height: auto;
 display: flex;
 color: white;
@@ -53,6 +62,7 @@ margin-bottom: 5px;
 font-size: 20px;
 position: relative;
 flex-direction: row;
+justify-content: end;
 `
 const OverviewText = styled.div`
 height: auto;
@@ -63,7 +73,7 @@ position: relative;
 flex-direction: row;
 `
 
-export default function ProgCardDetail({year,genreA,genreB,overview,progImge,starVal}) {
+export default function ProgCardDetail({year,genreA,genreB,overview,progImge,starVal, title}) {
 
     const starsCount = []
     for (let index = 0; index < starVal; index++) {
@@ -78,14 +88,12 @@ export default function ProgCardDetail({year,genreA,genreB,overview,progImge,sta
     <CardContainer>
         <MoviePoster src={image}/>
         <DetailContainer>
-             <ContextRow>
-                <Title>Pelicula</Title>
+            <ContextRow>
+                <Title>{title}</Title>
                 <MovieData>{`${year} ‧ ${genreA} / ${genreB}`}</MovieData>
             </ContextRow>
-            <StarsRow>
-                {starsCount}
-            </StarsRow>
             <OverviewText>{overview}</OverviewText>
+            <StarsRow>{starsCount}</StarsRow>
         </DetailContainer>
 
     </CardContainer>
