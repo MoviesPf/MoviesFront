@@ -115,17 +115,17 @@ export default function LogUserProgramOptions({setShowModal, setShowError, progr
   const playlists = playlistData.finalPlaylists;
 
   const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
-  let isFav = favorites.programs.filter(program => program.id === programId) ? true : false;
+  let isFav = playlists ? favorites.programs.filter(program => program.id === programId) ? true : false : false;
 
   console.log(isFav);
 
   const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
-  let isWatchL = watchlist.programs.filter(program => program.id === programId) ? true : false;
+  let isWatchL = playlists ? watchlist.programs.filter(program => program.id === programId) ? true : false : false;
 
   console.log(isWatchL);
 
   const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
-  let isWatch = watched.programs.filter(program => program.id === programId) ? true : false;
+  let isWatch = playlists ? watched.programs.filter(program => program.id === programId) ? true : false : false;
 
   console.log(isWatch);
 
