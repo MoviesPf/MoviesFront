@@ -1,7 +1,7 @@
 import css from './Home.module.css';
 import { useEffect, useState } from 'react';
 import { Cards } from '../../Components/Cards/Cards';
-import { getAllPrograms } from '../../Redux/actions';
+import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Footer } from '../../Components/Footer/Footer';
 import { NavBar } from '../../Components/NavBar/NavBar';
@@ -10,38 +10,48 @@ import { Carrusel } from '../../Components/Carrusel/Carrusel';
 import { Portrait } from '../../Components/Portrait/Portrait';
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import BtnStart from '../../Components/Buttons/BtnStart';
-import { useLocalStorage } from '../../utils/useLocalStorage';
+import styled from 'styled-components'
+
+const LineHR = styled.hr`
+  border: 0;
+  height: 2px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgb(0, 128, 0),
+    rgba(0, 0, 0, 0)
+  );
+`;
 
 export const Home = () => {
   const dispatch = useDispatch();
   const programs = useSelector((state) => state.programs);
+  const user = useSelector( (state)=> state.user)
   console.log(programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (programs.length === 0) {
-      dispatch(getAllPrograms()).then(() => {
-        setLoading(false);
-      });
-    }
-  }, []);
+    dispatch(getAllPrograms()).then(() => {setLoading(false)});
+  },[dispatch]);
+
+  useEffect(() => {
+    dispatch(getUserPlaylists(user.id))
+  },[dispatch]);
 
   return (
     <div className={css.background}>
       <span id='start' />
       <NavBar />
-      {programs.length === 0 ? (
+      {loading ? (
         <GreenLoading />
       ) : (
-        <div>
-          <Portrait
-            programs={
-              filteredPrograms.data ? filteredPrograms.data : programs.data
-            }
-          />
+        <div className={css.content}>
+          <Portrait programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
           <Filters />
-          <h1 className={css.subTitle1}>Latest Releases</h1>
+          <h1 className={css.subTitle}>Latest Releases</h1>
           <Carrusel
             programs={
               filteredPrograms.data ? filteredPrograms.data : programs.data

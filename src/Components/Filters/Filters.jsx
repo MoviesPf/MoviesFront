@@ -80,16 +80,9 @@ export const Filters = () => {
     genresChunks.push(
       <Carousel.Item>
         <div className={css.backGen}>
-          {chunk.map((genre) => (
-            <h3
-              key={genre.id}
-              onClick={() => handleGenreFilter(genre.name)}
-              style={{ cursor: 'pointer' }}
-              className={css.genres}
-            >
-              {genre.name}
-            </h3>
-          ))}
+            {chunk.map((genre) => (
+                <h3 key={genre.name} onClick={() => handleGenreFilter(genre.name)} style={{ cursor: 'pointer' }} className={selectedGenre === genre.name ? css.selected : css.genres}> {genre.name} </h3>
+            ))}
         </div>
       </Carousel.Item>
     );
@@ -108,7 +101,7 @@ export const Filters = () => {
   );
 
   return (
-    <div>
+    <div className={css.background}>
       <Carousel
         key={'genres'}
         wrap={false}
@@ -120,7 +113,6 @@ export const Filters = () => {
       >
         {genresChunks}
       </Carousel>
-      <br />
       <div className={css.backPlt}>
         <select
           value={selectedPlatform}

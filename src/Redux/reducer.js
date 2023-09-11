@@ -21,6 +21,9 @@ import {
   SERIE_TYPE,
   POST_REVIEW,
   SELECT_DONATION_OPTION,
+  GET_USER_PLAYLISTS,
+  GET_USER_REVIEWS,
+  HANDLE_FAV_WATCHED_WATCHLIST
 } from "./actions-type";
 
 const initialState = {
@@ -31,6 +34,8 @@ const initialState = {
   genres: [],
   platforms: [],
   user: {},
+  userPlaylists: {},
+  userReviews: {},
   message: "",
   type: "main",
   selectedOption: null,
@@ -136,6 +141,19 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         message: "",
       };
+
+    case GET_USER_PLAYLISTS:
+      return {
+        ...state,
+        userPlaylists:payload
+      }
+
+    case GET_USER_REVIEWS:
+      return {
+        ...state,
+        userReviews:payload
+      }
+    
     case MAIN_TYPE:
       return {
         ...state,
@@ -158,6 +176,11 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
+
+    case HANDLE_FAV_WATCHED_WATCHLIST:
+      return {
+        ...state,
+      }
 
     default:
       return state;

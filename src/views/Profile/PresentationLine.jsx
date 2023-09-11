@@ -1,36 +1,52 @@
 import styled from 'styled-components'
 
-const UserBarr = styled.div`
-height: 100%;
-width: 100%;
+const UserBarr = styled.div` 
+background-color: 1C1C1C;
+position: relative;
+align-items: center;
+height: max-content;
 display: flex;
+width: 100%;
+z-index: 2;
 `
+
 
 const UserNameContainer = styled.div`
-font-size: 2rem;
-color: #000;
-font-weight: bold;
-margin-left: 20rem;
-position: relative;
-bottom: 8rem;
+margin-right: 20px;
+margin-left: 20px;
+height: max-content;
+width: 80%;
+display: flex;
+color: white;
+flex-direction: column;
+z-index: 2;
 `
 
-const UserStatusContainer = styled.div`
-color: #000;
-font-size: 1.5rem;
-margin-left: 20rem;
-position: relative;
-bottom: 8rem;
+const NameAndNickname = styled.div`
+width: 100%;
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+`
+const AliasAndNick = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+`
+const Alias = styled.h1`
+margin-right: 10px;
+color: green;
 `
 
-const UserPicture = styled.img` 
-position: absolute;
-bottom: 5.5rem;
-border-radius: 50%;
-outline: 2px solid #fff;
-padding: .2rem;
-background: #000;
-height: 200px;
+const Background = styled.div`
+border: 5px solid;
+border-color: white;
+border-radius: 100%;
+background-color: black;
+position: relative;
+margin-left: 50px;
+top: -95px;
 `
 
 const UserCard = styled.div` 
@@ -38,20 +54,29 @@ height: 100%;
 // display: flex;
 margin-left: 120px;
 `
+const UserPicture = styled.img`
+border-radius: 100%;
+height: 250px;
+width: 250px;
+`
 
-const PresentationLine = ({ avatar, name, status }) => {
+const PresentationLine = ({avatar,name,nickname,status}) => {
 
     return (
         <UserBarr>
-            <UserCard>
-                <UserPicture src={avatar} />
-                <UserNameContainer>
+            <Background>
+            <UserPicture src={avatar}/>
+            </Background>
+            <UserNameContainer>
+                <NameAndNickname>
                     <h1>{name}</h1>
-                </UserNameContainer>
-                <UserStatusContainer>
-                    <p>{status}</p>
-                </UserStatusContainer>
-            </UserCard>
+                    <AliasAndNick>
+                        <Alias>Alias:</Alias>
+                        <h1>{nickname}</h1>
+                    </AliasAndNick>
+                </NameAndNickname>
+                <p>{status}</p>
+            </UserNameContainer>
         </UserBarr>
     );
 };

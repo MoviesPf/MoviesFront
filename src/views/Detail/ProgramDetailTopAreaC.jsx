@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux';
+
 
 import defaultImg from "../../assets/defaultMovie.png"
 import ProgCardDetail from './DetailCard'
@@ -12,6 +14,8 @@ import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews
 
 
 const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, setShowModal, similarMovies, handleMovieClick, GreenLoading, setShowError, rating}  ) => {
+  const user = useSelector( (state) => state.user )
+
   
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
@@ -79,11 +83,15 @@ const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, setShow
         </ContainerMiddle>
 
         {/* El componente de opciones */}
-        <LogUserProgramOptions 
+        {
+          user.id &&
+          <LogUserProgramOptions 
           setShowModal={setShowModal}
           setShowError={setShowError}
+          programId={programDetail.id}
           rating={rating}
-        />        
+          />        
+        }
 
     </AreaC>
   )
