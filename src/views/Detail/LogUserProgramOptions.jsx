@@ -5,6 +5,7 @@ import ViewsIcon from "../../assets/Icons/icons8-view-90.png"
 import PendingIcon from "../../assets/Icons/icons8-delivery-time-96.png"
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import styled from 'styled-components'
+import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 
 const ScoreContainer = styled.div`
   background-color: #1C1C1C; 
@@ -76,7 +77,7 @@ const LineSubHR = styled.hr`
 
 
 
-export default function LogUserProgramOptions({setShowModal, setShowError}) {
+export default function LogUserProgramOptions({setShowModal, setShowError, rating}) {
   return (
     <ScoreContainer >
             <IconsC>
@@ -96,11 +97,12 @@ export default function LogUserProgramOptions({setShowModal, setShowError}) {
             </IconsC>
    
             <EmptStarC>
-                <IconImg src={emptyStar}></IconImg>
-                <IconImg src={emptyStar}></IconImg>
-                <IconImg src={emptyStar}></IconImg>
-                <IconImg src={emptyStar}></IconImg>
-                <IconImg src={emptyStar}></IconImg>
+            {new Array(5).fill('').map((_, index) => (
+                <IconImg
+                  key={index}
+                  src={index < rating ? fullStar : emptyStar} 
+                />
+              ))}
             </EmptStarC>
 
         

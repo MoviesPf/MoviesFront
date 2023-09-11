@@ -62,13 +62,15 @@ flex-direction: row;
 const CastContainer = styled.label`
   width: 300px;
   height: auto;
-  background-color:#6161611c;
+  background-color:#1c1c1c33;
   color: white;
   display: flex;
   position: relative;
   flex-direction: column;
   font-size: 26;
   margin-top: 20px;
+  border-radius: 10px;
+  padding: 5px 15px;
 `
 
 export default function ProgCardDetail({props}) {

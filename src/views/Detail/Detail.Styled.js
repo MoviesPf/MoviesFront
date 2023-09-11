@@ -15,9 +15,18 @@ export const Header = styled.div`
   z-index: 1;
 `;
 
-export const ModalReview = styled.div`
-  z-index: 2;
+export const ContainerModalReview = styled.div`
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+`;
+
+export const ModalReview = styled.div`
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -29,15 +38,27 @@ export const ModalReview = styled.div`
   box-shadow: 0px 0px 108px 23px rgba(0, 0, 0, 0.3);
 `;
 
+export const CloseButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
 export const CloseButton = styled.label`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: #fce8e6;
-  font-size: 22px;
+  width: 40px;
+  height: 30px;
+  border: 2px solid #fce8e6;
+  border-radius: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
   cursor: pointer;
+  color: #fce8e6;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   &:hover {
     color: rgb(25, 213, 118);
+    border-color: rgb(25, 213, 118);
   }
 `;
 
@@ -76,17 +97,24 @@ export const SimilarMoviesList = styled.div`
   flex-direction: row;
 `;
 
+export const SimilarTitle = styled.span`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fce8e6;
+  margin-top: 50px;
+`;
+
 export const MovieCard = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /*  opacity: 0.9 !important;
-  border-radius: 10px !important; */
 
   img {
-    border-radius: 10px;
+    border-radius: 15px;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
     max-width: 170px;
@@ -99,9 +127,7 @@ export const MovieCard = styled.div`
 
   span {
     margin-top: 10px;
-    opacity: 0;
-    height: 0;
-    transition: opacity 0.3s ease-in-out, height 0.3s ease-in-out;
+    visibility: hidden;
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -109,11 +135,13 @@ export const MovieCard = styled.div`
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
     padding: 5px;
+    border-radius: 15px;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
   }
 
   &:hover span {
+    visibility: visible;
     opacity: 1;
-    height: auto;
   }
 `;
 
@@ -135,21 +163,41 @@ export const ContainerReviews = styled.div`
 
 export const Reviews = styled.div`
   width: 100%;
-  background: grey;
-  border-radius: 10px;
+  background: #1c1c1c91;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   padding: 5px 15px;
+`;
+
+export const SpanComments = styled.span`
+  padding: 10px 5px;
+`;
+
+export const ReviewBy = styled.span`
+  padding-left: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fce8e6;
+`;
+
+export const StarsReviews = styled.img`
+  width: 20px;
+  height: 20px;
 `;
 
 export const IconImg = styled.img`
   width: 30px;
   height: 30px;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 `;
 
 export const ContainerModalImg = styled.div`
   display: flex;
+  justify-content: space-between;
 `;
 
 export const ModalImg = styled.img`
@@ -157,10 +205,23 @@ export const ModalImg = styled.img`
   border-radius: 5px;
 `;
 
-export const SpanModalImg = styled.span`
+export const TitleModalContainer = styled.div`
+  text-align: center;
+`;
+
+export const TitleModal = styled.span`
   padding-left: 15px;
-  font-size: 22px;
-  font-weight: 900;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fce8e6;
+`;
+
+export const YearTitleModal = styled.span`
+  font-size: 100%;
+  color: rgba(252, 232, 230, 0.6);
+  margin-left: 5px;
 `;
 
 export const SpanError = styled.span`
