@@ -6,7 +6,7 @@ import css from './Detail.module.css';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
-import { Header, ModalReview, CloseButton, Comments, Submit, IconImg, ContainerModalImg, ModalImg, SpanModalImg, SpanError, StarsContainer } from "./Detail.Styled";
+import { Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import { Footer } from "../../Components/Footer/Footer"
 import moment from 'moment';
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
@@ -23,12 +23,8 @@ export const Detail = () => {
   const [showModal, setShowModal] = useState(false);
   const [showError, setShowError] = useState(false);
   const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
-
-  console.log(user, "user");
-
-  const randomElements = useMemo(() => {
-    return similarMovies && similarMovies.length > 0 ? Array.from({ length: 2 }, () => similarMovies[Math.floor(Math.random() * similarMovies.length)]) : []; 
-  }, [similarMovies]);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
 
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId));
@@ -43,8 +39,8 @@ export const Detail = () => {
   }, [dispatch, programDetail]);
 
   useEffect(() => {
-    
-  }, [dispatch, programDetail.Reviews?.length]);
+    setPeliculaSimilar(encontrarPeliculaMasParecida(programDetail?.title, similarMovies ? similarMovies : []));
+  }, [similarMovies]);
 
   if (!programDetail) {
     return <div>Loading...</div>;
@@ -62,28 +58,56 @@ export const Detail = () => {
     runtimeFormatted = `${programDetail.seasons} Seasons ${programDetail.episodes} Episodes`;
   }
 
-  const handleRating = (rating) => {
-    setReview({...review, rating:rating})
-  }
-
   const handleComment = (comments) => {
     setReview({...review, comments:comments})
   }
 
-  const handleCreate = async () => {
+  const handleCreate = async (event) => {
+    event.preventDefault();
     if (user.id) {
-      await dispatch(createReview(review, user.id, programDetail.id ));
-      dispatch(getProgramDetail(ProgramsId));
       setShowModal(false);
+      setReview({ ...review, rating: 0 });
+      await dispatch(createReview(review, user.id, programDetail.id));
+      dispatch(getProgramDetail(ProgramsId));
+      setReview([...review, review]);
     } else setShowError(true);
-  }
-
+  };
+  
   const handleMovieClick = (ProgramsId) => {
     navigate(`/detail/${ProgramsId}`); 
   };
 
-  console.log(similarMovies, "similarmovies");
-  console.log(programDetail, "programDetail");
+  const handleHoverRating = (rating) => {
+    setHoverRating(rating); 
+  };
+
+  const handleRating = (rating) => {
+    setReview({ ...review, rating: rating }); 
+  };
+
+  function encontrarPeliculaMasParecida(tituloQueTienes, peliculas) {
+    function calcularSimilitud(titulo1, titulo2) {
+      const s1 = new Set(titulo1.split(" "));
+      const s2 = new Set(titulo2.split(" "));
+      const intersection = new Set([...s1].filter(x => s2.has(x)));
+      const union = new Set([...s1, ...s2]);
+      const jaccardSimilitud = intersection.size / union.size;
+      return jaccardSimilitud;
+  }
+
+    peliculas.sort((pelicula1, pelicula2) => {
+      const similitud1 = calcularSimilitud(tituloQueTienes, pelicula1.title);
+      const similitud2 = calcularSimilitud(tituloQueTienes, pelicula2.title);
+      return similitud2 - similitud1;
+  });
+
+  const peliculasMasParecidas = peliculas.slice(1, 3);
+  
+      return peliculasMasParecidas;
+  }
+  const rating = Math.round(programDetail?.Reviews?.reduce((total, review) => total + review.rating, 0) / programDetail.Reviews?.length);
+
+  console.log(rating, "rating");
 
   return (
     <div className={css.container}>
@@ -95,31 +119,47 @@ export const Detail = () => {
         runtimeFormatted={runtimeFormatted} 
         setShowModal={setShowModal}
         setShowError={setShowError}
-        similarMovies={randomElements}
+        similarMovies={peliculaSimilar}
         handleMovieClick={handleMovieClick}
         GreenLoading={GreenLoading}
+        rating={rating}
       />
       {showModal && 
+      <ContainerModalReview>
         <ModalReview>
           <ContainerModalImg>
             <ModalImg  src={programDetail.poster} alt="" />
-            <SpanModalImg> {`${programDetail.title} (${year})`} </SpanModalImg>
+            <TitleModalContainer>
+              <TitleModal> {`${programDetail.title}`} </TitleModal> 
+              <YearTitleModal>{`(${year})`}</YearTitleModal>
+            </TitleModalContainer>
+            <CloseButtonContainer>
+              <CloseButton onClick={() => {setShowModal(false) 
+                setReview({ ...review, rating: 0 }) }}> x </CloseButton>
+            </CloseButtonContainer>
           </ContainerModalImg>
-          <CloseButton onClick={() => setShowModal(false)}> x </CloseButton>
           <Comments placeholder='Add a review...' onChange={(e) => handleComment(e.target.value)}/>
           {showError && 
             <SpanError>must be logged in to add a review</SpanError>
           }
           <StarsContainer>
             <div>
-              {
-                new Array(5).fill('').map((_, index) => <IconImg onClick={() => handleRating(index + 1)} src={review.rating > index ? fullStar : emptyStar } />)
-              }
+              {new Array(5).fill('').map((_, index) => (
+                <IconImg
+                  key={index}
+                  onMouseEnter={() => handleHoverRating(index + 1)}
+                  onMouseLeave={() => handleHoverRating(0)}
+                  onClick={() => handleRating(index + 1)}
+                  src={index < (hoverRating || review.rating) ? fullStar : emptyStar} 
+                />
+              ))}
             </div>
             <Submit onClick= {handleCreate} >Save</Submit >
           </StarsContainer>
-        </ModalReview>}
-        <Footer />
+        </ModalReview>
+        </ContainerModalReview>
+      }
+      <Footer />
     </div>
   );
 };
