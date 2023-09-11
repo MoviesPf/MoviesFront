@@ -12,8 +12,6 @@
     width: 100%;
     height: 100%;
     padding-top: 1em;
-    padding-right: 5em;
-    padding-left: 5em;
     display: flex;
     flex-wrap: wrap;
     justify-content:center;
@@ -23,7 +21,7 @@
 .paginate {
     margin-top: 1em;
     margin-bottom: 1em;
-    background-color: black;
+    background-color: #131212;
     width: 100%;
     display: flex;
     flex-direction: row;

@@ -19,6 +19,7 @@ import {
   Start,
   Users
 } from './Admin/index';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 function App() {
   return (
@@ -33,15 +34,17 @@ function App() {
         <Route path='/about' element={<About />} />
 
         {/* rutas Admin Dashboard */}
-        <Route path='admin' element={<Start />}>
-          <Route path='users' element={<Users />} />
-          <Route path='users/:id' element={<DetailUsers />} />
-          <Route path='reviews' element={<Reviews />} />
-          <Route path='reviews/:ReviewsId' element={<DetailReviews />} />
-          <Route path='programs' element={<Programs />} />
-          <Route path='programs/:ProgramsId' element={<DetailPrograms />} />
-          <Route path='create' element={<Form />} />
-          <Route path='donations' element={<Donations />} />
+        <Route element={<ProtectedRoute canActivate={false}/>}>
+          <Route path='admin' element={<Start />}>
+            <Route path='users' element={<Users />} />
+            <Route path='users/:id' element={<DetailUsers />} />
+            <Route path='reviews' element={<Reviews />} />
+            <Route path='reviews/:ReviewsId' element={<DetailReviews />} />
+            <Route path='programs' element={<Programs />} />
+            <Route path='programs/:ProgramsId' element={<DetailPrograms />} />
+            <Route path='create' element={<Form />} />
+            <Route path='donations' element={<Donations />} />
+          </Route>
         </Route>
       </Routes>
     </>

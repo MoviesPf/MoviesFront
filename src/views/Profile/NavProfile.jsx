@@ -1,58 +1,24 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 import favIcon from "../../assets/Icons/icons8-love-90.png"
 import ViewsIcon from "../../assets/Icons/icons8-view-90.png"
 import PendingIcon from "../../assets/Icons/icons8-delivery-time-96.png"
 
-
 const NavContainer = styled.div`
 background-color: #131212;
-width: 100%;
-padding-top: 10px;
 padding-bottom: 10px;
+padding-top: 10px;
 display: flex;
-justify-content: space-around;
-position: relative;
-z-index: 3;
-`
-const LinksContainer = styled.div`
-background-color: #131212;
+justify-content: center;
 width: 100%;
-display: flex;
-justify-content: space-evenly;
-position: relative;
-align-items: center;
-left: 42px;
-margin-right: 460px;
-z-index: 3;
 `
-const IconContainer = styled.div`
+// #131212
+const LinksContainer = styled.div`
 display: flex;
-flex-wrap: nowrap;
-flex-direction: column;
 justify-content: center;
 align-items: center;
-margin-right: 10px;
+`
 
-
-`
-const IconsC = styled.div`
-width: 250px;
-display: flex;
-justify-content: space-evenly;
-margin-right: 1.5rem;
-gap: .5rem;
-
-`
-const IconImg = styled.img`
-width: 30px;
-height: 30px;
-`
-const IconLabel = styled.label`
-color: white;
-font-size: 16px;
-`
 const ViewButton = styled.button`
 width: 140px;
 height: 50px;
@@ -68,40 +34,77 @@ cursor: pointer;
     color: rgb(25, 213, 118);
     background: #1C1C1C; 
   }
-
 `
 
-const NavProfile = () => {
+const IconsC = styled.div`
+display: flex;
+margin-left: 200px
+`
+
+const IconContainer = styled.div`
+margin-right: 10px;
+display: flex;
+flex-wrap: nowrap;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+`
+
+const IconImg = styled.img`
+width: 30px;
+height: 30px;
+`
+
+const IconLabel = styled.label`
+color: white;
+font-size: 16px;
+`
+
+const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
+
+  const setProfile = ()=> {
+    setMenu("Profile")
+  }
+
+  const setReviews = ()=> {
+    setMenu("Reviews")
+  }
+
+  const setFavorites = ()=> {
+    setMenu("Favorites")
+  }
+
+  const setWached = ()=> {
+    setMenu("Watched")
+  }
+
+  const setWatchlist = ()=> {
+    setMenu("Watchlist")
+  }
+
   return (
     <NavContainer>
-      <LinksContainer >
-
-          <ViewButton>Profile</ViewButton>
-
-          <ViewButton>Reviews</ViewButton>
-   
-          <ViewButton>Favorites</ViewButton>
-
-          <ViewButton>Watched</ViewButton>
-
-          <ViewButton>Watchlist</ViewButton>
-      
+      <LinksContainer>
+          <ViewButton onClick={setProfile}>Profile</ViewButton>
+          <ViewButton onClick={setReviews}>Reviews</ViewButton>
+          <ViewButton onClick={setFavorites}>Favorites</ViewButton>
+          <ViewButton onClick={setWached}>Watched</ViewButton>
+          <ViewButton onClick={setWatchlist}>Watchlist</ViewButton>
       </LinksContainer>
       <IconsC>
         <IconContainer>
           <IconImg src={ViewsIcon}></IconImg>
-          <IconLabel>140K</IconLabel>
+          <IconLabel>{ watched ? watched.programs.length : 0}</IconLabel>
         </IconContainer>
         <IconContainer>
           <IconImg src={favIcon}></IconImg>
-          <IconLabel>540</IconLabel>
+          <IconLabel>{ favorites ? favorites.programs.length : 0}</IconLabel>
         </IconContainer>
         <IconContainer>
           <IconImg src={PendingIcon}></IconImg>
-          <IconLabel>400</IconLabel>
+          <IconLabel>{ watchlist ? watchlist.programs.length : 0}</IconLabel>
         </IconContainer>
       </IconsC>
-
 
     </NavContainer>
 

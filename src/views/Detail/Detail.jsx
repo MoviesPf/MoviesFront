@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProgramDetail, createReview, filterProgramsByGenre } from '../../Redux/actions';
+import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists } from '../../Redux/actions';
 import { useParams, useNavigate } from 'react-router-dom';
 import css from './Detail.module.css';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
@@ -27,14 +27,17 @@ export const Detail = () => {
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
 
   useEffect(() => {
+    if (user.id) {dispatch(getUserPlaylists(user.id))}
     dispatch(getProgramDetail(ProgramsId));
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
-    if (programDetail && programDetail.Genres) {
-      const genre = programDetail.Genres[0].name;
+    if (programDetail.Genres[0]) {
 
-      dispatch(filterProgramsByGenre(genre, programDetail.type));
+      const genre = programDetail.Genres[0].name ? programDetail.Genres[0].name : "";
+
+      if (genre !== "")dispatch(filterProgramsByGenre(genre, programDetail.type))
+
     }
   }, [dispatch, programDetail]);
 

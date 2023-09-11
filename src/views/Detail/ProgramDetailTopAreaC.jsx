@@ -82,6 +82,7 @@ const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, setShow
         <LogUserProgramOptions 
           setShowModal={setShowModal}
           setShowError={setShowError}
+          programId={programDetail.id}
           rating={rating}
         />        
 

@@ -4,13 +4,10 @@ import { Card } from '../Card/Card.jsx';
 
 export const Cards = ({ programs }) => {
   const cantPrograms = programs.length;
-  const programList =
-    cantPrograms > 8
-      ? programs.slice(9, cantPrograms)
-      : ['No hay mas programas'];
+  const programList = cantPrograms > 8 ? programs.slice(9, cantPrograms) : ['No hay mas programas'];
 
   const [currentPage, setCurrentPage] = useState(1);
-  const programsForPage = 64;
+  const programsForPage = 32;
 
   const lastProgramIndex = currentPage * programsForPage;
   const fisrtProgramIndex = lastProgramIndex - programsForPage;

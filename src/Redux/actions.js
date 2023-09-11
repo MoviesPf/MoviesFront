@@ -24,6 +24,9 @@ import {
   SERIE_TYPE,
   POST_REVIEW,
   SELECT_DONATION_OPTION,
+  GET_USER_PLAYLISTS,
+  GET_USER_REVIEWS,
+  HANDLE_FAV_WATCHED_WATCHLIST
 } from "./actions-type";
 
 export const getAllPrograms = () => {
@@ -58,6 +61,7 @@ export const getAllMovies = () => {
     });
   };
 };
+
 
 export const getAllSeries = () => {
   return async (dispatch) => {
@@ -201,8 +205,9 @@ export const createUsers = ({
   name,
   password,
   source,
+  status
 }) => {
-  console.log(email, avatar, nickname, name, password);
+  console.log(email, avatar, nickname, name, password, status);
   return async (dispatch) => {
     try {
       const res = await fetch(URL_API + "users", {
@@ -215,7 +220,8 @@ export const createUsers = ({
           name,
           password,
           source,
-        }),
+          status
+        })
       });
       const data = await res.json();
       console.log(data);
@@ -327,3 +333,36 @@ export const initiatePayment = (donationData) => async (dispatch) => {
     console.error("Error al iniciar el pago:", error);
   }
 };
+
+export const getUserPlaylists = (UserId) => {
+  return async (dispatch) => {
+    const { data } = await axios(URL_API + `playlists/user/${UserId}`);
+    console.log(data);
+    return dispatch({
+      type: GET_USER_PLAYLISTS,
+      payload: data
+    })
+  }
+}
+
+export const getUserReviews = (UserId) => {
+  return async (dispatch) => {
+    const { data } = await axios(URL_API + `review/user/${UserId}`);
+    console.log(data);
+    return dispatch({
+      type: GET_USER_REVIEWS,
+      payload: data
+    })
+  }
+}
+
+export const handleList = (UserId, PlaylistName, ProgramId) => {
+  return async (dispatch) => {
+    const { data } = await axios.patch(URL_API + `playlists/user/${UserId}/name/${PlaylistName}/program/${ProgramId}`);
+    console.log(data);
+    return dispatch({
+      type: HANDLE_FAV_WATCHED_WATCHLIST,
+      payload: data
+    })
+  }
+}

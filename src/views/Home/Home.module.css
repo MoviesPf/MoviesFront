@@ -8,14 +8,16 @@
     overflow-y: scroll;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    z-index: -1;
 }
 
 .background h1{
     text-align:center ;
 }
 
-.subTitle{
-    background-color: #000;
+/* /* .subTitle{
+    padding-bottom: 50px;
+    background-color: #131212;
     width: 100%;
     height: 3rem;
     text-align: center;
@@ -28,13 +30,13 @@
     display: flex;
     justify-content: center;
     align-content: center;
-}
+} */
 
-.subTitle1{
+.subTitle{
     margin: 1rem 0;
-    background-color: #000;
+    /* background-color: #131212; */
     width: 100%;
-    height: 3rem;
+    height: max-content;
     text-align: center;
     font-size: 3rem;
     color: white;
@@ -47,7 +49,3 @@
 .background::-webkit-scrollbar-thumb{
     background: green;
 }
-
-
-
-
