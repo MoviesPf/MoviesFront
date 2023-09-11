@@ -26,9 +26,9 @@ import {
   SELECT_DONATION_OPTION,
 } from "./actions-type";
 
-export const getAllPrograms = () => {
+export const getAllPrograms = (page = 1) => {
   return async (dispatch) => {
-    const { data } = await axios.get(URL_API + "programs");
+    const { data } = await axios.get(URL_API + "programs?page=" + page);
     console.log(data);
     return dispatch({
       type: GET_ALL_PROGRAMS,

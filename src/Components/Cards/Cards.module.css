@@ -40,6 +40,7 @@
     background-color: rgb(0, 0, 0);
     color: white;
     transition: all 0.25s;
+    text-decoration: none;
 }
 
 .boton:hover {
@@ -55,4 +56,19 @@
     background-color: green;
     color: white;
     transition: all 0.25s;
+}
+
+.icon {
+    border: 0 solid;
+    border-radius: 8px;
+    margin: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: green;
+    color: white;
+    transition: all 0.25s;
+}
+
+.icon:hover{
+    opacity: .8;
 }
