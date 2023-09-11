@@ -17,26 +17,8 @@ const LinksContainer = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-margin-right: 10px;
+`
 
-
-`
-const IconsC = styled.div`
-width: 250px;
-display: flex;
-justify-content: space-evenly;
-margin-right: 1.5rem;
-gap: .5rem;
-
-`
-const IconImg = styled.img`
-width: 30px;
-height: 30px;
-`
-const IconLabel = styled.label`
-color: white;
-font-size: 16px;
-`
 const ViewButton = styled.button`
 width: 140px;
 height: 50px;
