@@ -10,13 +10,6 @@ width: 100%;
 z-index: 2;
 `
 
-const UserPicture = styled.img`
-border-radius: 300px;
-position: relative;
-margin-left: 50px;
-height: 200px;
-top: -95px;
-`
 
 const UserNameContainer = styled.div`
 margin-right: 20px;
@@ -46,11 +39,29 @@ margin-right: 10px;
 color: green;
 `
 
+const Background = styled.div`
+border: 5px solid;
+border-color: white;
+border-radius: 100%;
+background-color: black;
+position: relative;
+margin-left: 50px;
+top: -95px;
+
+`
+const UserPicture = styled.img`
+border-radius: 100%;
+height: 250px;
+width: 250px;
+`
+
 const PresentationLine = ({avatar,name,nickname,status}) => {
 
     return (
         <UserBarr>
+            <Background>
             <UserPicture src={avatar}/>
+            </Background>
             <UserNameContainer>
                 <NameAndNickname>
                     <h1>{name}</h1>

@@ -9,18 +9,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import defaultBackground from "../../assets/background.jpg"
 import { getUserPlaylists } from '../../Redux/actions';
 import { CardFake } from "./CardFake/CardFake.jsx";
+import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 
 const ViewContainer = styled.div`
-  background-color: #1C1C1C;
+  position: absolute;
+  background-color: #000;
   display: flex;
   width: 100%;
   height: 100%;
   flex-wrap: nowrap;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  &::-webkit-scrollbar-thumb{
+    background: green;
+  }
 `;
+
 const UserBackground = styled.img`
   width: 100%;
-  height: 50vh;
+  height: 40vh;
   object-fit: cover;
   position: relative;
   z-index: 1;
@@ -52,7 +66,7 @@ const LineHR = styled.hr`
   background-image: linear-gradient(
     to right,
     rgba(0, 0, 0, 0),
-    rgba(23, 255, 139, 255),
+    rgb(0, 128, 0),
     rgba(0, 0, 0, 0)
   );
 `;
@@ -61,7 +75,7 @@ const LineSubHR = styled.hr`
   border: 0;
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgb(0, 128, 0);
 `;
 
 const LineNavHR = styled.hr`
@@ -69,131 +83,225 @@ const LineNavHR = styled.hr`
   margin-bottom: 0;
   border: 0;
   height: 22px;
-  box-shadow: inset 0 22px 30px -29px rgba(23, 255, 139, 222);
+  box-shadow: inset 0 22px 30px -29px rgb(0, 128, 0);
 `;
+
 const BodyContainer = styled.div`
-  width: 57%;
+  width: 100%;
   height: auto; // Esto haco que la altura cubra toda la pantalla
   display: flex;
   position: relative;
-  margin-left: 10%;
   flex-direction: column;
-  padding-bottom: 5%;
+  padding-right: 5%;
+  padding-left: 5%;
   margin-top: 2%;
 `;
-// Temporal Card Container
+
 const CardsContainer = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: row;
+width: 100%;
+height: 100%;
+padding-top: 1em;
+display: flex;
+flex-wrap: wrap;
+justify-content:start;
+align-items: center;
 `;
 
+const AllCardsContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+`;
+
+const EmptyMessage = styled.h1`
+  margin: 30px;
+`;
+
+const ButtonMas = styled.button`
+  border-radius: 5px;
+  border: none;
+  padding: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #ffffff;
+  background: transparent;
+  transition: all 0.3s;
+  margin-left: .3rem;
+
+  &:hover {
+background-color: #464646;
+}
+`
+const TitleAndButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 const Profile = () => {
-
-  const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [ menu, setMenu ] = useState("profile")
-  
+  const user = useSelector((state) => state.user);
+  const playlistData = useSelector((state) => state.userPlaylists);
+  const [loading, setLoading] = useState(true);
+  const [ menu, setMenu ] = useState("Profile")
+  const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
+
   useEffect(() => {
-    dispatch(getUserPlaylists(user.id));
-  },[]);
+    dispatch(getUserPlaylists(user.id)).then(()=> {setLoading(false)})
+  },[dispatch]);
+  
+  console.log(playlistData)
 
-  const playlistData = useSelector((state) => state.userPlaylists)
+  const setFavorites = ()=> {
+    setMenu("Favorites")
+  }
 
-  const playlists = playlistData.finalPlaylists
+  const setWached = ()=> {
+    setMenu("Watched")
+  }
 
-  const totalPlaylist = playlistData.totalPlaylist
+  const setWatchlist = ()=> {
+    setMenu("Watchlist")
+  }
+  
+  const playlists = playlistData.finalPlaylists;
+  const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
+  const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
+  const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
 
   return (
     <ViewContainer>
-
-        {/* NavBar y background ⬇ */}
-          <NavBar/>
+      <NavBar/>
+      {loading ? (
+        <GreenLoading />
+      ) : (
+        <div>
           <UserBackground src={user.background ? user.background : defaultBackground}/>
+          <LineNavHR/>
 
-        {/* Area de contenido -/Usuario/Barra de navegacion/Peliculas- ⬇ */}
           <AreaContainer>
+          
             <ElementsBarr>
-              {/* Usuario/Barra de navegacion ⬇ */}
               <PresentationLine avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
-              <NavProfile setMenu={setMenu}/>
-              <h3> {totalPlaylist} </h3>
+                <NavProfile menu={menu} setMenu={setMenu} favorites={favorites} watchlist={watchlist} watched={watched}/>
             </ElementsBarr>
             
           <div>
-            {/* Peliculas ⬇ */}
           <LineNavHR/>
           <BodyContainer>
-            {/* "Fake Body" El contenido de esta area es el que ira cambiando segun
-             la seleccion que se haga en la barra de navegacion del usuario (fav/list/profile/etc..) */}
-            <IconLabel>Reviews</IconLabel>
-            <LineHR />
-            <ProgCardDetail
-              year={2023}
-              genreA={'Ci-fi'}
-              genreB={'Action'}
-              lenguage={'Spanish'}
-              overview={temporalOverview}
-              starVal={5}
-            />
-            <LineSubHR />
-            <ProgCardDetail
-              year={2023}
-              genreA={'Ci-fi'}
-              genreB={'Action'}
-              lenguage={'Spanish'}
-              overview={temporalOverview}
-              starVal={5}
-            />
-              {
-                playlists.map((playlist)=> (
-                  <div>
+            {
+              menu === "Profile" ?
+              <div>
+                <IconLabel>Reviews</IconLabel>
+                <LineHR />
+                <ProgCardDetail year={2023} genreA={'Ci-fi'} genreB={'Action'} overview={temporalOverview} starVal={5}/>
+                <LineSubHR />
+                <ProgCardDetail year={2023} genreA={'Ci-fi'} genreB={'Action'} overview={temporalOverview} starVal={5}/>
+                {
+                  playlists.map((playlist)=> (
+                    <div>
+                      <LineHR />
+                      <TitleAndButton> 
                       <IconLabel>{playlist.name}</IconLabel>
+                      {
+                        playlist.programs.length > 5 
+                        && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>Ver Todos</ButtonMas>
+                      }
+                      </TitleAndButton>
                       <LineHR />
                       {
                         playlist.programs.length 
                         ?
                         <CardsContainer>
                           {
-                            playlist.programs.map((program)=> (
+                            playlist.programs.slice(0,6).map((program)=> (
                               <Card program={program}></Card>
-                            ))
+                              ))
                           }
+
                         </CardsContainer>
                         :
                         <CardsContainer>
                           <CardFake/>
-                          <h1>This list is empty</h1>
+                          <EmptyMessage>This list is empty</EmptyMessage>
                         </CardsContainer>
-                    
                       }
-                    
-                  </div>
-                )
-                )
-              }
+                    </div>
+                  ))
+                }
+              </div>
+              
+              : menu === "Reviews" ?
+              <div>
+                <IconLabel>All Reviews</IconLabel>
+                <LineHR />
+                <ProgCardDetail year={2023} genreA={'Ci-fi'} genreB={'Action'} overview={temporalOverview} starVal={5}/>
+                <LineSubHR />
+                <ProgCardDetail year={2023} genreA={'Ci-fi'} genreB={'Action'} overview={temporalOverview} starVal={5}/>
+              </div>
 
-            <LineHR />
+              : menu === "Favorites" ?
+              <div>
+                <IconLabel>All {favorites.name}</IconLabel>
+                <LineHR />
+                {
+                  favorites.programs.length 
+                  ?
+                  <AllCardsContainer>
+                    {favorites.programs.map((program)=> (<Card program={program}></Card>))}
+                  </AllCardsContainer>
+                  :
+                  <CardsContainer>
+                    <CardFake/>
+                    <EmptyMessage>This list is empty</EmptyMessage>
+                  </CardsContainer>
+                }
+              </div>
+
+              : menu === "Watched" ?
+              <div>
+                <IconLabel>All {watched.name}</IconLabel>
+                <LineHR />
+                {
+                  watched.programs.length 
+                  ?
+                  <AllCardsContainer>
+                    {watched.programs.map((program)=> (<Card program={program}></Card>))}
+                  </AllCardsContainer>
+                  :
+                  <CardsContainer>
+                    <CardFake/>
+                    <EmptyMessage>This list is empty</EmptyMessage>
+                  </CardsContainer>
+                }
+              </div>
+              : 
+              <div>
+                <IconLabel>All {watchlist.name}</IconLabel>
+                <LineHR />
+                {
+                  watchlist.programs.length 
+                  ?
+                  <AllCardsContainer>
+                    {watchlist.programs.map((program)=> (<Card program={program}></Card>))}
+                  </AllCardsContainer>
+                  :
+                  <CardsContainer>
+                    <CardFake/>
+                    <EmptyMessage>This list is empty</EmptyMessage>
+                  </CardsContainer>
+                }
+              </div>
+            }
+              <LineHR />
           </BodyContainer>
         </div>
       </AreaContainer>
+      </div>
+    )}
     </ViewContainer>
   );
 };
 
 export default Profile;
-
-// const user = {
-//     "id": "df76d866-783a-4f23-8a9d-18e715fa1ebc",
-// 		"name": "Marcelo",
-// 		"nickname": "ElMariano123",
-// 		"avatar": "https://randomuser.me/api/portraits/men/75.jpg",
-// 		"email": "chau@gmail.com",
-// 		"password": "123456",
-// 		"status": "may the fourth be with you",
-// 		"admin": false,
-// 		"banned": false,
-// 		"PlaylistId": null,
-//         "background": "https://random.imagecdn.app/500/150",
-// }

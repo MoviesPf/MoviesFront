@@ -21,7 +21,7 @@
 .paginate {
     margin-top: 1em;
     margin-bottom: 1em;
-    background-color: black;
+    background-color: #131212;
     width: 100%;
     display: flex;
     flex-direction: row;

@@ -15,7 +15,7 @@
 .form {
   backdrop-filter: blur(3px);
   background-color: #49484847;
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-columns: 40% 60%;
   grid-template-rows: 15% 65% 20%;
@@ -39,7 +39,7 @@
   align-items: center;
   margin-left: 12rem;
   margin-top: 6.5rem;
-  width: 70%;
+  width: 60%;
   height: auto;
 
 }

@@ -16,7 +16,8 @@ export const Signin = () => {
     nickname: '',
     avatar: "https://i.ibb.co/4KWqYTS/user-removebg-preview-1.png",
     email: '',
-    password: ''
+    password: '',
+    status: ''
   })
 
   const handleChange = (event) => {
@@ -105,6 +106,18 @@ export const Signin = () => {
                 placeholder='Confirm Password'
                 type='password'
                 name='confirm password' />
+            </label>
+
+
+            <label className={css.label}>
+              Status <span className={css.span}>*</span>
+              <input
+                onChange={handleChange}
+                autoComplete='none'
+                className={css.input}
+                placeholder='Status'
+                type='text'
+                name='status' />
             </label>
 
           </div>

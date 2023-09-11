@@ -1,9 +1,13 @@
+.background {
+    background-color: #131212;
+}
+
 .backGen {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0);
+    background-color: #131212;
     width: 100%;
     height: auto;
     color: white;
@@ -47,10 +51,10 @@
     justify-content: right;
     background-color: rgba(0, 0, 0);
     width: 100%;
-    height: auto;
     color: white;
     z-index: 100;
     padding: 0.25rem 5vw;
+    padding-top: 20px;
 }
 
 .selectPlt {

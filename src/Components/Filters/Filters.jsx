@@ -101,7 +101,7 @@ export const Filters = () => {
   );
 
   return (
-    <div>
+    <div className={css.background}>
       <Carousel
         key={'genres'}
         wrap={false}
@@ -113,7 +113,6 @@ export const Filters = () => {
       >
         {genresChunks}
       </Carousel>
-      <br />
       <div className={css.backPlt}>
         <select
           value={selectedPlatform}

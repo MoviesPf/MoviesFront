@@ -201,9 +201,10 @@ export const createUsers = ({
   nickname,
   name,
   password,
+  status,
   source
 }) => {
-  console.log(email, avatar, nickname, name, password);
+  console.log(email, avatar, nickname, name, password, status);
   return async (dispatch) => {
     try {
       const res = await fetch(URL_API + 'users', {
@@ -215,6 +216,7 @@ export const createUsers = ({
           nickname,
           name,
           password,
+          status,
           source
         })
       });

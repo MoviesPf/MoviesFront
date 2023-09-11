@@ -10,6 +10,21 @@ import { Carrusel } from '../../Components/Carrusel/Carrusel';
 import { Portrait } from '../../Components/Portrait/Portrait';
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import BtnStart from '../../Components/Buttons/BtnStart';
+import styled from 'styled-components'
+
+
+const LineHR = styled.hr`
+  border: 0;
+  height: 2px;
+  margin-top: 0;
+  margin-bottom: 0;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgb(0, 128, 0),
+    rgba(0, 0, 0, 0)
+  );
+`;
 
 export const Home = () => {
   const dispatch = useDispatch();
@@ -17,16 +32,9 @@ export const Home = () => {
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
   const [loading, setLoading] = useState(true);
 
-  useEffect(
-    () => {
-      dispatch(getAllPrograms()).then(() => {
-        setLoading(false);
-      });
-    },
-    [
-      // dispatch,
-    ]
-  );
+  useEffect(() => {
+    dispatch(getAllPrograms()).then(() => {setLoading(false)});
+  },[]);
 
   return (
     <div className={css.background}>
@@ -35,26 +43,22 @@ export const Home = () => {
       {loading ? (
         <GreenLoading />
       ) : (
-        <div>
-          <Portrait
-            programs={
-              filteredPrograms.data ? filteredPrograms.data : programs.data
-            }
-          />
+        <div className={css.content}>
+          <Portrait programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
           <Filters />
-          <h1 className={css.subTitle1}>Latest Releases</h1>
-          <Carrusel
-            programs={
-              filteredPrograms.data ? filteredPrograms.data : programs.data
-            }
-          />
-          <div className={css.subTitle}> All Programs </div>
+
+          <LineHR />
+          <h1 className={css.subTitle}>Latest Releases</h1>
+          <LineHR />
+
+          <br/>
+          <Carrusel programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
+          <LineHR />
+          <h1 className={css.subTitle}>More Programs</h1>
+          <LineHR />
+
           <BtnStart />
-          <Cards
-            programs={
-              filteredPrograms.data ? filteredPrograms.data : programs.data
-            }
-          />
+          <Cards programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
           <Footer />
         </div>
       )}

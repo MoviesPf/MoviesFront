@@ -63,7 +63,7 @@ position: relative;
 flex-direction: row;
 `
 
-export default function ProgCardDetail({year,genreA,genreB,lenguage,overview,progImge,starVal}) {
+export default function ProgCardDetail({year,genreA,genreB,overview,progImge,starVal}) {
 
     const starsCount = []
     for (let index = 0; index < starVal; index++) {
@@ -80,7 +80,7 @@ export default function ProgCardDetail({year,genreA,genreB,lenguage,overview,pro
         <DetailContainer>
              <ContextRow>
                 <Title>Pelicula</Title>
-                <MovieData>{`${year} ‧ ${genreA} / ${genreB} ‧ ${lenguage}`}</MovieData>
+                <MovieData>{`${year} ‧ ${genreA} / ${genreB}`}</MovieData>
             </ContextRow>
             <StarsRow>
                 {starsCount}
