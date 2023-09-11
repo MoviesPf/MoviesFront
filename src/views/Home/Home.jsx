@@ -10,12 +10,10 @@ import { Carrusel } from '../../Components/Carrusel/Carrusel';
 import { Portrait } from '../../Components/Portrait/Portrait';
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import BtnStart from '../../Components/Buttons/BtnStart';
-import { useLocalStorage } from '../../utils/useLocalStorage';
 
 export const Home = () => {
   const dispatch = useDispatch();
   const programs = useSelector((state) => state.programs);
-  console.log(programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
   const [loading, setLoading] = useState(true);
 
