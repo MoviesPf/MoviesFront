@@ -55,12 +55,12 @@
   justify-content: space-between;
   align-items: center;
   color: white;
-  text-align: justify;
 }
 
 .info p {
   padding-top: 20px;
   padding-bottom: 20px;
+  text-align: justify;
 }
 
 .firstInfo {
@@ -102,7 +102,7 @@
   /* background-color: aqua; */
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: center;
   justify-content: end;
 }
 

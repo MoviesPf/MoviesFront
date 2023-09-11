@@ -7,7 +7,7 @@ export const Card = ({ program }) => {
   return (
     <div className={css.container}>
       <Link to={`/detail/${program.id}`}>
-        { program.poster === null 
+        { program.poster === "card"
         
         ? <img className={css.img} src={defaultImg}  alt={program.title}/>
 

@@ -1,0 +1,12 @@
+.container {
+    padding: 7px;
+    width: 13rem;
+}
+
+.img {
+    width: 200px;
+    height: 300px;
+    border-radius: 15px;
+    transition: all 0.25s;
+    overflow: hidden;
+}
