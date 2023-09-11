@@ -1,4 +1,4 @@
-import style from './Nav.module.css'
+import style from './AdminNav.module.css'
 
 const Nav = () => {
   return (
