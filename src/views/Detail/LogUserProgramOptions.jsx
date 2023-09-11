@@ -6,17 +6,8 @@ import favIcon from "../../assets/Icons/icons8-love-90.png"
 import ViewsIcon from "../../assets/Icons/icons8-view-90.png"
 import PendingIcon from "../../assets/Icons/icons8-delivery-time-96.png"
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
-import {styled ,keyframes, css }from 'styled-components'
-import { getUserPlaylists, handleList } from "../../Redux/actions"
-
-const scaleUp = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.5);
-  }
-`
+import styled from 'styled-components'
+import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 
 const ScoreContainer = styled.div`
   visibility: ${(props) => props.$isLogin ? 'visible' : 'hidden'};
@@ -197,11 +188,12 @@ export default function LogUserProgramOptions({setShowModal, setShowError, progr
             </IconsC>
    
             <EmptStarC>
-                <IconImg src={emptyStar}></IconImg>
-                <IconImg src={emptyStar}></IconImg>
-                <IconImg src={emptyStar}></IconImg>
-                <IconImg src={emptyStar}></IconImg>
-                <IconImg src={emptyStar}></IconImg>
+            {new Array(5).fill('').map((_, index) => (
+                <IconImg
+                  key={index}
+                  src={index < rating ? fullStar : emptyStar} 
+                />
+              ))}
             </EmptStarC>
 
         
