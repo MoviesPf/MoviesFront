@@ -27,13 +27,12 @@ export const Detail = () => {
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
 
   useEffect(() => {
-    if (user.id) {dispatch(getUserPlaylists(user.id))}
+    if (user.id) (dispatch(getUserPlaylists(user.id)))
     dispatch(getProgramDetail(ProgramsId));
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
-    if (programDetail.Genres[0]) {
-
+    if (programDetail && programDetail.Genres[0].name) {
       const genre = programDetail.Genres[0].name ? programDetail.Genres[0].name : "";
 
       if (genre !== "")dispatch(filterProgramsByGenre(genre, programDetail.type))
