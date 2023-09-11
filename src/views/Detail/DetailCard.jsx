@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 
 const ProgramData = styled.div`
-  width: 40%;
+  width: 100%;
   height: auto;
   padding-bottom: 40px;
   display: flex;
@@ -62,24 +62,25 @@ flex-direction: row;
 const CastContainer = styled.label`
   width: 300px;
   height: auto;
-  background-color:#6161611c;
+  background-color:#1c1c1c33;
   color: white;
   display: flex;
   position: relative;
   flex-direction: column;
   font-size: 26;
   margin-top: 20px;
+  border-radius: 10px;
+  padding: 5px 15px;
 `
 
 export default function ProgCardDetail({props}) {
-   console.log(props, "props");
    const {year, runtimeFormatted, programDetail} = props;
    /*  const starsCount = []
     for (let index = 0; index < starVal; index++) {
         starsCount.push(<StarPoint key={index}/>);
         
     } */
-    console.log(year, runtimeFormatted, programDetail, "const");
+
   return (
     <ProgramData>
       <DetailContainer>
@@ -94,7 +95,5 @@ export default function ProgCardDetail({props}) {
           <CastContainer>{programDetail?.cast?.map(c => c.split(' - ')[0]).slice(0, 5).join(', ')}</CastContainer>
       </DetailContainer>
     </ProgramData>
-
-  
   )
 }

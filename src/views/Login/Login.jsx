@@ -6,6 +6,7 @@ import { gapi } from 'gapi-script';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUsers, loginUser, resetMessage } from '../../Redux/actions';
 import BtnHome from '../../Components/Buttons/BtnHome';
+import { useLocalStorage } from '../../utils/useLocalStorage.js';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const Login = () => {
   };
 
   /////////////////////////////////////////////////////////////////
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useLocalStorage('text', ' ');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
@@ -90,7 +91,7 @@ const Login = () => {
               placeholder='Email'
               type='email'
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={ e => setEmail(e.target.value)}
             />
           </div>
           <div className={css.form_group2}>

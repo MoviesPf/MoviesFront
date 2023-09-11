@@ -80,8 +80,8 @@ export const Signin = () => {
                 type='text'
                 name='name'
               />
-              {error.name && <span>{error.name}</span>}
             </label>
+              {error.name && <span className={css.Error}>{error.name}</span>}
 
             <label className={css.label}>
               Nickname <span className={css.span}>*</span>
@@ -94,8 +94,8 @@ export const Signin = () => {
                 type='text'
                 name='nickname'
               />
-              {error.nickname && <span>{error.nickname}</span>}
             </label>
+              {error.nickname && <span className={css.Error}>{error.nickname}</span>}
 
             <label className={css.label}>
               Email <span className={css.span}>*</span>
@@ -108,8 +108,8 @@ export const Signin = () => {
                 type='email'
                 name='email'
               />
-              {error.email && <span>{error.email}</span>}
             </label>
+              {error.email && <span className={css.Error}>{error.email}</span>}
 
             <label className={css.label}>
               Password <span className={css.span}>*</span>
@@ -122,8 +122,8 @@ export const Signin = () => {
                 type='password'
                 name='password'
               />
-              {error.password && <span>{error.password}</span>}
             </label>
+              {error.password && <span className={css.Error}>{error.password}</span>}
 
             <label className={css.label}>
               Confirm Password <span className={css.span}>*</span>
@@ -136,8 +136,8 @@ export const Signin = () => {
                 type='password'
                 name='confirm'
               />
-              {error.confirm && <span>{error.confirm}</span>}
             </label>
+              {error.confirm && <span className={css.Error}>{error.confirm}</span>}
           </div>
         </div>
 
@@ -158,8 +158,7 @@ export const Signin = () => {
             <img className={css.avatarUserImg}
               src={user.avatar} alt="avatar" />
           </div>
-            <p className={css.titleAvatar}>Choose your avatar</p>
-
+          <p className={css.titleAvatar}>Choose your avatar</p>
 
           <div
             className={css.avatarContainer}
