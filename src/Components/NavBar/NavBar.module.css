@@ -1,159 +1,186 @@
 .allNavbar {
-    background-color: #000000b9;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 102;
+  background-color: #000000b9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 102;
 }
 
 .background {
-    background-color: #000000b9;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem;
-    width: 100%;
+  background-color: #000000b9;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  width: 100%;
 }
 
 .contRight {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .logo {
-    align-items: center;
-    color: green;
-    text-decoration: none;
-    display: flex;
-    flex-direction: row;
-    font-size: 2.7em;
-    transition: all 0.25s;
+  align-items: center;
+  color: green;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  font-size: 2.7em;
+  transition: all 0.25s;
 }
 
 .logo:hover {
-    color: rgb(0, 58, 0);
+  color: rgb(0, 58, 0);
 }
 
 .logo h1 {
-    margin-top: 9px;
+  margin-top: 9px;
 }
 
 .contMid {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .types {
-    border-radius: 5px;
-    border: 0;
-    padding: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    color: #ffffff;
-    background: transparent;
-    transition: all 0.25s;
+  border-radius: 5px;
+  border: none;
+  padding: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #ffffff;
+  background: transparent;
+  transition: all 0.3s;
+  margin-left: .3rem;
 }
 
 .types:hover {
-    background-color: rgb(70, 70, 70);
+  background-color: #464646;
 }
 
 .typesP {
-    border-radius: 5px;
-    border: 2px solid;
-    padding: 2px;
-    font-size: 18px;
-    cursor:context-menu;
-    color: green;
-    background: transparent;
-    transition: all 0.25s;
+  border-radius: 5px;
+  border: 2px solid;
+  padding: 4px;
+  font-size: 1rem;
+  cursor: context-menu;
+  color: green;
+  background: transparent;
+  transition: all 0.25s;
+  margin-left: .3rem;
 }
 
 .contLeft {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .sesion {
-    border-radius: 5px;
-    padding: 6px;
-    border: 0;
-    margin: 0 5px;
-    cursor: pointer;
-    color: #ffffff;
-    background: transparent;
-    transition: all 0.25s;
-    margin: 0 1rem;
-
+  border-radius: 5px;
+  padding: 6px;
+  border: 0;
+  cursor: pointer;
+  color: #ffffff;
+  background: transparent;
+  transition: all 0.25s;
+  margin: 0 1rem;
 }
 
 .sesion:hover {
-    background-color: rgb(70, 70, 70);
+  background-color: rgb(70, 70, 70);
 }
 
 .searchButton {
-    margin: 0 1rem;
-    border: 0;
-    font-size: 16px;
-    color: #ffffff;
-    font-family: Arial;
-    border-radius: 7px;
-    background: green;
-    padding-bottom: 3px;
-    padding-right: 10px;
-    padding-left: 10px;
-    transition: all 0.25s;
+  margin: 0 1rem;
+  border: 0;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: Arial;
+  border-radius: 7px;
+  background: green;
+  padding-bottom: 3px;
+  padding-right: 10px;
+  padding-left: 10px;
+  transition: all 0.25s;
 }
 
 .searchButton:hover {
-    background: rgb(0, 58, 0);
+  background: rgb(0, 58, 0);
 }
 
 .searchComponent {
-    width: 90%;
-    height: 100%;
-    margin: 5px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background-color: #000000e0;
+  width: 90%;
+  height: 100%;
+  margin: 5px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #000000e0;
 }
 
-.cartas{
-    color: green;
-    height: 78vh;
-    width: 100%;
-    display: flex;
-    overflow-y:scroll;
-    position: relative;
-    align-items: center;
-    flex-direction: column;
+.cartas {
+  color: green;
+  height: 78vh;
+  width: 100%;
+  display: flex;
+  overflow-y: scroll;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
 }
 
 .message {
-    margin: 5em;
+  margin: 5em;
 }
 
 .bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: rgb(0, 0, 0);
 }
 
 .cartas::-webkit-scrollbar {
-    width: 7px;
+  width: 7px;
 }
 
-.cartas::-webkit-scrollbar-thumb{
-    background: green;
+.cartas::-webkit-scrollbar-thumb {
+  background: green;
+}
+
+.user{
+  display: flex;
+  margin: 0 1rem;
+  gap: .5rem;
+}
+
+.avatarUser{
+  outline: 2px solid #ffffff;
+  border-radius: 50%;
+  padding: .2rem;
+  cursor: pointer;
+}
+
+.avatarUser:hover{
+  scale: 1.1;
+}
+
+.avatarUser:active{
+  scale: .9;
+}
+
+.avatarUserImg{
+  height: 2rem;
+  border-radius: 50%;
 }

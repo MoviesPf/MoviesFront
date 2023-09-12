@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import css from './Login.module.css';
-import { BiSolidCameraMovie } from 'react-icons/bi';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import GoogleLogin from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUsers, loginUser, resetMessage } from '../../Redux/actions';
+import BtnHome from '../../Components/Buttons/BtnHome';
+import { useLocalStorage } from '../../utils/useLocalStorage.js';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ const Login = () => {
   };
 
   /////////////////////////////////////////////////////////////////
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useLocalStorage('text', ' ');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
@@ -68,12 +69,7 @@ const Login = () => {
 
   return (
     <div className={css.section}>
-      <div className={css.logo}>
-        <Link to='/'>
-          <BiSolidCameraMovie className={css.icon2} />
-          <h3>GreenScreen</h3>
-        </Link>
-      </div>
+      <BtnHome />
       <div className={css.txt}>
         <h1>Welcome!</h1>
         <p>
@@ -95,7 +91,7 @@ const Login = () => {
               placeholder='Email'
               type='email'
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={ e => setEmail(e.target.value)}
             />
           </div>
           <div className={css.form_group2}>

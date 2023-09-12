@@ -1,10 +1,14 @@
 .background {
   height: 100vh;
-  background-image: url('https://github.com/MoviesPf/MoviesFront/blob/main/src/assets/background.jpg'); /* Ruta a la imagen de fondo */
+  background-image: url('https://i.ibb.co/PhcQXyq/background.jpg'); /* Ruta a la imagen de fondo */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  
+}
+
+.btnHome {
+  position: relative;
+  z-index: 1000;
 }
 
 .form {
@@ -13,13 +17,13 @@
   height: 100vh;
   display: grid;
   grid-template-columns: 40% 60%;
-  grid-template-rows: 15% 65% 20%;
+  grid-template-rows: 10% 70% 20%;
 }
 
 .title {
   grid-column: 1/3;
   grid-row: 1/2;
-  margin: auto;
+  margin: 0.6rem auto;
   font-size: 3.5rem;
   color: #ffffff;
   text-shadow: -4px 4px 7px #000;
@@ -33,13 +37,12 @@
   flex-direction: column;
   align-items: center;
   margin-left: 12rem;
-  margin-top: 6.5rem;
+  margin-top: 6rem;
   width: 70%;
-  height: auto;
-
+  height: 26.5rem;
 }
 
-.avatarUser{
+.avatarUser {
   background-color: #000;
   border-radius: 50%;
   outline: 2px solid #fff;
@@ -48,26 +51,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: .5rem;
 }
 
-.avatarUserImg{
+.avatarUserImg {
   height: 6rem;
 }
 
 .formUser {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0 4rem;
+  gap: 2rem;
 }
 
 .label {
+  font-size: 1.1rem;
   color: #fff;
 }
 
 .span {
-  color: #b30000;
+  color: #ff0000;
+  font-weight: bold;
   font-size: 1.2rem;
 }
 
@@ -130,23 +136,24 @@
 .sectionAvatar {
   grid-column: 2/3;
   grid-row: 2/3;
-  width: 60%;
-  margin: 1rem auto;
+  width: 80%;
+  height: 100%;
+  margin: 1rem 7rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.titleAvatar{
+.titleAvatar {
   color: #fff;
   width: 100%;
   text-align: center;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 500;
 }
 
-.avatarContainer{
+.avatarContainer {
   background-color: #000;
   border-radius: 50%;
   outline: 2px solid #fff;
@@ -155,15 +162,45 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: .5rem;
-  transition: .2s;
+  margin: 0.5rem;
+  transition: 0.2s;
   cursor: pointer;
 }
-.avatarContainer:hover{
+.avatarContainer:hover {
   scale: 1.1;
 }
 
-.avatarImg{
+.avatarImg {
   height: 4rem;
   width: auto;
+}
+
+.Error {
+  position: absolute;
+  font-weight: 600;
+  color: #ff0000;
+  backdrop-filter: blur(3px);
+  background-color: #ffffff47;
+  padding: 0 .5rem;
+  border-radius: .5rem;
+}
+
+.Error:nth-child(2) {
+  top: 4.2rem;
+}
+
+.Error:nth-child(4) {
+  top: 10rem;
+}
+
+.Error:nth-child(6) {
+  top: 15.8rem;
+}
+
+.Error:nth-child(8) {
+  top: 21.6rem;
+}
+
+.Error:nth-child(10) {
+  top: 27.5rem;
 }

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { URL_API } from '../URLS';
+import axios from "axios";
+import { URL_API } from "../URLS";
 
 import {
   GET_ALL_PROGRAMS,
@@ -21,16 +21,21 @@ import {
   POST_USER,
   MAIN_TYPE,
   MOVIE_TYPE,
-  SERIE_TYPE
-} from './actions-type';
+  SERIE_TYPE,
+  POST_REVIEW,
+  SELECT_DONATION_OPTION,
+  GET_USER_PLAYLISTS,
+  GET_USER_REVIEWS,
+  HANDLE_FAV_WATCHED_WATCHLIST
+} from "./actions-type";
 
-export const getAllPrograms = () => {
+export const getAllPrograms = (page = 1) => {
   return async (dispatch) => {
-    const { data } = await axios.get(URL_API + 'programs');
+    const { data } = await axios.get(URL_API + "programs?page=" + page);
     console.log(data);
     return dispatch({
       type: GET_ALL_PROGRAMS,
-      payload: data
+      payload: data,
     });
   };
 };
@@ -41,7 +46,7 @@ export const getProgramByName = (title) => {
     console.log(data);
     return dispatch({
       type: GET_PROGRAM_BY_NAME,
-      payload: data.data
+      payload: data.data,
     });
   };
 };
@@ -52,10 +57,11 @@ export const getAllMovies = () => {
     console.log(data);
     return dispatch({
       type: GET_MOVIES,
-      payload: data
+      payload: data,
     });
   };
 };
+
 
 export const getAllSeries = () => {
   return async (dispatch) => {
@@ -63,7 +69,7 @@ export const getAllSeries = () => {
     console.log(data);
     return dispatch({
       type: GET_SERIES,
-      payload: data
+      payload: data,
     });
   };
 };
@@ -71,11 +77,11 @@ export const getAllSeries = () => {
 export const getGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(URL_API + 'genres');
+      const { data } = await axios.get(URL_API + "genres");
       console.log(data);
       dispatch({
         type: GET_GENRES,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -86,11 +92,11 @@ export const getGenres = () => {
 export const getMovieGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(URL_API + 'genres/movies');
+      const { data } = await axios.get(URL_API + "genres/movies");
       console.log(data);
       dispatch({
         type: GET_MOVIES_GENRES,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -101,11 +107,11 @@ export const getMovieGenres = () => {
 export const getSeriesGenres = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(URL_API + 'genres/series');
+      const { data } = await axios.get(URL_API + "genres/series");
       console.log(data);
       dispatch({
         type: GET_SERIES_GENRES,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -116,10 +122,10 @@ export const getSeriesGenres = () => {
 export const getPlatforms = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(URL_API + 'platforms');
+      const { data } = await axios.get(URL_API + "platforms");
       dispatch({
         type: GET_PLATFORMS,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -133,7 +139,7 @@ export const getProgramDetail = (ProgramsId) => {
       const { data } = await axios.get(URL_API + `programs/${ProgramsId}`);
       dispatch({
         type: GET_PROGRAM_DETAIL,
-        payload: data.data
+        payload: data.data,
       });
     } catch (error) {
       console.log(error);
@@ -149,7 +155,7 @@ export const filterProgramsByGenre = (genreName, type) => {
       );
       dispatch({
         type: FILTER_PROGRAMS_BY_GENRE,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -166,7 +172,7 @@ export const filterProgramsByPlatform = (platformName, type) => {
       console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_BY_PLATFORM,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -184,7 +190,7 @@ export const filterProgramsCombined = (genreName, platformName, type) => {
       console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_COMBINED,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -198,28 +204,30 @@ export const createUsers = ({
   nickname,
   name,
   password,
-  source
+  source,
+  status
 }) => {
-  console.log(email, avatar, nickname, name, password);
+  console.log(email, avatar, nickname, name, password, status);
   return async (dispatch) => {
     try {
-      const res = await fetch(URL_API + 'users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch(URL_API + "users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
           avatar,
           nickname,
           name,
           password,
-          source
+          source,
+          status
         })
       });
       const data = await res.json();
       console.log(data);
       dispatch({
         type: POST_USER,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       console.log(error);
@@ -230,20 +238,20 @@ export const createUsers = ({
 export const loginUser = (email, password) => {
   return async (dispatch) => {
     try {
-      const res = await fetch(URL_API + 'users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+      const res = await fetch(URL_API + "users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
       dispatch({
         type: LOGIN_USER,
-        payload: data
+        payload: data,
       });
     } catch (error) {
       dispatch({
         type: ERROR_LOGIN,
-        payload: 'Incorrect password or email'
+        payload: "Incorrect password or email",
       });
     }
   };
@@ -253,7 +261,7 @@ export const logoutUser = () => {
   return (dispatch) => {
     dispatch({
       type: LOGOUT_USER,
-      payload: ''
+      payload: "",
     });
   };
 };
@@ -262,18 +270,99 @@ export const resetMessage = () => {
   return (dispatch) => {
     dispatch({
       type: RESET_MESSAGE,
-      payload: ''
+      payload: "",
     });
   };
 };
 export const changeTypeMain = () => {
-  return { type: MAIN_TYPE, payload: 'main' };
+  return { type: MAIN_TYPE, payload: "main" };
 };
 
 export const changeTypeMovie = () => {
-  return { type: MOVIE_TYPE, payload: 'movie' };
+  return { type: MOVIE_TYPE, payload: "movie" };
 };
 
 export const changeTypeSerie = () => {
-  return { type: SERIE_TYPE, payload: 'serie' };
+  return { type: SERIE_TYPE, payload: "serie" };
 };
+
+export const createReview = (reviewData, userId, ProgramsId) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(URL_API + `review`, {
+        reviewData,
+        userId,
+        ProgramsId,
+      });
+      dispatch({
+        type: POST_REVIEW,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const selectDonationOption = (amount) => ({
+  type: SELECT_DONATION_OPTION,
+  payload: amount,
+});
+
+export const initiatePayment = (donationData) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3001/donations/create-order",
+      donationData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("Respuesta de MercadoPago:", response.data);
+
+    const sandbox_init_point =
+      response.data?.response?.body?.sandbox_init_point;
+    if (sandbox_init_point) {
+      window.location.href = sandbox_init_point;
+    } else {
+      console.error("URL de redirección no válida");
+    }
+  } catch (error) {
+    console.error("Error al iniciar el pago:", error);
+  }
+};
+
+export const getUserPlaylists = (UserId) => {
+  return async (dispatch) => {
+    const { data } = await axios(URL_API + `playlists/user/${UserId}`);
+    console.log(data);
+    return dispatch({
+      type: GET_USER_PLAYLISTS,
+      payload: data
+    })
+  }
+}
+
+export const getUserReviews = (UserId) => {
+  return async (dispatch) => {
+    const { data } = await axios(URL_API + `review/user/${UserId}`);
+    console.log(data);
+    return dispatch({
+      type: GET_USER_REVIEWS,
+      payload: data
+    })
+  }
+}
+
+export const handleList = (UserId, PlaylistName, ProgramId) => {
+  return async (dispatch) => {
+    const { data } = await axios.patch(URL_API + `playlists/user/${UserId}/name/${PlaylistName}/program/${ProgramId}`);
+    console.log(data);
+    return dispatch({
+      type: HANDLE_FAV_WATCHED_WATCHLIST,
+      payload: data
+    })
+  }
+}
