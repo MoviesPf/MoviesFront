@@ -99,31 +99,30 @@ cursor: pointer;
   }
 `
 export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) => {
+  const playlistData = useSelector( (state) => state.userPlaylists )
   const user = useSelector( (state) => state.user )
+  const [idReal, setIdReal] = useState(false);
 
   const dispatch = useDispatch()
   useEffect(()=> {
-    if (user && user.id) (dispatch(getUserPlaylists(user.id)))
-  },[dispatch])
+    if (user && user.id) (dispatch(getUserPlaylists(user.id))).then(()=> { setIdReal(true)})
+  },[dispatch, user.id,])
 
-  const playlistData = useSelector( (state) => state.userPlaylists )
-
-  const playlists = playlistData.finalPlaylists;
-
-  const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
-  let isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
-
-  console.log(isFav);
-
-  const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
-  let isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
-
-  console.log(isWatchL);
-
-  const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
-  let isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
-
-  console.log(isWatch);
+    const playlists = playlistData.finalPlaylists;
+    
+    const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
+    const isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    
+    console.log(isFav);
+    
+    const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
+    const isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    
+    console.log(isWatchL);
+    
+    const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
+    const isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    console.log(isWatch);
 
 
 

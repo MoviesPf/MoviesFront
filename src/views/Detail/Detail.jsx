@@ -29,15 +29,19 @@ export const Detail = () => {
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
 
+  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
+  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showError, setShowError] = useState(false);
   const [idReal, setIdReal] = useState(false);
-  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
-  const [hoverRating, setHoverRating] = useState(0);
-  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   
   useEffect(() => {
-    dispatch(getUserPlaylists(user.id)).then(dispatch(getProgramDetail(ProgramsId))).then(()=>{setIdReal(true)})
+    dispatch(getProgramDetail(ProgramsId))
+    .then(
+      dispatch(getUserPlaylists(user.id))
+    )
+    .then(()=>{setIdReal(true)})
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
@@ -77,7 +81,7 @@ export const Detail = () => {
     if (user.id) {
       setShowModal(false);
       setReview({ ...review, rating: 0 });
-      dispatch(createReview(review, user.id, programDetail.id));
+      await dispatch(createReview(review, user.id, programDetail.id));
       dispatch(getProgramDetail(ProgramsId));
       setReview([...review, review]);
     } else setShowError(true);
@@ -126,7 +130,7 @@ export const Detail = () => {
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick} GreenLoading={GreenLoading}/>
              {
               user.id && idReal ?
-              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating} userId={user.id}/>
+              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating}/>
               : <ButtonOptionsFake/>
              }
           </div>
