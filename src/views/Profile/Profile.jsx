@@ -149,8 +149,7 @@ const Profile = () => {
   const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
   
   useEffect(() => {
-    // dispatch(getUserReviews(user.id)).then(()=> {setLoading(false)})
-    dispatch(getUserPlaylists(user.id)).then(()=> {setLoading(false)})
+    dispatch(getUserPlaylists(user.id)).then(()=> dispatch(getUserReviews(user.id))).then(()=> {setLoading(false)})
   },[dispatch]);
   
   const playlistData = useSelector((state) => state.userPlaylists);
@@ -169,9 +168,13 @@ const Profile = () => {
   const setWatchlist = ()=> {
     setMenu("Watchlist")
   }
+
+  const setReviews = ()=> {
+    setMenu("Reviews")
+  }
   
   const playlists = playlistData.finalPlaylists;
-  // const reviews = reviewsData.reviewsAndPrograms;
+  const reviews = reviewsData.reviewsAndPrograms;
   const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
   const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
   const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
@@ -179,7 +182,7 @@ const Profile = () => {
   return (
     <ViewContainer>
       <NavBar/>
-      {loading ? (
+      { loading ? (
         <GreenLoading />
       ) : (
         <div>
@@ -199,34 +202,39 @@ const Profile = () => {
             {
               menu === "Profile" ?
               <div>
-                <IconLabel>Reviews</IconLabel>
-                <LineSubHR />
-                  {/* {
+                <TitleAndButton>
+                  <IconLabel>Last Reviews</IconLabel>
+                  {
+                    reviews.length > 3
+                    && <ButtonMas onClick={setReviews}>All Reviews</ButtonMas>
+                  }
+                  </TitleAndButton>
+                  {
                     reviews.length 
                     ? <div>
                       {
-                      reviews.map((e)=> (
+                      reviews.slice(-3).reverse().map((e)=> (
                         <div>
+                          <LineHR />
                           <ProgCardDetail year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ProgCardDetail>
-                          <LineSubHR />
                         </div>
                       ))
-                      }
+                    }
                     </div>
                     : <EmptyMessage>Try to review some movies</EmptyMessage>
-                  } */}
+                  }
                 {
                   playlists.map((playlist)=> (
                     <div>
-                      <LineHR />
+                      <LineSubHR />
                       <TitleAndButton> 
                       <IconLabel>{playlist.name}</IconLabel>
                       {
                         playlist.programs.length > 5 
-                        && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>Ver Todos</ButtonMas>
+                        && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>See All</ButtonMas>
                       }
                       </TitleAndButton>
-                      <LineHR />
+                      <LineSubHR />
                       {
                         playlist.programs.length 
                         ?
@@ -253,11 +261,11 @@ const Profile = () => {
               <div>
                 <IconLabel>All Reviews</IconLabel>
                 <LineHR />
-                {/* {
+                {
                     reviews.length 
                     ? <div>
                       {
-                      reviews.map((e)=> (
+                      reviews.reverse().map((e)=> (
                         <div>
                           <ProgCardDetail year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ProgCardDetail>
                           <LineSubHR />
@@ -266,7 +274,7 @@ const Profile = () => {
                       }
                     </div>
                     : <EmptyMessage>Try to review some movies</EmptyMessage>
-                  } */}
+                  }
               </div>
 
               : menu === "Favorites" ?

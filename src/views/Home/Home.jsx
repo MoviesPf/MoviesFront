@@ -27,25 +27,22 @@ const LineHR = styled.hr`
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const programs = useSelector((state) => state.programs);
   const user = useSelector( (state)=> state.user)
-  console.log(programs);
+  const programs = useSelector((state) => state.programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(getAllPrograms()).then(() => {setLoading(false)});
-  },[dispatch]);
-
-  useEffect(() => {
-    dispatch(getUserPlaylists(user.id))
+    if (programs.length === 0){
+      dispatch(getAllPrograms()).then(dispatch(getUserPlaylists(user.id))).then(() => {setLoading(false)});
+    }
   },[dispatch]);
 
   return (
     <div className={css.background}>
       <span id='start' />
       <NavBar />
-      {loading ? (
+      {programs.length === 0 ? (
         <GreenLoading />
       ) : (
         <div className={css.content}>
