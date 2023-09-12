@@ -1,33 +1,41 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists } from '../../Redux/actions';
-import { useParams, useNavigate } from 'react-router-dom';
-import css from './Detail.module.css';
-import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
-import { NavBar } from '../../Components/NavBar/NavBar';
-import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
 import { Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
-import { Footer } from "../../Components/Footer/Footer"
-import moment from 'moment';
+import fullStar from "../../assets/Icons/icons8-star-100 green.png";
+import emptyStar from "../../assets/Icons/icons8-star-52.png";
+import css from './Detail.module.css';
+
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
+import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists } from '../../Redux/actions';
+import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
+
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
-import emptyStar from "../../assets/Icons/icons8-star-52.png"
-import fullStar from "../../assets/Icons/icons8-star-100 green.png"
-import LogUserProgramOptions from './LogUserProgramOptions'
+import { ProgramDetailTopAreaC}  from './ProgramDetailTopAreaC';
+import { NavBar } from '../../Components/NavBar/NavBar';
+import { Footer } from "../../Components/Footer/Footer";
+import { ButtonOptionsFake } from './ButtonOptionsFake';
+import { ButtonOptions } from './ButtonOptions';
+
+import moment from 'moment';
+
 
 export const Detail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { ProgramsId } = useParams();
+
   const user = useSelector((state) => state.user);
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
+
+  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
+  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showError, setShowError] = useState(false);
   const [idReal, setIdReal] = useState(false);
-  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
-  const [hoverRating, setHoverRating] = useState(0);
-  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
-
+  
   useEffect(() => {
     dispatch(getUserPlaylists(user.id)).then(dispatch(getProgramDetail(ProgramsId))).then(()=>{setIdReal(true)})
   }, [dispatch, ProgramsId]);
@@ -38,6 +46,7 @@ export const Detail = () => {
       if (genre !== "")dispatch(filterProgramsByGenre(genre, programDetail.type))
     }
   }, [dispatch, programDetail]);
+
 
   useEffect(() => {
     setPeliculaSimilar(encontrarPeliculaMasParecida(programDetail?.title, similarMovies ? similarMovies : []));
@@ -117,8 +126,8 @@ export const Detail = () => {
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick} GreenLoading={GreenLoading}/>
              {
               user.id && idReal ?
-              <LogUserProgramOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating}/>
-              : <div></div>  
+              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating} userId={user.id}/>
+              : <ButtonOptionsFake/>
              }
           </div>
         }

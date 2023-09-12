@@ -9,6 +9,7 @@ import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import {styled ,keyframes, css }from 'styled-components'
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 import {getUserPlaylists} from "../../Redux/actions"
+import e from 'cors';
 
 const scaleUp = keyframes`
   0% {
@@ -97,22 +98,14 @@ cursor: pointer;
 
   }
 `
-
-const LineSubHR = styled.hr`
- border: 0;
- height: 4px;
- background: #333;
- background-image: linear-gradient(to right, #ccc, #333, #ccc);
-`
-
-export default function LogUserProgramOptions({setShowModal, setShowError, programId, rating}) {
+export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) => {
   const user = useSelector( (state) => state.user )
-  
+
   const dispatch = useDispatch()
   useEffect(()=> {
-    if (user && user.id ) (dispatch(getUserPlaylists(user.id)))
+    if (user && user.id) (dispatch(getUserPlaylists(user.id)))
   },[dispatch])
-  
+
   const playlistData = useSelector( (state) => state.userPlaylists )
 
   const playlists = playlistData.finalPlaylists;

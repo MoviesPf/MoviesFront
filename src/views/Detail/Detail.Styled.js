@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Header = styled.div`
   position: absolute;
@@ -171,6 +171,7 @@ export const Reviews = styled.div`
 `;
 
 export const SpanComments = styled.span`
+  color: white;
   padding: 10px 5px;
 `;
 
