@@ -99,15 +99,14 @@ cursor: pointer;
   }
 `
 export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) => {
-  const playlistData = useSelector( (state) => state.userPlaylists )
   const user = useSelector( (state) => state.user )
-  const [idReal, setIdReal] = useState(false);
-
+  
   const dispatch = useDispatch()
   useEffect(()=> {
-    if (user && user.id) (dispatch(getUserPlaylists(user.id))).then(()=> { setIdReal(true)})
+    dispatch(getUserPlaylists(user.id))
   },[dispatch, user.id,])
-
+  
+    const playlistData = useSelector( (state) => state.userPlaylists )
     const playlists = playlistData.finalPlaylists;
     
     const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];

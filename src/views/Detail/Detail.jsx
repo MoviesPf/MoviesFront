@@ -37,11 +37,7 @@ export const Detail = () => {
   const [idReal, setIdReal] = useState(false);
   
   useEffect(() => {
-    dispatch(getProgramDetail(ProgramsId))
-    .then(
-      dispatch(getUserPlaylists(user.id))
-    )
-    .then(()=>{setIdReal(true)})
+    dispatch(getProgramDetail(ProgramsId)).then(dispatch(getUserPlaylists(user.id))).then(()=>{setIdReal(true)})
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
