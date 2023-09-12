@@ -29,12 +29,12 @@ export const Detail = () => {
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
 
-  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
-  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showError, setShowError] = useState(false);
   const [idReal, setIdReal] = useState(false);
+  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
+  const [hoverRating, setHoverRating] = useState(0);
+  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   
   useEffect(() => {
     dispatch(getUserPlaylists(user.id)).then(dispatch(getProgramDetail(ProgramsId))).then(()=>{setIdReal(true)})
