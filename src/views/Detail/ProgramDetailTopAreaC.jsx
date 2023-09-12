@@ -13,10 +13,7 @@ import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
 
 
-const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, setShowModal, similarMovies, handleMovieClick, GreenLoading, setShowError, rating}  ) => {
-  const user = useSelector( (state) => state.user )
-
-  
+const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick, GreenLoading}  ) => {
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
   : programDetail.poster
@@ -27,35 +24,25 @@ const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, setShow
 
   return (
     <AreaC>
+      <ContainerLeft>
+        <ProgramCard src={imageP}/>
+        <SimilarTitle> {`Similar ${programDetail.type}s`} </SimilarTitle>
+        <SimilarMoviesList>
+          {similarMovies && similarMovies.length > 0 ? (
+            similarMovies.map((s)=> (
+            <MovieCard key={s.id} onClick={() => handleMovieImageClick(s.id)}>
+              <img src={s.poster} alt={`Poster of ${s.title}`} onClick={() => handleMovieClick(s.id)} />
+              <span>{s.title}</span>
+            </MovieCard>
+            ))
+          ) : (
+          <GreenLoading/>
+          )}
+        </SimilarMoviesList>
+      </ContainerLeft>
 
-        <ContainerLeft>
-          {/* La imagen */}
-          <ProgramCard src={imageP}/>
-          <SimilarTitle> {`Similar ${programDetail.type}s`} </SimilarTitle>
-          <SimilarMoviesList>
-            {similarMovies && similarMovies.length > 0 ? (
-              similarMovies.map((s)=> (
-                <MovieCard key={s.id} onClick={() => handleMovieImageClick(s.id)}>
-                  <img
-                    src={s.poster}
-                    alt={`Poster of ${s.title}`}
-                    onClick={() => handleMovieClick(s.id)} 
-                  />
-                  <span>{s.title}</span>
-                </MovieCard>
-                ))
-              ) : (
-                <GreenLoading/>
-              )}
-          </SimilarMoviesList>
-
-        </ContainerLeft>
-
-        <ContainerMiddle>
-
-        {/* El componente de datos */}
+      <ContainerMiddle>
         <ProgCardDetail props={{programDetail, year, runtimeFormatted}}/>
-
         <ContainerReviews>
           {programDetail.Reviews && programDetail.Reviews.map((r)=> (
               <Reviews key={r.id}>
@@ -81,17 +68,6 @@ const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, setShow
             ))}
         </ContainerReviews>
         </ContainerMiddle>
-
-        {/* El componente de opciones */}
-        {
-          user.id &&
-          <LogUserProgramOptions 
-          setShowModal={setShowModal}
-          setShowError={setShowError}
-          programId={programDetail.id}
-          rating={rating}
-          />        
-        }
 
     </AreaC>
   )

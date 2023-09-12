@@ -22,9 +22,10 @@ const scaleUp = keyframes`
 const ScoreContainer = styled.div`
   visibility: ${(props) => props.$isLogin ? 'visible' : 'hidden'};
   opacity: ${(props) => props.$isLogin ? 1 : 0};
-  background-color: #1C1C1C; 
+  background-color: #1C1C1C;
+  margin-right: 100px;
   display: flex;
-  position: relative;
+  height: min-content;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -181,7 +182,7 @@ export default function LogUserProgramOptions({setShowModal, setShowError, progr
   }
 
   return (
-    <ScoreContainer $isLogin={user.id? true : false}> {/* Cambiar por: {user.id? true:false} */}
+    <ScoreContainer $isLogin={user.id ? true : false}> {/* Cambiar por: {user.id? true:false} */}
             <IconsC>
                 <IconContainer>
                     <IconImg src={ViewsIcon} id={"Watched"} $check={checkButtonState.watched}  onClick={scoreHandler}></IconImg>
