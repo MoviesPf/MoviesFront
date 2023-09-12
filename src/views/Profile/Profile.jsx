@@ -10,6 +10,7 @@ import defaultBackground from "../../assets/background.jpg"
 import { getUserPlaylists, getUserReviews } from '../../Redux/actions';
 import { CardFake } from "./CardFake/CardFake.jsx";
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
+import { Footer } from '../../Components/Footer/Footer'
 
 const ViewContainer = styled.div`
   position: absolute;
@@ -336,6 +337,7 @@ const Profile = () => {
       </AreaContainer>
       </div>
     )}
+    <Footer/>
     </ViewContainer>
   );
 };

@@ -1,6 +1,6 @@
 .container {
     position: absolute;
-    background-color: rgb(50, 50, 50); 
+    background-color: #000;
     color: rgb(255, 254, 254); 
     contain: content;
     min-height: 100%;
