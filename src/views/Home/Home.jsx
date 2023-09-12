@@ -1,5 +1,5 @@
 import css from './Home.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import { Cards } from '../../Components/Cards/Cards';
 import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,11 +30,10 @@ export const Home = () => {
   const user = useSelector( (state)=> state.user)
   const programs = useSelector((state) => state.programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (programs.length === 0){
-      dispatch(getAllPrograms()).then(dispatch(getUserPlaylists(user.id))).then(() => {setLoading(false)});
+      dispatch(getAllPrograms()).then( user.id ? dispatch(getUserPlaylists(user.id)) : null);
     }
   },[dispatch]);
 
@@ -46,27 +45,25 @@ export const Home = () => {
         <GreenLoading />
       ) : (
         <div className={css.content}>
+
           <Portrait programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
-          <Filters />
+          <Filters/>
+
+          <LineHR/>
           <h1 className={css.subTitle}>Latest Releases</h1>
-          <Carrusel
-            programs={
-              filteredPrograms.data ? filteredPrograms.data : programs.data
-            }
-          />
-          <div id='programs' className={css.subTitle}> All Programs </div>
-          <BtnStart />
-          <Cards
-            programs={
-              filteredPrograms.data ? filteredPrograms.data : programs.data
-            }
-            total={
-              filteredPrograms.data ? filteredPrograms.total : programs.total
-            }
-          />
-          <Footer />
+          <LineHR/>
+
+          <Carrusel programs={ filteredPrograms.data ? filteredPrograms.data : programs.data}/>
+
+          <LineHR/>
+          <div className={css.subTitle}> All Programs </div>
+          <LineHR/>
+
+          <BtnStart/>
+          <Cards programs={ filteredPrograms.data ? filteredPrograms.data : programs.data} total={filteredPrograms.data ? filteredPrograms.total : programs.total}/>    
         </div>
       )}
+      <Footer/>
     </div>
   );
 };

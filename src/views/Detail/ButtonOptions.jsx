@@ -9,6 +9,7 @@ import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import {styled ,keyframes, css }from 'styled-components'
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 import {getUserPlaylists} from "../../Redux/actions"
+import e from 'cors';
 
 const scaleUp = keyframes`
   0% {
@@ -97,40 +98,30 @@ cursor: pointer;
 
   }
 `
-
-const LineSubHR = styled.hr`
- border: 0;
- height: 4px;
- background: #333;
- background-image: linear-gradient(to right, #ccc, #333, #ccc);
-`
-
-export default function LogUserProgramOptions({setShowModal, setShowError, programId, rating}) {
+export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) => {
   const user = useSelector( (state) => state.user )
   
   const dispatch = useDispatch()
   useEffect(()=> {
-    if (user && user.id ) (dispatch(getUserPlaylists(user.id)))
-  },[dispatch])
+    dispatch(getUserPlaylists(user.id))
+  },[dispatch, user.id,])
   
-  const playlistData = useSelector( (state) => state.userPlaylists )
-
-  const playlists = playlistData.finalPlaylists;
-
-  const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
-  let isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
-
-  console.log(isFav);
-
-  const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
-  let isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
-
-  console.log(isWatchL);
-
-  const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
-  let isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
-
-  console.log(isWatch);
+    const playlistData = useSelector( (state) => state.userPlaylists )
+    const playlists = playlistData.finalPlaylists;
+    
+    const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
+    const isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    
+    console.log(isFav);
+    
+    const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
+    const isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    
+    console.log(isWatchL);
+    
+    const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
+    const isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    console.log(isWatch);
 
 
 

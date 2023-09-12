@@ -1,19 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useSelector } from 'react-redux';
-
-
+import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
 import defaultImg from "../../assets/defaultMovie.png"
 import ProgCardDetail from './DetailCard'
-import LogUserProgramOptions from './LogUserProgramOptions'
 
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 
-import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
-
-
-const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick, GreenLoading}  ) => {
+export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick, GreenLoading}  ) => {
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
   : programDetail.poster
@@ -72,5 +64,3 @@ const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similar
     </AreaC>
   )
 }
-
-export default ProgramDetailTopAreaC;
