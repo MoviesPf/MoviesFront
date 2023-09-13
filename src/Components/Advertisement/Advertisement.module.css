@@ -1,0 +1,30 @@
+.container {
+    background: url('../../assets/donation.jpg');
+    position: relative;
+    display: flex;
+    height: 50vh;
+    width: 20%;
+    border-radius: 1rem;
+}
+
+.title {
+    position: absolute;
+    text-align: center;
+    padding: 2vh 0;
+    top: 0% ;
+    font-size: 52px;
+    color: green;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+    font-weight: 800;
+}
+
+.subtitle {
+    position: absolute;
+    padding: 2vh 5px;
+    bottom: 0% ;
+    right: 0% ;
+    font-size: 32px;
+    color: green;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+    font-weight: 800;
+}
