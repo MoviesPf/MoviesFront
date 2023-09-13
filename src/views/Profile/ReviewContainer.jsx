@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import defaultImg from "../../assets/defaultMovie.png"
 import StarPoint from '../../Components/StarPoint'
+import { Link } from 'react-router-dom'
 
 const CardContainer = styled.div`
 border-radius: 30px;
@@ -18,6 +19,9 @@ const MoviePoster = styled.img`
 margin-left: 30px;
 border-radius: 30px;
 height: 350px;
+    &:hover {
+        transform: scale(1.05);
+    }
 `
 const DetailContainer = styled.div`
 padding: 20px;
@@ -73,7 +77,7 @@ position: relative;
 flex-direction: row;
 `
 
-export default function ProgCardDetail({year,genreA,genreB,overview,progImge,starVal, title}) {
+export default function ReviewContainer({year,genreA,genreB,overview,progImge,starVal, title, programId}) {
 
     const starsCount = []
     for (let index = 0; index < starVal; index++) {
@@ -86,7 +90,9 @@ export default function ProgCardDetail({year,genreA,genreB,overview,progImge,sta
 
   return (
     <CardContainer>
+      <Link to={`/detail/${programId}`}>
         <MoviePoster src={image}/>
+        </Link>
         <DetailContainer>
             <ContextRow>
                 <Title>{title}</Title>

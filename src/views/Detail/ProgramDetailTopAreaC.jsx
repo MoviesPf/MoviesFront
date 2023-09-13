@@ -23,7 +23,7 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
           {similarMovies && similarMovies.length > 0 ? (
             similarMovies.map((s)=> (
             <MovieCard key={s.id} onClick={() => handleMovieImageClick(s.id)}>
-              <img src={s.poster} alt={`Poster of ${s.title}`} onClick={() => handleMovieClick(s.id)} />
+              <img src={s.poster === "https://image.tmdb.org/t/p/w500null" ? defaultImg : s.poster} alt={`Poster of ${s.title}`} onClick={() => handleMovieClick(s.id)} />
               <span>{s.title}</span>
             </MovieCard>
             ))

@@ -3,7 +3,7 @@ import NavProfile from './NavProfile'
 import styled from 'styled-components'
 import PresentationLine from "./PresentationLine"
 import { NavBar }from "../../Components/NavBar/NavBar"
-import ProgCardDetail from "../Profile/ProgCardDetail"
+import ReviewContainer from "../Profile/ReviewContainer"
 import { Card } from '../../Components/Card/Card'
 import { useDispatch, useSelector } from 'react-redux';
 import defaultBackground from "../../assets/background.jpg"
@@ -133,7 +133,7 @@ const ButtonMas = styled.button`
   margin-left: .3rem;
 
   &:hover {
-background-color: #464646;
+  background-color: #464646;
 }
 `
 const TitleAndButton = styled.div`
@@ -145,9 +145,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [loading, setLoading] = useState(true);
-  const [loading2, setLoading2] = useState(true);
   const [ menu, setMenu ] = useState("Profile")
-  const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
   
   useEffect(() => {
     dispatch(getUserPlaylists(user.id)).then(()=> dispatch(getUserReviews(user.id))).then(()=> {setLoading(false)})
@@ -217,7 +215,7 @@ const Profile = () => {
                       reviews.slice(-3).reverse().map((e)=> (
                         <div>
                           <LineHR />
-                          <ProgCardDetail year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ProgCardDetail>
+                          <ReviewContainer year={e.program.release_date.split("-")[0]} title={e.program.title} programId={e.program.id}genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : ""} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ReviewContainer>
                         </div>
                       ))
                     }
@@ -268,7 +266,7 @@ const Profile = () => {
                       {
                       reviews.reverse().map((e)=> (
                         <div>
-                          <ProgCardDetail year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ProgCardDetail>
+                          <ReviewContainer year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ReviewContainer>
                           <LineSubHR />
                         </div>
                       ))

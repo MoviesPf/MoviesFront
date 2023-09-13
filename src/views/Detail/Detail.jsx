@@ -1,7 +1,9 @@
 import { Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import fullStar from "../../assets/Icons/icons8-star-100 green.png";
 import emptyStar from "../../assets/Icons/icons8-star-52.png";
+import defaultBackground from "../../assets/defaultBackground.png"
 import css from './Detail.module.css';
+
 
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -116,10 +118,14 @@ export const Detail = () => {
   }
   const rating = Math.round(programDetail?.Reviews?.reduce((total, review) => total + review.rating, 0) / programDetail.Reviews?.length);
 
+  let imageBack = programDetail.backdrop === "https://image.tmdb.org/t/p/w500null" 
+  ? defaultBackground
+  : programDetail.backdrop
+
   return (
     <div className={css.container}>
       <NavBar />
-        <Header backgroundurl={`url(${programDetail.backdrop})`} />
+        <Header backgroundurl={`url(${imageBack})`} />
         {
           <div className={css.top}>
             <ProgramDetailTopAreaC programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}

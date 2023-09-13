@@ -12,7 +12,7 @@ display: flex;
 justify-content: center;
 width: 100%;
 `
-// #131212
+
 const LinksContainer = styled.div`
 display: flex;
 justify-content: center;
@@ -60,7 +60,7 @@ color: white;
 font-size: 16px;
 `
 
-const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
+const NavProfile = ({setMenu, favorites, watchlist, watched}) => {
 
   const setProfile = ()=> {
     setMenu("Profile")
