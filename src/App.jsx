@@ -19,6 +19,7 @@ import {
   Start,
   Users
 } from './Admin/index';
+import {Cloudinary} from './views/Cloudinary/Cloudinary';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route path='/detail/:ProgramsId' element={<Detail />} />
         <Route path='/donate' element={<Donation />} />
         <Route path='/about' element={<About />} />
+        <Route path='/cloudinary' element={<Cloudinary />} />
 
         {/* rutas Admin Dashboard */}
         <Route path='admin' element={<Start />}>
