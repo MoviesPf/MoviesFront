@@ -28,9 +28,9 @@
 }
 
 .selected {
-    background-color: green;
+    background-color: #19d576;
     border-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 17px;
     display: flex;
     flex-direction: row;

@@ -1,5 +1,5 @@
 .allNavbar {
-  background-color: #000000b9;
+  background-color: #202020b9;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,7 +12,7 @@
 }
 
 .background {
-  background-color: #000000b9;
+  background-color: #202020b9;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -28,7 +28,7 @@
 
 .logo {
   align-items: center;
-  color: green;
+  color: #19d576;
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -37,7 +37,7 @@
 }
 
 .logo:hover {
-  color: rgb(0, 58, 0);
+  color: #288858;
 }
 
 .logo h1 {
@@ -72,7 +72,7 @@
   padding: 4px;
   font-size: 1rem;
   cursor: context-menu;
-  color: green;
+  color: #19d576;
   background: transparent;
   transition: all 0.25s;
   margin-left: .3rem;
@@ -102,10 +102,10 @@
   margin: 0 1rem;
   border: 0;
   font-size: 16px;
-  color: #ffffff;
+  color: #000000;
   font-family: Arial;
   border-radius: 7px;
-  background: green;
+  background:  #19d576;
   padding-bottom: 3px;
   padding-right: 10px;
   padding-left: 10px;
@@ -113,22 +113,22 @@
 }
 
 .searchButton:hover {
-  background: rgb(0, 58, 0);
+  background: #288858;
 }
 
 .searchComponent {
-  width: 90%;
-  height: 100%;
-  margin: 5px;
-  border-radius: 20px;
+  width: 40%;
+  height: auto;
+  margin-top: 30vh;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  position: relative;
-  background-color: #000000e0;
+  position: absolute;
+  background-color: #272727e0;
 }
 
 .cartas {
-  color: green;
+  color:  #19d576;
   height: 78vh;
   width: 100%;
   display: flex;
@@ -138,8 +138,31 @@
   flex-direction: column;
 }
 
+.searchContainer {
+  color:  #19d576;
+  width: 100%;
+  overflow: hidden;
+  max-height: 300px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}
+
+.searchBackWindow {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: -1; 
+  backdrop-filter: blur(10px);
+}
+
 .message {
-  margin: 5em;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .bottom {
@@ -156,7 +179,7 @@
 }
 
 .cartas::-webkit-scrollbar-thumb {
-  background: green;
+  background:  #19d576;
 }
 
 .user{

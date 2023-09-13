@@ -89,16 +89,22 @@ export const NavBar = () => {
         show && <div className={css.searchComponent}>
         <SearchBar setSearched={setSearched}/>
         {
-          <div className={css.cartas}>
-          {!searched 
-          ? <h1 className={css.message}>{' '}Search for a Movie/Serie here ↑↑</h1>
-          : searchedPrograms.length 
-          ? searchedPrograms.map((program) => {return (<SearchedCard key={program.id} program={program} setShow={setShow} show={show}/>)})
-          : <h1 className={css.message}> Movie/Serie Not Found </h1>
-          }
+          <div>
+            <div className={css.searchBackWindow}> </div>
+            <div className={css.searchContainer}>
+            {!searched 
+            ? <h1 className={css.message}>{' '}Search Program </h1>
+            : searchedPrograms.length 
+            ? searchedPrograms.map((program) => {return (<SearchedCard key={program.id} program={program} setShow={setShow} show={show}/>)})
+            : <h1 className={css.message}> Movie/Serie Not Found </h1>
+            }
+            </div>
           </div>
+  
+        
+          
+
         }
-        <div className={css.bottom}>bottom</div>
         </div>
         }
     </div>

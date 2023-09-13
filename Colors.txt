@@ -1,1 +1,6 @@
-#19D576  Verde corazon
+Colores:
+
+Verde on: #19d576;
+Verde off: #288858;
+
+

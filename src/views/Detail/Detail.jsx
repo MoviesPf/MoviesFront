@@ -8,7 +8,7 @@ import { NavBar } from '../../Components/NavBar/NavBar';
 import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
 import { Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import { Footer } from "../../Components/Footer/Footer"
-import moment from 'moment';
+import moment from 'moment'; 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
@@ -24,7 +24,7 @@ export const Detail = () => {
   const [showModal, setShowModal] = useState(false);
   const [showError, setShowError] = useState(false);
   const [idReal, setIdReal] = useState(false);
-  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
+  const [review, setReview] = useState( {rating:null, comments:null, date:moment().format('YYYY-MM-DD')} );
   const [hoverRating, setHoverRating] = useState(0);
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
 

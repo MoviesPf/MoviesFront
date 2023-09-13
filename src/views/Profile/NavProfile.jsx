@@ -31,7 +31,7 @@ font-weight: bold;
 
 cursor: pointer; 
   &:hover {
-    color: rgb(25, 213, 118);
+    color: #19d576;
     background: #1C1C1C; 
   }
 `

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState ,useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux';import { useState ,useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { handleList } from '../../Redux/actions'
 import favIcon from "../../assets/Icons/icons8-love-90.png"
@@ -11,14 +10,6 @@ import {styled ,keyframes, css }from 'styled-components'
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 import {getUserPlaylists} from "../../Redux/actions"
 
-const scaleUp = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.5);
-  }
-`
 
 const scaleUp = keyframes`
   0% {

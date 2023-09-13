@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 6%;
   }
 
   .button {
@@ -13,8 +13,8 @@
     padding-right: 5px;
     border-radius: 5px;
     border: 2px solid;
-    color: green;
-    border-color: green;
+    color: #19d576;
+    border-color: #19d576;
     background: transparent;
     transition: all 0.25s;
   }
@@ -22,5 +22,5 @@
   .button:hover {
     color: #ffffff;
     border-color: #ffffff;
-    background-color: green;
+    background-color: #19d576;
   }
