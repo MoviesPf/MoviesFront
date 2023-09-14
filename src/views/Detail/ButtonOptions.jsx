@@ -8,8 +8,9 @@ import PendingIcon from "../../assets/Icons/icons8-delivery-time-96.png"
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import {styled ,keyframes, css }from 'styled-components'
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
-import {getUserPlaylists} from "../../Redux/actions"
-import e from 'cors';
+import { getUserPlaylists } from "../../Redux/actions"
+import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
+
 
 const scaleUp = keyframes`
   0% {
@@ -21,8 +22,6 @@ const scaleUp = keyframes`
 `
 
 const ScoreContainer = styled.div`
-  visibility: ${(props) => props.$isLogin ? 'visible' : 'hidden'};
-  opacity: ${(props) => props.$isLogin ? 1 : 0};
   background-color: #1C1C1C;
   margin-right: 100px;
   display: flex;
@@ -99,31 +98,42 @@ cursor: pointer;
   }
 `
 export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) => {
-  const user = useSelector( (state) => state.user )
+  const playlistData = useSelector( (state) => state.userPlaylists)
+  const user = JSON.parse(localStorage.getItem("userStorage"))
+  const [loading, setLoading] = useState(true);
   
   const dispatch = useDispatch()
   useEffect(()=> {
-    dispatch(getUserPlaylists(user.id))
-  },[dispatch, user.id,])
+    dispatch(getUserPlaylists(user.id)).then(()=>{setLoading(false)}).then(console.log(playlistData))
+  },[dispatch]);
   
-    const playlistData = useSelector( (state) => state.userPlaylists )
-    const playlists = playlistData.finalPlaylists;
-    
-    const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
-    const isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
-    
-    console.log(isFav);
-    
-    const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
-    const isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
-    
-    console.log(isWatchL);
-    
-    const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
-    const isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
-    console.log(isWatch);
+  let playlists = [];
+  
+  let favorites = [];
+  let isFav = false;
+  
+  let watchlist = [];
+  let isWatchL = false;
+  
+  let watched = [];
+  let isWatch = false;
+  
+  if (loading === false) {
 
+    playlists = playlistData.finalPlaylists;
+    favorites = playlists.length ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
+    isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    
+    watchlist = playlists.length ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
+    isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    
+    watched = playlists.length ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
+    isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
+  }
 
+  console.log(isFav);
+  console.log(isWatch);
+  console.log(isWatchL);
 
  const [checkButtonState,setCheckButtonsSTate] =  useState({
    watched: !isWatch,
@@ -131,82 +141,74 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) =
    watchlist: !isWatchL,
  })
 
-
   function scoreHandler(event){
-    if (user) {
-      switch (event.target.id) {
+    switch (event.target.id) {
 
-        case "Watched":
-          if(checkButtonState.watched === true){
-             // Lo quita de watchd
-             setCheckButtonsSTate({...checkButtonState, watched: false})
-          } else {
-            setCheckButtonsSTate({...checkButtonState, watched: true})
-          }
-          dispatch(handleList(user.id, event.target.id, programId))
+      case "Watched":
+        if(checkButtonState.watched === true){
+          // Lo quita de watchd
+          setCheckButtonsSTate({...checkButtonState, watched: false})
+        } else {
+          setCheckButtonsSTate({...checkButtonState, watched: true})
+        }
+        dispatch(handleList(user.id, event.target.id, programId))
         break;
     
-        case "Favorites":
-          if(checkButtonState.favs === true){
-            // Lo quita de favs
-            setCheckButtonsSTate({...checkButtonState, favs: false})
-         } else {
-           setCheckButtonsSTate({...checkButtonState, favs: true})
-         }
-         dispatch(handleList(user.id, event.target.id, programId))
+      case "Favorites":
+        if(checkButtonState.favs === true){
+          // Lo quita de favs
+          setCheckButtonsSTate({...checkButtonState, favs: false})
+        } else {
+          setCheckButtonsSTate({...checkButtonState, favs: true})
+        }
+        dispatch(handleList(user.id, event.target.id, programId))
         break;
     
-        case "WatchList":
-          if(checkButtonState.watchlist === true){
-            // Lo quita de watchlist
-            setCheckButtonsSTate({...checkButtonState, watchlist: false})
-         } else {
-           setCheckButtonsSTate({...checkButtonState, watchlist: true})
-         }
-         dispatch(handleList(user.id, event.target.id, programId))
+      case "WatchList":
+        if(checkButtonState.watchlist === true){
+          // Lo quita de watchlist
+          setCheckButtonsSTate({...checkButtonState, watchlist: false})
+        } else {
+          setCheckButtonsSTate({...checkButtonState, watchlist: true})
+        }
+        dispatch(handleList(user.id, event.target.id, programId))
         break;
       
-        default:
-          break;
-      } 
-    }
+      default:
+      break;
+    } 
   }
 
   return (
-    <ScoreContainer $isLogin={user.id ? true : false}> {/* Cambiar por: {user.id? true:false} */}
-            <IconsC>
-                <IconContainer>
-                    <IconImg src={ViewsIcon} id={"Watched"} $check={checkButtonState.watched}  onClick={scoreHandler}></IconImg>
-                    <IconLabel>Watched</IconLabel>
-                </IconContainer>
-                <IconContainer>
-                    <IconImg src={favIcon} id={"Favorites"} $check={checkButtonState.favs} onClick={scoreHandler}></IconImg>
-                    <IconLabel>Favs</IconLabel>
-                </IconContainer>
-                <IconContainer>
-                    <IconImg src={PendingIcon} id={"WatchList"} $check={checkButtonState.watchlist} onClick={scoreHandler}></IconImg>
-                    <IconLabel>Watchlist</IconLabel>
-                </IconContainer>
-            </IconsC>
-   
-            <EmptStarC>
-            {new Array(5).fill('').map((_, index) => (
-                <IconImg
-                  key={index}
-                  src={index < rating ? fullStar : emptyStar} 
-                />
-              ))}
-            </EmptStarC>
+    <div>
+    {
+      loading ? 
+        <GreenLoading/>
+      :
+      <ScoreContainer>
+        <IconsC>
+          <IconContainer>
+            <IconImg src={ViewsIcon} id={"Watched"} $check={checkButtonState.watched}  onClick={scoreHandler}></IconImg>
+            <IconLabel>Watched</IconLabel>
+          </IconContainer>
+          <IconContainer>
+            <IconImg src={favIcon} id={"Favorites"} $check={checkButtonState.favs} onClick={scoreHandler}></IconImg>
+            <IconLabel>Favs</IconLabel>
+          </IconContainer>
+          <IconContainer>
+            <IconImg src={PendingIcon} id={"WatchList"} $check={checkButtonState.watchlist} onClick={scoreHandler}></IconImg>
+            <IconLabel>Watchlist</IconLabel>
+          </IconContainer>
+        </IconsC>
 
-        
-        <ReviewButton onClick={()=> { 
-           setShowError(false)
-           setShowModal(true)
-          } 
-        }
-        >
-          Review
-        </ReviewButton>
-    </ScoreContainer>
+        <EmptStarC>
+            {new Array(5).fill('').map((_, index) => (<IconImg key={index} src={index < rating ? fullStar : emptyStar} />))}
+        </EmptStarC>
+
+        <ReviewButton onClick={()=> { setShowError(false); setShowModal(true)}}> Review </ReviewButton>
+
+      </ScoreContainer>
+    }
+    </div>
   )
 }

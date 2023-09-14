@@ -14,17 +14,18 @@ flex-direction: row;
 padding-top: 20px;
 padding-bottom: 20px;
 margin-bottom: 30px;
+margin-top: 30px;
 `
 const MoviePoster = styled.img`
 margin-left: 30px;
 border-radius: 30px;
-height: 350px;
+height: 250px;
     &:hover {
         transform: scale(1.05);
     }
 `
 const DetailContainer = styled.div`
-padding: 20px;
+padding-right: 30px;
 height: auto;
 width: 100%;
 display: flex;
@@ -34,13 +35,12 @@ flex-direction: column;
 justify-content: space-between;
 `
 const ContextRow = styled.div`
-padding:20px;
-height: auto;
-display: flex;
+padding-bottom: 10px;
+justify-content: space-between;
 flex-direction: row;
 align-items: center;
-justify-content: space-between;
-flex-wrap: nowrap;
+height: auto;
+display: flex;
 `
 const Title = styled.label`
 height: auto;
@@ -77,7 +77,7 @@ position: relative;
 flex-direction: row;
 `
 
-export default function ReviewContainer({year,genreA,genreB,overview,progImge,starVal, title, programId}) {
+export default function ReviewContainer({reviewDate, year,genreA,genreB,overview,progImge,starVal, title, programId}) {
 
     const starsCount = []
     for (let index = 0; index < starVal; index++) {
@@ -94,12 +94,21 @@ export default function ReviewContainer({year,genreA,genreB,overview,progImge,st
         <MoviePoster src={image}/>
         </Link>
         <DetailContainer>
+
             <ContextRow>
                 <Title>{title}</Title>
                 <MovieData>{`${year} ‧ ${genreA} / ${genreB}`}</MovieData>
             </ContextRow>
-            <OverviewText>{overview}</OverviewText>
-            <StarsRow>{starsCount}</StarsRow>
+
+            <ContextRow>
+              <OverviewText>{overview}</OverviewText>
+            </ContextRow>
+
+            <ContextRow>
+              <OverviewText>{reviewDate}</OverviewText>
+              <StarsRow>{starsCount}</StarsRow>
+            </ContextRow>
+
         </DetailContainer>
 
     </CardContainer>

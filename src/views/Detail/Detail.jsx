@@ -23,14 +23,21 @@ import moment from 'moment';
 
 
 export const Detail = () => {
+  const user = JSON.parse(localStorage.getItem("userStorage"));
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { ProgramsId } = useParams();
+  const {ProgramsId} = useParams();
+  
+  useEffect(() => {
+    dispatch(getProgramDetail(ProgramsId)).then(dispatch(getUserPlaylists(user.id))).then(()=>{setIdReal(true)})
+    if(playlists) console.log(playlists)
+  }, [dispatch]);
 
-  const user = useSelector((state) => state.user);
+  const playlists = useSelector((state)=> state.userPlaylists.finalPlaylists);
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
-
+  
   const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -38,10 +45,7 @@ export const Detail = () => {
   const [showError, setShowError] = useState(false);
   const [idReal, setIdReal] = useState(false);
   
-  useEffect(() => {
-    dispatch(getProgramDetail(ProgramsId)).then(dispatch(getUserPlaylists(user.id))).then(()=>{setIdReal(true)})
-  }, [dispatch, ProgramsId]);
-
+  
   useEffect(() => {
     if (programDetail && programDetail.Genres && programDetail.Genres[0].name) {
       const genre = programDetail.Genres[0].name ? programDetail.Genres[0].name : "";
@@ -53,10 +57,6 @@ export const Detail = () => {
   useEffect(() => {
     setPeliculaSimilar(encontrarPeliculaMasParecida(programDetail?.title, similarMovies ? similarMovies : []));
   }, [similarMovies]);
-
-  if (!programDetail) {
-    return <div>Loading...</div>;
-  }
 
   const releaseDate = programDetail.release_date;
   const year = new Date(releaseDate).getFullYear();

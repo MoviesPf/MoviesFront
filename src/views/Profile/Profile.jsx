@@ -102,11 +102,11 @@ const BodyContainer = styled.div`
 const CardsContainer = styled.div`
 width: 100%;
 height: 100%;
-padding-top: 1em;
 display: flex;
 flex-wrap: wrap;
-justify-content:start;
+padding-top: 1em;
 align-items: center;
+justify-content:start;
 `;
 
 const AllCardsContainer = styled.div`
@@ -114,6 +114,7 @@ const AllCardsContainer = styled.div`
   height: 100%;
   display: flex;
   flex-wrap: wrap;
+  padding-top: 1em;
   justify-content:center;
 `;
 
@@ -143,12 +144,13 @@ const TitleAndButton = styled.div`
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = JSON.parse(localStorage.getItem("userStorage"))
+
   const [loading, setLoading] = useState(true);
   const [ menu, setMenu ] = useState("Profile")
-  
+
   useEffect(() => {
-    dispatch(getUserPlaylists(user.id)).then(()=> dispatch(getUserReviews(user.id))).then(()=> {setLoading(false)})
+    dispatch(getUserPlaylists(user.id)).then(()=> dispatch(getUserReviews(user.id))).then(()=> {setLoading(false)}).then(console.log(loading))
   },[dispatch]);
   
   const playlistData = useSelector((state) => state.userPlaylists);
@@ -184,11 +186,11 @@ const Profile = () => {
       { loading ? (
         <GreenLoading />
       ) : (
-        <div>
-          <UserBackground src={user.background ? user.background : defaultBackground}/>
-          <LineNavHR/>
+      <div>
+        <UserBackground src={user.background ? user.background : defaultBackground}/>
+        <LineNavHR/>
 
-          <AreaContainer>
+        <AreaContainer>
           
             <ElementsBarr>
               <PresentationLine avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
@@ -196,145 +198,158 @@ const Profile = () => {
             </ElementsBarr>
             
           <div>
-          <LineNavHR/>
-          <BodyContainer>
+            <LineNavHR/>
+            <BodyContainer>
             {
-              menu === "Profile" ?
-              <div>
-                <TitleAndButton>
-                  <IconLabel>Last Reviews</IconLabel>
-                  {
-                    reviews.length > 3
-                    && <ButtonMas onClick={setReviews}>All Reviews</ButtonMas>
-                  }
-                  </TitleAndButton>
-                  {
-                    reviews.length 
-                    ? <div>
-                      {
-                      reviews.slice(-3).reverse().map((e)=> (
-                        <div>
-                          <LineHR />
-                          <ReviewContainer year={e.program.release_date.split("-")[0]} title={e.program.title} programId={e.program.id}genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : ""} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ReviewContainer>
-                        </div>
-                      ))
-                    }
-                    </div>
-                    : <EmptyMessage>Try to review some movies</EmptyMessage>
-                  }
-                {
-                  playlists.map((playlist)=> (
-                    <div>
-                      <LineSubHR />
-                      <TitleAndButton> 
-                      <IconLabel>{playlist.name}</IconLabel>
-                      {
-                        playlist.programs.length > 5 
-                        && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>See All</ButtonMas>
-                      }
-                      </TitleAndButton>
-                      <LineSubHR />
-                      {
-                        playlist.programs.length 
-                        ?
-                        <CardsContainer>
-                          {
-                            playlist.programs.slice(0,6).map((program)=> (
-                              <Card program={program}></Card>
-                              ))
-                          }
 
-                        </CardsContainer>
-                        :
-                        <CardsContainer>
-                          <CardFake/>
-                          <EmptyMessage>This list is empty</EmptyMessage>
-                        </CardsContainer>
-                      }
-                    </div>
-                  ))
-                }
-              </div>
-              
-              : menu === "Reviews" ?
+            menu === "Profile" ?
+            <div>
+              <TitleAndButton>
+                <IconLabel>Last Reviews</IconLabel>
+                { reviews.length > 3 && <ButtonMas onClick={setReviews}>All Reviews</ButtonMas>}
+              </TitleAndButton>
+              <LineHR />
+              { reviews.length ? 
               <div>
-                <IconLabel>All Reviews</IconLabel>
-                <LineHR />
-                {
-                    reviews.length 
-                    ? <div>
-                      {
-                      reviews.reverse().map((e)=> (
-                        <div>
-                          <ReviewContainer year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ReviewContainer>
-                          <LineSubHR />
-                        </div>
-                      ))
-                      }
-                    </div>
-                    : <EmptyMessage>Try to review some movies</EmptyMessage>
-                  }
-              </div>
-
-              : menu === "Favorites" ?
-              <div>
-                <IconLabel>All {favorites.name}</IconLabel>
-                <LineHR />
-                {
-                  favorites.programs.length 
-                  ?
-                  <AllCardsContainer>
-                    {favorites.programs.map((program)=> (<Card program={program}></Card>))}
-                  </AllCardsContainer>
-                  :
-                  <CardsContainer>
-                    <CardFake/>
-                    <EmptyMessage>This list is empty</EmptyMessage>
-                  </CardsContainer>
-                }
-              </div>
-
-              : menu === "Watched" ?
-              <div>
-                <IconLabel>All {watched.name}</IconLabel>
-                <LineHR />
-                {
-                  watched.programs.length 
-                  ?
-                  <AllCardsContainer>
-                    {watched.programs.map((program)=> (<Card program={program}></Card>))}
-                  </AllCardsContainer>
-                  :
-                  <CardsContainer>
-                    <CardFake/>
-                    <EmptyMessage>This list is empty</EmptyMessage>
-                  </CardsContainer>
-                }
+                { reviews.slice(-3).reverse().map((e)=> (
+                  <div>
+                    <ReviewContainer reviewDate={e.date} year={e.program.release_date.split("-")[0]} title={e.program.title} programId={e.program.id}genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : ""} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ReviewContainer>
+                    <LineSubHR />
+                  </div>
+                ))}
               </div>
               : 
               <div>
-                <IconLabel>All {watchlist.name}</IconLabel>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>Try to review some movies!!</EmptyMessage>
+                </CardsContainer>
+              </div>
+              }
+              { playlists.map((playlist)=> (
+              <div>
+                <TitleAndButton> 
+                  <IconLabel>{playlist.name}</IconLabel>
+                  { playlist.programs.length > 5 && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>See All</ButtonMas>}
+                </TitleAndButton>
                 <LineHR />
-                {
-                  watchlist.programs.length 
-                  ?
-                  <AllCardsContainer>
-                    {watchlist.programs.map((program)=> (<Card program={program}></Card>))}
-                  </AllCardsContainer>
-                  :
+                { playlist.programs.length ?
+                <div>
+                  <CardsContainer>
+                  { playlist.programs.slice(0,6).map((program)=> (<Card program={program}></Card>))}
+                </CardsContainer>
+                <LineSubHR />
+
+                </div>
+                : 
+                <div>
                   <CardsContainer>
                     <CardFake/>
                     <EmptyMessage>This list is empty</EmptyMessage>
                   </CardsContainer>
+                  <LineSubHR />
+                </div>
+
                 }
               </div>
-            }
+              ))}
+            </div>
+            
+            : menu === "Reviews" ?
+            <div>
+              <IconLabel>All Reviews</IconLabel>
               <LineHR />
-          </BodyContainer>
-        </div>
-      </AreaContainer>
+              { reviews.length ? 
+              <div>
+                { reviews.reverse().map((e)=> (
+                <div>
+                  <ReviewContainer year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ReviewContainer>
+                  <LineSubHR />
+                </div>
+                ))}
+              </div>
+              : 
+              <div>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>Try to review some movies!!</EmptyMessage>
+                </CardsContainer>
+                <LineSubHR />
+              </div>
+              }
+            </div>
+            
+            : menu === "Favorites" ?
+            <div>
+              <IconLabel>All {favorites.name}</IconLabel>
+              <LineHR />
+              { favorites.programs.length ?
+              <div>
+                <AllCardsContainer>
+                {favorites.programs.map((program)=> (<Card program={program}></Card>))}
+                </AllCardsContainer>
+                <LineSubHR />
+              </div>
+              :
+              <div>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>This list is empty</EmptyMessage>
+                </CardsContainer>
+                <LineSubHR />
+              </div>
+              }
+            </div>
+
+            : menu === "Watched" ?
+            <div>
+              <IconLabel>All {watched.name}</IconLabel>
+              <LineHR />
+              { watched.programs.length ? 
+              <div>
+                <AllCardsContainer>
+                  {watched.programs.map((program)=> (<Card program={program}></Card>))}
+                </AllCardsContainer>
+                <LineSubHR />
+              </div>
+              :
+              <div>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>This list is empty</EmptyMessage>
+                </CardsContainer>
+                <LineSubHR />
+              </div>
+              }
+            </div>
+
+            : 
+            <div>
+              <IconLabel>All {watchlist.name}</IconLabel>
+              <LineHR />
+              { watchlist.programs.length ?
+              <div>
+                <AllCardsContainer>
+                  {watchlist.programs.map((program)=> (<Card program={program}></Card>))}
+                </AllCardsContainer>
+                <LineSubHR />
+              </div>
+              :
+              <div>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>This list is empty</EmptyMessage>
+                </CardsContainer>
+                <LineSubHR />
+              </div>
+              }
+            </div>
+            }
+            </BodyContainer>
+          </div>
+        </AreaContainer>
       </div>
-    )}
+      )}
     <Footer/>
     </ViewContainer>
   );
