@@ -1,102 +1,15 @@
-import React from 'react'
 import { useState ,useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { handleList } from '../../Redux/actions'
-import favIcon from "../../assets/Icons/icons8-love-90.png"
-import ViewsIcon from "../../assets/Icons/icons8-view-90.png"
-import PendingIcon from "../../assets/Icons/icons8-delivery-time-96.png"
-import emptyStar from "../../assets/Icons/icons8-star-52.png"
-import {styled ,keyframes, css }from 'styled-components'
-import fullStar from "../../assets/Icons/icons8-star-100 green.png"
-import { getUserPlaylists } from "../../Redux/actions"
-import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
+import { handleList, getUserPlaylists } from '../../../Redux/actions'
 
+import favIcon from "../../../assets/Icons/icons8-love-90.png"
+import ViewsIcon from "../../../assets/Icons/icons8-view-90.png"
+import PendingIcon from "../../../assets/Icons/icons8-delivery-time-96.png"
+import emptyStar from "../../../assets/Icons/icons8-star-52.png"
+import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
 
-const scaleUp = keyframes`
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.5);
-  }
-`
+import {ScoreContainer, IconsC, IconContainer, IconImg, IconLabel, EmptStarC, ReviewButton} from "./ButtonOptions.Styled"
 
-const ScoreContainer = styled.div`
-  background-color: #1C1C1C;
-  margin-right: 100px;
-  display: flex;
-  height: min-content;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 13px;
-  margin-top: 200px;
-`
-
-const IconContainer = styled.div`
-display: flex;
-flex-wrap: nowrap;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-margin-right: 10px;
-margin-left: 10px;
-`
-
-const IconsC = styled.div`
-display: flex;
-margin-top: 12px;
-margin-right: 10px;
-margin-left: 10px;
-`
-
-const IconImg = styled.img`
- filter: brightness(${(props) => (props.$check ? '0.5' : '1')});
-  width: 30px;
-  height: 30px;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  cursor: pointer;
-  &:hover {
-    ${    
-    (props) => (props.$check ? css` animation: ${scaleUp} 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;` : null )
-  }
-    
-  }
-`
-const IconLabel = styled.label`
-color: white;
-font-size: 16px;
-`
-
-const EmptStarC = styled.div`
-display: flex;
-flex-wrap: nowrap;
-flex-direction: row;
-margin-top: 22px;
-`
-
-const ReviewButton = styled.button`
-width: 140px;
-height: 50px;
-border-radius: 200px;
-margin-top: 22px;
-margin-bottom: 22px;
-background: transparent; 
-border: 2px solid transparent;
-color: rgb(25, 213, 118);
-background: #6161611c;
-font-size: 25px;
-font-weight: bold;
-cursor: pointer; 
-  &:hover {
-    color: #1b1b1b;
-    background: rgb(25, 213, 118); 
-
-  }
-`
 export const ButtonOptions = ({setShowModal, setShowError, programId, rating, userId}) => {
   const playlistData = useSelector( (state) => state.userPlaylists)
   const [loading, setLoading] = useState(true);
@@ -179,7 +92,7 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating, us
     <div>
     {
       loading ? 
-        <GreenLoading/>
+        <div></div>
       :
       <ScoreContainer>
         <IconsC>

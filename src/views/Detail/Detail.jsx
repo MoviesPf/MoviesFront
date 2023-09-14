@@ -1,9 +1,7 @@
-import { Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
+import {Container, Top, Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import fullStar from "../../assets/Icons/icons8-star-100 green.png";
 import emptyStar from "../../assets/Icons/icons8-star-52.png";
 import defaultBackground from "../../assets/defaultBackground.png"
-import css from './Detail.module.css';
-
 
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,11 +11,11 @@ import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
-import { ProgramDetailTopAreaC}  from './ProgramDetailTopAreaC';
+import { ProgramDetailTopAreaC }  from './ProgramDetailTopAreaC';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import { Footer } from "../../Components/Footer/Footer";
-import { ButtonOptionsFake } from './ButtonOptionsFake';
-import { ButtonOptions } from './ButtonOptions';
+import { ButtonOptions } from './ButtonOptions/ButtonOptions';
+import { ButtonOptionsFake } from "./buttonOptions/ButtonOptionsFake";
 
 import moment from 'moment';
 
@@ -124,22 +122,22 @@ export const Detail = () => {
   console.log(playlists)
 
   return (
-    <div className={css.container}>
+    <Container>
       <NavBar />
         <Header backgroundurl={`url(${imageBack})`} />
         { 
           !idReal ?
           <GreenLoading/>
           :
-          <div className={css.top}>
+          <Top>
             <ProgramDetailTopAreaC programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
-              playlists.totalPlaylist ?
+              user.id && playlists.totalPlaylist ?
               <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating} userId={user.id} playlistData={playlists}/>
               : <ButtonOptionsFake/>
              }
-          </div>
+          </Top>
         }
         {showModal && 
         <ContainerModalReview>
@@ -173,7 +171,7 @@ export const Detail = () => {
         </ContainerModalReview>
         }
         <Footer />
-    </div>
+    </Container>
   );
 };
 
