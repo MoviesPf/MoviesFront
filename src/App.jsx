@@ -35,7 +35,7 @@ function App() {
         <Route path='/cloudinary' element={<Cloudinary />} />
 
         {/* rutas Admin Dashboard */}
-        <Route path='admin' element={<Start />}>
+          <Route path='admin' element={<Start />}>
           <Route path='users' element={<Users />} />
           <Route path='users/:id' element={<DetailUsers />} />
           <Route path='reviews' element={<Reviews />} />
