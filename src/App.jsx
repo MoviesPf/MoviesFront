@@ -38,6 +38,7 @@ function App() {
         <Route path='/about' element={<About />} />
 
         {/* rutas Admin Dashboard */}
+<<<<<<< HEAD
         <Route element={<ProtectedRoute canActivate={true}/>}>
           <Route path='admin' element={<Start />}>
             <Route path='users' element={<Users />} />
@@ -49,6 +50,17 @@ function App() {
             <Route path='create' element={<Form />} />
             <Route path='donations' element={<Donations />} />
           </Route>
+=======
+          <Route path='admin' element={<Start />}>
+          <Route path='users' element={<Users />} />
+          <Route path='users/:id' element={<DetailUsers />} />
+          <Route path='reviews' element={<Reviews />} />
+          <Route path='reviews/:ReviewsId' element={<DetailReviews />} />
+          <Route path='programs' element={<Programs />} />
+          <Route path='programs/:ProgramsId' element={<DetailPrograms />} />
+          <Route path='create' element={<Form />} />
+          <Route path='donations' element={<Donations />} />
+>>>>>>> 74885b8d24b3d0f9812dcb0a6ab8d789c9a36faa
         </Route>
       </Routes>
     </>
