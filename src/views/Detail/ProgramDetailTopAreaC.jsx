@@ -5,7 +5,7 @@ import ProgCardDetail from './DetailCard'
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
 
-export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick, GreenLoading}  ) => {
+export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
   : programDetail.poster
@@ -23,12 +23,12 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
           {similarMovies && similarMovies.length > 0 ? (
             similarMovies.map((s)=> (
             <MovieCard key={s.id} onClick={() => handleMovieImageClick(s.id)}>
-              <img src={s.poster} alt={`Poster of ${s.title}`} onClick={() => handleMovieClick(s.id)} />
+              <img src={s.poster === "https://image.tmdb.org/t/p/w500null" ? defaultImg : s.poster} alt={`Poster of ${s.title}`} onClick={() => handleMovieClick(s.id)} />
               <span>{s.title}</span>
             </MovieCard>
             ))
           ) : (
-          <GreenLoading/>
+          <div></div>
           )}
         </SimilarMoviesList>
       </ContainerLeft>

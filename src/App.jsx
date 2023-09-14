@@ -33,7 +33,7 @@ function App() {
         <Route path='/about' element={<About />} />
 
         {/* rutas Admin Dashboard */}
-        <Route path='admin' element={<Start />}>
+          <Route path='admin' element={<Start />}>
           <Route path='users' element={<Users />} />
           <Route path='users/:id' element={<DetailUsers />} />
           <Route path='reviews' element={<Reviews />} />

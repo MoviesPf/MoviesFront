@@ -8,11 +8,17 @@ const NavContainer = styled.div`
 background-color: #131212;
 padding-bottom: 10px;
 padding-top: 10px;
+font-size: 4rem;
 display: flex;
 justify-content: center;
-width: 100%;
+border: 2px solid;
+border-color: black;
+align-items: center;
+position: sticky;
+top: 3rem;
+z-index: 99;
 `
-// #131212
+
 const LinksContainer = styled.div`
 display: flex;
 justify-content: center;
@@ -20,20 +26,18 @@ align-items: center;
 `
 
 const ViewButton = styled.button`
+background:${(props) => (props.$check ? 'green' : "transparent")};
+color: ${(props) => (props.$check ? 'black' : "white")};
 width: 140px;
 height: 50px;
 border-radius: 200px;
-background: transparent; 
 border: 2px solid transparent;
-color: white;
 font-size: 25px;
 font-weight: bold;
-
-cursor: pointer; 
+cursor: pointer;
   &:hover {
-    color: rgb(25, 213, 118);
-    background: #1C1C1C; 
-  }
+    ${(props) => (props.$check ? null :` color: green; background: black;`)}
+}
 `
 
 const IconsC = styled.div`
@@ -60,7 +64,7 @@ color: white;
 font-size: 16px;
 `
 
-const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
+export const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
 
   const setProfile = ()=> {
     setMenu("Profile")
@@ -74,7 +78,7 @@ const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
     setMenu("Favorites")
   }
 
-  const setWached = ()=> {
+  const setWatched = ()=> {
     setMenu("Watched")
   }
 
@@ -85,11 +89,11 @@ const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
   return (
     <NavContainer>
       <LinksContainer>
-          <ViewButton onClick={setProfile}>Profile</ViewButton>
-          <ViewButton onClick={setReviews}>Reviews</ViewButton>
-          <ViewButton onClick={setFavorites}>Favorites</ViewButton>
-          <ViewButton onClick={setWached}>Watched</ViewButton>
-          <ViewButton onClick={setWatchlist}>Watchlist</ViewButton>
+        <ViewButton onClick={setProfile} $check={menu === "Profile" ? true : false}>Profile</ViewButton>
+          <ViewButton onClick={setReviews} $check={menu === "Reviews" ? true : false}>Reviews</ViewButton>
+          <ViewButton onClick={setFavorites} $check={menu === "Favorites" ? true : false}>Favorites</ViewButton>
+          <ViewButton onClick={setWatched} $check={menu === "Watched" ? true : false}>Watched</ViewButton>
+          <ViewButton onClick={setWatchlist} $check={menu === "Watchlist" ? true : false}>Watchlist</ViewButton>
       </LinksContainer>
       <IconsC>
         <IconContainer>
@@ -110,6 +114,3 @@ const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
 
   );
 };
-
-export default NavProfile;
-
