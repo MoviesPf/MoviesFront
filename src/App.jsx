@@ -19,7 +19,7 @@ import {
   Start,
   Users
 } from './Admin/index';
-import {Cloudinary} from './views/Cloudinary/Cloudinary';
+import Cloudinary from './views/Cloudinary/Cloudinary';
 
 function App() {
   return (
