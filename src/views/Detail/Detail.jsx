@@ -1,7 +1,9 @@
 import { Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import fullStar from "../../assets/Icons/icons8-star-100 green.png";
 import emptyStar from "../../assets/Icons/icons8-star-52.png";
+import defaultBackground from "../../assets/defaultBackground.png"
 import css from './Detail.module.css';
+
 
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,14 +23,20 @@ import moment from 'moment';
 
 
 export const Detail = () => {
+  const user = JSON.parse(localStorage.getItem("userStorage"));
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { ProgramsId } = useParams();
+  const {ProgramsId} = useParams();
+  
+  useEffect(() => {
+    dispatch(getProgramDetail(ProgramsId)).then(dispatch(getUserPlaylists(user.id))).then(()=>{setIdReal(true)})
+  }, [dispatch, ProgramsId]);
 
-  const user = useSelector((state) => state.user);
+  const playlists = useSelector((state)=> state.userPlaylists);
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
-
+  
   const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
@@ -36,10 +44,7 @@ export const Detail = () => {
   const [showError, setShowError] = useState(false);
   const [idReal, setIdReal] = useState(false);
   
-  useEffect(() => {
-    dispatch(getProgramDetail(ProgramsId)).then(dispatch(getUserPlaylists(user.id))).then(()=>{setIdReal(true)})
-  }, [dispatch, ProgramsId]);
-
+  
   useEffect(() => {
     if (programDetail && programDetail.Genres && programDetail.Genres[0].name) {
       const genre = programDetail.Genres[0].name ? programDetail.Genres[0].name : "";
@@ -51,10 +56,6 @@ export const Detail = () => {
   useEffect(() => {
     setPeliculaSimilar(encontrarPeliculaMasParecida(programDetail?.title, similarMovies ? similarMovies : []));
   }, [similarMovies]);
-
-  if (!programDetail) {
-    return <div>Loading...</div>;
-  }
 
   const releaseDate = programDetail.release_date;
   const year = new Date(releaseDate).getFullYear();
@@ -116,17 +117,26 @@ export const Detail = () => {
   }
   const rating = Math.round(programDetail?.Reviews?.reduce((total, review) => total + review.rating, 0) / programDetail.Reviews?.length);
 
+  let imageBack = programDetail.backdrop === "https://image.tmdb.org/t/p/w500null" 
+  ? defaultBackground
+  : programDetail.backdrop
+
+  console.log(playlists)
+
   return (
     <div className={css.container}>
       <NavBar />
-        <Header backgroundurl={`url(${programDetail.backdrop})`} />
-        {
+        <Header backgroundurl={`url(${imageBack})`} />
+        { 
+          !idReal ?
+          <GreenLoading/>
+          :
           <div className={css.top}>
             <ProgramDetailTopAreaC programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}
-             similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick} GreenLoading={GreenLoading}/>
+             similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
-              user.id && idReal ?
-              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating}/>
+              playlists.totalPlaylist ?
+              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating} userId={user.id} playlistData={playlists}/>
               : <ButtonOptionsFake/>
              }
           </div>
