@@ -31,7 +31,7 @@ const ScoreContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 13px;
-  margin-top: 200px;
+  margin-top: 420px;
 `
 
 const IconContainer = styled.div`
@@ -110,17 +110,17 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) =
     const playlists = playlistData.finalPlaylists;
     
     const favorites = playlists ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
-    const isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    const isFav = favorites.programs?.filter(program => program.id === programId).length === 1 ? true : false;
     
     console.log(isFav);
     
     const watchlist = playlists ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
-    const isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    const isWatchL = watchlist.programs?.filter(program => program.id === programId).length === 1 ? true : false;
     
     console.log(isWatchL);
     
     const watched = playlists ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
-    const isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
+    const isWatch = watched.programs?.filter(program => program.id === programId).length === 1 ? true : false;
     console.log(isWatch);
 
 

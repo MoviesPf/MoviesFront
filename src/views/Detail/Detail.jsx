@@ -1,4 +1,4 @@
-import { Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
+import { Header, Modal, CloseButton, Comments, Submit, ContainerModalInfo, CheckboxContainer, CheckboxLabel, Checkbox, CloseButtonContainerDonate, TextDonation, ContainerModal, IconImg, CloseButtonContainer, ContainerModalHeader, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import fullStar from "../../assets/Icons/icons8-star-100 green.png";
 import emptyStar from "../../assets/Icons/icons8-star-52.png";
 import css from './Detail.module.css';
@@ -29,10 +29,11 @@ export const Detail = () => {
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
 
-  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
+  const [review, setReview] = useState({spoiler:false, rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [showDonation, setShowDonation] = useState(false);
   const [showError, setShowError] = useState(false);
   const [idReal, setIdReal] = useState(false);
   
@@ -75,8 +76,7 @@ export const Detail = () => {
   const handleCreate = async (event) => {
     event.preventDefault();
     if (user.id) {
-      setShowModal(false);
-      setReview({ ...review, rating: 0 });
+      handleCloseModal();
       await dispatch(createReview(review, user.id, programDetail.id));
       dispatch(getProgramDetail(ProgramsId));
       setReview([...review, review]);
@@ -93,6 +93,21 @@ export const Detail = () => {
 
   const handleRating = (rating) => {
     setReview({ ...review, rating: rating }); 
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false) 
+    setReview({ ...review, rating: 0 })
+    setShowDonation(true) 
+  }
+
+  const handleDonate = () => {
+    setShowDonation(false)
+    navigate('/donate')
+  }
+
+  const handleCheckboxChange = (event) => {
+    setReview({ ...review, spoiler: event.target.checked }); 
   };
 
   function encontrarPeliculaMasParecida(tituloQueTienes, peliculas) {
@@ -132,20 +147,27 @@ export const Detail = () => {
           </div>
         }
         {showModal && 
-        <ContainerModalReview>
-          <ModalReview>
-            <ContainerModalImg>
+        <ContainerModal>
+          <Modal>
+            <ContainerModalHeader>
               <ModalImg  src={programDetail.poster} alt="" />
               <TitleModalContainer>
                 <TitleModal> {`${programDetail.title}`} </TitleModal> 
                 <YearTitleModal>{`(${year})`}</YearTitleModal>
               </TitleModalContainer>
               <CloseButtonContainer>
-                <CloseButton onClick={() => {setShowModal(false) 
-                setReview({ ...review, rating: 0 }) }}> x </CloseButton>
+                <CloseButton onClick={() => handleCloseModal()}> x </CloseButton>
               </CloseButtonContainer>
-            </ContainerModalImg>
+            </ContainerModalHeader>
             <Comments placeholder='Add a review...' onChange={(e) => handleComment(e.target.value)}/>
+            <CheckboxContainer>
+              <Checkbox 
+                type="checkbox"
+                checked={review.spoiler}
+                onChange={handleCheckboxChange}
+              />
+              <CheckboxLabel>Contains Spoiler</CheckboxLabel>
+            </CheckboxContainer>
             {showError && 
               <SpanError>must be logged in to add a review</SpanError>
             }
@@ -159,8 +181,23 @@ export const Detail = () => {
             </div>
             <Submit onClick= {handleCreate} >Save</Submit >
             </StarsContainer>
-          </ModalReview>
-        </ContainerModalReview>
+          </Modal>
+        </ContainerModal>
+        }
+        {showDonation &&
+          <ContainerModal>
+            <Modal>
+              <ContainerModalHeader>
+                <CloseButtonContainerDonate>
+                  <CloseButton onClick={() => setShowDonation(false)}> x </CloseButton>
+                </CloseButtonContainerDonate>              
+              </ContainerModalHeader>
+              <ContainerModalInfo>
+              <TextDonation>¡You can donate us a popcorn! 🍿</TextDonation>
+              </ContainerModalInfo>
+              <Submit onClick={() => handleDonate()}>Donate</Submit >
+            </Modal>
+          </ContainerModal>
         }
         <Footer />
     </div>

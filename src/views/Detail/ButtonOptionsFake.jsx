@@ -13,7 +13,7 @@ const ScoreContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 13px;
-  margin-top: 200px;
+  margin-top: 420px;
 
 span {
   display: flex;
