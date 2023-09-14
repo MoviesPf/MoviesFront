@@ -1,27 +1,12 @@
 import { useState } from 'react';
 import css from './Signin.module.css';
 import { useDispatch } from 'react-redux';
-import {
-  caballoAvatar,
-  conejoAvatar,
-  elefanteAvatar,
-  gatoAvatar,
-  gatoBodyAvatar,
-  leonAvatar,
-  monoBodyAvatar,
-  osoAvatar,
-  osoBodyAvatar,
-  perroBodyAvatar,
-  rinoceronteBodyAvatar,
-  tigreAvatar,
-  unicornioAvatar,
-  zorroAvatar,
-  zorroBodyAvatar
-} from './Images';
+import { caballoAvatar, conejoAvatar, elefanteAvatar, gatoAvatar, gatoBodyAvatar, leonAvatar, monoBodyAvatar, osoAvatar, osoBodyAvatar, perroBodyAvatar, rinoceronteBodyAvatar, tigreAvatar, unicornioAvatar, zorroAvatar, zorroBodyAvatar} from './Images';
 import { useNavigate } from 'react-router-dom';
 import { createUsers } from '../../Redux/actions';
 import BtnHome from '../../Components/Buttons/BtnHome';
 import { validations } from './validations';
+import { useLocalStorage } from "../../utils/useLocalStorage"
 
 export const Signin = () => {
   const dispatch = useDispatch();
@@ -55,8 +40,7 @@ export const Signin = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(user);
-    dispatch(createUsers(user));
-    navigate('/');
+    dispatch(createUsers(user)).then(navigate('/'))
   };
 
   return (

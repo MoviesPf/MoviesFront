@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import defaultImg from "../../assets/defaultMovie.png"
-import StarPoint from '../../Components/StarPoint'
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import StarPoint from '../../Components/StarPoint';
+import defaultImg from "../../assets/defaultMovie.png";
 
 const CardContainer = styled.div`
 border-radius: 30px;
@@ -13,14 +13,20 @@ flex-direction: row;
 padding-top: 20px;
 padding-bottom: 20px;
 margin-bottom: 30px;
+margin-top: 30px;
 `
+
 const MoviePoster = styled.img`
 margin-left: 30px;
 border-radius: 30px;
-height: 350px;
+height: 250px;
+    &:hover {
+        transform: scale(1.05);
+    }
 `
+
 const DetailContainer = styled.div`
-padding: 20px;
+padding-right: 30px;
 height: auto;
 width: 100%;
 display: flex;
@@ -29,15 +35,16 @@ position: relative;
 flex-direction: column;
 justify-content: space-between;
 `
+
 const ContextRow = styled.div`
-padding:20px;
-height: auto;
-display: flex;
+padding-bottom: 10px;
+justify-content: space-between;
 flex-direction: row;
 align-items: center;
-justify-content: space-between;
-flex-wrap: nowrap;
+height: auto;
+display: flex;
 `
+
 const Title = styled.label`
 height: auto;
 display: flex;
@@ -45,6 +52,7 @@ color: white;
 font-size: 40px;
 position: relative;
 `
+
 const MovieData = styled.label`
 height: auto;
 display: flex;
@@ -52,6 +60,7 @@ color: white;
 font-size: 20px;
 position: relative;  
 `
+
 const StarsRow = styled.div`
 padding-right: 20px;
 height: auto;
@@ -64,6 +73,7 @@ position: relative;
 flex-direction: row;
 justify-content: end;
 `
+
 const OverviewText = styled.div`
 height: auto;
 display: flex;
@@ -73,29 +83,36 @@ position: relative;
 flex-direction: row;
 `
 
-export default function ProgCardDetail({year,genreA,genreB,overview,progImge,starVal, title}) {
+export const ReviewContainer = ({reviewDate, year, genreA, genreB, overview, progImge, starVal, title, programId}) => {
+  const starsCount = [];
+  
+  for (let index = 0; index < starVal; index++) { starsCount.push(<StarPoint key={index}/>)};
 
-    const starsCount = []
-    for (let index = 0; index < starVal; index++) {
-        starsCount.push(<StarPoint key={index}/>);
-        
-    }
-
-    let image =  defaultImg
-    if (progImge){image = progImge}
+  let image =  defaultImg;
+  if (progImge){image = progImge};
 
   return (
     <CardContainer>
+      <Link to={`/detail/${programId}`}>
         <MoviePoster src={image}/>
+        </Link>
         <DetailContainer>
+
             <ContextRow>
                 <Title>{title}</Title>
                 <MovieData>{`${year} ‧ ${genreA} / ${genreB}`}</MovieData>
             </ContextRow>
-            <OverviewText>{overview}</OverviewText>
-            <StarsRow>{starsCount}</StarsRow>
-        </DetailContainer>
 
+            <ContextRow>
+              <OverviewText>{overview}</OverviewText>
+            </ContextRow>
+
+            <ContextRow>
+              <OverviewText>{reviewDate}</OverviewText>
+              <StarsRow>{starsCount}</StarsRow>
+            </ContextRow>
+
+        </DetailContainer>
     </CardContainer>
-  )
-}
+  );
+};

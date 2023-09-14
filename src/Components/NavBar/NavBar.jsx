@@ -6,13 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SearchedCard } from '../SearchedCard/SearchedCard';
 import { BiSolidCameraMovie } from 'react-icons/bi';
 import { getAllPrograms, getGenres, getAllMovies, getMovieGenres, getAllSeries, getSeriesGenres, logoutUser, changeTypeMain, changeTypeMovie, changeTypeSerie } from '../../Redux/actions';
+import { useLocalStorage } from '../../utils/useLocalStorage';
+
 
 export const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const [userStorage, setUserStorage] = useLocalStorage("userStorage", {} );
+  const user = JSON.parse(localStorage.getItem("userStorage"))
   
-  const user = useSelector((state) => state.user);
   const type = useSelector((state) => state.type);
   const searchedPrograms = useSelector((state) => state.searchedPrograms);
 
@@ -42,6 +45,7 @@ export const NavBar = () => {
   };
 
   const LogOut = () => {
+    setUserStorage({})
     dispatch(logoutUser());
     navigate("/")
   }

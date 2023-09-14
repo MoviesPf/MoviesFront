@@ -1,51 +1,61 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists } from '../../Redux/actions';
-import { useParams, useNavigate } from 'react-router-dom';
-import css from './Detail.module.css';
-import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
-import { NavBar } from '../../Components/NavBar/NavBar';
-import ProgramDetailTopAreaC from './ProgramDetailTopAreaC';
 import { Header, ModalReview, CloseButton, Comments, Submit, ContainerModalReview, IconImg, CloseButtonContainer, ContainerModalImg, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
-import { Footer } from "../../Components/Footer/Footer"
-import moment from 'moment';
+import fullStar from "../../assets/Icons/icons8-star-100 green.png";
+import emptyStar from "../../assets/Icons/icons8-star-52.png";
+import defaultBackground from "../../assets/defaultBackground.png"
+import css from './Detail.module.css';
+
+
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
+import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists } from '../../Redux/actions';
+import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
+
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
-import emptyStar from "../../assets/Icons/icons8-star-52.png"
-import fullStar from "../../assets/Icons/icons8-star-100 green.png"
+import { ProgramDetailTopAreaC}  from './ProgramDetailTopAreaC';
+import { NavBar } from '../../Components/NavBar/NavBar';
+import { Footer } from "../../Components/Footer/Footer";
+import { ButtonOptionsFake } from './ButtonOptionsFake';
+import { ButtonOptions } from './ButtonOptions';
+
+import moment from 'moment';
+
 
 export const Detail = () => {
-  const { ProgramsId } = useParams();
+  const user = JSON.parse(localStorage.getItem("userStorage"));
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const programDetail = useSelector((state) => state.programDetail);
-  const user = useSelector((state) => state.user);
-  const similarMovies = useSelector((state) => state.filteredPrograms.data);
-  const [showModal, setShowModal] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
-  const [hoverRating, setHoverRating] = useState(0);
-  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
-
+  const {ProgramsId} = useParams();
+  
   useEffect(() => {
-    if (user && user.id ) (dispatch(getUserPlaylists(user.id)))
-    dispatch(getProgramDetail(ProgramsId));
+    dispatch(getProgramDetail(ProgramsId)).then(dispatch(getUserPlaylists(user.id))).then(()=>{setIdReal(true)})
   }, [dispatch, ProgramsId]);
 
+  const playlists = useSelector((state)=> state.userPlaylists);
+  const programDetail = useSelector((state) => state.programDetail);
+  const similarMovies = useSelector((state) => state.filteredPrograms.data);
+  
+  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
+  const [peliculaSimilar, setPeliculaSimilar] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [idReal, setIdReal] = useState(false);
+  
+  
   useEffect(() => {
     if (programDetail && programDetail.Genres && programDetail.Genres[0].name) {
       const genre = programDetail.Genres[0].name ? programDetail.Genres[0].name : "";
-
       if (genre !== "")dispatch(filterProgramsByGenre(genre, programDetail.type))
     }
   }, [dispatch, programDetail]);
 
+
   useEffect(() => {
     setPeliculaSimilar(encontrarPeliculaMasParecida(programDetail?.title, similarMovies ? similarMovies : []));
   }, [similarMovies]);
-
-  if (!programDetail) {
-    return <div>Loading...</div>;
-  }
 
   const releaseDate = programDetail.release_date;
   const year = new Date(releaseDate).getFullYear();
@@ -94,73 +104,75 @@ export const Detail = () => {
       const union = new Set([...s1, ...s2]);
       const jaccardSimilitud = intersection.size / union.size;
       return jaccardSimilitud;
-  }
+    }
 
     peliculas.sort((pelicula1, pelicula2) => {
       const similitud1 = calcularSimilitud(tituloQueTienes, pelicula1.title);
       const similitud2 = calcularSimilitud(tituloQueTienes, pelicula2.title);
       return similitud2 - similitud1;
-  });
+    });
 
-  const peliculasMasParecidas = peliculas.slice(1, 3);
-  
-      return peliculasMasParecidas;
+    const peliculasMasParecidas = peliculas.slice(1, 3);
+    return peliculasMasParecidas;
   }
   const rating = Math.round(programDetail?.Reviews?.reduce((total, review) => total + review.rating, 0) / programDetail.Reviews?.length);
 
-  console.log(rating, "rating");
+  let imageBack = programDetail.backdrop === "https://image.tmdb.org/t/p/w500null" 
+  ? defaultBackground
+  : programDetail.backdrop
+
+  console.log(playlists)
 
   return (
     <div className={css.container}>
       <NavBar />
-      <Header backgroundurl={`url(${programDetail.backdrop})`} />
-      <ProgramDetailTopAreaC 
-        programDetail={programDetail} 
-        year={year} 
-        runtimeFormatted={runtimeFormatted} 
-        setShowModal={setShowModal}
-        setShowError={setShowError}
-        similarMovies={peliculaSimilar}
-        handleMovieClick={handleMovieClick}
-        GreenLoading={GreenLoading}
-        rating={rating}
-      />
-      {showModal && 
-      <ContainerModalReview>
-        <ModalReview>
-          <ContainerModalImg>
-            <ModalImg  src={programDetail.poster} alt="" />
-            <TitleModalContainer>
-              <TitleModal> {`${programDetail.title}`} </TitleModal> 
-              <YearTitleModal>{`(${year})`}</YearTitleModal>
-            </TitleModalContainer>
-            <CloseButtonContainer>
-              <CloseButton onClick={() => {setShowModal(false) 
+        <Header backgroundurl={`url(${imageBack})`} />
+        { 
+          !idReal ?
+          <GreenLoading/>
+          :
+          <div className={css.top}>
+            <ProgramDetailTopAreaC programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}
+             similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
+             {
+              playlists.totalPlaylist ?
+              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating} userId={user.id} playlistData={playlists}/>
+              : <ButtonOptionsFake/>
+             }
+          </div>
+        }
+        {showModal && 
+        <ContainerModalReview>
+          <ModalReview>
+            <ContainerModalImg>
+              <ModalImg  src={programDetail.poster} alt="" />
+              <TitleModalContainer>
+                <TitleModal> {`${programDetail.title}`} </TitleModal> 
+                <YearTitleModal>{`(${year})`}</YearTitleModal>
+              </TitleModalContainer>
+              <CloseButtonContainer>
+                <CloseButton onClick={() => {setShowModal(false) 
                 setReview({ ...review, rating: 0 }) }}> x </CloseButton>
-            </CloseButtonContainer>
-          </ContainerModalImg>
-          <Comments placeholder='Add a review...' onChange={(e) => handleComment(e.target.value)}/>
-          {showError && 
-            <SpanError>must be logged in to add a review</SpanError>
-          }
-          <StarsContainer>
+              </CloseButtonContainer>
+            </ContainerModalImg>
+            <Comments placeholder='Add a review...' onChange={(e) => handleComment(e.target.value)}/>
+            {showError && 
+              <SpanError>must be logged in to add a review</SpanError>
+            }
+            <StarsContainer>
             <div>
               {new Array(5).fill('').map((_, index) => (
-                <IconImg
-                  key={index}
-                  onMouseEnter={() => handleHoverRating(index + 1)}
-                  onMouseLeave={() => handleHoverRating(0)}
-                  onClick={() => handleRating(index + 1)}
-                  src={index < (hoverRating || review.rating) ? fullStar : emptyStar} 
+                <IconImg key={index} onMouseEnter={() => handleHoverRating(index + 1)} onMouseLeave={() => handleHoverRating(0)}
+                  onClick={() => handleRating(index + 1)} src={index < (hoverRating || review.rating) ? fullStar : emptyStar} 
                 />
               ))}
             </div>
             <Submit onClick= {handleCreate} >Save</Submit >
-          </StarsContainer>
-        </ModalReview>
+            </StarsContainer>
+          </ModalReview>
         </ContainerModalReview>
-      }
-      <Footer />
+        }
+        <Footer />
     </div>
   );
 };
