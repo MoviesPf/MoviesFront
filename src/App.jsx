@@ -23,8 +23,8 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const user = useSelector((state) => state.user)
-  console.log(user)
+  const user = useSelector((state) => state.user);
+  console.log(user);
 
   return (
     <>
@@ -38,7 +38,7 @@ function App() {
         <Route path='/about' element={<About />} />
 
         {/* rutas Admin Dashboard */}
-        <Route element={<ProtectedRoute canActivate={true}/>}>
+        <Route element={<ProtectedRoute canActivate={true} />}>
           <Route path='admin' element={<Start />}>
             <Route path='users' element={<Users />} />
             <Route path='users/:id' element={<DetailUsers />} />
