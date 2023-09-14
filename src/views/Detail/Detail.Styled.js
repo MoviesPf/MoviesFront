@@ -293,22 +293,15 @@ export const ProgramCard = styled.img`
 `;
 
 export const Checkbox = styled.input`
-  /* Estilo del checkbox */
-  display: none;
-
-  /* Estilo del interruptor */
   width: 40px;
-  height: 20px;
   background-color: #ccc;
   border-radius: 25px;
   position: relative;
 
-  /* Estilo cuando está marcado */
   &:checked + label {
     background-color: rgb(25, 213, 118);
   }
 
-  /* Estilo del botón del interruptor */
   &:checked + label::before {
     content: "";
     width: 20px;
@@ -327,7 +320,7 @@ export const CheckboxContainer = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: auto 1fr;
-  color: #fce8e6; /* Color del texto */
+  color: #fce8e6;
   font-weight: bold;
   font-size: 16px;
   column-gap: 8px;
@@ -353,4 +346,8 @@ export const CheckboxLabel = styled.label`
     left: 0;
     transition: 0.3s;
   }
+`;
+
+export const DonationContainer = styled.div`
+  margin-top: 100px;
 `;

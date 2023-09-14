@@ -1,6 +1,8 @@
-import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
+import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, DonationContainer, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
 import defaultImg from "../../assets/defaultMovie.png"
 import ProgCardDetail from './DetailCard'
+
+import { Advertisement } from "../../Components/Advertisement/Advertisement";
 
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
@@ -31,6 +33,9 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
           <div></div>
           )}
         </SimilarMoviesList>
+        <DonationContainer>
+          <Advertisement/>
+        </DonationContainer>
       </ContainerLeft>
 
       <ContainerMiddle>

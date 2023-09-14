@@ -13,6 +13,7 @@ import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
+import { Advertisement } from "../../Components/Advertisement/Advertisement";
 import { ProgramDetailTopAreaC}  from './ProgramDetailTopAreaC';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import { Footer } from "../../Components/Footer/Footer";
@@ -173,10 +174,11 @@ export const Detail = () => {
             <CheckboxContainer>
               <Checkbox 
                 type="checkbox"
+                id="containsSpoiler"
                 checked={review.spoiler}
                 onChange={handleCheckboxChange}
               />
-              <CheckboxLabel>Contains Spoiler</CheckboxLabel>
+              <CheckboxLabel htmlFor="containsSpoiler">Contains Spoiler</CheckboxLabel>
             </CheckboxContainer>
             {showError && 
               <SpanError>must be logged in to add a review</SpanError>
@@ -203,7 +205,8 @@ export const Detail = () => {
                 </CloseButtonContainerDonate>              
               </ContainerModalHeader>
               <ContainerModalInfo>
-              <TextDonation>¡You can donate us a popcorn! 🍿</TextDonation>
+                <Advertisement/>
+                {/* <TextDonation>¡You can donate us a popcorn! 🍿</TextDonation> */}
               </ContainerModalInfo>
               <Submit onClick={() => handleDonate()}>Donate</Submit >
             </Modal>
