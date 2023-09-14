@@ -337,7 +337,6 @@ export const initiatePayment = (donationData) => async (dispatch) => {
 export const getUserPlaylists = (UserId) => {
   return async (dispatch) => {
     const { data } = await axios(URL_API + `playlists/user/${UserId}`);
-    console.log(data);
     return dispatch({
       type: GET_USER_PLAYLISTS,
       payload: data

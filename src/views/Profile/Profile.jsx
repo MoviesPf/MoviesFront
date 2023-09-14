@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import NavProfile from './NavProfile'
-import styled from 'styled-components'
-import PresentationLine from "./PresentationLine"
-import { NavBar }from "../../Components/NavBar/NavBar"
-import ProgCardDetail from "../Profile/ProgCardDetail"
-import { Card } from '../../Components/Card/Card'
-import { useDispatch, useSelector } from 'react-redux';
-import defaultBackground from "../../assets/background.jpg"
+import defaultBackground from "../../assets/background.jpg";
+import styled from 'styled-components';
+
 import { getUserPlaylists, getUserReviews } from '../../Redux/actions';
-import { CardFake } from "./CardFake/CardFake.jsx";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
-import { Footer } from '../../Components/Footer/Footer'
+import { ReviewContainer } from "../Profile/ReviewContainer";
+import { Footer } from '../../Components/Footer/Footer';
+import { NavBar }from "../../Components/NavBar/NavBar";
+import { CardFake } from "./CardFake/CardFake.jsx";
+import { Card } from '../../Components/Card/Card';
+import { NavProfile } from './NavProfile';
+import { UserData } from "./UserData";
 
 const ViewContainer = styled.div`
   position: absolute;
@@ -31,7 +33,7 @@ const ViewContainer = styled.div`
   &::-webkit-scrollbar-thumb{
     background: green;
   }
-`;
+`
 
 const UserBackground = styled.img`
   width: 100%;
@@ -46,18 +48,11 @@ const AreaContainer = styled.div`
   flex-direction: column;
 `
 
-const ElementsBarr = styled.div`
-  width: 100%;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-`
-
 const IconLabel = styled.label`
   color: white;
   font-size: 26px;
   position: relative;
-`;
+`
 
 const LineHR = styled.hr`
   border: 0;
@@ -70,14 +65,14 @@ const LineHR = styled.hr`
     rgb(0, 128, 0),
     rgba(0, 0, 0, 0)
   );
-`;
+`
 
 const LineSubHR = styled.hr`
   border: 0;
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgb(0, 128, 0);
-`;
+`
 
 const LineNavHR = styled.hr`
   margin-top: 0;
@@ -85,7 +80,7 @@ const LineNavHR = styled.hr`
   border: 0;
   height: 22px;
   box-shadow: inset 0 22px 30px -29px rgb(0, 128, 0);
-`;
+`
 
 
 const BodyContainer = styled.div`
@@ -97,29 +92,30 @@ const BodyContainer = styled.div`
   padding-right: 5%;
   padding-left: 5%;
   margin-top: 2%;
-`;
+`
 
 const CardsContainer = styled.div`
 width: 100%;
 height: 100%;
-padding-top: 1em;
 display: flex;
 flex-wrap: wrap;
-justify-content:start;
+padding-top: 1em;
 align-items: center;
-`;
+justify-content:start;
+`
 
 const AllCardsContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
+  padding-top: 1em;
   justify-content:center;
-`;
+`
 
 const EmptyMessage = styled.h1`
   margin: 30px;
-`;
+`
 
 const ButtonMas = styled.button`
   border-radius: 5px;
@@ -133,8 +129,8 @@ const ButtonMas = styled.button`
   margin-left: .3rem;
 
   &:hover {
-background-color: #464646;
-}
+  background-color: #464646;
+  }
 `
 const TitleAndButton = styled.div`
   display: flex;
@@ -143,14 +139,13 @@ const TitleAndButton = styled.div`
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = JSON.parse(localStorage.getItem("userStorage"))
+
   const [loading, setLoading] = useState(true);
-  const [loading2, setLoading2] = useState(true);
   const [ menu, setMenu ] = useState("Profile")
-  const temporalOverview = "An intelligence operative for a shadowy global peacekeeping agency races to stop a hacker from stealing its most valuable — and dangerous — weapon."
-  
+
   useEffect(() => {
-    dispatch(getUserPlaylists(user.id)).then(()=> dispatch(getUserReviews(user.id))).then(()=> {setLoading(false)})
+    dispatch(getUserPlaylists(user.id)).then(()=> dispatch(getUserReviews(user.id))).then(()=> {setLoading(false)}).then(console.log(loading))
   },[dispatch]);
   
   const playlistData = useSelector((state) => state.userPlaylists);
@@ -186,157 +181,166 @@ const Profile = () => {
       { loading ? (
         <GreenLoading />
       ) : (
-        <div>
-          <UserBackground src={user.background ? user.background : defaultBackground}/>
-          <LineNavHR/>
+      <div>
+        <UserBackground src={user.background ? user.background : defaultBackground}/>
 
-          <AreaContainer>
-          
-            <ElementsBarr>
-              <PresentationLine avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
-                <NavProfile menu={menu} setMenu={setMenu} favorites={favorites} watchlist={watchlist} watched={watched}/>
-            </ElementsBarr>
+        <AreaContainer>
+          <UserData avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
+          <NavProfile menu={menu} setMenu={setMenu} favorites={favorites} watchlist={watchlist} watched={watched}/>
             
           <div>
-          <LineNavHR/>
-          <BodyContainer>
+            <LineNavHR/>
+            <BodyContainer>
             {
-              menu === "Profile" ?
-              <div>
-                <TitleAndButton>
-                  <IconLabel>Last Reviews</IconLabel>
-                  {
-                    reviews.length > 3
-                    && <ButtonMas onClick={setReviews}>All Reviews</ButtonMas>
-                  }
-                  </TitleAndButton>
-                  {
-                    reviews.length 
-                    ? <div>
-                      {
-                      reviews.slice(-3).reverse().map((e)=> (
-                        <div>
-                          <LineHR />
-                          <ProgCardDetail year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ProgCardDetail>
-                        </div>
-                      ))
-                    }
-                    </div>
-                    : <EmptyMessage>Try to review some movies</EmptyMessage>
-                  }
-                {
-                  playlists.map((playlist)=> (
-                    <div>
-                      <LineSubHR />
-                      <TitleAndButton> 
-                      <IconLabel>{playlist.name}</IconLabel>
-                      {
-                        playlist.programs.length > 5 
-                        && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>See All</ButtonMas>
-                      }
-                      </TitleAndButton>
-                      <LineSubHR />
-                      {
-                        playlist.programs.length 
-                        ?
-                        <CardsContainer>
-                          {
-                            playlist.programs.slice(0,6).map((program)=> (
-                              <Card program={program}></Card>
-                              ))
-                          }
 
-                        </CardsContainer>
-                        :
-                        <CardsContainer>
-                          <CardFake/>
-                          <EmptyMessage>This list is empty</EmptyMessage>
-                        </CardsContainer>
-                      }
-                    </div>
-                  ))
-                }
-              </div>
-              
-              : menu === "Reviews" ?
+            menu === "Profile" ?
+            <div>
+              <TitleAndButton>
+                <IconLabel>Last Reviews</IconLabel>
+                { reviews.length > 3 && <ButtonMas onClick={setReviews}>All Reviews</ButtonMas>}
+              </TitleAndButton>
+              <LineHR />
+              { reviews.length ? 
               <div>
-                <IconLabel>All Reviews</IconLabel>
-                <LineHR />
-                {
-                    reviews.length 
-                    ? <div>
-                      {
-                      reviews.reverse().map((e)=> (
-                        <div>
-                          <ProgCardDetail year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ProgCardDetail>
-                          <LineSubHR />
-                        </div>
-                      ))
-                      }
-                    </div>
-                    : <EmptyMessage>Try to review some movies</EmptyMessage>
-                  }
-              </div>
-
-              : menu === "Favorites" ?
-              <div>
-                <IconLabel>All {favorites.name}</IconLabel>
-                <LineHR />
-                {
-                  favorites.programs.length 
-                  ?
-                  <AllCardsContainer>
-                    {favorites.programs.map((program)=> (<Card program={program}></Card>))}
-                  </AllCardsContainer>
-                  :
-                  <CardsContainer>
-                    <CardFake/>
-                    <EmptyMessage>This list is empty</EmptyMessage>
-                  </CardsContainer>
-                }
-              </div>
-
-              : menu === "Watched" ?
-              <div>
-                <IconLabel>All {watched.name}</IconLabel>
-                <LineHR />
-                {
-                  watched.programs.length 
-                  ?
-                  <AllCardsContainer>
-                    {watched.programs.map((program)=> (<Card program={program}></Card>))}
-                  </AllCardsContainer>
-                  :
-                  <CardsContainer>
-                    <CardFake/>
-                    <EmptyMessage>This list is empty</EmptyMessage>
-                  </CardsContainer>
-                }
+                { reviews.slice(-3).reverse().map((e)=> (
+                  <div>
+                    <ReviewContainer reviewDate={e.date} year={e.program.release_date.split("-")[0]} title={e.program.title} programId={e.program.id}genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : ""} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ReviewContainer>
+                    <LineSubHR />
+                  </div>
+                ))}
               </div>
               : 
               <div>
-                <IconLabel>All {watchlist.name}</IconLabel>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>Try to review some movies!!</EmptyMessage>
+                </CardsContainer>
+              </div>
+              }
+              { playlists.map((playlist)=> (
+              <div>
+                <TitleAndButton> 
+                  <IconLabel>{playlist.name}</IconLabel>
+                  { playlist.programs.length > 7 && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>See All</ButtonMas>}
+                </TitleAndButton>
                 <LineHR />
-                {
-                  watchlist.programs.length 
-                  ?
-                  <AllCardsContainer>
-                    {watchlist.programs.map((program)=> (<Card program={program}></Card>))}
-                  </AllCardsContainer>
-                  :
+                { playlist.programs.length ?
+                <div>
+                  <CardsContainer>
+                  { playlist.programs.slice(0,8).map((program)=> (<Card program={program}></Card>))}
+                </CardsContainer>
+                <LineSubHR />
+
+                </div>
+                : 
+                <div>
                   <CardsContainer>
                     <CardFake/>
                     <EmptyMessage>This list is empty</EmptyMessage>
                   </CardsContainer>
+                  <LineSubHR />
+                </div>
+
                 }
               </div>
-            }
+              ))}
+            </div>
+            
+            : menu === "Reviews" ?
+            <div>
+              <IconLabel>All Reviews</IconLabel>
               <LineHR />
-          </BodyContainer>
-        </div>
-      </AreaContainer>
+              { reviews.length ? 
+              <div>
+                { reviews.reverse().map((e)=> (
+                <div>
+                  <ReviewContainer year={e.program.release_date.split("-")[0]} title={e.program.title} genreA={e.program.Genres[0].name} genreB={e.program.Genres[1] ? e.program.Genres[1].name : "uno"} overview={e.comments} progImge={e.program.poster} starVal={e.rating}></ReviewContainer>
+                  <LineSubHR />
+                </div>
+                ))}
+              </div>
+              : 
+              <div>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>Try to review some movies!!</EmptyMessage>
+                </CardsContainer>
+                <LineSubHR />
+              </div>
+              }
+            </div>
+            
+            : menu === "Favorites" ?
+            <div>
+              <IconLabel>All {favorites.name}</IconLabel>
+              <LineHR />
+              { favorites.programs.length ?
+              <div>
+                <AllCardsContainer>
+                {favorites.programs.map((program)=> (<Card program={program}></Card>))}
+                </AllCardsContainer>
+                <LineSubHR />
+              </div>
+              :
+              <div>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>This list is empty</EmptyMessage>
+                </CardsContainer>
+                <LineSubHR />
+              </div>
+              }
+            </div>
+
+            : menu === "Watched" ?
+            <div>
+              <IconLabel>All {watched.name}</IconLabel>
+              <LineHR />
+              { watched.programs.length ? 
+              <div>
+                <AllCardsContainer>
+                  {watched.programs.map((program)=> (<Card program={program}></Card>))}
+                </AllCardsContainer>
+                <LineSubHR />
+              </div>
+              :
+              <div>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>This list is empty</EmptyMessage>
+                </CardsContainer>
+                <LineSubHR />
+              </div>
+              }
+            </div>
+
+            : 
+            <div>
+              <IconLabel>All {watchlist.name}</IconLabel>
+              <LineHR />
+              { watchlist.programs.length ?
+              <div>
+                <AllCardsContainer>
+                  {watchlist.programs.map((program)=> (<Card program={program}></Card>))}
+                </AllCardsContainer>
+                <LineSubHR />
+              </div>
+              :
+              <div>
+                <CardsContainer>
+                  <CardFake/>
+                  <EmptyMessage>This list is empty</EmptyMessage>
+                </CardsContainer>
+                <LineSubHR />
+              </div>
+              }
+            </div>
+            }
+            </BodyContainer>
+          </div>
+        </AreaContainer>
       </div>
-    )}
+      )}
     <Footer/>
     </ViewContainer>
   );
