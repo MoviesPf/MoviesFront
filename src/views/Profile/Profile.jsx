@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import NavProfile from './NavProfile'
-import styled from 'styled-components'
-import PresentationLine from "./PresentationLine"
-import { NavBar }from "../../Components/NavBar/NavBar"
-import ReviewContainer from "../Profile/ReviewContainer"
-import { Card } from '../../Components/Card/Card'
-import { useDispatch, useSelector } from 'react-redux';
-import defaultBackground from "../../assets/background.jpg"
+import defaultBackground from "../../assets/background.jpg";
+import styled from 'styled-components';
+
 import { getUserPlaylists, getUserReviews } from '../../Redux/actions';
-import { CardFake } from "./CardFake/CardFake.jsx";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
-import { Footer } from '../../Components/Footer/Footer'
+import { ReviewContainer } from "../Profile/ReviewContainer";
+import { Footer } from '../../Components/Footer/Footer';
+import { NavBar }from "../../Components/NavBar/NavBar";
+import { CardFake } from "./CardFake/CardFake.jsx";
+import { Card } from '../../Components/Card/Card';
+import { NavProfile } from './NavProfile';
+import { UserData } from "./UserData";
 
 const ViewContainer = styled.div`
   position: absolute;
@@ -31,7 +33,7 @@ const ViewContainer = styled.div`
   &::-webkit-scrollbar-thumb{
     background: green;
   }
-`;
+`
 
 const UserBackground = styled.img`
   width: 100%;
@@ -46,18 +48,11 @@ const AreaContainer = styled.div`
   flex-direction: column;
 `
 
-const ElementsBarr = styled.div`
-  width: 100%;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-`
-
 const IconLabel = styled.label`
   color: white;
   font-size: 26px;
   position: relative;
-`;
+`
 
 const LineHR = styled.hr`
   border: 0;
@@ -70,14 +65,14 @@ const LineHR = styled.hr`
     rgb(0, 128, 0),
     rgba(0, 0, 0, 0)
   );
-`;
+`
 
 const LineSubHR = styled.hr`
   border: 0;
   height: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgb(0, 128, 0);
-`;
+`
 
 const LineNavHR = styled.hr`
   margin-top: 0;
@@ -85,7 +80,7 @@ const LineNavHR = styled.hr`
   border: 0;
   height: 22px;
   box-shadow: inset 0 22px 30px -29px rgb(0, 128, 0);
-`;
+`
 
 
 const BodyContainer = styled.div`
@@ -97,7 +92,7 @@ const BodyContainer = styled.div`
   padding-right: 5%;
   padding-left: 5%;
   margin-top: 2%;
-`;
+`
 
 const CardsContainer = styled.div`
 width: 100%;
@@ -107,7 +102,7 @@ flex-wrap: wrap;
 padding-top: 1em;
 align-items: center;
 justify-content:start;
-`;
+`
 
 const AllCardsContainer = styled.div`
   width: 100%;
@@ -116,11 +111,11 @@ const AllCardsContainer = styled.div`
   flex-wrap: wrap;
   padding-top: 1em;
   justify-content:center;
-`;
+`
 
 const EmptyMessage = styled.h1`
   margin: 30px;
-`;
+`
 
 const ButtonMas = styled.button`
   border-radius: 5px;
@@ -135,7 +130,7 @@ const ButtonMas = styled.button`
 
   &:hover {
   background-color: #464646;
-}
+  }
 `
 const TitleAndButton = styled.div`
   display: flex;
@@ -188,14 +183,10 @@ const Profile = () => {
       ) : (
       <div>
         <UserBackground src={user.background ? user.background : defaultBackground}/>
-        <LineNavHR/>
 
         <AreaContainer>
-          
-            <ElementsBarr>
-              <PresentationLine avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
-                <NavProfile menu={menu} setMenu={setMenu} favorites={favorites} watchlist={watchlist} watched={watched}/>
-            </ElementsBarr>
+          <UserData avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
+          <NavProfile menu={menu} setMenu={setMenu} favorites={favorites} watchlist={watchlist} watched={watched}/>
             
           <div>
             <LineNavHR/>
@@ -230,13 +221,13 @@ const Profile = () => {
               <div>
                 <TitleAndButton> 
                   <IconLabel>{playlist.name}</IconLabel>
-                  { playlist.programs.length > 5 && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>See All</ButtonMas>}
+                  { playlist.programs.length > 7 && <ButtonMas onClick={playlist.name === "Favorites" ? setFavorites : playlist.name === "Watched" ? setWached : playlist.name === "WatchList" ? setWatchlist : null}>See All</ButtonMas>}
                 </TitleAndButton>
                 <LineHR />
                 { playlist.programs.length ?
                 <div>
                   <CardsContainer>
-                  { playlist.programs.slice(0,6).map((program)=> (<Card program={program}></Card>))}
+                  { playlist.programs.slice(0,8).map((program)=> (<Card program={program}></Card>))}
                 </CardsContainer>
                 <LineSubHR />
 

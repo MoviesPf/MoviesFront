@@ -8,9 +8,15 @@ const NavContainer = styled.div`
 background-color: #131212;
 padding-bottom: 10px;
 padding-top: 10px;
+font-size: 4rem;
 display: flex;
 justify-content: center;
-width: 100%;
+border: 2px solid;
+border-color: black;
+align-items: center;
+position: sticky;
+top: 3rem;
+z-index: 99;
 `
 
 const LinksContainer = styled.div`
@@ -21,7 +27,7 @@ align-items: center;
 
 const ViewButton = styled.button`
 background:${(props) => (props.$check ? 'green' : "transparent")};
-color: ${(props) => (props.$check ? 'white' : "white")};
+color: ${(props) => (props.$check ? 'black' : "white")};
 width: 140px;
 height: 50px;
 border-radius: 200px;
@@ -30,7 +36,7 @@ font-size: 25px;
 font-weight: bold;
 cursor: pointer;
   &:hover {
-    ${(props) => (props.$check ? null :` color: green; background: #1C1C1C;`)}
+    ${(props) => (props.$check ? null :` color: green; background: black;`)}
 }
 `
 
@@ -58,7 +64,7 @@ color: white;
 font-size: 16px;
 `
 
-const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
+export const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
 
   const setProfile = ()=> {
     setMenu("Profile")
@@ -108,6 +114,3 @@ const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
 
   );
 };
-
-export default NavProfile;
-
