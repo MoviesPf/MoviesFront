@@ -15,7 +15,7 @@ export const Header = styled.div`
   z-index: 1;
 `;
 
-export const ContainerModalReview = styled.div`
+export const ContainerModal = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -25,7 +25,7 @@ export const ContainerModalReview = styled.div`
   z-index: 999;
 `;
 
-export const ModalReview = styled.div`
+export const Modal = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -38,15 +38,33 @@ export const ModalReview = styled.div`
   box-shadow: 0px 0px 108px 23px rgba(0, 0, 0, 0.3);
 `;
 
+export const ContainerModalInfo = styled.div`
+  text-aling: center;
+`;
+
+export const TextDonation = styled.span`
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fce8e6;
+`;
+
 export const CloseButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 `;
 
+export const CloseButtonContainerDonate = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
 export const CloseButton = styled.label`
-  width: 40px;
-  height: 30px;
+  width: 35px;
+  height: 25px;
   border: 2px solid #fce8e6;
   border-radius: 200px;
   display: flex;
@@ -196,7 +214,7 @@ export const IconImg = styled.img`
   transition: transform 0.2s ease-in-out;
 `;
 
-export const ContainerModalImg = styled.div`
+export const ContainerModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -272,4 +290,64 @@ export const ProgramCard = styled.img`
   height: 480px;
   border-radius: 30px;
   z-index: 2;
+`;
+
+export const Checkbox = styled.input`
+  width: 40px;
+  background-color: #ccc;
+  border-radius: 25px;
+  position: relative;
+
+  &:checked + label {
+    background-color: rgb(25, 213, 118);
+  }
+
+  &:checked + label::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+    transform: translateX(20px);
+  }
+`;
+
+export const CheckboxContainer = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: auto 1fr;
+  color: #fce8e6;
+  font-weight: bold;
+  font-size: 16px;
+  column-gap: 8px;
+`;
+
+export const CheckboxLabel = styled.label`
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 25px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.3s;
+  }
+`;
+
+export const DonationContainer = styled.div`
+  margin-top: 100px;
 `;
