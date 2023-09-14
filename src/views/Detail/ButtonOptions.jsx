@@ -97,14 +97,13 @@ cursor: pointer;
 
   }
 `
-export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) => {
+export const ButtonOptions = ({setShowModal, setShowError, programId, rating, userId}) => {
   const playlistData = useSelector( (state) => state.userPlaylists)
-  const user = JSON.parse(localStorage.getItem("userStorage"))
   const [loading, setLoading] = useState(true);
   
   const dispatch = useDispatch()
   useEffect(()=> {
-    dispatch(getUserPlaylists(user.id)).then(()=>{setLoading(false)}).then(console.log(playlistData))
+    dispatch(getUserPlaylists(userId)).then(()=>{setLoading(false)}).then(console.log(playlistData))
   },[dispatch]);
   
   let playlists = [];
@@ -117,8 +116,6 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) =
   
   let watched = [];
   let isWatch = false;
-  
-  if (loading === false) {
 
     playlists = playlistData.finalPlaylists;
     favorites = playlists.length ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
@@ -129,10 +126,9 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) =
     
     watched = playlists.length ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
     isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
-  }
 
-  console.log(isFav);
   console.log(isWatch);
+  console.log(isFav);
   console.log(isWatchL);
 
  const [checkButtonState,setCheckButtonsSTate] =  useState({
@@ -151,7 +147,7 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) =
         } else {
           setCheckButtonsSTate({...checkButtonState, watched: true})
         }
-        dispatch(handleList(user.id, event.target.id, programId))
+        dispatch(handleList(userId, event.target.id, programId))
         break;
     
       case "Favorites":
@@ -161,7 +157,7 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) =
         } else {
           setCheckButtonsSTate({...checkButtonState, favs: true})
         }
-        dispatch(handleList(user.id, event.target.id, programId))
+        dispatch(handleList(userId, event.target.id, programId))
         break;
     
       case "WatchList":
@@ -171,7 +167,7 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating}) =
         } else {
           setCheckButtonsSTate({...checkButtonState, watchlist: true})
         }
-        dispatch(handleList(user.id, event.target.id, programId))
+        dispatch(handleList(userId, event.target.id, programId))
         break;
       
       default:

@@ -31,10 +31,9 @@ export const Detail = () => {
   
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId)).then(dispatch(getUserPlaylists(user.id))).then(()=>{setIdReal(true)})
-    if(playlists) console.log(playlists)
-  }, [dispatch]);
+  }, [dispatch, ProgramsId]);
 
-  const playlists = useSelector((state)=> state.userPlaylists.finalPlaylists);
+  const playlists = useSelector((state)=> state.userPlaylists);
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
   
@@ -122,17 +121,22 @@ export const Detail = () => {
   ? defaultBackground
   : programDetail.backdrop
 
+  console.log(playlists)
+
   return (
     <div className={css.container}>
       <NavBar />
         <Header backgroundurl={`url(${imageBack})`} />
-        {
+        { 
+          !idReal ?
+          <GreenLoading/>
+          :
           <div className={css.top}>
             <ProgramDetailTopAreaC programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}
-             similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick} GreenLoading={GreenLoading}/>
+             similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
-              user.id && idReal ?
-              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating}/>
+              playlists.totalPlaylist ?
+              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating} userId={user.id} playlistData={playlists}/>
               : <ButtonOptionsFake/>
              }
           </div>
