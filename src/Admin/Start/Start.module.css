@@ -1,0 +1,53 @@
+.container{
+  background-image: url('https://i.ibb.co/tX26dKk/concepto-cine-carrete-entradas.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  color: #fff;
+}
+
+.nav{
+  height: 5rem;
+  background-color: #000;
+}
+
+.contain{
+  background-color: #00000050;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 10px #000;
+  border-radius: 1rem;
+  margin: 3rem;
+  padding: .5rem;
+}
+
+.title{
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 2rem auto;
+  text-align: center;
+  color: #15d415;
+  width: 50rem;
+}
+
+.intro{
+  margin: 2rem 10rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.complemento{
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 1rem 10rem;
+  text-align: center;
+}
+
+.thanks{
+  font-size: 1.2rem;
+  margin: 3rem 10rem;
+  text-align: center;
+  font-weight: 500;
+  color: #15d415;
+}
