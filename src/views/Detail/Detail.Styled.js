@@ -63,17 +63,16 @@ export const CloseButtonContainerDonate = styled.div`
 `;
 
 export const CloseButton = styled.label`
-  width: 35px;
-  height: 25px;
+  background: transparent;
   border: 2px solid #fce8e6;
   border-radius: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
   cursor: pointer;
+  font-size: 20px;
   color: #fce8e6;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 1;
   &:hover {
     color: rgb(25, 213, 118);
     border-color: rgb(25, 213, 118);
