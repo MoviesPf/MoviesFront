@@ -8,9 +8,9 @@ const Users = () => {
   const user = useSelector((select) => select.allUsers)
   console.log(user)
 
-  const handlerClick = () => {
-    dispatch(getUserById())
-    navigate(`detail/${user.id}`)
+  const handlerClick = (id) => {
+    dispatch(getUserById(id))
+    navigate(`detail/${id}`)
   }
 
   return (
@@ -28,7 +28,7 @@ const Users = () => {
 
       {user?.map((user, i) => {
         return (
-          <div onClick={() => handlerClick} key={i} className={style.contain}>
+          <div onClick={() => handlerClick(user.id)} key={i} className={style.contain}>
             <span className={style.content}>{user.id}</span>
             <span className={style.content}>{user.name}</span>
             <span className={style.content}>{user.nickname}</span>
