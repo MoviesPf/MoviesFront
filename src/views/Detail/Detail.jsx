@@ -1,4 +1,4 @@
-import { Header, Modal, CloseButton, Comments, Submit, ContainerModalInfo, CheckboxContainer, CheckboxLabel, Checkbox, CloseButtonContainerDonate, TextDonation, ContainerModal, IconImg, CloseButtonContainer, ContainerModalHeader, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
+import { Header, Modal, CloseButton, Comments, Submit, ContainerModalInfo, CustomKnob, HiddenCheckbox, CustomSwitch, CustomCheckbox, CheckboxContainer, CheckboxLabel, /* Checkbox, */ CloseButtonContainerDonate, TextDonation, ContainerModal, IconImg, CloseButtonContainer, ContainerModalHeader, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import fullStar from "../../assets/Icons/icons8-star-100 green.png";
 import emptyStar from "../../assets/Icons/icons8-star-52.png";
 import defaultBackground from "../../assets/defaultBackground.png"
@@ -172,12 +172,15 @@ export const Detail = () => {
             </ContainerModalHeader>
             <Comments placeholder='Add a review...' onChange={(e) => handleComment(e.target.value)}/>
             <CheckboxContainer>
-              <Checkbox 
+              <HiddenCheckbox
                 type="checkbox"
                 id="containsSpoiler"
                 checked={review.spoiler}
                 onChange={handleCheckboxChange}
               />
+              <CustomSwitch checked={review.spoiler}>
+                <CustomKnob checked={review.spoiler} />
+              </CustomSwitch>
               <CheckboxLabel htmlFor="containsSpoiler">Contains Spoiler</CheckboxLabel>
             </CheckboxContainer>
             {showError && 

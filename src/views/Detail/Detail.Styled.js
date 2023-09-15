@@ -292,60 +292,98 @@ export const ProgramCard = styled.img`
   z-index: 2;
 `;
 
-export const Checkbox = styled.input`
-  width: 40px;
-  background-color: #ccc;
-  border-radius: 25px;
-  position: relative;
+export const CheckboxContainer = styled.label`
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  cursor: pointer;
+`;
 
-  &:checked + label {
+export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+`;
+
+export const CustomSwitch = styled.div`
+  width: 40px;
+  height: 20px;
+  background-color: ${({ checked }) =>
+    checked ? "rgb(25, 213, 118)" : "#ccc"};
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
     background-color: rgb(25, 213, 118);
   }
 
-  &:checked + label::before {
-    content: "";
-    width: 20px;
-    height: 20px;
-    background-color: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: 0.3s;
-    transform: translateX(20px);
-  }
-`;
-
-export const CheckboxContainer = styled.div`
-  display: grid;
-  align-items: center;
-  grid-template-columns: auto 1fr;
-  color: #fce8e6;
-  font-weight: bold;
-  font-size: 16px;
-  column-gap: 8px;
-`;
-
-export const CheckboxLabel = styled.label`
-  width: 40px;
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 25px;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-
   &::before {
     content: "";
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background-color: white;
     border-radius: 50%;
     position: absolute;
-    top: 0;
-    left: 0;
-    transition: 0.3s;
+    transition: transform 0.3s ease;
+    transform: ${({ checked }) =>
+      checked ? "translateX(20px)" : "translateX(0)"};
   }
+`;
+
+export const CustomKnob = styled.div`
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  transition: transform 0.3s ease;
+  transform: ${({ checked }) =>
+    checked ? "translateX(20px)" : "translateX(0)"};
+`;
+
+export const CustomCheckbox = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgb(25, 213, 118);
+  }
+
+  ${HiddenCheckbox}:checked + & {
+    background-color: rgb(25, 213, 118);
+    border-color: rgb(25, 213, 118);
+  }
+
+  &::after {
+    content: "\u2713"; /* Esto es un símbolo de marca de verificación Unicode */
+    font-size: 14px;
+    color: white;
+    display: block;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  ${HiddenCheckbox}:checked + &::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
+export const CheckboxLabel = styled.span`
+  font-size: 16px;
+  color: #fce8e6;
+  font-weight: bold;
 `;
 
 export const DonationContainer = styled.div`
