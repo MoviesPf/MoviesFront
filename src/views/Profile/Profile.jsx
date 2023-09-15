@@ -21,6 +21,7 @@ const Profile = () => {
   const reviewsData = useSelector((state) => state.userReviews);
 
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [ menu, setMenu ] = useState("Profile")
 
   useEffect(() => {
