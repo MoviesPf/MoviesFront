@@ -25,7 +25,9 @@ import {
   GET_USER_REVIEWS,
   HANDLE_FAV_WATCHED_WATCHLIST,
   GET_USER_BY_ID,
-  GET_USERS_ADMIN
+  GET_USERS_ADMIN,
+  RESET_USER_BY_ID,
+  DELETE_USER
 } from './actions-type';
 
 const initialState = {
@@ -39,9 +41,9 @@ const initialState = {
   userById: {},
   userPlaylists: {},
   userReviews: {},
-  message: "",
-  type: "main",
-  selectedOption: null,
+  message: '',
+  type: 'main',
+  selectedOption: null
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -190,8 +192,13 @@ const reducer = (state = initialState, { type, payload }) => {
         userById: payload
       };
 
+    case DELETE_USER:
+      console.log(payload);
+      return {
+        ...state,
+        userById: payload
+      };
     case GET_USERS_ADMIN:
-      console.log(payload)
       return {
         ...state,
         allUsers: payload.data,
@@ -201,7 +208,13 @@ const reducer = (state = initialState, { type, payload }) => {
           totalDonators: payload.totalDonators,
           totalReviews: payload.totalReviews
         }
-      }
+      };
+
+    case RESET_USER_BY_ID:
+      return {
+        ...state,
+        userById: {}
+      };
 
     default:
       return state;

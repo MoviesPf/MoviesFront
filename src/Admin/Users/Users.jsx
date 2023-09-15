@@ -1,17 +1,24 @@
 import { useDispatch, useSelector } from 'react-redux';
-import style from './Users.module.css'
+import style from './Users.module.css';
 import { useNavigate } from 'react-router-dom';
+import { getUserById } from '../../Redux/actions';
+import { useEffect } from 'react';
 
 const Users = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const user = useSelector((select) => select.allUsers)
-  console.log(user)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((select) => select.allUsers);
+  console.log(user);
 
-  const handlerClick = () => {
-    dispatch(getUserById())
-    navigate(`detail/${user.id}`)
-  }
+  const handlerClick = (id) => {
+    dispatch(getUserById(id));
+    navigate(`detail/${id}`);
+  };
+
+  // useEffect(() => {
+    
+  
+  // }, []);
 
   return (
     <div className={style.container}>
@@ -28,7 +35,11 @@ const Users = () => {
 
       {user?.map((user, i) => {
         return (
-          <div onClick={() => handlerClick} key={i} className={style.contain}>
+          <div
+            onClick={() => handlerClick(user.id)}
+            key={i}
+            className={style.contain}
+          >
             <span className={style.content}>{user.id}</span>
             <span className={style.content}>{user.name}</span>
             <span className={style.content}>{user.nickname}</span>
@@ -36,10 +47,10 @@ const Users = () => {
             <span className={style.content}>{user.Reviews.length}</span>
             <span className={style.content}>{user.banned ? 'si' : 'no'}</span>
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
 export default Users;
