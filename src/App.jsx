@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Outlet, Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import { Signin } from './views/Signin/Signin';
 import Profile from './views/Profile/Profile';
 import { Detail } from './views/Detail/Detail';
@@ -40,7 +40,7 @@ function App() {
         <Route path='/about' element={<About />} />
 
         {/* rutas Admin Dashboard */}
-        <Route element={<ProtectedRoute canActivate={true}/>}>
+        <Route element={<ProtectedRoute canActivate={true} />}>
           <Route path='admin' element={<Start />}>
             <Route path='users' element={<Users />} />
             <Route path='detail/:id' element={<DetailUsers />} />
