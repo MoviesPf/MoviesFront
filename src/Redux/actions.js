@@ -27,7 +27,8 @@ import {
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
   HANDLE_FAV_WATCHED_WATCHLIST,
-  GET_USER_BY_ID
+  GET_USER_BY_ID,
+  GET_USERS_ADMIN
 } from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
@@ -377,5 +378,21 @@ export const getUserById = (id) => {
       type: GET_USER_BY_ID,
       payload: data
     });
+  };
+};
+// ADMIN DASHBOARD
+export const getUsersAdmin = () => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(URL_API + 'users/all');
+      const data = await res.json();
+
+      return dispatch({
+        type: GET_USERS_ADMIN,
+        payload: data
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
