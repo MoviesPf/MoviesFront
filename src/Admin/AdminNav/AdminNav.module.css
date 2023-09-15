@@ -1,7 +1,9 @@
 .container {
   background-color: #000;
   width: 100vw;
-  height: 5rem;
+  height: 10vh;
+  position: sticky;
+  top: .01px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
