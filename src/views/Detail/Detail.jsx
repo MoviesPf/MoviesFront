@@ -1,13 +1,20 @@
 import {
   Header,
-  ModalReview,
+  ContainerModal,
+  ContainerModalHeader,
+  CheckboxContainer,
+  Checkbox,
+  CheckboxLabel,
+  CloseButtonContainerDonate,
+  ContainerModalInfo,
+  Modal,
   CloseButton,
   Comments,
   Submit,
-  ContainerModalReview,
+  ContainerReviews,
   IconImg,
   CloseButtonContainer,
-  ContainerModalImg,
+  ContainerAvatarImg,
   ModalImg,
   SpanError,
   StarsContainer,
@@ -247,14 +254,17 @@ export const Detail = () => {
                   <CloseButton onClick={() => setShowDonation(false)}> x </CloseButton>
                 </CloseButtonContainerDonate>              
               </ContainerModalHeader>
+              <br/>
               <ContainerModalInfo>
                 <Advertisement/>
                 {/* <TextDonation>¡You can donate us a popcorn! 🍿</TextDonation> */}
               </ContainerModalInfo>
+              <br/>
               <Submit onClick={() => handleDonate()}>Donate</Submit >
             </Modal>
           </ContainerModal>
         }
+        <br/>
         <Footer />
     </div>
   );
