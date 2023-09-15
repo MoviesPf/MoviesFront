@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import { ReviewContainer } from "./ReviewContainer/ReviewContainer";
+import { EditProfileModal } from "./EditProfileModal/EditProfileModal";
 import { Footer } from '../../Components/Footer/Footer';
 import { NavBar }from "../../Components/NavBar/NavBar";
 import { CardFake } from "./CardFake/CardFake.jsx";
@@ -61,7 +62,7 @@ const Profile = () => {
 
         <AreaContainer>
           <UserData avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
-          <NavProfile menu={menu} setMenu={setMenu} favorites={favorites} watchlist={watchlist} watched={watched}/>
+          <NavProfile setShowModal={setShowModal} menu={menu} setMenu={setMenu} favorites={favorites} watchlist={watchlist} watched={watched}/>
             
           <div>
             <LineNavHR/>
@@ -216,6 +217,9 @@ const Profile = () => {
         </AreaContainer>
       </div>
       )}
+      {
+        showModal && <EditProfileModal setShowModal={setShowModal}/>
+      }
     <Footer/>
     </ViewContainer>
   );

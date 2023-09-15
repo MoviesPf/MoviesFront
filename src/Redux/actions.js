@@ -81,7 +81,6 @@ export const getGenres = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(URL_API + 'genres');
-      console.log(data);
       dispatch({
         type: GET_GENRES,
         payload: data
@@ -96,7 +95,6 @@ export const getMovieGenres = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(URL_API + 'genres/movies');
-      console.log(data);
       dispatch({
         type: GET_MOVIES_GENRES,
         payload: data
@@ -111,7 +109,6 @@ export const getSeriesGenres = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(URL_API + 'genres/series');
-      console.log(data);
       dispatch({
         type: GET_SERIES_GENRES,
         payload: data
@@ -172,7 +169,6 @@ export const filterProgramsByPlatform = (platformName, type) => {
       const { data } = await axios.get(
         URL_API + `programs/filter/platform/${platformName}/${type}`
       );
-      console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_BY_PLATFORM,
         payload: data
@@ -190,7 +186,6 @@ export const filterProgramsCombined = (genreName, platformName, type) => {
         URL_API +
           `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
       );
-      console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_COMBINED,
         payload: data
