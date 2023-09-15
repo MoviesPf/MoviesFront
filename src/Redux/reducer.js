@@ -23,7 +23,8 @@ import {
   SELECT_DONATION_OPTION,
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
-  HANDLE_FAV_WATCHED_WATCHLIST
+  HANDLE_FAV_WATCHED_WATCHLIST,
+  GET_USERS_ADMIN
 } from "./actions-type";
 
 const initialState = {
@@ -39,6 +40,8 @@ const initialState = {
   message: "",
   type: "main",
   selectedOption: null,
+  usersInfo: {},
+  allUsers: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -180,6 +183,19 @@ const reducer = (state = initialState, { type, payload }) => {
     case HANDLE_FAV_WATCHED_WATCHLIST:
       return {
         ...state,
+      }
+
+    case GET_USERS_ADMIN:
+      console.log(payload)
+      return {
+        ...state,
+        allUsers: payload.data,
+        usersInfo: {
+          total: payload.total,
+          totalBanned: payload.totalBanned,
+          totalDonators: payload.totalDonators,
+          totalReviews: payload.totalReviews
+        }
       }
 
     default:

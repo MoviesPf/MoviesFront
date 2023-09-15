@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes, useParams } from 'react-router-dom';
 import { Signin } from './views/Signin/Signin';
 import Profile from './views/Profile/Profile';
 import { Detail } from './views/Detail/Detail';
@@ -23,6 +23,8 @@ import ProtectedRoute from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 
 function App() {
+  const path = useParams()
+  console.log(path)
   const user = useSelector((state) => state.user)
   console.log(user)
 
@@ -41,11 +43,11 @@ function App() {
         <Route element={<ProtectedRoute canActivate={true}/>}>
           <Route path='admin' element={<Start />}>
             <Route path='users' element={<Users />} />
-            <Route path='users/:id' element={<DetailUsers />} />
+            <Route path='detail/:id' element={<DetailUsers />} />
             <Route path='reviews' element={<Reviews />} />
-            <Route path='reviews/:ReviewsId' element={<DetailReviews />} />
+            <Route path='detail/:ReviewsId' element={<DetailReviews />} />
             <Route path='programs' element={<Programs />} />
-            <Route path='programs/:ProgramsId' element={<DetailPrograms />} />
+            <Route path='detail/:ProgramsId' element={<DetailPrograms />} />
             <Route path='create' element={<Form />} />
             <Route path='donations' element={<Donations />} />
           </Route>
