@@ -1,16 +1,19 @@
-import css from './Home.module.css';
-import { useEffect} from 'react';
-import { Cards } from '../../Components/Cards/Cards';
-import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { Footer } from '../../Components/Footer/Footer';
-import { NavBar } from '../../Components/NavBar/NavBar';
-import { Filters } from '../../Components/Filters/Filters';
-import { Carrusel } from '../../Components/Carrusel/Carrusel';
-import { Portrait } from '../../Components/Portrait/Portrait';
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
-import BtnStart from '../../Components/Buttons/BtnStart';
-import styled from 'styled-components'
+import { Portrait } from '../../Components/Portrait/Portrait';
+import { Carrusel } from '../../Components/Carrusel/Carrusel';
+import { BtnStart } from '../../Components/Buttons/BtnStart';
+import { Filters } from '../../Components/Filters/Filters';
+import { NavBar } from '../../Components/NavBar/NavBar';
+import { Footer } from '../../Components/Footer/Footer';
+import { Cards } from '../../Components/Cards/Cards';
+
+import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
+import { useLocalStorage } from '../../utils/useLocalStorage';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import styled from 'styled-components';
+import css from './Home.module.css';
 
 const LineHR = styled.hr`
   border: 0;
@@ -27,15 +30,26 @@ const LineHR = styled.hr`
 
 export const Home = () => {
   const dispatch = useDispatch();
-  const user = useSelector( (state)=> state.user)
+  const userInState = useSelector((state) => state.user);
+  const user = JSON.parse(localStorage.getItem('userStorage'));
+
   const programs = useSelector((state) => state.programs);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
 
+  console.log(user);
+
+  const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
+
   useEffect(() => {
-    if (programs.length === 0){
-      dispatch(getAllPrograms()).then( user.id ? dispatch(getUserPlaylists(user.id)) : null);
+    if (programs.length === 0) {
+      dispatch(getAllPrograms());
     }
-  },[dispatch]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (userInState.id) setUserStorage(userInState);
+    user?.id ? dispatch(getUserPlaylists(user.id)) : null;
+  }, []);
 
   return (
     <div className={css.background}>
@@ -45,25 +59,41 @@ export const Home = () => {
         <GreenLoading />
       ) : (
         <div className={css.content}>
+          <Portrait
+            programs={
+              filteredPrograms.data ? filteredPrograms.data : programs.data
+            }
+          />
+          <Filters />
 
-          <Portrait programs={filteredPrograms.data ? filteredPrograms.data : programs.data}/>
-          <Filters/>
-
-          <LineHR/>
+          <LineHR />
           <h1 className={css.subTitle}>Latest Releases</h1>
-          <LineHR/>
+          <LineHR />
 
-          <Carrusel programs={ filteredPrograms.data ? filteredPrograms.data : programs.data}/>
+          <Carrusel
+            programs={
+              filteredPrograms.data ? filteredPrograms.data : programs.data
+            }
+          />
 
-          <LineHR/>
-          <div className={css.subTitle}> All Programs </div>
-          <LineHR/>
+          <LineHR />
+          <div id='programs' className={css.subTitle}>
+            All Programs
+          </div>
+          <LineHR />
 
-          <BtnStart/>
-          <Cards programs={ filteredPrograms.data ? filteredPrograms.data : programs.data} total={filteredPrograms.data ? filteredPrograms.total : programs.total}/>    
+          <BtnStart />
+          <Cards
+            programs={
+              filteredPrograms.data ? filteredPrograms.data : programs.data
+            }
+            total={
+              filteredPrograms.data ? filteredPrograms.total : programs.total
+            }
+          />
+          <Footer />
         </div>
       )}
-      <Footer/>
     </div>
   );
 };

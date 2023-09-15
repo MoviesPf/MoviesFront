@@ -53,7 +53,7 @@ const Login = () => {
   };
 
   /////////////////////////////////////////////////////////////////
-  const [email, setEmail] = useLocalStorage('text', ' ');
+  const [email, setEmail] = useLocalStorage('text',' ');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {

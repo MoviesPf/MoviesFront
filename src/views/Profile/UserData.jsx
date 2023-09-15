@@ -1,20 +1,17 @@
 import styled from 'styled-components'
 
-const UserBarr = styled.div` 
-background-color: 1C1C1C;
+const UserBarr = styled.div`
 position: relative;
 align-items: center;
-height: max-content;
+height: 10em;
 display: flex;
 width: 100%;
 z-index: 2;
 `
 
-
 const UserNameContainer = styled.div`
 margin-right: 20px;
 margin-left: 20px;
-height: max-content;
 width: 80%;
 display: flex;
 color: white;
@@ -29,11 +26,14 @@ flex-direction: row;
 align-items: center;
 justify-content: space-between;
 `
+
 const AliasAndNick = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
+margin-right: 5rem; 
 `
+
 const Alias = styled.h1`
 margin-right: 10px;
 color: green;
@@ -49,18 +49,13 @@ margin-left: 50px;
 top: -95px;
 `
 
-const UserCard = styled.div` 
-height: 100%;
-// display: flex;
-margin-left: 120px;
-`
 const UserPicture = styled.img`
 border-radius: 100%;
 height: 250px;
 width: 250px;
 `
 
-const PresentationLine = ({avatar,name,nickname,status}) => {
+export const UserData = ({avatar,name,nickname,status}) => {
 
     return (
         <UserBarr>
@@ -71,7 +66,7 @@ const PresentationLine = ({avatar,name,nickname,status}) => {
                 <NameAndNickname>
                     <h1>{name}</h1>
                     <AliasAndNick>
-                        <Alias>Alias:</Alias>
+                        <Alias>Nickname:</Alias>
                         <h1>{nickname}</h1>
                     </AliasAndNick>
                 </NameAndNickname>
@@ -80,4 +75,3 @@ const PresentationLine = ({avatar,name,nickname,status}) => {
         </UserBarr>
     );
 };
-export default PresentationLine;
