@@ -19,12 +19,9 @@ import {
   Start,
   Users
 } from './Admin/index';
-<<<<<<< HEAD
 import ProtectedRoute from './utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
-=======
 import  Cloudinary  from './views/Profile/Cloudinary/Cloudinary';
->>>>>>> 381cf11e4e24911ce954f6e712e5e1ed1440deb5
 
 function App() {
   const path = useParams();
