@@ -47,7 +47,7 @@ export const Home = () => {
   
   useEffect(()=> {
     if (userInState.id) setUserStorage(userInState)
-    user.id ? dispatch(getUserPlaylists(user.id)) : null
+    user?.id ? dispatch(getUserPlaylists(user.id)) : null
   },[])
 
   return (

@@ -34,3 +34,7 @@ export const MOVIE_TYPE = "MOVIE_TYPE";
 export const SERIE_TYPE = "SERIE_TYPE";
 
 export const POST_REVIEW = "POST_REVIEW";
+
+export const UPLOAD_IMAGE = "UPLOAD_IMAGE";
+export const MODIFY_IMAGE = "MODIFY_IMAGE";
+export const DELETE_IMAGE = "DELETE_IMAGE";

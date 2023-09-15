@@ -23,7 +23,10 @@ import {
   SELECT_DONATION_OPTION,
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
-  HANDLE_FAV_WATCHED_WATCHLIST
+  HANDLE_FAV_WATCHED_WATCHLIST,
+  UPLOAD_IMAGE,
+  MODIFY_IMAGE,
+  DELETE_IMAGE
 } from "./actions-type";
 
 const initialState = {
@@ -181,6 +184,37 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       }
+      case UPLOAD_IMAGE:
+        // Actualiza la URL de la imagen en el estado del usuario
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            [payload.imageType]: payload.imageUrl,
+          },
+        };
+  
+      // Caso de acción para modificar una imagen
+      case MODIFY_IMAGE:
+        // Actualiza la URL de la imagen en el estado del usuario
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            [payload.imageType]: payload.imageUrl,
+          },
+        };
+  
+      // Caso de acción para eliminar una imagen
+      case DELETE_IMAGE:
+        // Establece la URL de la imagen en blanco en el estado del usuario
+        return {
+          ...state,
+          user: {
+            ...state.user,
+            [payload.imageType]: "",
+          },
+        };
 
     default:
       return state;
