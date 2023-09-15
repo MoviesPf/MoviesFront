@@ -51,8 +51,10 @@
     margin: 5px;
     padding-right: 10px;
     padding-left: 10px;
-    background-color: green;
-    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #19d576;
+    color: rgb(31, 31, 31);
     transition: all 0.25s;
 }
 
@@ -62,7 +64,7 @@
     margin: 5px;
     padding-right: 10px;
     padding-left: 10px;
-    background-color: green;
+    background-color: #288858;
     color: white;
     transition: all 0.25s;
 }

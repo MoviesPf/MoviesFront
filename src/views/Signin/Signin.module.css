@@ -52,6 +52,11 @@
   justify-content: center;
   align-items: center;
 }
+.imagenesContainer{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
 .avatarUserImg {
   height: 6rem;
