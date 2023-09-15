@@ -14,7 +14,7 @@ import {
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
-import { ButtonOptionsFake } from "./buttonOptions/ButtonOptionsFake";
+import { ButtonOptionsFake } from "./ButtonOptions/ButtonOptionsFake";
 import { ProgramDetail }  from './DetailData/ProgramDetail';
 import { ButtonOptions } from './ButtonOptions/ButtonOptions';
 import { NavBar } from '../../Components/NavBar/NavBar';
