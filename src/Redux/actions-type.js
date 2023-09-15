@@ -39,5 +39,3 @@ export const POST_REVIEW = "POST_REVIEW";
 
 export const UPLOAD_AVATAR = "UPLOAD_AVATAR";
 export const UPLOAD_BACKGROUND = "UPLOAD_BACKGROUND";
-export const MODIFY_IMAGE = "MODIFY_IMAGE";
-export const DELETE_IMAGE = "DELETE_IMAGE";
