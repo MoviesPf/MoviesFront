@@ -27,7 +27,10 @@ import {
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
   HANDLE_FAV_WATCHED_WATCHLIST,
-  GET_USERS_ADMIN
+  GET_USER_BY_ID,
+  GET_USERS_ADMIN,
+  RESET_USER_BY_ID,
+  DELETE_USER
 } from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
@@ -274,6 +277,7 @@ export const resetMessage = () => {
     });
   };
 };
+
 export const changeTypeMain = () => {
   return { type: MAIN_TYPE, payload: 'main' };
 };
@@ -369,6 +373,17 @@ export const handleList = (UserId, PlaylistName, ProgramId) => {
   };
 };
 
+export const getUserById = (id) => {
+  console.log(id);
+  return async (dispatch) => {
+    const res = await fetch(URL_API + `users/${id}`);
+    const data = await res.json();
+    return dispatch({
+      type: GET_USER_BY_ID,
+      payload: data
+    });
+  };
+};
 // ADMIN DASHBOARD
 export const getUsersAdmin = () => {
   return async (dispatch) => {
@@ -381,7 +396,35 @@ export const getUsersAdmin = () => {
         payload: data
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  };
+};
+
+export const deleteUser = (id) => {
+  console.log(id);
+  return async (dispatch) => {
+    try {
+      const res = await fetch(URL_API + 'users/ban/' + id, {
+        method: 'DELETE'
+      });
+      const data = await res.json();
+
+      return dispatch({
+        type: DELETE_USER,
+        payload: data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const resetUserById = () => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_USER_BY_ID,
+      payload: ''
+    });
   };
 };
