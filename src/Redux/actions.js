@@ -374,7 +374,7 @@ export const uploadAvatar = (userId, image) => async (dispatch) => {
   try {
     const imageData = {
       userId: userId,
-      imageFile: image,
+      image: image,
     };
 
     const response = await axios.post(`http://localhost:3001/users/avatar/upload-image`, imageData, {
@@ -401,7 +401,7 @@ export const uploadBackground = (userId, image) => async (dispatch) => {
   try {
     const imageData = {
       userId: userId,
-      imageFile: image,
+      image: image,
     };
 
     const response = await axios.post(`http://localhost:3001/users/background/upload-image`, imageData, {
@@ -422,25 +422,25 @@ export const uploadBackground = (userId, image) => async (dispatch) => {
 };
 
 
-export const modifyImage = (userId, image, imageType) => async (dispatch) => {
-  try {
-    const imageData = {
-      userId: userId,
-      imageType: imageType,
-      imageFile: image,
-    };
+// export const modifyImage = (userId, image, imageType) => async (dispatch) => {
+//   try {
+//     const imageData = {
+//       userId: userId,
+//       imageType: imageType,
+//       imageFile: image,
+//     };
 
-    const response = await axios.post('http://localhost:3001/users/modify-image', imageData, {
-      headers: {
-        'Content-Type': 'application/json', // Especifica el tipo de contenido como JSON
-      },
-    });
+//     const response = await axios.post('http://localhost:3001/users/modify-image', imageData, {
+//       headers: {
+//         'Content-Type': 'application/json', // Especifica el tipo de contenido como JSON
+//       },
+//     });
 
-    dispatch({ type: MODIFY_IMAGE, payload: response.data });
-  } catch (error) {
-    console.error("Error al modificar la imagen:", error);
-  }
-};
+//     dispatch({ type: MODIFY_IMAGE, payload: response.data });
+//   } catch (error) {
+//     console.error("Error al modificar la imagen:", error);
+//   }
+// };
 
 export const deleteImage = (userId, imageType) => async (dispatch) => {
   try {

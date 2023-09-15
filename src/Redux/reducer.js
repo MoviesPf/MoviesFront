@@ -188,10 +188,10 @@ const reducer = (state = initialState, { type, payload }) => {
       }
     case UPLOAD_AVATAR:
         // Actualiza la URL de la imagen en el estado del usuario
-      return {
-        ...state,
-        user: {
-          ...state.user,
+        return {
+          ...state,
+          user: {
+            ...state.user,
           [payload.imageType]: payload.imageUrl,
         },
       };
