@@ -6,8 +6,9 @@ export const Advertisement = () => {
   return (
     <Link to={`/donate`} style={{ textDecoration: 'none' }}>
         <div className={css.container}>
-            <h1 className={css.title}>Donate us a popcorn</h1>
-            <h2 className={css.subtitle}>and get a beret</h2>
+            <div className={css.background}></div>
+            <div className={css.title}>Donate now !</div>
+            <div className={css.subtitle}>Support us and get a beret</div>
         </div>
     </Link>
   );
