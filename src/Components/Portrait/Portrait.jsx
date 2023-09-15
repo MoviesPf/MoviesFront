@@ -12,7 +12,7 @@ export const Portrait = ({ programs }) => {
       poster: defaultPortrait,
       backdrop: defaultPortrait,
       overview: "",
-      release_date: "",
+      release_date: "", 
       Genres: [],
       Platforms: [],
     };

@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import { Signin } from './views/Signin/Signin';
 import Profile from './views/Profile/Profile';
 import { Detail } from './views/Detail/Detail';
@@ -19,9 +19,11 @@ import {
   Start,
   Users
 } from './Admin/index';
+import ProtectedRoute from './utils/ProtectedRoute';
 import  Cloudinary  from './views/Profile/Cloudinary/Cloudinary';
 
 function App() {
+
   return (
     <>
       <Routes>
@@ -35,15 +37,23 @@ function App() {
         <Route path='/cloudinary' element={<Cloudinary />} />
 
         {/* rutas Admin Dashboard */}
+        <Route element={<ProtectedRoute canActivate={true} />}>
           <Route path='admin' element={<Start />}>
-          <Route path='users' element={<Users />} />
-          <Route path='users/:id' element={<DetailUsers />} />
-          <Route path='reviews' element={<Reviews />} />
-          <Route path='reviews/:ReviewsId' element={<DetailReviews />} />
-          <Route path='programs' element={<Programs />} />
-          <Route path='programs/:ProgramsId' element={<DetailPrograms />} />
-          <Route path='create' element={<Form />} />
-          <Route path='donations' element={<Donations />} />
+            <Route path='users' element={<Users />} />
+            <Route path='users/detail/:id' element={<DetailUsers />} />
+            <Route path='reviews' element={<Reviews />} />
+            <Route
+              path='reviews/detail/:ReviewsId'
+              element={<DetailReviews />}
+            />
+            <Route path='programs' element={<Programs />} />
+            <Route
+              path='progeamas/detail/:ProgramsId'
+              element={<DetailPrograms />}
+            />
+            <Route path='create' element={<Form />} />
+            <Route path='donations' element={<Donations />} />
+          </Route>
         </Route>
       </Routes>
     </>

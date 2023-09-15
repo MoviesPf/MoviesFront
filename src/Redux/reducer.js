@@ -24,6 +24,10 @@ import {
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
   HANDLE_FAV_WATCHED_WATCHLIST,
+  GET_USER_BY_ID,
+  GET_USERS_ADMIN,
+  RESET_USER_BY_ID,
+  DELETE_USER,
   MODIFY_IMAGE,
   DELETE_IMAGE,
   UPLOAD_AVATAR,
@@ -38,12 +42,12 @@ const initialState = {
   genres: [],
   platforms: [],
   user: {},
+  userById: {},
   userPlaylists: {},
   userReviews: {},
-  message: "",
-  type: "main",
-  selectedOption: null,
-  
+  message: '',
+  type: 'main',
+  selectedOption: null
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -52,57 +56,57 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         programs: payload,
-        filteredPrograms: [],
+        filteredPrograms: []
       };
 
     case GET_MOVIES:
       return {
         ...state,
         programs: payload,
-        filteredPrograms: [],
+        filteredPrograms: []
       };
 
     case GET_SERIES:
       return {
         ...state,
         programs: payload,
-        filteredPrograms: [],
+        filteredPrograms: []
       };
 
     case GET_PROGRAM_BY_NAME:
       return {
         ...state,
-        searchedPrograms: payload,
+        searchedPrograms: payload
       };
 
     case GET_GENRES:
       return {
         ...state,
-        genres: payload,
+        genres: payload
       };
 
     case GET_MOVIES_GENRES:
       return {
         ...state,
-        genres: payload,
+        genres: payload
       };
 
     case GET_SERIES_GENRES:
       return {
         ...state,
-        genres: payload,
+        genres: payload
       };
 
     case GET_PLATFORMS:
       return {
         ...state,
-        platforms: payload,
+        platforms: payload
       };
 
     case GET_PROGRAM_DETAIL:
       return {
         ...state,
-        programDetail: payload,
+        programDetail: payload
       };
 
     case FILTER_PROGRAMS_BY_GENRE:
@@ -110,81 +114,110 @@ const reducer = (state = initialState, { type, payload }) => {
     case FILTER_PROGRAMS_COMBINED:
       return {
         ...state,
-        filteredPrograms: payload,
+        filteredPrograms: payload
       };
     case SELECT_DONATION_OPTION:
       return {
         ...state,
-        selectedOption: payload,
+        selectedOption: payload
       };
     //USERS
     case LOGIN_USER:
       return {
         ...state,
         user: payload.data,
-        message: payload.message,
+        message: payload.message
       };
     case POST_USER:
       console.log(payload);
       return {
         ...state,
-        user: payload.data,
+        user: payload.data
       };
     case LOGOUT_USER:
       return {
         ...state,
         user: {},
-        message: payload,
+        message: payload
       };
     case ERROR_LOGIN:
       return {
         ...state,
-        message: payload,
+        message: payload
       };
     case RESET_MESSAGE:
       return {
         ...state,
-        message: "",
+        message: ''
       };
 
     case GET_USER_PLAYLISTS:
       return {
         ...state,
-        userPlaylists:payload
-      }
+        userPlaylists: payload
+      };
 
     case GET_USER_REVIEWS:
       return {
         ...state,
-        userReviews:payload
-      }
-    
+        userReviews: payload
+      };
+
     case MAIN_TYPE:
       return {
         ...state,
-        type: "main",
+        type: 'main'
       };
 
     case MOVIE_TYPE:
       return {
         ...state,
-        type: "movie",
+        type: 'movie'
       };
 
     case SERIE_TYPE:
       return {
         ...state,
-        type: "serie",
+        type: 'serie'
       };
 
     case POST_REVIEW:
       return {
-        ...state,
+        ...state
       };
 
     case HANDLE_FAV_WATCHED_WATCHLIST:
       return {
+        ...state
+      };
+    case GET_USER_BY_ID:
+      return {
         ...state,
+        userById: payload
+      };
+
+    case DELETE_USER:
+      console.log(payload);
+      return {
+        ...state,
+        userById: payload
+      };
+    case GET_USERS_ADMIN:
+      return {
+        ...state,
+        allUsers: payload.data,
+        usersInfo: {
+          total: payload.total,
+          totalBanned: payload.totalBanned,
+          totalDonators: payload.totalDonators,
+          totalReviews: payload.totalReviews
+        }
+      };
+
+    case RESET_USER_BY_ID:
+      return {
+        ...state,
+        userById: {}
       }
     case UPLOAD_AVATAR:
         // Actualiza la URL de la imagen en el estado del usuario
