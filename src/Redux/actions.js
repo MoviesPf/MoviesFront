@@ -31,8 +31,6 @@ import {
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
   DELETE_USER,
-  MODIFY_IMAGE,
-  DELETE_IMAGE,
   UPLOAD_BACKGROUND,
   UPLOAD_AVATAR
 } from "./actions-type";
@@ -477,45 +475,5 @@ export const uploadBackground = (userId, image) => async (dispatch) => {
     }
   } catch (error) {
     console.error('Error al subir la imagen de fondo:', error); // Cambio de mensaje
-  }
-};
-
-
-export const modifyImage = (userId, image, imageType) => async (dispatch) => {
-  try {
-    const imageData = {
-      userId: userId,
-      imageType: imageType,
-      image: image,
-    };
-
-    const response = await axios.post('http://localhost:3001/users/modify-image', imageData, {
-      headers: {
-        'Content-Type': 'application/json', // Especifica el tipo de contenido como JSON
-      },
-    });
-
-    dispatch({ type: MODIFY_IMAGE, payload: response.data });
-  } catch (error) {
-    console.error("Error al modificar la imagen:", error);
-  }
-};
-
-export const deleteImage = (userId, imageType) => async (dispatch) => {
-  try {
-    const imageData = {
-      userId: userId,
-      imageType: imageType,
-    };
-
-    const response = await axios.post('http://localhost:3001/users/delete-image', imageData, {
-      headers: {
-        'Content-Type': 'application/json', // Especifica el tipo de contenido como JSON
-      },
-    });
-
-    dispatch({ type: DELETE_IMAGE, payload: response.data });
-  } catch (error) {
-    console.error("Error al eliminar la imagen:", error);
   }
 };
