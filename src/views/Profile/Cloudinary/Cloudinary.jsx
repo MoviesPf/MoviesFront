@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { uploadAvatar, uploadBackground } from "../../../Redux/actions";
 
 
@@ -65,8 +65,8 @@ const Cloudinary = () => {
     // Abre el widget de Cloudinary y maneja el resultado según el tipo de imagen
     const myWidget = window.cloudinary.createUploadWidget(widgetOptions, (error, result) => {
         if (!error && result && result.event === "success") {
-            const imageUrl = result.info.secure_url;
-            console.log("result.info.secure_url", result.info.secure_url)
+            const imageUrl = result.info.url;
+            console.log(imageUrl)
             if (imageType === "avatar") {
               setUploadedAvatar(imageUrl);
               dispatch(uploadAvatar(user.id, imageUrl)); // Llama a la acción para subir la imagen de avatar

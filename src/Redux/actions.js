@@ -431,10 +431,11 @@ export const resetUserById = () => {
 
 export const uploadAvatar = (userId, image) => async (dispatch) => {
   console.log('userId', userId);
+  console.log("imagen", image);
   try {
     const imageData = {
       userId: userId,
-      imageFile: image,
+      image: image,
     };
 
     const response = await axios.post(`http://localhost:3001/users/avatar/upload-image`, imageData, {
@@ -442,8 +443,6 @@ export const uploadAvatar = (userId, image) => async (dispatch) => {
         'Content-Type': 'application/json',
       },
     });
-    console.log('response', response.config.data)
-    console.log("userDATA",userId)
     
     if (response.data.error) {
       console.error('Error al subir la imagen de avatar:', response.data.error);
@@ -461,7 +460,7 @@ export const uploadBackground = (userId, image) => async (dispatch) => {
   try {
     const imageData = {
       userId: userId,
-      imageFile: image,
+      image: image,
     };
 
     const response = await axios.post(`http://localhost:3001/users/background/upload-image`, imageData, {
@@ -473,7 +472,7 @@ export const uploadBackground = (userId, image) => async (dispatch) => {
     if (response.data.error) {
       console.error('Error al subir la imagen de fondo:', response.data.error); // Cambio de mensaje
     } else {
-      console.log('Imagen de fondo subida exitosamente:', response.data.imageUrl);
+      console.log('Imagen de fondo subida exitosamente:', response.data);
       dispatch({ type: UPLOAD_BACKGROUND, payload: response.data.imageUrl });
     }
   } catch (error) {
@@ -487,7 +486,7 @@ export const modifyImage = (userId, image, imageType) => async (dispatch) => {
     const imageData = {
       userId: userId,
       imageType: imageType,
-      imageFile: image,
+      image: image,
     };
 
     const response = await axios.post('http://localhost:3001/users/modify-image', imageData, {
