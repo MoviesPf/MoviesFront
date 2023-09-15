@@ -5,7 +5,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists } from '../../Redux/actions';
+import {
+  getProgramDetail,
+  createReview,
+  filterProgramsByGenre,
+  getUserPlaylists
+} from '../../Redux/actions';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
@@ -30,18 +35,30 @@ export const Detail = () => {
 
 
   useEffect(() => {
-    dispatch(getProgramDetail(ProgramsId)).then(dispatch(getUserPlaylists(user.id))).then(()=>{setIdReal(true)})
+    dispatch(getProgramDetail(ProgramsId))
+      .then(dispatch(getUserPlaylists(user?.id)))
+      .then(() => {
+        setIdReal(true);
+      });
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
     if (programDetail && programDetail.Genres && programDetail.Genres[0].name) {
-      const genre = programDetail.Genres[0].name ? programDetail.Genres[0].name : "";
-      if (genre !== "")dispatch(filterProgramsByGenre(genre, programDetail.type))
+      const genre = programDetail.Genres[0].name
+        ? programDetail.Genres[0].name
+        : '';
+      if (genre !== '')
+        dispatch(filterProgramsByGenre(genre, programDetail.type));
     }
   }, [dispatch, programDetail]);
 
   useEffect(() => {
-    setPeliculaSimilar(encontrarPeliculaMasParecida(programDetail?.title, similarMovies ? similarMovies : []));
+    setPeliculaSimilar(
+      encontrarPeliculaMasParecida(
+        programDetail?.title,
+        similarMovies ? similarMovies : []
+      )
+    );
   }, [similarMovies]);
 
 
@@ -69,16 +86,16 @@ export const Detail = () => {
     dispatch(getProgramDetail(ProgramsId));
     setReview([...review, review]);
   };
-  
+
   const handleMovieClick = (ProgramsId) => {
-    navigate(`/detail/${ProgramsId}`); 
+    navigate(`/detail/${ProgramsId}`);
   };
 
   function encontrarPeliculaMasParecida(tituloQueTienes, peliculas) {
     function calcularSimilitud(titulo1, titulo2) {
-      const s1 = new Set(titulo1.split(" "));
-      const s2 = new Set(titulo2.split(" "));
-      const intersection = new Set([...s1].filter(x => s2.has(x)));
+      const s1 = new Set(titulo1.split(' '));
+      const s2 = new Set(titulo2.split(' '));
+      const intersection = new Set([...s1].filter((x) => s2.has(x)));
       const union = new Set([...s1, ...s2]);
       const jaccardSimilitud = intersection.size / union.size;
       return jaccardSimilitud;
@@ -96,9 +113,10 @@ export const Detail = () => {
 
   const rating = Math.round(programDetail?.Reviews?.reduce((total, review) => total + review.rating, 0) / programDetail.Reviews?.length);
 
-  let imageBack = programDetail.backdrop === "https://image.tmdb.org/t/p/w500null" 
-  ? defaultBackground
-  : programDetail.backdrop
+  let imageBack =
+    programDetail.backdrop === 'https://image.tmdb.org/t/p/w500null'
+      ? defaultBackground
+      : programDetail.backdrop;
 
   return (
     <Container>
