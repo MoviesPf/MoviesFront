@@ -27,9 +27,10 @@ import {
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
   HANDLE_FAV_WATCHED_WATCHLIST,
-  UPLOAD_IMAGE,
   MODIFY_IMAGE,
-  DELETE_IMAGE
+  DELETE_IMAGE,
+  UPLOAD_BACKGROUND,
+  UPLOAD_AVATAR
 } from "./actions-type";
 
 export const getAllPrograms = (page = 1) => {
@@ -188,7 +189,7 @@ export const filterProgramsCombined = (genreName, platformName, type) => {
     try {
       const { data } = await axios.get(
         URL_API +
-          `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
+        `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
       );
       console.log(data);
       dispatch({
@@ -368,26 +369,58 @@ export const handleList = (UserId, PlaylistName, ProgramId) => {
     })
   }
 }
-
-export const uploadImage = (userId, image, imageType) => async (dispatch) => {
+export const uploadAvatar = (userId, image) => async (dispatch) => {
+  console.log('userId', userId);
   try {
     const imageData = {
       userId: userId,
-      imageType: imageType,
       imageFile: image,
     };
 
-    const response = await axios.post('http://localhost:3001/users/upload-image', imageData, {
+    const response = await axios.post(`http://localhost:3001/users/avatar/upload-image`, imageData, {
       headers: {
-        'Content-Type': 'application/json', // Especifica el tipo de contenido como JSON
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('response', response.config.data)
+    console.log("userDATA",userId)
+    
+    if (response.data.error) {
+      console.error('Error al subir la imagen de avatar:', response.data.error);
+    } else {
+      console.log('Imagen de avatar subida exitosamente:', response);
+      dispatch({ type: UPLOAD_AVATAR, payload: response });
+    }
+  } catch (error) {
+    console.error('Error al subir la imagen de avatar:', error);
+  }
+};
+
+export const uploadBackground = (userId, image) => async (dispatch) => {
+  console.log('userId', userId);
+  try {
+    const imageData = {
+      userId: userId,
+      imageFile: image,
+    };
+
+    const response = await axios.post(`http://localhost:3001/users/background/upload-image`, imageData, {
+      headers: {
+        'Content-Type': 'application/json',
       },
     });
 
-    dispatch({ type: UPLOAD_IMAGE, payload: response.data });
+    if (response.data.error) {
+      console.error('Error al subir la imagen de fondo:', response.data.error); // Cambio de mensaje
+    } else {
+      console.log('Imagen de fondo subida exitosamente:', response.data.imageUrl);
+      dispatch({ type: UPLOAD_BACKGROUND, payload: response.data.imageUrl });
+    }
   } catch (error) {
-    console.error("Error al subir la imagen", error);
+    console.error('Error al subir la imagen de fondo:', error); // Cambio de mensaje
   }
 };
+
 
 export const modifyImage = (userId, image, imageType) => async (dispatch) => {
   try {

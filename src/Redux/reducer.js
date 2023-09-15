@@ -24,9 +24,10 @@ import {
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
   HANDLE_FAV_WATCHED_WATCHLIST,
-  UPLOAD_IMAGE,
   MODIFY_IMAGE,
-  DELETE_IMAGE
+  DELETE_IMAGE,
+  UPLOAD_AVATAR,
+  UPLOAD_BACKGROUND
 } from "./actions-type";
 
 const initialState = {
@@ -42,6 +43,7 @@ const initialState = {
   message: "",
   type: "main",
   selectedOption: null,
+  
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -184,37 +186,46 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       }
-      case UPLOAD_IMAGE:
+    case UPLOAD_AVATAR:
         // Actualiza la URL de la imagen en el estado del usuario
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            [payload.imageType]: payload.imageUrl,
-          },
-        };
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [payload.imageType]: payload.imageUrl,
+        },
+      };
+    case UPLOAD_BACKGROUND:
+        // Actualiza la URL de la imagen en el estado del usuario
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [payload.imageType]: payload.imageUrl,
+        },
+      };
   
       // Caso de acción para modificar una imagen
-      case MODIFY_IMAGE:
+    case MODIFY_IMAGE:
         // Actualiza la URL de la imagen en el estado del usuario
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            [payload.imageType]: payload.imageUrl,
-          },
-        };
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [payload.imageType]: payload.imageUrl,
+        },
+      };
   
       // Caso de acción para eliminar una imagen
-      case DELETE_IMAGE:
+    case DELETE_IMAGE:
         // Establece la URL de la imagen en blanco en el estado del usuario
-        return {
-          ...state,
-          user: {
-            ...state.user,
-            [payload.imageType]: "",
-          },
-        };
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [payload.imageType]: "",
+        },
+      };
 
     default:
       return state;
