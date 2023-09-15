@@ -27,8 +27,12 @@ import {
   GET_USER_BY_ID,
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
-  DELETE_USER
-} from './actions-type';
+  DELETE_USER,
+  MODIFY_IMAGE,
+  DELETE_IMAGE,
+  UPLOAD_AVATAR,
+  UPLOAD_BACKGROUND
+} from "./actions-type";
 
 const initialState = {
   programs: [],
@@ -214,6 +218,46 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userById: {}
+      }
+    case UPLOAD_AVATAR:
+        // Actualiza la URL de la imagen en el estado del usuario
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [payload.imageType]: payload.imageUrl,
+        },
+      };
+    case UPLOAD_BACKGROUND:
+        // Actualiza la URL de la imagen en el estado del usuario
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [payload.imageType]: payload.imageUrl,
+        },
+      };
+  
+      // Caso de acción para modificar una imagen
+    case MODIFY_IMAGE:
+        // Actualiza la URL de la imagen en el estado del usuario
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [payload.imageType]: payload.imageUrl,
+        },
+      };
+  
+      // Caso de acción para eliminar una imagen
+    case DELETE_IMAGE:
+        // Establece la URL de la imagen en blanco en el estado del usuario
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          [payload.imageType]: "",
+        },
       };
 
     default:

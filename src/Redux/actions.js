@@ -30,8 +30,12 @@ import {
   GET_USER_BY_ID,
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
-  DELETE_USER
-} from './actions-type';
+  DELETE_USER,
+  MODIFY_IMAGE,
+  DELETE_IMAGE,
+  UPLOAD_BACKGROUND,
+  UPLOAD_AVATAR
+} from "./actions-type";
 
 export const getAllPrograms = (page = 1) => {
   return async (dispatch) => {
@@ -184,7 +188,7 @@ export const filterProgramsCombined = (genreName, platformName, type) => {
     try {
       const { data } = await axios.get(
         URL_API +
-          `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
+        `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
       );
       dispatch({
         type: FILTER_PROGRAMS_COMBINED,
@@ -379,6 +383,7 @@ export const getUserById = (id) => {
     });
   };
 };
+
 // ADMIN DASHBOARD
 export const getUsersAdmin = () => {
   return async (dispatch) => {
@@ -422,4 +427,96 @@ export const resetUserById = () => {
       payload: ''
     });
   };
+}
+
+export const uploadAvatar = (userId, image) => async (dispatch) => {
+  console.log('userId', userId);
+  try {
+    const imageData = {
+      userId: userId,
+      imageFile: image,
+    };
+
+    const response = await axios.post(`http://localhost:3001/users/avatar/upload-image`, imageData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('response', response.config.data)
+    console.log("userDATA",userId)
+    
+    if (response.data.error) {
+      console.error('Error al subir la imagen de avatar:', response.data.error);
+    } else {
+      console.log('Imagen de avatar subida exitosamente:', response);
+      dispatch({ type: UPLOAD_AVATAR, payload: response });
+    }
+  } catch (error) {
+    console.error('Error al subir la imagen de avatar:', error);
+  }
+};
+
+export const uploadBackground = (userId, image) => async (dispatch) => {
+  console.log('userId', userId);
+  try {
+    const imageData = {
+      userId: userId,
+      imageFile: image,
+    };
+
+    const response = await axios.post(`http://localhost:3001/users/background/upload-image`, imageData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.data.error) {
+      console.error('Error al subir la imagen de fondo:', response.data.error); // Cambio de mensaje
+    } else {
+      console.log('Imagen de fondo subida exitosamente:', response.data.imageUrl);
+      dispatch({ type: UPLOAD_BACKGROUND, payload: response.data.imageUrl });
+    }
+  } catch (error) {
+    console.error('Error al subir la imagen de fondo:', error); // Cambio de mensaje
+  }
+};
+
+
+export const modifyImage = (userId, image, imageType) => async (dispatch) => {
+  try {
+    const imageData = {
+      userId: userId,
+      imageType: imageType,
+      imageFile: image,
+    };
+
+    const response = await axios.post('http://localhost:3001/users/modify-image', imageData, {
+      headers: {
+        'Content-Type': 'application/json', // Especifica el tipo de contenido como JSON
+      },
+    });
+
+    dispatch({ type: MODIFY_IMAGE, payload: response.data });
+  } catch (error) {
+    console.error("Error al modificar la imagen:", error);
+  }
+};
+
+export const deleteImage = (userId, imageType) => async (dispatch) => {
+  try {
+    const imageData = {
+      userId: userId,
+      imageType: imageType,
+    };
+
+    const response = await axios.post('http://localhost:3001/users/delete-image', imageData, {
+      headers: {
+        'Content-Type': 'application/json', // Especifica el tipo de contenido como JSON
+      },
+    });
+
+    dispatch({ type: DELETE_IMAGE, payload: response.data });
+  } catch (error) {
+    console.error("Error al eliminar la imagen:", error);
+  }
 };

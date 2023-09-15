@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Cloudinary from './Cloudinary/Cloudinary'
 
 const UserBarr = styled.div`
 position: relative;
@@ -59,6 +60,7 @@ export const UserData = ({avatar,name,nickname,status}) => {
 
     return (
         <UserBarr>
+            <Cloudinary/>
             <Background>
             <UserPicture src={avatar}/>
             </Background>
