@@ -20,13 +20,9 @@ import {
   Users
 } from './Admin/index';
 import ProtectedRoute from './utils/ProtectedRoute';
-import { useSelector } from 'react-redux';
+import  Cloudinary  from './views/Profile/Cloudinary/Cloudinary';
 
 function App() {
-  const path = useParams();
-  console.log(path);
-  const user = useSelector((state) => state.user);
-  console.log(user);
 
   return (
     <>
@@ -38,6 +34,7 @@ function App() {
         <Route path='/detail/:ProgramsId' element={<Detail />} />
         <Route path='/donate' element={<Donation />} />
         <Route path='/about' element={<About />} />
+        <Route path='/cloudinary' element={<Cloudinary />} />
 
         {/* rutas Admin Dashboard */}
         <Route element={<ProtectedRoute canActivate={true} />}>
