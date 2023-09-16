@@ -47,8 +47,10 @@ export const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (userInState.id) setUserStorage(userInState);
-    user?.id ? dispatch(getUserPlaylists(user.id)) : null;
+    if (userInState.id) {
+      setUserStorage(userInState);
+      user.id ? dispatch(getUserPlaylists(user.id)) : null;
+    }
   }, []);
 
   return (

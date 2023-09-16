@@ -74,7 +74,7 @@ export const NavBar = () => {
             </svg>
           </button>
           {
-          userStorage.name ? 
+          user?.id ? 
           <div className={css.user}>
             <button onClick={LogOut} className={css.sesion}> Sign Out </button>
             <div className={css.avatarUser} onClick={() => navigate('/profile')}>

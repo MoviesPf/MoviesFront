@@ -127,7 +127,7 @@ export const Detail = () => {
           <GreenLoading/>
           :
           <Top>
-            <ProgramDetail programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}
+            <ProgramDetail setIdReal={setIdReal} programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
               user.id && playlists.totalPlaylist ?

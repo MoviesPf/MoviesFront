@@ -5,7 +5,7 @@ import defaultImg from "../../../assets/defaultMovie.png"
 import emptyStar from "../../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
 
-export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
+export const ProgramDetail = (  {setIdReal, programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
   : programDetail.poster
@@ -22,7 +22,7 @@ export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarM
         <SimilarMoviesList>
           {similarMovies && similarMovies.length > 0 
           ? ( similarMovies.map((s)=> (
-            <MovieCard key={s.id} onClick={() => handleMovieImageClick(s.id)}>
+            <MovieCard key={s.id} onClick={() => {handleMovieImageClick(s.id), setIdReal(false)}}>
               <img src={s.poster === "https://image.tmdb.org/t/p/w500null" ? defaultImg : s.poster} alt={`Poster of ${s.title}`} onClick={() => handleMovieClick(s.id)} />
               <span>{s.title}</span>
             </MovieCard>
