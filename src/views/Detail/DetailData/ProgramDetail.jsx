@@ -6,8 +6,9 @@ import { Advertisement } from "../../Components/Advertisement/Advertisement";
 
 import emptyStar from "../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../assets/Icons/icons8-star-100 green.png"
+import { DetailCard } from './DetailCard'
 
-export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
+export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
   : programDetail.poster
@@ -22,13 +23,13 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
         <ProgramCard src={imageP}/>
         <SimilarTitle> {`Similar ${programDetail.type}s`} </SimilarTitle>
         <SimilarMoviesList>
-          {similarMovies && similarMovies.length > 0 ? (
-            similarMovies.map((s)=> (
+          {similarMovies && similarMovies.length > 0 
+          ? ( similarMovies.map((s)=> (
             <MovieCard key={s.id} onClick={() => handleMovieImageClick(s.id)}>
               <img src={s.poster === "https://image.tmdb.org/t/p/w500null" ? defaultImg : s.poster} alt={`Poster of ${s.title}`} onClick={() => handleMovieClick(s.id)} />
               <span>{s.title}</span>
             </MovieCard>
-            ))
+          ))
           ) : (
           <div></div>
           )}
@@ -39,7 +40,7 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
       </ContainerLeft>
 
       <ContainerMiddle>
-        <ProgCardDetail props={{programDetail, year, runtimeFormatted}}/>
+        <DetailCard props={{programDetail, year, runtimeFormatted}}/>
         <ContainerReviews>
           {programDetail.Reviews && programDetail.Reviews.map((r)=> (
               <Reviews key={r.id}>
@@ -54,21 +55,15 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
                 <StarsContainer>
                 <span>
                   {new Array(5).fill('').map((_, index) => (
-                    <StarsReviews
-                      key={`key-${index}`}
-                      onClick={() => handleRating(index + 1)}
-                      src={r.rating > index ? fullStar : emptyStar}
-                      alt={r.rating > index ? '★' : '☆'}
-                    />
+                    <StarsReviews key={`key-${index}`} onClick={() => handleRating(index + 1)} src={r.rating > index ? fullStar : emptyStar} alt={r.rating > index ? '★' : '☆'}/>
                   ))}
                 </span>
                 <YearTitleModal>{`(${r.date})`}</YearTitleModal>
-                </StarsContainer>
-              </Reviews>
-            ))}
+              </StarsContainer>
+            </Reviews>
+          ))}
         </ContainerReviews>
         </ContainerMiddle>
-
     </AreaC>
   )
 }

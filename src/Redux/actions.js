@@ -30,8 +30,10 @@ import {
   GET_USER_BY_ID,
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
-  DELETE_USER
-} from './actions-type';
+  DELETE_USER,
+  UPLOAD_BACKGROUND,
+  UPLOAD_AVATAR
+} from "./actions-type";
 
 export const getAllPrograms = (page = 1) => {
   return async (dispatch) => {
@@ -81,7 +83,6 @@ export const getGenres = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(URL_API + 'genres');
-      console.log(data);
       dispatch({
         type: GET_GENRES,
         payload: data
@@ -96,7 +97,6 @@ export const getMovieGenres = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(URL_API + 'genres/movies');
-      console.log(data);
       dispatch({
         type: GET_MOVIES_GENRES,
         payload: data
@@ -111,7 +111,6 @@ export const getSeriesGenres = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(URL_API + 'genres/series');
-      console.log(data);
       dispatch({
         type: GET_SERIES_GENRES,
         payload: data
@@ -172,7 +171,6 @@ export const filterProgramsByPlatform = (platformName, type) => {
       const { data } = await axios.get(
         URL_API + `programs/filter/platform/${platformName}/${type}`
       );
-      console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_BY_PLATFORM,
         payload: data
@@ -188,9 +186,8 @@ export const filterProgramsCombined = (genreName, platformName, type) => {
     try {
       const { data } = await axios.get(
         URL_API +
-          `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
+        `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
       );
-      console.log(data);
       dispatch({
         type: FILTER_PROGRAMS_COMBINED,
         payload: data
@@ -384,6 +381,7 @@ export const getUserById = (id) => {
     });
   };
 };
+
 // ADMIN DASHBOARD
 export const getUsersAdmin = () => {
   return async (dispatch) => {
@@ -427,4 +425,55 @@ export const resetUserById = () => {
       payload: ''
     });
   };
+}
+
+export const uploadAvatar = (userId, image) => async (dispatch) => {
+  console.log('userId', userId);
+  console.log("imagen", image);
+  try {
+    const imageData = {
+      userId: userId,
+      image: image,
+    };
+
+    const response = await axios.post(`http://localhost:3001/users/avatar/upload-image`, imageData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (response.data.error) {
+      console.error('Error al subir la imagen de avatar:', response.data.error);
+    } else {
+      console.log('Imagen de avatar subida exitosamente:', response);
+      dispatch({ type: UPLOAD_AVATAR, payload: response });
+    }
+  } catch (error) {
+    console.error('Error al subir la imagen de avatar:', error);
+  }
+};
+
+export const uploadBackground = (userId, image) => async (dispatch) => {
+  console.log('userId', userId);
+  try {
+    const imageData = {
+      userId: userId,
+      image: image,
+    };
+
+    const response = await axios.post(`http://localhost:3001/users/background/upload-image`, imageData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.data.error) {
+      console.error('Error al subir la imagen de fondo:', response.data.error); // Cambio de mensaje
+    } else {
+      console.log('Imagen de fondo subida exitosamente:', response.data);
+      dispatch({ type: UPLOAD_BACKGROUND, payload: response.data.imageUrl });
+    }
+  } catch (error) {
+    console.error('Error al subir la imagen de fondo:', error); // Cambio de mensaje
+  }
 };

@@ -1,4 +1,4 @@
-import { Header, Modal, CloseButton, Comments, Submit, ContainerModalInfo, CustomKnob, HiddenCheckbox, ContainerButtons, CancelButton, CustomSwitch, CustomCheckbox, CheckboxContainer, CheckboxLabel, /* Checkbox, */ CloseButtonContainerDonate, TextDonation, ContainerModal, IconImg, CloseButtonContainer, ContainerModalHeader, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
+import { Container, Top, Header, Modal, CloseButton, Comments, Submit, ContainerModalInfo, CustomKnob, HiddenCheckbox, ContainerButtons, CancelButton, CustomSwitch, CustomCheckbox, CheckboxContainer, CheckboxLabel, /* Checkbox, */ CloseButtonContainerDonate, TextDonation, ContainerModal, IconImg, CloseButtonContainer, ContainerModalHeader, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import fullStar from "../../assets/Icons/icons8-star-100 green.png";
 import emptyStar from "../../assets/Icons/icons8-star-52.png";
 import defaultBackground from "../../assets/defaultBackground.png"
@@ -19,19 +19,21 @@ import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import { Advertisement } from "../../Components/Advertisement/Advertisement";
 import { ProgramDetailTopAreaC}  from './ProgramDetailTopAreaC';
+import { ButtonOptionsFake } from "./ButtonOptions/ButtonOptionsFake";
+import { ProgramDetail }  from './DetailData/ProgramDetail';
+import { ButtonOptions } from './ButtonOptions/ButtonOptions';
 import { NavBar } from '../../Components/NavBar/NavBar';
-import { Footer } from '../../Components/Footer/Footer';
-import { ButtonOptionsFake } from './ButtonOptionsFake';
-import { ButtonOptions } from './ButtonOptions';
+import { Footer } from "../../Components/Footer/Footer";
+import { ReviewModal } from "./ReviewModal/ReviewModal";
 
 import moment from 'moment';
 
 export const Detail = () => {
-  const user = JSON.parse(localStorage.getItem('userStorage'));
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { ProgramsId } = useParams();
+  const {ProgramsId} = useParams();
+
+  const user = JSON.parse(localStorage.getItem("userStorage"));
 
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId))
@@ -45,7 +47,6 @@ export const Detail = () => {
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
   const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
-  console.log(programDetail.Reviews, "review", alreadyReviewed, "alreadyreview");
 
   const [review, setReview] = useState({spoiler:false, rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
@@ -76,7 +77,6 @@ export const Detail = () => {
 
   const releaseDate = programDetail.release_date;
   const year = new Date(releaseDate).getFullYear();
-
   let runtimeFormatted = 'N/A';
 
   if (programDetail.type === 'movie' && !isNaN(programDetail.runtime)) {
@@ -85,10 +85,6 @@ export const Detail = () => {
   } else {
     runtimeFormatted = `${programDetail.seasons} Seasons ${programDetail.episodes} Episodes`;
   }
-
-  const handleComment = (comments) => {
-    setReview({ ...review, comments: comments });
-  };
 
   const handleCreate = async (event) => {
     event.preventDefault();
@@ -145,23 +141,17 @@ export const Detail = () => {
 
     const peliculasMasParecidas = peliculas.slice(1, 3);
     return peliculasMasParecidas;
-  }
-  const rating = Math.round(
-    programDetail?.Reviews?.reduce(
-      (total, review) => total + review.rating,
-      0
-    ) / programDetail.Reviews?.length
-  );
+  };
+
+  const rating = Math.round(programDetail?.Reviews?.reduce((total, review) => total + review.rating, 0) / programDetail.Reviews?.length);
 
   let imageBack =
     programDetail.backdrop === 'https://image.tmdb.org/t/p/w500null'
       ? defaultBackground
       : programDetail.backdrop;
 
-  console.log(playlists);
-
   return (
-    <div className={css.container}>
+    <Container>
       <NavBar />
         <Header backgroundurl={`url(${imageBack})`} />
         { 
@@ -258,6 +248,6 @@ export const Detail = () => {
         }
         <br/>
         <Footer />
-    </div>
+    </Container>
   );
 };
