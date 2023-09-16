@@ -45,14 +45,17 @@ const initialState = {
   userReviews: {},
   message: '',
   type: 'main',
-  selectedOption: null
+  selectedOption: null,
+  totalPages: 0
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_ALL_PROGRAMS:
+      console.log(payload);
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
         filteredPrograms: []
       };
@@ -60,6 +63,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_MOVIES:
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
         filteredPrograms: []
       };
@@ -67,6 +71,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case GET_SERIES:
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
         filteredPrograms: []
       };

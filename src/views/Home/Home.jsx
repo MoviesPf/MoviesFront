@@ -34,6 +34,8 @@ export const Home = () => {
   const user = JSON.parse(localStorage.getItem('userStorage'));
 
   const programs = useSelector((state) => state.programs);
+  const limit = useSelector((state) => state.totalPages);
+  console.log(limit);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
 
   console.log(user);
@@ -90,6 +92,7 @@ export const Home = () => {
             total={
               filteredPrograms.data ? filteredPrograms.total : programs.total
             }
+            limit={limit}
           />
           <Footer />
         </div>

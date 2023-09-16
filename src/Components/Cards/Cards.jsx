@@ -5,13 +5,15 @@ import { useDispatch } from 'react-redux';
 import { getAllPrograms } from '../../Redux/actions';
 import { GrFormNextLink, GrFormPreviousLink } from 'react-icons/gr';
 
-export const Cards = ({ programs }) => {
+export const Cards = ({ programs, limit }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
 
   useEffect(() => {}, [programs, dispatch]);
 
   const handlerClick = (page) => {
+    console.log(page);
+    if (page > limit || page < 1) return;
     if (page <= 1) setPage(1);
     if (page) setPage(page);
     dispatch(getAllPrograms(page));
@@ -27,6 +29,7 @@ export const Cards = ({ programs }) => {
       </div>
 
       <div className={css.paginate}>
+        {/* next */}
         <a
           href='#programs'
           className={css.icon}
@@ -34,6 +37,9 @@ export const Cards = ({ programs }) => {
         >
           <GrFormPreviousLink />
         </a>
+
+        {/* pos 1 */}
+
         {page === 1 ? (
           <button className={css.actual} onClick={() => handlerClick(page)}>
             {page}
@@ -47,31 +53,42 @@ export const Cards = ({ programs }) => {
             >
               1
             </a>
-            <button className={css.actual} onClick={() => handlerClick(page)}>
-              {page}
+            <button
+              className={page > limit - 3 ? css.boton : css.actual}
+              onClick={() => handlerClick(page > limit - 3 ? limit - 3 : page)}
+            >
+              {page > limit - 3 ? limit - 3 : page}
             </button>
           </>
         )}
         <a
           href='#programs'
-          className={css.boton}
-          onClick={() => handlerClick(page + 1)}
+          className={
+            page > limit - 2 || page < limit - 2 ? css.boton : css.actual
+          }
+          onClick={() =>
+            handlerClick(page + 1 > limit - 2 ? limit - 2 : page + 1)
+          }
         >
-          {page + 1}
+          {page + 1 > limit - 2 ? limit - 2 : page + 1}
         </a>
         <a
           href='#programs'
-          className={css.boton}
-          onClick={() => handlerClick(page + 2)}
+          className={
+            page > limit - 1 || page < limit - 1 ? css.boton : css.actual
+          }
+          onClick={() =>
+            handlerClick(page + 2 > limit - 1 ? limit - 1 : page + 2)
+          }
         >
-          {page + 2}
+          {page + 2 > limit - 1 ? limit - 1 : page + 2}
         </a>
         <a
           href='#programs'
-          className={css.boton}
-          onClick={() => handlerClick(page + 3)}
+          className={page > limit || page < limit ? css.boton : css.actual}
+          onClick={() => handlerClick(limit)}
         >
-          {page + 3}
+          {limit}
         </a>
         <a
           href='#programs'
