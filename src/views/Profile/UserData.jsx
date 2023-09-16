@@ -31,6 +31,7 @@ const AliasAndNick = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
+margin-right: 5rem; 
 `
 
 const Alias = styled.h1`
@@ -65,7 +66,7 @@ export const UserData = ({avatar,name,nickname,status}) => {
                 <NameAndNickname>
                     <h1>{name}</h1>
                     <AliasAndNick>
-                        <Alias>Alias:</Alias>
+                        <Alias>Nickname:</Alias>
                         <h1>{nickname}</h1>
                     </AliasAndNick>
                 </NameAndNickname>

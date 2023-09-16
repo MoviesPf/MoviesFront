@@ -110,7 +110,7 @@ const Donations = () => {
 
       {successMessage && (
         <div className={css.donationSuccess}>
-          <span>donation successfully</span>
+          <span>successMsg</span>
         </div>
       )}
     </div>
