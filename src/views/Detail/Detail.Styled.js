@@ -102,6 +102,26 @@ export const Submit = styled.label`
   }
 `;
 
+export const CancelButton = styled.label`
+  border-radius: 200px;
+  color: #fce8e6;
+  background: #616161d1;
+  font-size: 25px;
+  font-weight: bold;
+  transition: 0.2s;
+  padding: 5px 15px;
+  cursor: pointer;
+  &:hover {
+    color: #1b1b1b;
+    background: rgb(25, 213, 118);
+  }
+`;
+
+export const ContainerButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const ContainerLeft = styled.div`
   display: flex;
   flex-direction: column;
@@ -295,7 +315,6 @@ export const CheckboxContainer = styled.label`
   display: flex;
   align-items: center;
   column-gap: 8px;
-  cursor: pointer;
 `;
 
 export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
@@ -306,8 +325,8 @@ export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
 `;
 
 export const CustomSwitch = styled.div`
-  width: 40px;
-  height: 20px;
+  width: 36px;
+  height: 18px;
   background-color: ${({ checked }) =>
     checked ? "rgb(25, 213, 118)" : "#ccc"};
   border-radius: 40px;
@@ -364,7 +383,7 @@ export const CustomCheckbox = styled.div`
   }
 
   &::after {
-    content: "\u2713"; /* Esto es un símbolo de marca de verificación Unicode */
+    content: "\u2713";
     font-size: 14px;
     color: white;
     display: block;
@@ -387,4 +406,10 @@ export const CheckboxLabel = styled.span`
 
 export const DonationContainer = styled.div`
   margin-top: 100px;
+`;
+
+export const SpanSpoiler = styled.span`
+  font-size: 18px;
+  color: rgb(25, 213, 118);
+  font-weight: bold;
 `;

@@ -1,4 +1,4 @@
-import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, DonationContainer, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
+import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, SpanSpoiler, DonationContainer, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
 import defaultImg from "../../assets/defaultMovie.png"
 import ProgCardDetail from './DetailCard'
 
@@ -44,8 +44,11 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
           {programDetail.Reviews && programDetail.Reviews.map((r)=> (
               <Reviews key={r.id}>
                 <ContainerAvatarImg>
+                  <div>
                   <AvatarImg src={r.User.avatar} alt="" />
                   <ReviewBy>{`Reveiwed by ${r.User.nickname}`}</ReviewBy>
+                  </div>
+                  {r.spoiler && <SpanSpoiler>Spoiler Alert!!</SpanSpoiler>}
                 </ContainerAvatarImg>
                 <SpanComments>{r.comments}</SpanComments>
                 <StarsContainer>

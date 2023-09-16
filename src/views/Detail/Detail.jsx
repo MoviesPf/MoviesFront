@@ -1,4 +1,4 @@
-import { Header, Modal, CloseButton, Comments, Submit, ContainerModalInfo, CustomKnob, HiddenCheckbox, CustomSwitch, CustomCheckbox, CheckboxContainer, CheckboxLabel, /* Checkbox, */ CloseButtonContainerDonate, TextDonation, ContainerModal, IconImg, CloseButtonContainer, ContainerModalHeader, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
+import { Header, Modal, CloseButton, Comments, Submit, ContainerModalInfo, CustomKnob, HiddenCheckbox, ContainerButtons, CancelButton, CustomSwitch, CustomCheckbox, CheckboxContainer, CheckboxLabel, /* Checkbox, */ CloseButtonContainerDonate, TextDonation, ContainerModal, IconImg, CloseButtonContainer, ContainerModalHeader, ModalImg, SpanError, StarsContainer, TitleModal, YearTitleModal, TitleModalContainer } from "./Detail.Styled";
 import fullStar from "../../assets/Icons/icons8-star-100 green.png";
 import emptyStar from "../../assets/Icons/icons8-star-52.png";
 import defaultBackground from "../../assets/defaultBackground.png"
@@ -44,6 +44,8 @@ export const Detail = () => {
   const playlists = useSelector((state) => state.userPlaylists);
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
+  const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
+  console.log(programDetail.Reviews, "review", alreadyReviewed, "alreadyreview");
 
   const [review, setReview] = useState({spoiler:false, rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
@@ -112,7 +114,7 @@ export const Detail = () => {
 
   const handleCloseModal = () => {
     setShowModal(false) 
-    setReview({ ...review, rating: 0 })
+    setReview({ ...review, rating: 0, spoiler: false })
     setShowDonation(true) 
   }
 
@@ -171,7 +173,16 @@ export const Detail = () => {
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
               playlists.totalPlaylist ?
-              <ButtonOptions setShowModal={setShowModal} setShowError={setShowError} programId={programDetail.id} rating={rating} userId={user.id} playlistData={playlists}/>
+              <ButtonOptions 
+                setShowModal={setShowModal} 
+                setShowError={setShowError} 
+                programId={programDetail.id} 
+                rating={rating} 
+                userId={user.id} 
+                playlistData={playlists}
+                alreadyReviewed={alreadyReviewed}
+                programDetailType={programDetail.type}
+              />
               : <ButtonOptionsFake/>
              }
           </div>
@@ -193,14 +204,13 @@ export const Detail = () => {
             <CheckboxContainer>
               <HiddenCheckbox
                 type="checkbox"
-                id="containsSpoiler"
                 checked={review.spoiler}
                 onChange={handleCheckboxChange}
               />
               <CustomSwitch checked={review.spoiler}>
                 <CustomKnob checked={review.spoiler} />
               </CustomSwitch>
-              <CheckboxLabel htmlFor="containsSpoiler">Contains Spoiler</CheckboxLabel>
+              <CheckboxLabel>Contains Spoiler</CheckboxLabel>
             </CheckboxContainer>
             {showError && 
               <SpanError>must be logged in to add a review</SpanError>
@@ -237,10 +247,12 @@ export const Detail = () => {
               <br/>
               <ContainerModalInfo>
                 <Advertisement/>
-                {/* <TextDonation>¡You can donate us a popcorn! 🍿</TextDonation> */}
               </ContainerModalInfo>
               <br/>
-              <Submit onClick={() => handleDonate()}>Donate</Submit >
+              <ContainerButtons>
+                <CancelButton onClick={() => setShowDonation(false)}>Maybe Later</CancelButton>
+                <Submit onClick={() => handleDonate()}>Donate</Submit >
+              </ContainerButtons>
             </Modal>
           </ContainerModal>
         }

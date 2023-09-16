@@ -91,13 +91,34 @@ background: #6161611c;
 font-size: 25px;
 font-weight: bold;
 cursor: pointer; 
+opacity: ${({ disabled }) =>
+    disabled ? '0.5' : '1'};
+pointer-events: ${({ disabled }) =>
+    disabled ? 'none' : 'auto'};
   &:hover {
     color: #1b1b1b;
     background: rgb(25, 213, 118); 
 
   }
 `
-export const ButtonOptions = ({setShowModal, setShowError, programId, rating, userId}) => {
+const AlreadyReviewedMessage = styled.div`
+  background-color: #6161611c;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 0px 0px 15px 15px;
+`;
+
+const AlreadyReviewedText = styled.span`
+  font-size: 18px;
+  color: rgb(25, 213, 118);
+  font-weight: bold;
+`;
+
+
+export const ButtonOptions = ({setShowModal, setShowError, programId, rating, userId, alreadyReviewed, programDetailType}) => {
   const playlistData = useSelector( (state) => state.userPlaylists)
   const [loading, setLoading] = useState(true);
   
@@ -201,8 +222,11 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating, us
             {new Array(5).fill('').map((_, index) => (<IconImg key={index} src={index < rating ? fullStar : emptyStar} />))}
         </EmptStarC>
 
-        <ReviewButton onClick={()=> { setShowError(false); setShowModal(true)}}> Review </ReviewButton>
-
+        <ReviewButton onClick={()=> { setShowError(false); setShowModal(true)}} disabled={alreadyReviewed}> Review </ReviewButton>
+        {alreadyReviewed &&
+        <AlreadyReviewedMessage>
+          <AlreadyReviewedText>Each user can write one review per {programDetailType}.</AlreadyReviewedText>
+        </AlreadyReviewedMessage>}
       </ScoreContainer>
     }
     </div>
