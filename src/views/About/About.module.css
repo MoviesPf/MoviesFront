@@ -1,4 +1,3 @@
-/* Estilos para pantallas grandes */
 .section {
   display: grid;
   width: 100%;
@@ -87,8 +86,8 @@
 
 #img3{
     background: url('../../assets/gabriela.jpg');
-    background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+    
 }
 
 #img4{
@@ -131,12 +130,19 @@ h2 {
 .list a:hover{
   color: green;
 }
-
-/* Estilos para pantallas más pequeñas (ejemplo: dispositivos móviles) */
 @media screen and (max-width: 768px) {
+  .section {
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    overflow-y: scroll; /* Agrega scroll vertical */
+    contain: content;
+  }
+  
   .txt {
     font-size: 2rem;
-    margin-left: 0;
+    margin: 1rem auto;
+    text-align: center; /* Alinea el texto al centro en pantallas pequeñas */
   }
 
   .cards {
@@ -151,5 +157,8 @@ h2 {
     font-size: 1rem;
   }
 
-  /* Agrega más ajustes de estilo para pantallas pequeñas aquí */
+  .img{
+    display: none;
+  }
 }
+
