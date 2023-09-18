@@ -1,3 +1,4 @@
+/* Estilos para pantallas grandes */
 .section {
   display: grid;
   width: 100%;
@@ -129,4 +130,26 @@ h2 {
 
 .list a:hover{
   color: green;
+}
+
+/* Estilos para pantallas más pequeñas (ejemplo: dispositivos móviles) */
+@media screen and (max-width: 768px) {
+  .txt {
+    font-size: 2rem;
+    margin-left: 0;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    width: 90%;
+    padding-left: 0;
+  }
+
+  .card {
+    width: 150px;
+    height: 220px;
+    font-size: 1rem;
+  }
+
+  /* Agrega más ajustes de estilo para pantallas pequeñas aquí */
 }
