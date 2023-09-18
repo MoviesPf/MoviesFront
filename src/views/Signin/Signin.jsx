@@ -20,6 +20,9 @@ export const Signin = () => {
     confirm: ''
   });
 
+  const [displayAvatars,setDisplayAvatars] = useState({ display: 'none' })
+  const [chooseAvatar,setChooseAvatar] = useState({visibility: "visible" })
+
   const [error, setError] = useState({});
 
   const handleChange = (event) => {
@@ -36,6 +39,12 @@ export const Signin = () => {
     console.log(error);
   };
 
+  const showAvatars = () => {
+    if (displayAvatars.display === "none") setDisplayAvatars({ display: 'flex' })
+    if (displayAvatars.display === "flex") setDisplayAvatars({ display: 'none' })
+    
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(user);
@@ -45,16 +54,70 @@ export const Signin = () => {
 
   return (
     <div className={css.background}>
-      <form className={css.form} onSubmit={handleSubmit}>
-        <BtnHome className={css.btnHome} />
+    
+      <BtnHome className={css.btnHome} />
+      <div className={css.ViewContainer}>
 
         <h1 className={css.title}>SIGN UP</h1>
+{/*  /////////////// User Avatar Area //////////////// */}
+        <div className={css.sectionAvatar} >
+
+          <div className={css.avatarUser} onClick={showAvatars}>
+            <img className={css.avatarUserImg}
+              src={user.avatar} alt="avatar" />
+          </div>
+          <p className={css.titleAvatar} style={chooseAvatar}>Choose your avatar</p>
+
+          {/*////////////////  Imagenes ////////////////*/}
+
+          <div className={css.imagenesBGfiltrer} style={displayAvatars} onClick={showAvatars}/> 
+            <div className={css.imagenesContainer} style={displayAvatars}> 
+                {avatarsArray.map( (avatar,index)=>{
+                  return <div
+                  key ={index}
+                  className={css.avatarContainer}
+                  onClick={() =>
+                    {
+                      setUser({...user,avatar: avatar})
+                      setChooseAvatar({visibility: "hidden" })
+                      showAvatars()
+                    }
+                  }
+                >
+                  <img className={css.avatarImg} src={avatar} alt='avatar' />
+                </div>
+                } )}
+            </div>
+        </div>
+
+ {/*  /////////////// Form Area //////////////// */}       
+      <form className={css.form} onSubmit={handleSubmit}>
 
         <div className={css.section}>
-          <div className={css.formUser}>
-
-            <label className={css.label}>
+           <div className={css.labelSection}>
+            
+           <label className={css.label}>
               Name <span className={css.span}>*</span>
+            </label>
+            <label className={css.label}>
+              Nickname <span className={css.span}>*</span>
+            </label>
+            <label className={css.label}>
+              Email <span className={css.span}>*</span>
+            </label>
+            <label className={css.label}>
+              Password <span className={css.span}>*</span>
+            </label>
+            <label className={css.label}>
+              Confirm Password <span className={css.span}>*</span>
+            </label>
+
+           </div>
+
+           <div className={css.inputsSection}>
+              {error.name
+              ? <span className={css.Error} style={{visibility:"visible"}}>{error.name}</span>
+              : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
               <input
                 onChange={handleChange}
                 value={user.name}
@@ -64,11 +127,9 @@ export const Signin = () => {
                 type='text'
                 name='name'
               />
-            </label>
-              {error.name && <span className={css.Error}>{error.name}</span>}
-
-            <label className={css.label}>
-              Nickname <span className={css.span}>*</span>
+              {error.nickname
+              ? <span className={css.Error} style={{visibility:"visible"}}>{error.nickname}</span>
+              : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
               <input
                 onChange={handleChange}
                 value={user.nickname}
@@ -78,11 +139,9 @@ export const Signin = () => {
                 type='text'
                 name='nickname'
               />
-            </label>
-              {error.nickname && <span className={css.Error}>{error.nickname}</span>}
-
-            <label className={css.label}>
-              Email <span className={css.span}>*</span>
+              {error.email
+              ? <span className={css.Error} style={{visibility:"visible"}}>{error.email}</span>
+              :<span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}  
               <input
                 onChange={handleChange}
                 value={user.email}
@@ -92,12 +151,10 @@ export const Signin = () => {
                 type='email'
                 name='email'
               />
-            </label>
-              {error.email && <span className={css.Error}>{error.email}</span>}
-
-            <label className={css.label}>
-              Password <span className={css.span}>*</span>
-              <input
+              {error.password
+              ? <span className={css.Error} style={{visibility:"visible"}}>{error.password}</span>
+              : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
+             <input
                 onChange={handleChange}
                 value={user.password}
                 autoComplete='none'
@@ -106,11 +163,9 @@ export const Signin = () => {
                 type='password'
                 name='password'
               />
-            </label>
-              {error.password && <span className={css.Error}>{error.password}</span>}
-
-            <label className={css.label}>
-              Confirm Password <span className={css.span}>*</span>
+              {error.confirm
+              ? <span className={css.Error} style={{visibility:"visible"}}>{error.confirm}</span>
+              : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
               <input
                 onChange={handleChange}
                 value={user.confirm}
@@ -120,54 +175,19 @@ export const Signin = () => {
                 type='password'
                 name='confirm'
               />
-            </label>
-              {error.confirm && <span className={css.Error}>{error.confirm}</span>}
-          </div>
+           </div>
         </div>
-
         <div className={css.containBtn}>
           <div className={css.policy}>
             <input className={css.checkbox} type='checkbox' name='policy' />
             <p>I agree to the Terms and Privacy Policy</p>
           </div>
-
           <button type='submit' className={css.btn}>
             Sign up
           </button>
         </div>
-
-        <div className={css.sectionAvatar}>
-
-          <div className={css.avatarUser}>
-            <img className={css.avatarUserImg}
-              src={user.avatar} alt="avatar" />
-          </div>
-          <p className={css.titleAvatar}>Choose your avatar</p>
-
-
-            {/*  Imagenes */}
-
-            <div className={css.imagenesContainer}> 
-                {avatarsArray.map( (avatar,index)=>{
-                  return <div
-                  key ={index}
-                  className={css.avatarContainer}
-                  onClick={() =>
-                    setUser({
-                      ...user,
-                      avatar: avatar
-                    })
-                  }
-                >
-                  <img className={css.avatarImg} src={avatar} alt='avatar' />
-                </div>
-                } )}
-
-            </div>
-
-          
-        </div>
       </form>
+      </div>
     </div>
   );
 };
