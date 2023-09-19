@@ -4,6 +4,7 @@ import defaultBackground from "../../assets/background.jpg";
 import { getUserPlaylists, getUserReviews } from '../../Redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useLocalStorage } from '../../utils/useLocalStorage';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import { ReviewContainer } from "./ReviewContainer/ReviewContainer";
@@ -19,8 +20,10 @@ import Cloudinary from "./Cloudinary/Cloudinary";
 const Profile = () => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("userStorage"))
+  const userUpdated = useSelector((state) => state.user);
   const playlistData = useSelector((state) => state.userPlaylists);
   const reviewsData = useSelector((state) => state.userReviews);
+  const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
 
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -28,7 +31,8 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getUserPlaylists(user.id)).then(()=> dispatch(getUserReviews(user.id))).then(()=> {setLoading(false)}).then(console.log(loading))
-  },[dispatch]);
+    if ( userUpdated.id ) setUserStorage(userUpdated)
+  },[dispatch, userUpdated]);
   
   const setFavorites = ()=> {
     setMenu("Favorites")
@@ -59,7 +63,7 @@ const Profile = () => {
         <GreenLoading />
       ) : (
       <div>
-        <UserBackground src={user.background ? user.background : defaultBackground}/>
+        <UserBackground src={(user.background !== "default" || !user.background) ? user.background : defaultBackground}/>
 
         <AreaContainer>
           <UserData avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>

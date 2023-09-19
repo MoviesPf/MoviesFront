@@ -20,7 +20,7 @@ const Login = () => {
 
   useEffect(() => {
     const start = () => {
-      if (user.name) {
+      if (user.id) {
         navigate('/');
       }
       gapi.auth2.init({
@@ -45,7 +45,9 @@ const Login = () => {
 
     dispatch(createUsers(data));
 
-    navigate('/');
+    if (user.id) { 
+      navigate('/');
+    }
   };
 
   const onFailure = () => {
@@ -59,10 +61,9 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email);
-    console.log(password);
     dispatch(loginUser(email, password));
 
-    if (user.name) {
+    if (user.id) {
       navigate('/');
     }
   };

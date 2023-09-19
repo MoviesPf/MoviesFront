@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import css from './Signin.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { caballoAvatar, conejoAvatar, elefanteAvatar, gatoAvatar, gatoBodyAvatar, leonAvatar, monoBodyAvatar, osoAvatar, osoBodyAvatar, perroBodyAvatar, rinoceronteBodyAvatar, tigreAvatar, unicornioAvatar, zorroAvatar, zorroBodyAvatar} from './Images';
 import { useNavigate } from 'react-router-dom';
 import { createUsers } from '../../Redux/actions';
 import BtnHome from '../../Components/Buttons/BtnHome';
 import { validations } from './validations';
-import { useLocalStorage } from "../../utils/useLocalStorage"
 
 export const Signin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [user, setUser] = useState({
+  const user = useSelector((state) => state.user);
+
+
+  const [createdUser, setCreatedUser] = useState({
     name: '',
     nickname: '',
     avatar: 'https://i.ibb.co/4KWqYTS/user-removebg-preview-1.png',
@@ -24,13 +26,13 @@ export const Signin = () => {
   const [error, setError] = useState({});
 
   const handleChange = (event) => {
-    setUser({
-      ...user,
+    setCreatedUser({
+      ...createdUser,
       [event.target.name]: event.target.value
     });
     setError(
       validations({
-        ...user,
+        ...createdUser,
         [event.target.name]: event.target.value
       })
     );
@@ -39,8 +41,12 @@ export const Signin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(user);
-    dispatch(createUsers(user)).then(navigate('/'))
+    console.log(createdUser)
+    dispatch(createUsers(createdUser)) 
+
+    if(user.id) {
+      navigate("/")
+    }
   };
 
   return (
@@ -57,7 +63,7 @@ export const Signin = () => {
               Name <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
-                value={user.name}
+                value={createdUser.name}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Name'
@@ -71,7 +77,7 @@ export const Signin = () => {
               Nickname <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
-                value={user.nickname}
+                value={createdUser.nickname}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Nickname'
@@ -85,7 +91,7 @@ export const Signin = () => {
               Email <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
-                value={user.email}
+                value={createdUser.email}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Email'
@@ -99,7 +105,7 @@ export const Signin = () => {
               Password <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
-                value={user.password}
+                value={createdUser.password}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Password'
@@ -113,7 +119,7 @@ export const Signin = () => {
               Confirm Password <span className={css.span}>*</span>
               <input
                 onChange={handleChange}
-                value={user.confirm}
+                value={createdUser.confirm}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Confirm Password'
@@ -140,15 +146,15 @@ export const Signin = () => {
 
           <div className={css.avatarUser}>
             <img className={css.avatarUserImg}
-              src={user.avatar} alt="avatar" />
+              src={createdUser.avatar} alt="avatar" />
           </div>
           <p className={css.titleAvatar}>Choose your avatar</p>
 
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: caballoAvatar
               })
             }
@@ -159,8 +165,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: conejoAvatar
               })
             }
@@ -171,8 +177,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: gatoBodyAvatar
               })
             }
@@ -183,8 +189,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: monoBodyAvatar
               })
             }
@@ -195,8 +201,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: osoBodyAvatar
               })
             }
@@ -207,8 +213,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: perroBodyAvatar
               })
             }
@@ -219,8 +225,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: rinoceronteBodyAvatar
               })
             }
@@ -235,8 +241,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: zorroBodyAvatar
               })
             }
@@ -247,8 +253,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: elefanteAvatar
               })
             }
@@ -259,8 +265,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: gatoAvatar
               })
             }
@@ -271,8 +277,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: leonAvatar
               })
             }
@@ -283,8 +289,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: osoAvatar
               })
             }
@@ -295,8 +301,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: tigreAvatar
               })
             }
@@ -307,8 +313,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: unicornioAvatar
               })
             }
@@ -319,8 +325,8 @@ export const Signin = () => {
           <div
             className={css.avatarContainer}
             onClick={() =>
-              setUser({
-                ...user,
+              setCreatedUser({
+                ...createdUser,
                 avatar: zorroAvatar
               })
             }

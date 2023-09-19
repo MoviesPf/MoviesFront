@@ -24,6 +24,7 @@ const Donations = () => {
   const handleDonation = async () => {
     if (selectedOption) {
       const donationData = {
+        userId: user.id,
         title: 'Donation',
         price: selectedOption,
         quantity: 1
