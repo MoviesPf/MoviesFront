@@ -1,18 +1,14 @@
-import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, 
-  StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle,ButtonFullComments, SpanSpoiler, DonationContainer} from "./ProgramDetail.Styled";
-import { DetailCard } from './DetailCard'
-import defaultImg from "../../../assets/defaultMovie.png"
+import { ContainerLeft, SimilarTitle, SimilarMoviesList, MovieCard, ContainerMiddle, ContainerReviews, AreaC, ProgramCard, DonationContainer} from "./ProgramDetail.Styled";
 import { Advertisement } from "../../../Components/Advertisement/Advertisement";
-import emptyStar from "../../../assets/Icons/icons8-star-52.png"
-import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
-import { useState } from "react";
+import { DetailReview } from "../DetailReview/DetailReview.jsx";
+import { DetailCard } from './DetailCard'
+
+import defaultImg from "../../../assets/defaultMovie.png"
 
 export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
   : programDetail.poster
-  
-  const [showFullComments, setShowFullComments] = useState(false);
 
   const handleMovieImageClick = (ProgramsId) => {
     handleMovieClick(ProgramsId);
@@ -44,40 +40,10 @@ export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarM
         <DetailCard props={{programDetail, year, runtimeFormatted}}/>
         <ContainerReviews>
           {programDetail.Reviews && programDetail.Reviews.map((r)=> (
-              <Reviews key={r.id}>
-                <ContainerAvatarImg>
-                  <div>
-                  <AvatarImg src={r.User.avatar} alt="" />
-                  <ReviewBy>{`Reveiwed by ${r.User.nickname}`}</ReviewBy>
-                  </div>
-                  {r.spoiler && <SpanSpoiler>Spoiler Alert!!</SpanSpoiler>}
-                </ContainerAvatarImg>
-                <SpanComments>
-                  {showFullComments ? r.comments : r.comments.slice(0, 500)}
-                  {r.comments.length > 500 && (
-                    <ButtonFullComments onClick={() => setShowFullComments(!showFullComments)}>
-                      {showFullComments ? "Read less" : "Read more"}
-                    </ButtonFullComments>
-                  )}
-                </SpanComments>
-                <StarsContainer>
-                <span>
-                  {new Array(5).fill('').map((_, index) => (
-                    <StarsReviews
-                      key={`key-${index}`}
-                      onClick={() => handleRating(index + 1)}
-                      src={r.rating > index ? fullStar : emptyStar}
-                      alt={r.rating > index ? '★' : '☆'}
-                    />
-                  ))}
-                </span>
-                <YearTitleModal>{`(${r.date})`}</YearTitleModal>
-                </StarsContainer>
-              </Reviews>
-            ))}
+            <DetailReview r={r}/>
+          ))}
         </ContainerReviews>
         </ContainerMiddle>
-
   </AreaC>
   )
 }

@@ -63,14 +63,6 @@ export const CloseButtonContainerDonate = styled.div`
   width: 100%;
 `;
 
-export const TextDonation = styled.span`
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
-  color: #fce8e6;
-`;
-
 export const ContainerModalInfo = styled.div`
   text-aling: center;
 `;

@@ -6,12 +6,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import {
-  getProgramDetail,
-  createReview,
-  filterProgramsByGenre,
-  getUserPlaylists
-} from '../../Redux/actions';
+import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists} from '../../Redux/actions';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
@@ -35,7 +30,6 @@ export const Detail = () => {
   const programDetail = useSelector((state) => state.programDetail);
   const similarPrograms = useSelector((state) => state.similarPrograms.data);
   const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
-  
   
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId))

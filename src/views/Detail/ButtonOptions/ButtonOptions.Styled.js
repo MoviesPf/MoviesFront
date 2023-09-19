@@ -7,7 +7,7 @@ export const scaleUp = keyframes`
   100% {
     transform: scale(1.5);
   }
-`
+`;
 
 export const ScoreContainer = styled.div`
   background-color: #1C1C1C;
@@ -43,7 +43,14 @@ span {
     opacity: 1;
   }
 }
-`
+`;
+
+export const IconsC = styled.div`
+display: flex;
+margin-top: 12px;
+margin-right: 10px;
+margin-left: 10px;
+`;
 
 export const IconContainer = styled.div`
 display: flex;
@@ -53,14 +60,7 @@ justify-content: center;
 align-items: center;
 margin-right: 10px;
 margin-left: 10px;
-`
-
-export const IconsC = styled.div`
-display: flex;
-margin-top: 12px;
-margin-right: 10px;
-margin-left: 10px;
-`
+`;
 
 export const IconImg = styled.img`
  filter: brightness(${(props) => (props.$check ? '0.5' : '1')});
@@ -77,19 +77,19 @@ export const IconImg = styled.img`
   }
     
   }
-`
+`;
 
 export const IconLabel = styled.label`
 color: white;
 font-size: 16px;
-`
+`;
 
 export const EmptStarC = styled.div`
 display: flex;
 flex-wrap: nowrap;
 flex-direction: row;
 margin-top: 22px;
-`
+`;
 
 export const ReviewButton = styled.button`
 width: 140px;
@@ -109,7 +109,7 @@ cursor: pointer;
     background: rgb(25, 213, 118); 
 
   }
-`
+`;
 
 export const AlreadyReviewedMessage = styled.div`
   background-color: #6161611c;
