@@ -1,4 +1,4 @@
-import { ContainerModalReview, ModalEdit, Fondo, Top, CloseButton, Avatars, Label, Background, UpdateButton, Avatar, Content, TopContent, EditInput, NameStatusAlias, Nick, Alias, AllForm, InputForm, CloudinaryButtons, Form } from "./EditProfileModal.Styled"
+import { H1Propio, PropioP, ContainerModalReview, ModalEdit, Fondo, Top, CloseButton, Avatars, Label, Background, UpdateButton, Avatar, Content, TopContent, EditInput, NameStatusAlias, Nick, Alias, AllForm, InputForm, CloudinaryButtons, Form } from "./EditProfileModal.Styled"
 import { caballoAvatar, conejoAvatar, elefanteAvatar, gatoAvatar, gatoBodyAvatar, leonAvatar, monoBodyAvatar, osoAvatar, osoBodyAvatar, perroBodyAvatar, rinoceronteBodyAvatar, tigreAvatar, unicornioAvatar, zorroAvatar, zorroBodyAvatar} from '../../Signin/Images'
 import defaultBackground from "../../../assets/background.jpg";
 import { useState } from "react";
@@ -79,12 +79,12 @@ export const EditProfileModal = ({setShowModal}) => {
                         </Background>
                         <NameStatusAlias>
                             <div>
-                                <h1>{editedUser.name ? editedUser.name : user.name}</h1>
-                                <p>{editedUser.status ? editedUser.status : "Movies Fan!!"}</p>
+                                <H1Propio>{editedUser.name ? editedUser.name : user.name}</H1Propio>
+                                <PropioP>{editedUser.status ? editedUser.status : "Movies Fan!!"}</PropioP>
                             </div>
                             <Alias>
                                 <Nick>Alias:</Nick>
-                                <h1>{editedUser.nickname ? editedUser.nickname : user.nickname}</h1>
+                                <H1Propio>{editedUser.nickname ? editedUser.nickname : user.nickname}</H1Propio>
                             </Alias>
                         </NameStatusAlias>
                     </TopContent>

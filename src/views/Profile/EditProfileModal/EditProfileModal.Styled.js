@@ -104,8 +104,9 @@ export const Alias = styled.div`
 display: flex;
 align-items: center;
 `
-  
+
 export const Nick = styled.h1`
+font-size: 18px;
 padding-right: 10px;
 color: green;
 `
@@ -180,4 +181,12 @@ display: flex;
 flex-wrap: wrap;
 justify-content: center;
 margin-bottom: 10px;
+`
+
+export const H1Propio = styled.h1`
+font-size: 18px;
+`
+
+export const PropioP = styled.p`
+font-size: 14px;
 `
