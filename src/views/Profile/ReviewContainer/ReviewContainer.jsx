@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export const ReviewContainer = ({reviewDate, year, genreA, genreB, overview, progImge, starVal, title, programId}) => {
   const starsCount = [];
-  const [showFullComments, setShowFullComments] = useState(false);
+  const [showFullComments, setShowFullComments] = useState(true);
   
   for (let index = 0; index < starVal; index++) { starsCount.push(<StarPoint key={index}/>)};
 

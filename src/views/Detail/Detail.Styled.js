@@ -138,7 +138,6 @@ export const DonationContainer = styled.div`
 `;
 
 export const RightContainer = styled.div`
-background-color: red;
 top: 0;
 right: 0;
 position: relative;
