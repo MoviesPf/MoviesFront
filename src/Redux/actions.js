@@ -35,7 +35,8 @@ import {
   UPDATE_USER,
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
-  GENRES_FILTERS
+  GENRES_FILTERS,
+  DELETE_PROGRAMS
 } from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
@@ -453,6 +454,27 @@ export const updateUser = (updateData) => async (dispatch) => {
     console.log(error);
   }
 }
+
+export const deletePrograms = (id) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(URL_API + 'programs' + id, {
+        method: 'DELETE'
+      })
+      const data = await res.json()
+
+      dispatch({
+        type: DELETE_PROGRAMS,
+        payload: data
+      })
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+
 // filtros
 
 export const programsFilters = (state, page = 1) => {

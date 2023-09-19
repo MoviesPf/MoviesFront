@@ -326,6 +326,7 @@ export const StarsContainer = styled.div`
 `;
 
 export const AreaC = styled.div`
+grid-column: 1/2;
   display: flex;
   position: relative;
   flex-direction: row;

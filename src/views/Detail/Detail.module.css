@@ -19,6 +19,7 @@
   }
 
 .Top{
+  background-color: #1c1c1c;
   display: flex;
   flex-direction: row;
   align-items: center;

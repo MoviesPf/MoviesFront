@@ -126,7 +126,7 @@ export const TitleAndButton = styled.div`
 export const AdminButton = styled.div`
   background: #008000;
   height: 3rem;
-  width: 5rem;
+  width: 4rem;
   color: #fff;
   font-size: 1rem;
   border-radius: .5rem;

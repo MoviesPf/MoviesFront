@@ -64,7 +64,9 @@ export const NavProfile = ({setShowModal, menu, setMenu, favorites, watchlist, w
 
 
       {!user?.admin ?
-      <AdminButton onClick={() => navigate('/admin')}> <RiUserSettingsFill/> ADMIN</AdminButton>
+      <AdminButton onClick={() => navigate('/admin')}> <RiUserSettingsFill style={{
+        fontSize: '2rem'
+      }}/> </AdminButton>
       : ''
       }
 

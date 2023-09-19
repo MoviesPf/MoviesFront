@@ -23,6 +23,7 @@ import { ReviewModal } from './ReviewModal/ReviewModal';
 import { Advertisement } from '../../Components/Advertisement/Advertisement';
 
 import moment from 'moment';
+import EditProgramModal from './EditProgramModal/EditProgramModal';
 
 export const Detail = () => {
   const dispatch = useDispatch();
@@ -164,7 +165,7 @@ export const Detail = () => {
   return (
     <div className={style.Container}>
       <NavBar />
-      <div className={style.Header} style={`background: url(${imageBack})`} />
+      <div className={style.Header} style={{background: `url(${imageBack})`}} />
       {!idReal ? (
         <GreenLoading />
       ) : (
@@ -206,6 +207,9 @@ export const Detail = () => {
           setReview={setReview}
         />
       )}
+
+        <EditProgramModal/>
+
       {showDonation && (
         <div className={style.ContainerModal}>
           <div className={style.Modal}>
