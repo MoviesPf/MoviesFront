@@ -23,7 +23,7 @@ export const ViewContainer = styled.div`
 
 export const UserBackground = styled.img`
   width: 100%;
-  height: 40vh;
+  height: 60vh;
   object-fit: cover;
   position: relative;
   z-index: 1;
