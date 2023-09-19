@@ -201,6 +201,5 @@ export const Detail = () => {
         }
         <Footer />
     </Container>
-    </Container>
   );
 };

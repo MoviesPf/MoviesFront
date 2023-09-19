@@ -22,13 +22,11 @@ export const Container = styled.div`
     background: green;
   }
 `;
-`;
 
 export const Top = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
 `;
 
 export const Header = styled.div`
