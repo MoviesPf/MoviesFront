@@ -14,6 +14,7 @@ import { CardFake } from "./CardFake/CardFake.jsx";
 import { Card } from '../../Components/Card/Card';
 import { NavProfile } from './NavProfile/NavProfile';
 import { UserData } from "./UserData/UserData";
+import Cloudinary from "./Cloudinary/Cloudinary";
 
 const Profile = () => {
   const dispatch = useDispatch();
