@@ -3,9 +3,9 @@ import {
   GET_PLATFORMS,
   GET_GENRES,
   GET_PROGRAM_DETAIL,
-  FILTER_PROGRAMS_BY_GENRE,
-  FILTER_PROGRAMS_BY_PLATFORM,
-  FILTER_PROGRAMS_COMBINED,
+  // FILTER_PROGRAMS_BY_GENRE,
+  // FILTER_PROGRAMS_BY_PLATFORM,
+  // FILTER_PROGRAMS_COMBINED,
   GET_PROGRAM_BY_NAME,
   GET_MOVIES,
   GET_SERIES,
@@ -28,12 +28,18 @@ import {
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
   DELETE_USER,
-  UPDATE_USER
-} from "./actions-type";
+  UPDATE_USER,
+  PROGRAMS_FILTERS,
+  ACTIVE_FILTERS,
+  GENRES_FILTERS
+} from './actions-type';
 
 const initialState = {
   programs: [],
   filteredPrograms: [],
+  activeFilters: {},
+  genresActive: [],
+  platformsFilters: [],
   searchedPrograms: [],
   programDetail: [],
   genres: [],
@@ -45,29 +51,37 @@ const initialState = {
   userReviews: {},
   message: '',
   type: 'main',
-  selectedOption: null
+  selectedOption: null,
+  totalPages: 0
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_ALL_PROGRAMS:
+      console.log(payload);
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
+        type: 'main',
         filteredPrograms: []
       };
 
     case GET_MOVIES:
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
+        type: 'movies',
         filteredPrograms: []
       };
 
     case GET_SERIES:
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
+        type: 'series',
         filteredPrograms: []
       };
 
@@ -107,13 +121,32 @@ const reducer = (state = initialState, { type, payload }) => {
         programDetail: payload
       };
 
-    case FILTER_PROGRAMS_BY_GENRE:
-    case FILTER_PROGRAMS_BY_PLATFORM:
-    case FILTER_PROGRAMS_COMBINED:
+    case PROGRAMS_FILTERS:
       return {
         ...state,
+        totalPages: payload.totalPages,
         filteredPrograms: payload
       };
+
+    case ACTIVE_FILTERS:
+      return {
+        ...state,
+        activeFilters: payload
+      };
+
+    case GENRES_FILTERS:
+      if (typeof genresActive === 'undefined') {
+        console.log('unde');
+        data.push(payload);
+      } else {
+        data = [...genresActive, payload];
+      }
+
+      return {
+        ...state,
+        genresActive: data
+      };
+
     case SELECT_DONATION_OPTION:
       return {
         ...state,

@@ -7,9 +7,9 @@ import {
   GET_PLATFORMS,
   GET_GENRES,
   GET_PROGRAM_DETAIL,
-  FILTER_PROGRAMS_BY_GENRE,
-  FILTER_PROGRAMS_BY_PLATFORM,
-  FILTER_PROGRAMS_COMBINED,
+  // FILTER_PROGRAMS_BY_GENRE,
+  // FILTER_PROGRAMS_BY_PLATFORM,
+  // FILTER_PROGRAMS_COMBINED,
   GET_MOVIES,
   GET_SERIES,
   GET_MOVIES_GENRES,
@@ -31,13 +31,15 @@ import {
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
   DELETE_USER,
-  UPDATE_USER
-} from "./actions-type";
+  UPDATE_USER,
+  PROGRAMS_FILTERS,
+  ACTIVE_FILTERS,
+  GENRES_FILTERS
+} from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
   return async (dispatch) => {
     const { data } = await axios.get(URL_API + 'programs?page=' + page);
-    console.log(data);
     return dispatch({
       type: GET_ALL_PROGRAMS,
       payload: data
@@ -48,7 +50,6 @@ export const getAllPrograms = (page = 1) => {
 export const getProgramByName = (title) => {
   return async (dispatch) => {
     const { data } = await axios(URL_API + `programs?title=${title}`);
-    console.log(data);
     return dispatch({
       type: GET_PROGRAM_BY_NAME,
       payload: data.data
@@ -56,10 +57,9 @@ export const getProgramByName = (title) => {
   };
 };
 
-export const getAllMovies = () => {
+export const getAllMovies = (page = 1) => {
   return async (dispatch) => {
-    const { data } = await axios(URL_API + `programs/movies`);
-    console.log(data);
+    const { data } = await axios(URL_API + `programs/movies?page=` + page);
     return dispatch({
       type: GET_MOVIES,
       payload: data
@@ -67,10 +67,9 @@ export const getAllMovies = () => {
   };
 };
 
-export const getAllSeries = () => {
+export const getAllSeries = (page = 1) => {
   return async (dispatch) => {
-    const { data } = await axios(URL_API + `programs/series`);
-    console.log(data);
+    const { data } = await axios(URL_API + `programs/series?page=` + page);
     return dispatch({
       type: GET_SERIES,
       payload: data
@@ -148,54 +147,54 @@ export const getProgramDetail = (ProgramsId) => {
   };
 };
 
-export const filterProgramsByGenre = (genreName, type) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(
-        URL_API + `programs/filter/genre/${genreName}/${type}`
-      );
-      dispatch({
-        type: FILTER_PROGRAMS_BY_GENRE,
-        payload: data
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+// export const filterProgramsByGenre = (genreName, type) => {
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axios.get(
+//         URL_API + `programs/filter/genre/${genreName}/${type}`
+//       );
+//       dispatch({
+//         type: FILTER_PROGRAMS_BY_GENRE,
+//         payload: data
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
 
-export const filterProgramsByPlatform = (platformName, type) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(
-        URL_API + `programs/filter/platform/${platformName}/${type}`
-      );
-      dispatch({
-        type: FILTER_PROGRAMS_BY_PLATFORM,
-        payload: data
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+// export const filterProgramsByPlatform = (platformName, type) => {
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axios.get(
+//         URL_API + `programs/filter/platform/${platformName}/${type}`
+//       );
+//       dispatch({
+//         type: FILTER_PROGRAMS_BY_PLATFORM,
+//         payload: data
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
 
-export const filterProgramsCombined = (genreName, platformName, type) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.get(
-        URL_API +
-        `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
-      );
-      dispatch({
-        type: FILTER_PROGRAMS_COMBINED,
-        payload: data
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
+// export const filterProgramsCombined = (genreName, platformName, type) => {
+//   return async (dispatch) => {
+//     try {
+//       const { data } = await axios.get(
+//         URL_API +
+//           `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
+//       );
+//       dispatch({
+//         type: FILTER_PROGRAMS_COMBINED,
+//         payload: data
+//       });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// };
 
 export const createUsers = ({
   email,
@@ -424,7 +423,7 @@ export const resetUserById = () => {
       payload: ''
     });
   };
-}
+};
 
 export const updateUser = (updateData) => async (dispatch) => {
   try {
@@ -438,4 +437,42 @@ export const updateUser = (updateData) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
-}
+// filtros
+
+export const programsFilters = (state, page = 1) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(URL_API + 'programs/filters?page=' + page, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(state)
+      });
+      const data = await res.json();
+      console.log(data);
+      dispatch({
+        type: PROGRAMS_FILTERS,
+        payload: data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const activeFilters = (state) => {
+  return (dispatch) => {
+    dispatch({
+      type: ACTIVE_FILTERS,
+      payload: state
+    });
+  };
+};
+
+export const genresFilters = (filter) => {
+  return (dispatch) => {
+    dispatch({
+      type: GENRES_FILTERS,
+      payload: filter
+    });
+  };
+};
