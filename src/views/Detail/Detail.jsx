@@ -1,4 +1,5 @@
-import {Container, Top, Header} from "./Detail.Styled";
+import {Container, Top, Header, ContainerModal, ContainerModalHeader, CloseButtonContainerDonate,
+ContainerModalInfo, ContainerButtons, CancelButton, Submit, Modal, CloseButton} from "./Detail.Styled";
 import defaultBackground from "../../assets/defaultBackground.png";
 
 import { useParams, useNavigate } from 'react-router-dom';
@@ -20,6 +21,7 @@ import { ButtonOptions } from './ButtonOptions/ButtonOptions';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import { Footer } from "../../Components/Footer/Footer";
 import { ReviewModal } from "./ReviewModal/ReviewModal";
+import { Advertisement } from "../../Components/Advertisement/Advertisement"
 
 import moment from 'moment';
 
@@ -32,6 +34,7 @@ export const Detail = () => {
   const playlists = useSelector((state)=> state.userPlaylists);
   const programDetail = useSelector((state) => state.programDetail);
   const similarMovies = useSelector((state) => state.filteredPrograms.data);
+  const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
 
 
   useEffect(() => {
@@ -62,10 +65,15 @@ export const Detail = () => {
   }, [similarMovies]);
 
 
-  const [review, setReview] = useState({rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
+  const [review, setReview] = useState({spoiler:false, rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const [showDonation, setShowDonation] = useState(false);
+  const [showError, setShowError] = useState(false);
   const [idReal, setIdReal] = useState(false);
+  const [commentError, setCommentError] = useState(false);
+
+
 
   const releaseDate = programDetail.release_date;
   const year = new Date(releaseDate).getFullYear();
@@ -80,16 +88,40 @@ export const Detail = () => {
 
   const handleCreate = async (event) => {
     event.preventDefault();
-    setShowModal(false);
-    setReview({ ...review, rating: 0 });
-    await dispatch(createReview(review, user.id, programDetail.id));
-    dispatch(getProgramDetail(ProgramsId));
-    setReview([...review, review]);
+  
+    const isValidRating = review.rating !== null && review.rating > 0;
+    const isValidComments = review.comments && review.comments.length >= 10 && review.comments.length <= 3500;
+  
+    if (user.id && isValidComments) {
+      if (isValidRating) {
+        handleCloseModal();
+        await dispatch(createReview(review, user.id, programDetail.id));
+        dispatch(getProgramDetail(ProgramsId));
+        setReview({ ...review, comments: "" });
+      } else {
+        setShowError(true);
+      }
+    } else {
+      setShowError(!isValidRating);
+      setCommentError(!(review.comments && review.comments.length >= 10));
+    }
   };
+
+  const handleCloseModal = () => {
+    setCommentError(false);
+    setShowModal(false) 
+    setReview({ ...review, rating: 0, spoiler: false, comments: ""  })
+    setShowDonation(true) 
+  }
 
   const handleMovieClick = (ProgramsId) => {
     navigate(`/detail/${ProgramsId}`);
   };
+
+  const handleDonate = () => {
+    setShowDonation(false)
+    navigate('/donate')
+  }
 
   function encontrarPeliculaMasParecida(tituloQueTienes, peliculas) {
     function calcularSimilitud(titulo1, titulo2) {
@@ -131,12 +163,41 @@ export const Detail = () => {
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
               user.id && playlists.totalPlaylist ?
-              <ButtonOptions setShowModal={setShowModal} programId={programDetail.id} rating={rating} userId={user.id} playlistData={playlists}/>
+              <ButtonOptions 
+              setShowModal={setShowModal}
+              setShowError={setShowError} 
+              programId={programDetail.id} 
+              rating={rating} 
+              userId={user.id} 
+              playlistData={playlists}
+              alreadyReviewed={alreadyReviewed} 
+              programDetailType={programDetail.type}
+              />
               : <ButtonOptionsFake/>
              }
           </Top>
         }
-        {showModal && <ReviewModal year={year} handleCreate={handleCreate}setShowModal={setShowModal} programDetail={programDetail} review={review} setReview={setReview}/>}
+        {showModal && <ReviewModal handleCloseModal={handleCloseModal} year={year} showError={showError} setShowError={setShowError} handleCreate={handleCreate} setShowModal={setShowModal} programDetail={programDetail} review={review} setReview={setReview}/>}
+        {showDonation &&
+          <ContainerModal>
+            <Modal>
+              <ContainerModalHeader>
+                <CloseButtonContainerDonate>
+                  <CloseButton onClick={() => setShowDonation(false)}> x </CloseButton>
+                </CloseButtonContainerDonate>              
+              </ContainerModalHeader>
+              <br/>
+              <ContainerModalInfo>
+                <Advertisement/>
+              </ContainerModalInfo>
+              <br/>
+              <ContainerButtons>
+                <CancelButton onClick={() => setShowDonation(false)}>Maybe Later</CancelButton>
+                <Submit onClick={() => handleDonate()}>Donate</Submit >
+              </ContainerButtons>
+            </Modal>
+          </ContainerModal>
+        }
         <Footer />
     </Container>
   );

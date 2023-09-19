@@ -3,19 +3,15 @@ import { caballoAvatar, conejoAvatar, elefanteAvatar, gatoAvatar, gatoBodyAvatar
 import defaultBackground from "../../../assets/background.jpg";
 import { useState } from "react";
 import cloudinaryIcon from "../../../assets/cloudinary.png";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import css from "./EditProfile.module.css"
 import { updateUser } from "../../../Redux/actions";
-
-import { useLocalStorage } from '../../../utils/useLocalStorage';
 
 export const EditProfileModal = ({setShowModal}) => {
     const dispatch = useDispatch();
 
     const user = JSON.parse(localStorage.getItem('userStorage'));
-
-    const userUpdated = useSelector((state) => state.userUpdated);
 
     const [editedUser, setEditedUser] = useState({
         background: user.background,
@@ -31,7 +27,7 @@ export const EditProfileModal = ({setShowModal}) => {
     
         const widgetOptions = { 
             cloudName: cloudName, uploadPreset: uploadPreset, 
-            sources: ["local","url","camera","image_search","google_drive","facebook","dropbox","instagram","shutterstock","istock","unsplash","getty"],
+            sources: ["local","url","camera","google_drive","facebook","dropbox","instagram","shutterstock","istock","unsplash","getty"],
             googleApiKey: "<image_search_google_api_key>", showAdvancedOptions: true, cropping: true, multiple: false, defaultSource: "local",
             styles: { 
             palette: { window: "#000000", sourceBg: "#000000", windowBorder: "#8E9FBF", tabIcon: "#FFFFFF", inactiveTabIcon: "#8E9FBF", menuIcons: "#19D576", link: "#19D576", action: "#336BFF",inProgress: "#19D576",complete: "#1DFD8C",error: "#EA2727",textDark: "#000000",textLight: "#FFFFFF"},

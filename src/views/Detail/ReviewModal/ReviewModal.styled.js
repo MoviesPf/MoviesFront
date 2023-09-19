@@ -112,3 +112,111 @@ export const StarsContainer = styled.div`
   width: 100%;
   align-items: center;
 `
+export const CheckboxContainer = styled.label`
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+`;
+
+export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+`;
+
+export const CustomSwitch = styled.div`
+  width: 36px;
+  height: 18px;
+  background-color: ${({ checked }) =>
+    checked ? "rgb(25, 213, 118)" : "#ccc"};
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgb(25, 213, 118);
+  }
+
+  &::before {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    transition: transform 0.3s ease;
+    transform: ${({ checked }) =>
+      checked ? "translateX(20px)" : "translateX(0)"};
+  }
+`;
+
+export const CustomKnob = styled.div`
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  transition: transform 0.3s ease;
+  transform: ${({ checked }) =>
+    checked ? "translateX(20px)" : "translateX(0)"};
+`;
+
+export const CustomCheckbox = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    border-color: rgb(25, 213, 118);
+  }
+
+  ${HiddenCheckbox}:checked + & {
+    background-color: rgb(25, 213, 118);
+    border-color: rgb(25, 213, 118);
+  }
+
+  &::after {
+    content: "\u2713";
+    font-size: 14px;
+    color: white;
+    display: block;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  ${HiddenCheckbox}:checked + &::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+`;
+
+export const CheckboxLabel = styled.span`
+  font-size: 16px;
+  color: #fce8e6;
+  font-weight: bold;
+`;
+
+export const SpanError = styled.span`
+  background: rgb(0 0 0 / 21%);
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 10px 0;
+  font-size: 18px;
+  color: rgb(25, 213, 118);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid rgb(25 213 118 / 23%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+`;
