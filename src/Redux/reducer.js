@@ -3,7 +3,7 @@ import {
   GET_PLATFORMS,
   GET_GENRES,
   GET_PROGRAM_DETAIL,
-  // FILTER_PROGRAMS_BY_GENRE,
+  FILTER_PROGRAMS_BY_GENRE,
   // FILTER_PROGRAMS_BY_PLATFORM,
   // FILTER_PROGRAMS_COMBINED,
   GET_PROGRAM_BY_NAME,
@@ -28,8 +28,7 @@ import {
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
   DELETE_USER,
-  UPLOAD_AVATAR,
-  UPLOAD_BACKGROUND,
+  UPDATE_USER,
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
   GENRES_FILTERS
@@ -38,6 +37,7 @@ import {
 const initialState = {
   programs: [],
   filteredPrograms: [],
+  similarPrograms: [],
   activeFilters: {},
   genresActive: [],
   platformsFilters: [],
@@ -46,6 +46,7 @@ const initialState = {
   genres: [],
   platforms: [],
   user: {},
+  userUpdated: {},
   userById: {},
   userPlaylists: {},
   userReviews: {},
@@ -146,6 +147,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         genresActive: data
       };
+    
+    case FILTER_PROGRAMS_BY_GENRE:
+      return {
+        ...state,
+        similarPrograms: payload
+      }
 
     case SELECT_DONATION_OPTION:
       return {
@@ -233,6 +240,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         userById: payload
       };
+
     case GET_USERS_ADMIN:
       return {
         ...state,
@@ -249,25 +257,14 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userById: {}
-      };
-    case UPLOAD_AVATAR:
-      // Actualiza la URL de la imagen en el estado del usuario
+      }
+
+    case UPDATE_USER:
       return {
         ...state,
-        user: {
-          ...state.user,
-          [payload.imageType]: payload.imageUrl
-        }
-      };
-    case UPLOAD_BACKGROUND:
-      // Actualiza la URL de la imagen en el estado del usuario
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          [payload.imageType]: payload.imageUrl
-        }
-      };
+        userUpdated: payload,
+        user: payload
+      }
 
     default:
       return state;
