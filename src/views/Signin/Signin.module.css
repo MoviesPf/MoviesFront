@@ -48,6 +48,12 @@
   flex-direction: row;
   align-items: center;
   margin-right: 160px;
+  @media (max-width: 768px) {
+    margin-right: 100px;
+  }
+  @media (max-width: 470px) {
+    margin-right: 60px;
+  }
   justify-content: center;
 }
 
@@ -109,6 +115,9 @@
   font-size: 1.1rem;
   padding-top: 22px;
   color: #fff;
+  @media (max-width: 470px) {
+    font-size: 14px;
+  }
 }
 .labelSection{
   display: flex;
@@ -133,10 +142,17 @@
   background: white;
   letter-spacing: 1.5px;
   box-shadow: -2px 2px 7px#000000a6;
+  @media (max-width: 768px) {
+    width: 15rem;
+  }
+  @media (max-width: 470px) {
+    width: 12rem;
+  }
 }
 .inputsSection{
   display: flex;
   flex-direction: column;
+
 }
 .containBtn {
   grid-column: 1/3;

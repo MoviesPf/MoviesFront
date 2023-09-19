@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import css from './Signin.module.css';
 import { useDispatch } from 'react-redux';
 import {avatarsArray} from './Images';
@@ -7,9 +7,30 @@ import { createUsers } from '../../Redux/actions';
 import BtnHome from '../../Components/Buttons/BtnHome';
 import { validations } from './validations';
 
+
+
 export const Signin = () => {
+
+
+  function changeLabelText(){
+    const screenWidth = window.innerWidth;
+    if (screenWidth <= 768) {
+      setConfTextPass("Confirm");
+    } else {
+      setConfTextPass("Confirm Password");
+    }
+    console.log(screenWidth)
+    console.log(confTextPass)
+  }
+  window.onload = changeLabelText;
+  window.onresize = changeLabelText;
+
+
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+
 
   const [user, setUser] = useState({
     name: '',
@@ -20,6 +41,7 @@ export const Signin = () => {
     confirm: ''
   });
 
+  const [confTextPass,setConfTextPass] = useState("Confirm Password")
   const [displayAvatars,setDisplayAvatars] = useState({ display: 'none' })
   const [chooseAvatar,setChooseAvatar] = useState({visibility: "visible" })
 
@@ -109,7 +131,7 @@ export const Signin = () => {
               Password <span className={css.span}>*</span>
             </label>
             <label className={css.label}>
-              Confirm Password <span className={css.span}>*</span>
+             {confTextPass} <span className={css.span}>*</span>
             </label>
 
            </div>
