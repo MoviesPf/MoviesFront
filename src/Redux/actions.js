@@ -7,7 +7,7 @@ import {
   GET_PLATFORMS,
   GET_GENRES,
   GET_PROGRAM_DETAIL,
-  // FILTER_PROGRAMS_BY_GENRE,
+  FILTER_PROGRAMS_BY_GENRE,
   // FILTER_PROGRAMS_BY_PLATFORM,
   // FILTER_PROGRAMS_COMBINED,
   GET_MOVIES,
@@ -147,21 +147,21 @@ export const getProgramDetail = (ProgramsId) => {
   };
 };
 
-// export const filterProgramsByGenre = (genreName, type) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.get(
-//         URL_API + `programs/filter/genre/${genreName}/${type}`
-//       );
-//       dispatch({
-//         type: FILTER_PROGRAMS_BY_GENRE,
-//         payload: data
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
+export const filterProgramsByGenre = (genreName, type) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(
+        URL_API + `programs/filter/genre/${genreName}/${type}`
+      );
+      dispatch({
+        type: FILTER_PROGRAMS_BY_GENRE,
+        payload: data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 // export const filterProgramsByPlatform = (platformName, type) => {
 //   return async (dispatch) => {
@@ -437,6 +437,7 @@ export const updateUser = (updateData) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+}
 // filtros
 
 export const programsFilters = (state, page = 1) => {

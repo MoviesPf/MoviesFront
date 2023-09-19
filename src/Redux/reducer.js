@@ -3,7 +3,7 @@ import {
   GET_PLATFORMS,
   GET_GENRES,
   GET_PROGRAM_DETAIL,
-  // FILTER_PROGRAMS_BY_GENRE,
+  FILTER_PROGRAMS_BY_GENRE,
   // FILTER_PROGRAMS_BY_PLATFORM,
   // FILTER_PROGRAMS_COMBINED,
   GET_PROGRAM_BY_NAME,
@@ -37,6 +37,7 @@ import {
 const initialState = {
   programs: [],
   filteredPrograms: [],
+  similarPrograms: [],
   activeFilters: {},
   genresActive: [],
   platformsFilters: [],
@@ -146,6 +147,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         genresActive: data
       };
+    
+    case FILTER_PROGRAMS_BY_GENRE:
+      return {
+        ...state,
+        similarPrograms: payload
+      }
 
     case SELECT_DONATION_OPTION:
       return {
@@ -233,6 +240,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         userById: payload
       };
+
     case GET_USERS_ADMIN:
       return {
         ...state,

@@ -33,37 +33,38 @@ export const Detail = () => {
   const user = JSON.parse(localStorage.getItem("userStorage"));
   const playlists = useSelector((state)=> state.userPlaylists);
   const programDetail = useSelector((state) => state.programDetail);
-  const similarMovies = useSelector((state) => state.filteredPrograms.data);
+  const similarPrograms = useSelector((state) => state.similarPrograms.data);
   const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
-
-
+  
+  
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId))
-      .then( user.id ? dispatch(getUserPlaylists(user.id)) : null)
-      .then(() => {
-        setIdReal(true);
-      });
+    .then( user.id ? dispatch(getUserPlaylists(user.id)) : null)
+    .then(() => {
+      setIdReal(true);
+    });
   }, [dispatch, ProgramsId]);
-
+  
   useEffect(() => {
     if (programDetail && programDetail.Genres && programDetail.Genres[0].name) {
       const genre = programDetail.Genres[0].name
-        ? programDetail.Genres[0].name
-        : '';
+      ? programDetail.Genres[0].name
+      : '';
       if (genre !== '')
         dispatch(filterProgramsByGenre(genre, programDetail.type));
     }
   }, [dispatch, programDetail]);
-
+  
   useEffect(() => {
     setPeliculaSimilar(
       encontrarPeliculaMasParecida(
         programDetail?.title,
-        similarMovies ? similarMovies : []
-      )
-    );
-  }, [similarMovies]);
-
+        similarPrograms ? similarPrograms : []
+        )
+        );
+        console.log(similarPrograms)
+  }, [similarPrograms]);
+      
 
   const [review, setReview] = useState({spoiler:false, rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
