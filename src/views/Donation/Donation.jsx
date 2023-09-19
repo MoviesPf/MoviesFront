@@ -6,9 +6,8 @@ import { initiatePayment, selectDonationOption } from '../../Redux/actions';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import css from './Donations.module.css';
 
-
 const Donations = () => {
-  const user = JSON.parse(localStorage.getItem("userStorage"))
+  const user = JSON.parse(localStorage.getItem('userStorage'));
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,8 +68,8 @@ const Donations = () => {
       <div className={css.txt}>
         <h1 className={css.title}>Help us keep the service free!</h1>
       </div>
-        { user.id ?
-          <div className={css.content}>
+      {user.id ? (
+        <div className={css.content}>
           <h2 className={css.subtitle}>Make your donation</h2>
 
           <div className={css.cards}>
@@ -82,7 +81,7 @@ const Donations = () => {
                 value={10}
                 checked={selectedOption === 10}
                 onChange={() => handleOptionSelect(10)}
-                />
+              />
               <h2 className={css.monto}>10$</h2>
             </div>
 
@@ -95,7 +94,7 @@ const Donations = () => {
                   value={30}
                   checked={selectedOption === 30}
                   onChange={() => handleOptionSelect(30)}
-                  />
+                />
                 <h2 className={css.monto}>30$</h2>
               </label>
             </div>
@@ -109,51 +108,61 @@ const Donations = () => {
                   value={50}
                   checked={selectedOption === 50}
                   onChange={() => handleOptionSelect(50)}
-                  />
+                />
                 <h2 className={css.monto}>50$</h2>
               </label>
             </div>
           </div>
-          <button className={css.btnDono} onClick={handleDonation}>Donate</button>
-          </div>
-        : 
-          <div className={css.content}>
-            <h2 className={css.subtitle}>Sign in to donate!!</h2>
-            <div className={css.cards}>
-
-              <div className={css.card}>
-                <label>
-                  <h2 className={css.monto}>10$</h2>
-                </label>
-              </div>
-
-              <div className={css.card}>
-                <label>
-                  <h2 className={css.monto}>30$</h2>
-                </label>
-              </div>
-
-              <div className={css.card}>
-                <label>
-                  <h2 className={css.monto}>50$</h2>
-                </label>
-              </div>
-
+          <button className={css.btnDono} onClick={handleDonation}>
+            Donate
+          </button>
+        </div>
+      ) : (
+        <div className={css.content}>
+          <h2 className={css.subtitle}>Sign in to donate!!</h2>
+          <div className={css.cards}>
+            <div className={css.card}>
+              <label>
+                <h2 className={css.monto}>10$</h2>
+              </label>
             </div>
 
-            <div className={css.noLoginMessage}>
-              <div className={css.buttons}>
-                <button className={css.btnDono} onClick={()=> navigate('/login')}>Sign in</button>
-                <button className={css.btnDono} onClick={()=> navigate('/signin')}>Create Acount</button>
-              </div>
+            <div className={css.card}>
+              <label>
+                <h2 className={css.monto}>30$</h2>
+              </label>
+            </div>
+
+            <div className={css.card}>
+              <label>
+                <h2 className={css.monto}>50$</h2>
+              </label>
             </div>
           </div>
-        }
-        {successMessage && (
-          <div className={css.donationSuccess}>
-            <span>donation successfully</span>
+
+          <div className={css.noLoginMessage}>
+            <div className={css.buttons}>
+              <button
+                className={css.btnDono}
+                onClick={() => navigate('/login')}
+              >
+                Sign in
+              </button>
+              <button
+                className={css.btnDono}
+                onClick={() => navigate('/signin')}
+              >
+                Create Acount
+              </button>
+            </div>
           </div>
-        )}
+        </div>
+      )}
+      {successMessage && (
+        <div className={css.donationSuccess}>
+          <span>{successMessage}</span>
+        </div>
+      )}
     </div>
   );
 };
