@@ -1,4 +1,4 @@
-import { ContainerLeft, SimilarTitle, SimilarMoviesList, MovieCard, ContainerMiddle, ContainerReviews, AreaC, ProgramCard} from "./ProgramDetail.Styled";
+import { ContainerLeft, SimilarTitle, SimilarMoviesList, MovieCard, ContainerMiddle, ContainerReviews, AreaC, ProgramCard, EmptyMessage} from "./ProgramDetail.Styled";
 
 import { DetailReview } from "../DetailReview/DetailReview.jsx";
 import { DetailCard } from './DetailCard'
@@ -37,13 +37,13 @@ export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarM
         <DetailCard props={{programDetail, year, runtimeFormatted}}/>
         <ContainerReviews>
           {
-            programDetail.Reviews 
+            programDetail.Reviews.length
 
             ? programDetail.Reviews.map((r)=> ( <DetailReview r={r}/>))
             
-            : <div>
-              <h1>No tiene reviews</h1>
-            </div>
+            : <EmptyMessage>
+              <h1>{`This ${programDetail.type} has no reviews`}</h1>
+            </EmptyMessage>
           }
         </ContainerReviews>
         </ContainerMiddle>

@@ -94,3 +94,14 @@ export const ProgramCard = styled.img`
   border-radius: 30px;
   z-index: 2;
 `;
+
+export const EmptyMessage = styled.div`
+padding: 20px;
+margin-top: 10px;
+width: 100%;
+background: #1c1c1c91;
+display: flex;
+justify-content: center;
+border-radius: 15px;
+color: white;
+`
