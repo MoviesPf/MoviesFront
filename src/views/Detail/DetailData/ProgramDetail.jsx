@@ -1,14 +1,13 @@
-import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, ButtonFullComments, SpanSpoiler, DonationContainer, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
-import defaultImg from "../../assets/defaultMovie.png"
-import ProgCardDetail from './DetailCard'
-import React, { useState } from 'react';
+import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, 
+  StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle,ButtonFullComments, SpanSpoiler, DonationContainer} from "./ProgramDetail.Styled";
+import { DetailCard } from './DetailCard'
+import defaultImg from "../../../assets/defaultMovie.png"
+import { Advertisement } from "../../../Components/Advertisement/Advertisement";
+import emptyStar from "../../../assets/Icons/icons8-star-52.png"
+import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
+import { useState } from "react";
 
-import { Advertisement } from "../../Components/Advertisement/Advertisement";
-
-import emptyStar from "../../assets/Icons/icons8-star-52.png"
-import fullStar from "../../assets/Icons/icons8-star-100 green.png"
-
-export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
+export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
   : programDetail.poster
@@ -42,7 +41,7 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
       </ContainerLeft>
 
       <ContainerMiddle>
-        <ProgCardDetail props={{programDetail, year, runtimeFormatted}}/>
+        <DetailCard props={{programDetail, year, runtimeFormatted}}/>
         <ContainerReviews>
           {programDetail.Reviews && programDetail.Reviews.map((r)=> (
               <Reviews key={r.id}>
@@ -79,6 +78,6 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
         </ContainerReviews>
         </ContainerMiddle>
 
-    </AreaC>
+  </AreaC>
   )
 }
