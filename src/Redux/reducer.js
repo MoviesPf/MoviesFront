@@ -28,8 +28,7 @@ import {
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
   DELETE_USER,
-  UPLOAD_AVATAR,
-  UPLOAD_BACKGROUND
+  UPDATE_USER
 } from "./actions-type";
 
 const initialState = {
@@ -40,6 +39,7 @@ const initialState = {
   genres: [],
   platforms: [],
   user: {},
+  userUpdated: {},
   userById: {},
   userPlaylists: {},
   userReviews: {},
@@ -217,24 +217,13 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         userById: {}
       }
-    case UPLOAD_AVATAR:
-        // Actualiza la URL de la imagen en el estado del usuario
+
+    case UPDATE_USER:
       return {
         ...state,
-        user: {
-          ...state.user,
-          [payload.imageType]: payload.imageUrl,
-        },
-      };
-    case UPLOAD_BACKGROUND:
-        // Actualiza la URL de la imagen en el estado del usuario
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          [payload.imageType]: payload.imageUrl,
-        },
-      };
+        userUpdated: payload,
+        user: payload
+      }
 
     default:
       return state;

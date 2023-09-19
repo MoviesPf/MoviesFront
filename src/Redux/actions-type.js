@@ -22,9 +22,11 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const DELETE_USER = 'DELETE_USER';
+
+export const UPDATE_USER = "UPDATE_USER";
 export const GET_USER_PLAYLISTS ="GET_USER_PLAYLISTS";
 export const GET_USER_REVIEWS = "GET_USER_REVIEWS";
-export const GET_USERS_ADMIN = 'GET_USERS_ADMIN'
+export const GET_USERS_ADMIN = 'GET_USERS_ADMIN';
 
 export const RESET_MESSAGE = "RESET_MESSAGE";
 export const RESET_USER_BY_ID = "RESET_USER_BY_ID";
@@ -37,5 +39,3 @@ export const SERIE_TYPE = "SERIE_TYPE";
 
 export const POST_REVIEW = "POST_REVIEW";
 
-export const UPLOAD_AVATAR = "UPLOAD_AVATAR";
-export const UPLOAD_BACKGROUND = "UPLOAD_BACKGROUND";

@@ -61,7 +61,6 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email);
-    console.log(password);
     dispatch(loginUser(email, password));
 
     if (user.id) {

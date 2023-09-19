@@ -20,7 +20,6 @@ import {
   Users
 } from './Admin/index';
 import ProtectedRoute from './utils/ProtectedRoute';
-import  Cloudinary  from './views/Profile/Cloudinary/Cloudinary';
 
 function App() {
 
@@ -34,7 +33,6 @@ function App() {
         <Route path='/detail/:ProgramsId' element={<Detail />} />
         <Route path='/donate' element={<Donation />} />
         <Route path='/about' element={<About />} />
-        <Route path='/cloudinary' element={<Cloudinary />} />
 
         {/* rutas Admin Dashboard */}
         <Route element={<ProtectedRoute canActivate={true} />}>

@@ -31,8 +31,7 @@ import {
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
   DELETE_USER,
-  UPLOAD_BACKGROUND,
-  UPLOAD_AVATAR
+  UPDATE_USER
 } from "./actions-type";
 
 export const getAllPrograms = (page = 1) => {
@@ -427,53 +426,16 @@ export const resetUserById = () => {
   };
 }
 
-export const uploadAvatar = (userId, image) => async (dispatch) => {
-  console.log('userId', userId);
-  console.log("imagen", image);
+export const updateUser = (updateData) => async (dispatch) => {
   try {
-    const imageData = {
-      userId: userId,
-      image: image,
-    };
-
-    const response = await axios.post(`http://localhost:3001/users/avatar/upload-image`, imageData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (response.data.error) {
-      console.error('Error al subir la imagen de avatar:', response.data.error);
-    } else {
-      console.log('Imagen de avatar subida exitosamente:', response);
-      dispatch({ type: UPLOAD_AVATAR, payload: response });
-    }
-  } catch (error) {
-    console.error('Error al subir la imagen de avatar:', error);
-  }
-};
-
-export const uploadBackground = (userId, image) => async (dispatch) => {
-  console.log('userId', userId);
-  try {
-    const imageData = {
-      userId: userId,
-      image: image,
-    };
-
-    const response = await axios.post(`http://localhost:3001/users/background/upload-image`, imageData, {
+    const response = await axios.patch(URL_API + `users`, updateData,{
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    if (response.data.error) {
-      console.error('Error al subir la imagen de fondo:', response.data.error); // Cambio de mensaje
-    } else {
-      console.log('Imagen de fondo subida exitosamente:', response.data);
-      dispatch({ type: UPLOAD_BACKGROUND, payload: response.data.imageUrl });
-    }
+    dispatch({ type: UPDATE_USER, payload: response.data.update });
   } catch (error) {
-    console.error('Error al subir la imagen de fondo:', error); // Cambio de mensaje
+    console.log(error);
   }
-};
+}

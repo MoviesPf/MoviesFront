@@ -36,7 +36,7 @@ export const Detail = () => {
 
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId))
-      .then(dispatch(getUserPlaylists(user?.id)))
+      .then( user.id ? dispatch(getUserPlaylists(user.id)) : null)
       .then(() => {
         setIdReal(true);
       });
