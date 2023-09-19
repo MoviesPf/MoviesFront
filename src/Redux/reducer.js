@@ -4,8 +4,8 @@ import {
   GET_GENRES,
   GET_PROGRAM_DETAIL,
   FILTER_PROGRAMS_BY_GENRE,
-  FILTER_PROGRAMS_BY_PLATFORM,
-  FILTER_PROGRAMS_COMBINED,
+  // FILTER_PROGRAMS_BY_PLATFORM,
+  // FILTER_PROGRAMS_COMBINED,
   GET_PROGRAM_BY_NAME,
   GET_MOVIES,
   GET_SERIES,
@@ -23,163 +23,247 @@ import {
   SELECT_DONATION_OPTION,
   GET_USER_PLAYLISTS,
   GET_USER_REVIEWS,
-  HANDLE_FAV_WATCHED_WATCHLIST
-} from "./actions-type";
+  HANDLE_FAV_WATCHED_WATCHLIST,
+  GET_USER_BY_ID,
+  GET_USERS_ADMIN,
+  RESET_USER_BY_ID,
+  DELETE_USER,
+  UPDATE_USER,
+  PROGRAMS_FILTERS,
+  ACTIVE_FILTERS,
+  GENRES_FILTERS
+} from './actions-type';
 
 const initialState = {
   programs: [],
   filteredPrograms: [],
+  similarPrograms: [],
+  activeFilters: {},
+  genresActive: [],
+  platformsFilters: [],
   searchedPrograms: [],
   programDetail: [],
   genres: [],
   platforms: [],
   user: {},
+  userUpdated: {},
+  userById: {},
   userPlaylists: {},
   userReviews: {},
-  message: "",
-  type: "main",
+  message: '',
+  type: 'main',
   selectedOption: null,
+  totalPages: 0
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_ALL_PROGRAMS:
+      console.log(payload);
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
-        filteredPrograms: [],
+        type: 'main',
+        filteredPrograms: []
       };
 
     case GET_MOVIES:
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
-        filteredPrograms: [],
+        type: 'movies',
+        filteredPrograms: []
       };
 
     case GET_SERIES:
       return {
         ...state,
+        totalPages: payload.total,
         programs: payload,
-        filteredPrograms: [],
+        type: 'series',
+        filteredPrograms: []
       };
 
     case GET_PROGRAM_BY_NAME:
       return {
         ...state,
-        searchedPrograms: payload,
+        searchedPrograms: payload
       };
 
     case GET_GENRES:
       return {
         ...state,
-        genres: payload,
+        genres: payload
       };
 
     case GET_MOVIES_GENRES:
       return {
         ...state,
-        genres: payload,
+        genres: payload
       };
 
     case GET_SERIES_GENRES:
       return {
         ...state,
-        genres: payload,
+        genres: payload
       };
 
     case GET_PLATFORMS:
       return {
         ...state,
-        platforms: payload,
+        platforms: payload
       };
 
     case GET_PROGRAM_DETAIL:
       return {
         ...state,
-        programDetail: payload,
+        programDetail: payload
       };
 
-    case FILTER_PROGRAMS_BY_GENRE:
-    case FILTER_PROGRAMS_BY_PLATFORM:
-    case FILTER_PROGRAMS_COMBINED:
+    case PROGRAMS_FILTERS:
       return {
         ...state,
-        filteredPrograms: payload,
+        totalPages: payload.totalPages,
+        filteredPrograms: payload
       };
+
+    case ACTIVE_FILTERS:
+      return {
+        ...state,
+        activeFilters: payload
+      };
+
+    case GENRES_FILTERS:
+      if (typeof genresActive === 'undefined') {
+        console.log('unde');
+        data.push(payload);
+      } else {
+        data = [...genresActive, payload];
+      }
+
+      return {
+        ...state,
+        genresActive: data
+      };
+    
+    case FILTER_PROGRAMS_BY_GENRE:
+      return {
+        ...state,
+        similarPrograms: payload
+      }
+
     case SELECT_DONATION_OPTION:
       return {
         ...state,
-        selectedOption: payload,
+        selectedOption: payload
       };
     //USERS
     case LOGIN_USER:
       return {
         ...state,
         user: payload.data,
-        message: payload.message,
+        message: payload.message
       };
     case POST_USER:
       console.log(payload);
       return {
         ...state,
-        user: payload.data,
+        user: payload.data
       };
     case LOGOUT_USER:
       return {
         ...state,
         user: {},
-        message: payload,
+        message: payload
       };
     case ERROR_LOGIN:
       return {
         ...state,
-        message: payload,
+        message: payload
       };
     case RESET_MESSAGE:
       return {
         ...state,
-        message: "",
+        message: ''
       };
 
     case GET_USER_PLAYLISTS:
       return {
         ...state,
-        userPlaylists:payload
-      }
+        userPlaylists: payload
+      };
 
     case GET_USER_REVIEWS:
       return {
         ...state,
-        userReviews:payload
-      }
-    
+        userReviews: payload
+      };
+
     case MAIN_TYPE:
       return {
         ...state,
-        type: "main",
+        type: 'main'
       };
 
     case MOVIE_TYPE:
       return {
         ...state,
-        type: "movie",
+        type: 'movie'
       };
 
     case SERIE_TYPE:
       return {
         ...state,
-        type: "serie",
+        type: 'serie'
       };
 
     case POST_REVIEW:
       return {
-        ...state,
+        ...state
       };
 
     case HANDLE_FAV_WATCHED_WATCHLIST:
       return {
+        ...state
+      };
+    case GET_USER_BY_ID:
+      return {
         ...state,
+        userById: payload
+      };
+
+    case DELETE_USER:
+      console.log(payload);
+      return {
+        ...state,
+        userById: payload
+      };
+
+    case GET_USERS_ADMIN:
+      return {
+        ...state,
+        allUsers: payload.data,
+        usersInfo: {
+          total: payload.total,
+          totalBanned: payload.totalBanned,
+          totalDonators: payload.totalDonators,
+          totalReviews: payload.totalReviews
+        }
+      };
+
+    case RESET_USER_BY_ID:
+      return {
+        ...state,
+        userById: {}
+      }
+
+    case UPDATE_USER:
+      return {
+        ...state,
+        userUpdated: payload,
+        user: payload
       }
 
     default:
