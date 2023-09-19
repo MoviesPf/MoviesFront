@@ -53,6 +53,7 @@ export const Detail = () => {
   const [showModal, setShowModal] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [commentError, setCommentError] = useState(false);
   const [idReal, setIdReal] = useState(false);
 
   useEffect(() => {
@@ -87,18 +88,35 @@ export const Detail = () => {
   }
 
   const handleComment = (comments) => {
+    if (comments.length < 10 || comments.length > 3500) {
+      setCommentError(true);
+    } else {
+      setCommentError(false);
+    }
     setReview({ ...review, comments: comments });
   };
-
+  
   const handleCreate = async (event) => {
     event.preventDefault();
-    if (user.id) {
-      handleCloseModal();
-      await dispatch(createReview(review, user.id, programDetail.id));
-      dispatch(getProgramDetail(ProgramsId));
-      setReview([...review, review]);
-    } else setShowError(true);
+  
+    const isValidRating = review.rating !== null && review.rating > 0;
+    const isValidComments = review.comments && review.comments.length >= 10 && review.comments.length <= 3500;
+  
+    if (user.id && isValidComments) {
+      if (isValidRating) {
+        handleCloseModal();
+        await dispatch(createReview(review, user.id, programDetail.id));
+        dispatch(getProgramDetail(ProgramsId));
+        setReview({ ...review, comments: "" });
+      } else {
+        setShowError(true);
+      }
+    } else {
+      setShowError(!isValidRating);
+      setCommentError(!(review.comments && review.comments.length >= 10));
+    }
   };
+  
 
   const handleMovieClick = (ProgramsId) => {
     navigate(`/detail/${ProgramsId}`);
@@ -113,8 +131,9 @@ export const Detail = () => {
   };
 
   const handleCloseModal = () => {
+    setCommentError(false);
     setShowModal(false) 
-    setReview({ ...review, rating: 0, spoiler: false })
+    setReview({ ...review, rating: 0, spoiler: false, comments: ""  })
     setShowDonation(true) 
   }
 
@@ -201,6 +220,11 @@ export const Detail = () => {
               </CloseButtonContainer>
             </ContainerModalHeader>
             <Comments placeholder='Add a review...' onChange={(e) => handleComment(e.target.value)}/>
+            {commentError && (
+              <SpanError>
+                Comments must be between 10 and 3500 characters.
+              </SpanError>
+            )}
             <CheckboxContainer>
               <HiddenCheckbox
                 type="checkbox"
@@ -213,7 +237,9 @@ export const Detail = () => {
               <CheckboxLabel>Contains Spoiler</CheckboxLabel>
             </CheckboxContainer>
             {showError && 
-              <SpanError>must be logged in to add a review</SpanError>
+              <SpanError>
+                Please select a rating before submitting your review.
+              </SpanError>
             }
             <StarsContainer>
               <div>

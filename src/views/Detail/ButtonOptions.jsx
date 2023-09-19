@@ -112,9 +112,19 @@ const AlreadyReviewedMessage = styled.div`
 `;
 
 const AlreadyReviewedText = styled.span`
+  background: rgb(0 0 0 / 21%);
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 10px 0;
   font-size: 18px;
   color: rgb(25, 213, 118);
-  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid rgb(25 213 118 / 23%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 `;
 
 

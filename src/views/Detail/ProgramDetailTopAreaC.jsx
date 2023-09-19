@@ -1,6 +1,7 @@
-import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, SpanSpoiler, DonationContainer, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
+import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, ButtonFullComments, SpanSpoiler, DonationContainer, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
 import defaultImg from "../../assets/defaultMovie.png"
 import ProgCardDetail from './DetailCard'
+import React, { useState } from 'react';
 
 import { Advertisement } from "../../Components/Advertisement/Advertisement";
 
@@ -12,6 +13,8 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
   ? defaultImg
   : programDetail.poster
   
+  const [showFullComments, setShowFullComments] = useState(false);
+
   const handleMovieImageClick = (ProgramsId) => {
     handleMovieClick(ProgramsId);
   };
@@ -50,7 +53,14 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
                   </div>
                   {r.spoiler && <SpanSpoiler>Spoiler Alert!!</SpanSpoiler>}
                 </ContainerAvatarImg>
-                <SpanComments>{r.comments}</SpanComments>
+                <SpanComments>
+                  {showFullComments ? r.comments : r.comments.slice(0, 500)}
+                  {r.comments.length > 500 && (
+                    <ButtonFullComments onClick={() => setShowFullComments(!showFullComments)}>
+                      {showFullComments ? "Read less" : "Read more"}
+                    </ButtonFullComments>
+                  )}
+                </SpanComments>
                 <StarsContainer>
                 <span>
                   {new Array(5).fill('').map((_, index) => (

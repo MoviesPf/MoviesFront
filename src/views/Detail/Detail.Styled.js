@@ -263,13 +263,19 @@ export const YearTitleModal = styled.span`
 `;
 
 export const SpanError = styled.span`
-  color: #1c1c1c;
-  background: #fce8e6;
+  background: rgb(0 0 0 / 21%);
   font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 5px 10px;
   margin: 10px 0;
+  font-size: 18px;
+  color: rgb(25, 213, 118);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid rgb(25 213 118 / 23%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 `;
 
 export const ContainerAvatarImg = styled.div`
@@ -412,4 +418,20 @@ export const SpanSpoiler = styled.span`
   font-size: 18px;
   color: rgb(25, 213, 118);
   font-weight: bold;
+`;
+
+export const ButtonFullComments = styled.label`
+  border-radius: 5px;
+  background: transparent;
+  color: rgb(25, 213, 118);
+  background: #6161611c;
+  font-size: 13px;
+  font-weight: bold;
+  transition: 0.2s;
+  padding: 2px 5px;
+  cursor: pointer;
+  &:hover {
+    color: #1b1b1b;
+    background: rgb(25, 213, 118);
+  }
 `;
