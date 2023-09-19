@@ -58,7 +58,7 @@ export const EditProfileModal = ({setShowModal}) => {
 
     const handleSubmit = () => {
         if (user.avatar !== editedUser.avatar || user.background !== editedUser.background || user.name !== editedUser.name || user.nickname !== editedUser.nickname || user.status !== editedUser.status) {
-            dispatch(updateUser({ id: user.id, name: editedUser.name, nickname: editedUser.nickname, status: editedUser.status, avatarImage: editedUser.avatar, backgroundImage: editedUser.background}))}
+            dispatch(updateUser({ id: user.id, name: editedUser.name, nickname: editedUser.nickname, status: editedUser.status, avatarImage: editedUser.avatar, backgroundImage: editedUser.background})).then(showModal())}
     }
 
     return (
