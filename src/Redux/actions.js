@@ -8,8 +8,6 @@ import {
   GET_GENRES,
   GET_PROGRAM_DETAIL,
   FILTER_PROGRAMS_BY_GENRE,
-  // FILTER_PROGRAMS_BY_PLATFORM,
-  // FILTER_PROGRAMS_COMBINED,
   GET_MOVIES,
   GET_SERIES,
   GET_MOVIES_GENRES,
@@ -310,7 +308,7 @@ export const selectDonationOption = (amount) => ({
 export const initiatePayment = (donationData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      'http://localhost:3001/donations/create-order',
+      URL_API + 'donations/create-order',
       donationData,
       {
         headers: {
@@ -357,8 +355,7 @@ export const getUserReviews = (UserId) => {
 export const handleList = (UserId, PlaylistName, ProgramId) => {
   return async (dispatch) => {
     const { data } = await axios.patch(
-      URL_API +
-        `playlists/user/${UserId}/name/${PlaylistName}/program/${ProgramId}`
+      URL_API + `playlists/user/${UserId}/name/${PlaylistName}/program/${ProgramId}`
     );
     console.log(data);
     return dispatch({
