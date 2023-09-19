@@ -27,7 +27,8 @@ import {
   GET_USER_BY_ID,
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
-  DELETE_USER
+  DELETE_USER,
+  GET_PROGRAMS_ADMIN
 } from './actions-type';
 
 const initialState = {
@@ -35,12 +36,16 @@ const initialState = {
   filteredPrograms: [],
   searchedPrograms: [],
   programDetail: [],
+  allPrograms: [],
+  programsInfo: {},
   genres: [],
   platforms: [],
   user: {},
   userById: {},
   userPlaylists: {},
   userReviews: {},
+  allUsers: [],
+  usersInfo: {},
   message: '',
   type: 'main',
   selectedOption: null
@@ -198,6 +203,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         userById: payload
       };
+
     case GET_USERS_ADMIN:
       return {
         ...state,
@@ -207,6 +213,18 @@ const reducer = (state = initialState, { type, payload }) => {
           totalBanned: payload.totalBanned,
           totalDonators: payload.totalDonators,
           totalReviews: payload.totalReviews
+        }
+      };
+
+    case GET_PROGRAMS_ADMIN:
+      return {
+        ...state,
+        allPrograms: payload.data,
+        programsInfo: {
+          total: payload.totalPrograms,
+          totalMovies: payload.totalMovies,
+          totalSeries: payload.totalSeries,
+          bannedPrograms: payload.bannedPrograms
         }
       };
 

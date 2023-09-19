@@ -46,8 +46,8 @@ export const Filters = () => {
         type === 'main'
           ? dispatch(getAllPrograms())
           : type === 'movie'
-          ? dispatch(getAllMovies())
-          : dispatch(getAllSeries());
+            ? dispatch(getAllMovies())
+            : dispatch(getAllSeries());
       }
     }
   };
@@ -61,8 +61,8 @@ export const Filters = () => {
       type === 'main'
         ? dispatch(getAllPrograms())
         : type === 'movie'
-        ? dispatch(getAllMovies())
-        : dispatch(getAllSeries());
+          ? dispatch(getAllMovies())
+          : dispatch(getAllSeries());
     } else {
       if (platformName && !selectedGenre) {
         dispatch(filterProgramsByPlatform(platformName, type));
@@ -80,9 +80,9 @@ export const Filters = () => {
     genresChunks.push(
       <Carousel.Item>
         <div className={css.backGen}>
-            {chunk.map((genre) => (
-                <h3 key={genre.name} onClick={() => handleGenreFilter(genre.name)} style={{ cursor: 'pointer' }} className={selectedGenre === genre.name ? css.selected : css.genres}> {genre.name} </h3>
-            ))}
+          {chunk.map((genre) => (
+            <h3 key={genre.name} onClick={() => handleGenreFilter(genre.name)} style={{ cursor: 'pointer' }} className={selectedGenre === genre.name ? css.selected : css.genres}> {genre.name} </h3>
+          ))}
         </div>
       </Carousel.Item>
     );

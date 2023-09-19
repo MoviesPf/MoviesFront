@@ -30,7 +30,8 @@ import {
   GET_USER_BY_ID,
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
-  DELETE_USER
+  DELETE_USER,
+  GET_PROGRAMS_ADMIN
 } from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
@@ -402,7 +403,6 @@ export const getUsersAdmin = () => {
 };
 
 export const deleteUser = (id) => {
-  console.log(id);
   return async (dispatch) => {
     try {
       const res = await fetch(URL_API + 'users/ban/' + id, {
@@ -426,5 +426,21 @@ export const resetUserById = () => {
       type: RESET_USER_BY_ID,
       payload: ''
     });
+  };
+};
+
+export const getProgramsAdmin = (page = 1) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(URL_API + 'programs/all?page=' + page);
+      const data = await res.json();
+
+      return dispatch({
+        type: GET_PROGRAMS_ADMIN,
+        payload: data
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
