@@ -5,17 +5,27 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { SearchedCard } from '../SearchedCard/SearchedCard';
 import { BiSolidCameraMovie } from 'react-icons/bi';
-import { getAllPrograms, getGenres, getAllMovies, getMovieGenres, getAllSeries, getSeriesGenres, logoutUser, changeTypeMain, changeTypeMovie, changeTypeSerie } from '../../Redux/actions';
+import {
+  getAllPrograms,
+  getGenres,
+  getAllMovies,
+  getMovieGenres,
+  getAllSeries,
+  getSeriesGenres,
+  logoutUser,
+  changeTypeMain,
+  changeTypeMovie,
+  changeTypeSerie
+} from '../../Redux/actions';
 import { useLocalStorage } from '../../utils/useLocalStorage';
-
 
 export const NavBar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const [userStorage, setUserStorage] = useLocalStorage("userStorage", {} );
-  const user = JSON.parse(localStorage.getItem("userStorage"))
-  
+  const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
+  const user = JSON.parse(localStorage.getItem('userStorage'));
+
   const type = useSelector((state) => state.type);
   const searchedPrograms = useSelector((state) => state.searchedPrograms);
 
@@ -27,28 +37,31 @@ export const NavBar = () => {
   };
 
   const AllPrograms = () => {
+    if (type === 'main') return;
+    dispatch(changeTypeMain());
     dispatch(getAllPrograms());
     dispatch(getGenres());
-    dispatch(changeTypeMain());
   };
 
   const Movies = () => {
+    if (type === 'movies') return;
+    dispatch(changeTypeMovie());
     dispatch(getAllMovies());
     dispatch(getMovieGenres());
-    dispatch(changeTypeMovie());
   };
 
   const Series = () => {
+    if (type === 'series') return;
+    dispatch(changeTypeSerie());
     dispatch(getAllSeries());
     dispatch(getSeriesGenres());
-    dispatch(changeTypeSerie());
   };
 
   const LogOut = () => {
-    setUserStorage({})
+    setUserStorage({});
     dispatch(logoutUser());
-    navigate("/")
-  }
+    navigate('/');
+  };
 
   return (
     <div className={css.allNavbar}>
@@ -61,9 +74,24 @@ export const NavBar = () => {
         </div>
         {pathname === '/' && (
           <div className={css.contMid}>
-            <button className={type === 'main' ? css.typesP : css.types} onClick={AllPrograms}>All</button>
-            <button className={type === 'movie' ? css.typesP : css.types} onClick={Movies}>Movies</button>
-            <button className={type === 'serie' ? css.typesP : css.types} onClick={Series}>Series</button>
+            <button
+              className={type === 'main' ? css.typesP : css.types}
+              onClick={AllPrograms}
+            >
+              All
+            </button>
+            <button
+              className={type === 'movies' ? css.typesP : css.types}
+              onClick={Movies}
+            >
+              Movies
+            </button>
+            <button
+              className={type === 'series' ? css.typesP : css.types}
+              onClick={Series}
+            >
+              Series
+            </button>
           </div>
         )}
 
@@ -74,37 +102,43 @@ export const NavBar = () => {
             </svg>
           </button>
           {
-          userStorage.name ? 
+          user?.id ? (
           <div className={css.user}>
             <button onClick={LogOut} className={css.sesion}> Sign Out </button>
-            <div className={css.avatarUser} onClick={() => navigate('/profile')}>
-              <img className={css.avatarUserImg} src={user.avatar} alt="avatar" />
+              <div className={css.avatarUser} onClick={() => navigate('/profile')}>
+                <img className={css.avatarUserImg} src={user.avatar} alt="avatar" />
+              </div>
+          </div>
+          ) : (
+            <div>
+              <button onClick={() => navigate('/login')} className={css.sesion}>{' '}Sign In{' '}</button>
+              <button onClick={() => navigate('/signin')} className={css.sesion}> {' '} Sign Up </button>
             </div>
-          </div>
-          : 
-          <div>
-            <button onClick={() => navigate('/login')} className={css.sesion}> Sign In </button>
-            <button onClick={() => navigate('/signin')} className={css.sesion}> Sign Up</button>
-          </div>
+          )
           }
         </div>
-        </div>
-        {
-        show && <div className={css.searchComponent}>
-        <SearchBar setSearched={setSearched}/>
-        {
-          <div className={css.cartas}>
-          {!searched 
-          ? <h1 className={css.message}>{' '}Search for a Movie/Serie here ↑↑</h1>
-          : searchedPrograms.length 
-          ? searchedPrograms.map((program) => {return (<SearchedCard key={program.id} program={program} setShow={setShow} show={show}/>)})
-          : <h1 className={css.message}> Movie/Serie Not Found </h1>
-          }
+      </div>
+        {show && (
+          <div className={css.searchComponent}>
+            <SearchBar setSearched={setSearched} />
+            {
+            <div className={css.cartas}>
+              {!searched ? (
+                <h1 className={css.message}> {' '} Search for a Movie/Serie here ↑↑ </h1>
+              ) : searchedPrograms.length ? (
+                searchedPrograms.map((program) => {
+                  return (
+                    <SearchedCard key={program.id} program={program} setShow={setShow} show={show}/>
+                  );
+                })
+              ) : (
+                <h1 className={css.message}> Movie/Serie Not Found </h1>
+              )}
+            </div>
+            }
+            <div className={css.bottom}>bottom</div>
           </div>
-        }
-        <div className={css.bottom}>bottom</div>
-        </div>
-        }
+        )}
     </div>
   );
 };

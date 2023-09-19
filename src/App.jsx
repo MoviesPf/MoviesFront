@@ -20,13 +20,8 @@ import {
   Users
 } from './Admin/index';
 import ProtectedRoute from './utils/ProtectedRoute';
-import { useSelector } from 'react-redux';
 
 function App() {
-  const path = useParams();
-  console.log(path);
-  const user = useSelector((state) => state.user);
-  console.log(user);
 
   return (
     <>

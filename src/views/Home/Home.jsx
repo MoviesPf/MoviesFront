@@ -6,6 +6,7 @@ import { Filters } from '../../Components/Filters/Filters';
 import { NavBar } from '../../Components/NavBar/NavBar';
 import { Footer } from '../../Components/Footer/Footer';
 import { Cards } from '../../Components/Cards/Cards';
+import Paginate from '../../Components/Paginate/Paginate';
 
 import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
 import { useLocalStorage } from '../../utils/useLocalStorage';
@@ -34,9 +35,9 @@ export const Home = () => {
   const user = JSON.parse(localStorage.getItem('userStorage'));
 
   const programs = useSelector((state) => state.programs);
+  const type = useSelector((state) => state.type);
+  const limit = useSelector((state) => state.totalPages);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
-
-  console.log(user);
 
   const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
 
@@ -47,8 +48,10 @@ export const Home = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (userInState.id) setUserStorage(userInState);
-    user?.id ? dispatch(getUserPlaylists(user.id)) : null;
+    if (userInState.id) {
+      setUserStorage(userInState);
+      user.id ? dispatch(getUserPlaylists(user.id)) : null;
+    }
   }, []);
 
   return (
@@ -91,6 +94,16 @@ export const Home = () => {
               filteredPrograms.data ? filteredPrograms.total : programs.total
             }
           />
+
+          <Paginate
+            programs={
+              filteredPrograms.data ? filteredPrograms.data : programs.data
+            }
+            limit={limit}
+            type={type}
+            filters={filteredPrograms.data ? 'filters' : 'all'}
+          />
+
           <Footer />
         </div>
       )}

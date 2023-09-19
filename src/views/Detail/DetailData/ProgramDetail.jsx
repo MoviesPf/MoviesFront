@@ -1,15 +1,19 @@
-import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle } from "./Detail.Styled";
-import defaultImg from "../../assets/defaultMovie.png"
-import ProgCardDetail from './DetailCard'
+import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, 
+  StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle,ButtonFullComments, SpanSpoiler, DonationContainer} from "./ProgramDetail.Styled";
+import { DetailCard } from './DetailCard'
+import defaultImg from "../../../assets/defaultMovie.png"
+import { Advertisement } from "../../../Components/Advertisement/Advertisement";
+import emptyStar from "../../../assets/Icons/icons8-star-52.png"
+import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
+import { useState } from "react";
 
-import emptyStar from "../../assets/Icons/icons8-star-52.png"
-import fullStar from "../../assets/Icons/icons8-star-100 green.png"
-
-export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
+export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarMovies, handleMovieClick}  ) => {
   let imageP =  programDetail.poster === "https://image.tmdb.org/t/p/w500null"  
   ? defaultImg
   : programDetail.poster
   
+  const [showFullComments, setShowFullComments] = useState(false);
+
   const handleMovieImageClick = (ProgramsId) => {
     handleMovieClick(ProgramsId);
   };
@@ -31,18 +35,31 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
           <div></div>
           )}
         </SimilarMoviesList>
+        <DonationContainer>
+          <Advertisement/>
+        </DonationContainer>
       </ContainerLeft>
 
       <ContainerMiddle>
-        <ProgCardDetail props={{programDetail, year, runtimeFormatted}}/>
+        <DetailCard props={{programDetail, year, runtimeFormatted}}/>
         <ContainerReviews>
           {programDetail.Reviews && programDetail.Reviews.map((r)=> (
               <Reviews key={r.id}>
                 <ContainerAvatarImg>
+                  <div>
                   <AvatarImg src={r.User.avatar} alt="" />
                   <ReviewBy>{`Reveiwed by ${r.User.nickname}`}</ReviewBy>
+                  </div>
+                  {r.spoiler && <SpanSpoiler>Spoiler Alert!!</SpanSpoiler>}
                 </ContainerAvatarImg>
-                <SpanComments>{r.comments}</SpanComments>
+                <SpanComments>
+                  {showFullComments ? r.comments : r.comments.slice(0, 500)}
+                  {r.comments.length > 500 && (
+                    <ButtonFullComments onClick={() => setShowFullComments(!showFullComments)}>
+                      {showFullComments ? "Read less" : "Read more"}
+                    </ButtonFullComments>
+                  )}
+                </SpanComments>
                 <StarsContainer>
                 <span>
                   {new Array(5).fill('').map((_, index) => (
@@ -61,6 +78,6 @@ export const ProgramDetailTopAreaC = (  {programDetail, year, runtimeFormatted, 
         </ContainerReviews>
         </ContainerMiddle>
 
-    </AreaC>
+  </AreaC>
   )
 }
