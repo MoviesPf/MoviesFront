@@ -94,7 +94,3 @@ export const ProgramCard = styled.img`
   border-radius: 30px;
   z-index: 2;
 `;
-
-export const DonationContainer = styled.div`
-  margin-top: 100px;
-`;

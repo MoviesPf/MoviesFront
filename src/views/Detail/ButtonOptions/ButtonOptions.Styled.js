@@ -11,9 +11,9 @@ export const scaleUp = keyframes`
 
 export const ScoreContainer = styled.div`
   background-color: #1C1C1C;
-  margin-right: 100px;
   display: flex;
   height: min-content;
+  width: min-content;
   flex-direction: column;
   align-items: center;
   justify-content: center;

@@ -132,3 +132,15 @@ export const CloseButton = styled.label`
     border-color: rgb(25, 213, 118);
   }
 `;
+
+export const DonationContainer = styled.div`
+  margin-top: 100px;
+`;
+
+export const RightContainer = styled.div`
+width: 30%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+`
