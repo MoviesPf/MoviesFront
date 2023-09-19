@@ -29,7 +29,7 @@ const ViewContainer = styled.div`
   }
   
   &::-webkit-scrollbar-thumb{
-    background: green;
+    background: #19d576;
   }
 `;
 

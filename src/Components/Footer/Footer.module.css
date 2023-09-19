@@ -21,7 +21,25 @@
     background: transparent;
     transition: all 0.25s;
 }
+.donateLink {
+    margin: 10px;
+    border-radius: 5px;
+    border: 0;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color:  #ffffff;
+    font-weight: bold;
+
+    transition: all 0.25s;
+}
+
 
 .link:hover {
     background-color: rgb(70, 70, 70);
+}
+.donateLink:hover  {
+    background-color:#288858;
+    color: #ffffff;
+
 }
