@@ -54,7 +54,7 @@ const Paginate = ({ limit, type, filters, programs }) => {
       >
         <GrFormPreviousLink />
       </a>
-      {limit === 1 ? (
+      {limit === 1 || limit === 0 ? (
         <button className={style.actual} onClick={() => handlerClick(1)}>
           1
         </button>
