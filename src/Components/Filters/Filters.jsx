@@ -148,35 +148,38 @@ export const Filters = () => {
   //   </button>
   // );
   return (
+    <>
     <div className={css.background}>
       <div className={css.filtersContainer}>
         {Genres?.map((gen) => {
           return (
             <div
-              className={css.filters}
               onClick={() => handlerFilters('genre', gen.name)}
+              className={filters.genres?.includes(gen.name) ? css.selected : css.filters}
             >
               {gen.name}
             </div>
           );
         })}
       </div>
-
-      <div>platforms</div>
-
+    </div>
+      <br/>
+    <div className={css.background}>
       <div className={css.filtersContainer}>
         {Platforms?.map((plat) => {
           return (
             <div
-              className={css.filters}
               onClick={() => handlerFilters('platforms', plat.name)}
+              className={filters.platforms?.includes(plat.name) ? css.selected : css.filters}
             >
               {plat.name}
             </div>
           );
         })}
       </div>
-
+    </div>
+      <br/>
+        
       {/* <Carousel
         key={'genres'}
         wrap={false}
@@ -202,6 +205,6 @@ export const Filters = () => {
           ))}
         </select>
       </div> */}
-    </div>
+    </>
   );
 };
