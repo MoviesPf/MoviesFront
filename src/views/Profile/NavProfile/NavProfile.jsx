@@ -1,10 +1,17 @@
 import { NavContainer, LinksContainer, ViewButton, IconsC, IconContainer, IconImg, IconLabel, EditButton } from "./NavProfile.Styled"
 
+import {RiUserSettingsFill} from 'react-icons/ri'
 import favIcon from "../../../assets/Icons/icons8-love-90.png"
 import ViewsIcon from "../../../assets/Icons/icons8-view-90.png"
 import PendingIcon from "../../../assets/Icons/icons8-delivery-time-96.png"
+import { AdminButton } from "../Profile.Styled";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const NavProfile = ({setShowModal, menu, setMenu, favorites, watchlist, watched}) => {
+
+  const user = JSON.parse(localStorage.getItem("userStorage"))
+  const navigate = useNavigate()
 
   const showModal = ()=> {
     setShowModal(true)
@@ -54,6 +61,12 @@ export const NavProfile = ({setShowModal, menu, setMenu, favorites, watchlist, w
           <IconLabel>{ watchlist ? watchlist.programs.length : 0}</IconLabel>
         </IconContainer>
       </IconsC>
+
+
+      {!user?.admin ?
+      <AdminButton onClick={() => navigate('/admin')}> <RiUserSettingsFill/> ADMIN</AdminButton>
+      : ''
+      }
 
       <EditButton onClick={showModal}>
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

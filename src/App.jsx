@@ -8,14 +8,8 @@ import { Home } from './views/Home/Home';
 import Donation from './views/Donation/Donation';
 import About from './views/About/About';
 import {
-  DetailPrograms,
-  DetailReviews,
   DetailUsers,
-  Donations,
-  Form,
   Nav,
-  Programs,
-  Reviews,
   Start,
   Users
 } from './Admin/index';
@@ -26,6 +20,7 @@ function App() {
   return (
     <>
       <Routes>
+        
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/login' element={<Login />} />
@@ -39,20 +34,10 @@ function App() {
           <Route path='admin' element={<Start />}>
             <Route path='users' element={<Users />} />
             <Route path='users/detail/:id' element={<DetailUsers />} />
-            <Route path='reviews' element={<Reviews />} />
-            <Route
-              path='reviews/detail/:ReviewsId'
-              element={<DetailReviews />}
-            />
-            <Route path='programs' element={<Programs />} />
-            <Route
-              path='progeamas/detail/:ProgramsId'
-              element={<DetailPrograms />}
-            />
-            <Route path='create' element={<Form />} />
-            <Route path='donations' element={<Donations />} />
           </Route>
         </Route>
+
+
       </Routes>
     </>
   );

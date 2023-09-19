@@ -31,6 +31,7 @@ import {
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
   DELETE_USER,
+  GET_PROGRAMS_ADMIN,
   UPDATE_USER,
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
@@ -423,6 +424,21 @@ export const resetUserById = () => {
     });
   };
 };
+
+export const getProgramsAdmin = (page = 1) => {
+  return async (dispatch) => {
+    try {
+      const res = await fetch(URL_API + 'programs/all?page=' + page);
+      const data = await res.json();
+
+      return dispatch({
+        type: GET_PROGRAMS_ADMIN,
+      })
+    } catch (error) {
+    console.log(error)
+  }
+}}
+
 
 export const updateUser = (updateData) => async (dispatch) => {
   try {
