@@ -17,14 +17,18 @@ export const Container = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
+
+  &::-webkit-scrollbar-thumb {
     background: green;
   }
+`;
 `;
 
 export const Top = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+`;
 `;
 
 export const Header = styled.div`
