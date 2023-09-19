@@ -47,8 +47,10 @@
     justify-content: center;
     align-items: center;
     margin: 0 5px;
-    padding: 1rem;
+    padding: .3rem .5rem;
     transition: all 0.25s;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .backPlt {
