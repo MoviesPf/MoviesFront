@@ -153,6 +153,6 @@ export const RightContainer = styled.div`
 export const ProgramModal = styled.div`
   position: absolute;
   top: 25rem;
-  left: 86.5%;
-  z-index: 100;
+  left: 85.5%;
+  z-index: 1001;
 `;
