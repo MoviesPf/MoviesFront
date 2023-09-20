@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getGenres, getPlatforms, activeFilters, programsFilters } from '../../Redux/actions';
+
 import BtnResetFilters from '../Buttons/BtnResetFilters';
 import css from './filters.module.css';
 
