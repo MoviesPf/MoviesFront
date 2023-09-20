@@ -33,7 +33,8 @@ import {
   GENRES_FILTERS,
   DELETE_PROGRAMS,
   PATCH_PROGRAMS,
-  RESET_FILTERS
+  RESET_FILTERS,
+  RESET_USER
 } from './actions-type';
 
 const initialState = {
@@ -133,14 +134,14 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         message: payload.message,
         programDetail: payload.data
-      }
+      };
 
-    case PATCH_PROGRAMS: 
-    return {
-      ...state,
-      message: payload.message,
-      programDetail: payload.data
-    }
+    case PATCH_PROGRAMS:
+      return {
+        ...state,
+        message: payload.message,
+        programDetail: payload.data
+      };
 
     case PROGRAMS_FILTERS:
       return {
@@ -175,12 +176,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         genresActive: data
       };
-    
+
     case FILTER_PROGRAMS_BY_GENRE:
       return {
         ...state,
         similarPrograms: payload
-      }
+      };
 
     case SELECT_DONATION_OPTION:
       return {
@@ -263,10 +264,15 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case DELETE_USER:
-      console.log(payload);
       return {
         ...state,
         userById: payload
+      };
+
+    case RESET_USER:
+      return {
+        ...state,
+        user: {}
       };
 
     case GET_USERS_ADMIN:
@@ -297,14 +303,14 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userById: {}
-      }
+      };
 
     case UPDATE_USER:
       return {
         ...state,
         userUpdated: payload,
         user: payload
-      }
+      };
 
     default:
       return state;

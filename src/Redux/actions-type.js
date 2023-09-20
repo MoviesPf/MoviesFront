@@ -28,6 +28,7 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const DELETE_USER = 'DELETE_USER';
+export const RESET_USER = 'RESET_USER';
 
 export const UPDATE_USER = "UPDATE_USER";
 export const GET_USER_PLAYLISTS ="GET_USER_PLAYLISTS";
