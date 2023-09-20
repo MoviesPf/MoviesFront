@@ -57,6 +57,7 @@ const Donations = () => {
 
   return (
     <div className={css.section}>
+      <div className={css.BGfiltrer}/>
       <NavBar />
       <div className={css.txt}>
         <h1 className={css.title}>Help us keep the service free!</h1>
@@ -113,6 +114,7 @@ const Donations = () => {
           <span>donation successfully</span>
         </div>
       )}
+      
     </div>
   );
 };

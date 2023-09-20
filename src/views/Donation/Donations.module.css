@@ -3,49 +3,92 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background: black;
+  background: rgb(32, 32, 32);
   background: url('../../assets/donation.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 2;
 }
+.BGfiltrer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #131212ea;
+  justify-content: center;
+  
+}
+
+
+
 
 .txt {
   display: flex;
   text-align: center;
   justify-content: center;
   margin: 2vh 0;
+  z-index: 2;
 }
 
 .title {
-  font-size: 4rem;
-  color: black;
-  font-weight: 800;
-  text-shadow: 10px 0px 10px rgba(0, 255, 0, 0.5);
-
+  font-size: 3rem;
+  color: rgb(255, 255, 255);
+  font-weight: 670;
+  margin-top: 35px;
+  text-shadow: 0px 0px 40px  #22ca76;
+  z-index: 2;
+  @media (max-width: 1000px) {
+    margin-top: 35px;
+    font-size: 2rem;
+    color: rgb(255, 255, 255);
+    font-weight: 570;
+  }
 }
 
 .subtitle {
     padding: 2vh 0;
     font-size: 2rem;
     font-weight: 750;
+    margin-top: 5vh;
+    z-index: 2;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  padding-left: 10vh;
+  padding-right:  10vh;
   margin: auto;
+  margin-bottom: 14%;
   align-items: center;
   justify-content: space-between;
   color: white;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.301);
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  @media (max-width: 1000px) {
+    padding-left: 3vh;
+    padding-right:  3vh;
+  }
+
+  z-index: 2;
 }
 
 .cards {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 3rem;
+  gap: 6rem;
+  margin-bottom: 10vh;
+  padding-top: 100px;
+  z-index: 2;
+  @media (max-width: 1000px) {
+    gap: 2rem;
+    flex-direction: column;
+    margin-bottom: 4vh;
+    padding-top: 40px;
+  }
 }
 
 .card {
@@ -56,20 +99,36 @@
   border-radius: 1rem;
   flex-direction: row;
   justify-content: center;
-  border: 5px solid white;
+  border: 5px solid rgba(255, 255, 255, 0.507);
   background: url('../../assets/popcorn.png');
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(41, 41, 41, 0.856);
   background-size: 10rem;
   background-repeat: no-repeat;
   background-position-y: 5rem;
   background-position-x: 3rem;
+  z-index: 2;
+  @media (max-width: 1000px) {
+    width: 11rem;
+    height: 7rem;
+    background-position-y: 1rem;
+    background-position-x: 1rem;
+  }
+  
 }
 
 .monto {
     top: 0%;
     font-size: 3rem;
     font-weight: 800;
-    color: green;
+    color: #32da78;
+    z-index: 2;
+    @media (max-width: 1000px) {
+      font-size: 2rem;
+      font-weight: 800;
+      color:  #32da78;
+      border-color: black;
+      -webkit-text-stroke: 2px black;
+    }
 }
 
 .chckMark {
@@ -80,22 +139,38 @@
     width: 3rem;
     height: 3rem;
     cursor: pointer;
+    z-index: 2;
 }
 
+
+
 .btnDono {
-  width: 20vw;
+
+  height: 7vh;
   border-radius: 2rem;
   border: none;
-  font-size: 5vh;
+  font-size: 2.5vh;
   font-weight: 750;
-  padding: 1vh;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 3vh 0;
-  color: white;
-  background-color: green;
-  border: 5px solid green;
+  margin-bottom: 9vh;
+  color: rgb(19, 19, 19);
+  background-color:  #19d576;
+  border: 5px solid  #19d576;
+  z-index: 2;
+  @media (max-width: 1000px) {
+    margin-bottom: 3vh;
+    margin-top: 0;
+  }
+
 }
-.btnDono:hover { background-color: darkgreen; }
-.btnDono:active { background-color: rgb(0, 70, 0); }
+.btnDono:hover {
+  color: rgb(255, 255, 255);
+  background-color: #288858;
+  
+}
+.btnDono:active { background-color: #19d576; }
 
 .donationSuccess {
   background-color: #fff598;
