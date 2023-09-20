@@ -122,3 +122,21 @@ export const TitleAndButton = styled.div`
   display: flex;
   justify-content: space-between;
 `
+
+export const AdminButton = styled.div`
+  background: #008000;
+  height: 3rem;
+  width: 4rem;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgb(0, 58, 0)
+  }
+`

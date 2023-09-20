@@ -185,26 +185,50 @@
   color: #ff0000;
   backdrop-filter: blur(3px);
   background-color: #ffffff47;
-  padding: 0 .5rem;
-  border-radius: .5rem;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
 }
 
-.Error:nth-child(2) {
-  top: 4.2rem;
-}
-
-.Error:nth-child(4) {
+.ErrorNick {
   top: 10rem;
+  position: absolute;
+  font-weight: 600;
+  color: #ff0000;
+  backdrop-filter: blur(3px);
+  background-color: #ffffff47;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
 }
 
-.Error:nth-child(6) {
+.ErrorEmail {
   top: 15.8rem;
+  position: absolute;
+  font-weight: 600;
+  color: #ff0000;
+  backdrop-filter: blur(3px);
+  background-color: #ffffff47;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
 }
 
-.Error:nth-child(8) {
+.ErrorPass {
   top: 21.6rem;
+  position: absolute;
+  font-weight: 600;
+  color: #ff0000;
+  backdrop-filter: blur(3px);
+  background-color: #ffffff47;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
 }
 
-.Error:nth-child(10) {
+.ErrorConfirm {
   top: 27.5rem;
+  position: absolute;
+  font-weight: 600;
+  color: #ff0000;
+  backdrop-filter: blur(3px);
+  background-color: #ffffff47;
+  padding: 0 0.5rem;
+  border-radius: 0.5rem;
 }

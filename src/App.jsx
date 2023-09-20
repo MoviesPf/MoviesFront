@@ -7,25 +7,25 @@ import Login from './views/Login/Login';
 import { Home } from './views/Home/Home';
 import Donation from './views/Donation/Donation';
 import About from './views/About/About';
+import Error404 from './Components/Not Found 404/Error404'
 import {
-  DetailPrograms,
-  DetailReviews,
   DetailUsers,
-  Donations,
-  Form,
   Nav,
-  Programs,
-  Reviews,
   Start,
   Users
 } from './Admin/index';
 import ProtectedRoute from './utils/ProtectedRoute';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const user = useSelector(state => state.user)
 
   return (
     <>
       <Routes>
+
+        <Route path='*' element={<Error404/>}/>
+        
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<Signin />}/>
         <Route path='/login' element={<Login />} />
@@ -35,18 +35,14 @@ function App() {
         <Route path='/about' element={<About />} />
 
         {/* rutas Admin Dashboard */}
-        <Route element={<ProtectedRoute canActivate={true} />}>
+        <Route element={<ProtectedRoute canActivate={user?.admin} />}>
           <Route path='admin' element={<Start />}>
             <Route path='users' element={<Users />} />
-            <Route path='users/detail/:id' element={<DetailUsers />}/>
-            <Route path='reviews' element={<Reviews />} />
-            <Route path='reviews/detail/:ReviewsId' element={<DetailReviews />}/>
-            <Route path='programs' element={<Programs />} />
-            <Route path='progeamas/detail/:ProgramsId' element={<DetailPrograms />}/>
-            <Route path='create' element={<Form />} />
-            <Route path='donations' element={<Donations />} />
+            <Route path='users/detail/:id' element={<DetailUsers />} />
           </Route>
         </Route>
+
+
       </Routes>
     </>
   );
