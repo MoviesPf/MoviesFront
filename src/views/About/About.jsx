@@ -14,7 +14,7 @@ export default function About() {
       <div className={css.cards}>
         <div className={css.card}>
           <div className={css.img} id={css.img1}></div>
-          <h1>Marian Sofia Gutierez</h1>
+          <h1>Marian Sofia Gutierrez</h1>
           <h2>FullStack Developer</h2>
           <div className={css.list}>
             <ul>

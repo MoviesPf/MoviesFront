@@ -201,7 +201,7 @@ export const Detail = () => {
       }
 
 
-      {user.admin ?
+      {user?.admin ?
         <ProgramModal>
           <EditProgramModal />
         </ProgramModal>
