@@ -22,7 +22,6 @@ import {
 import ProtectedRoute from './utils/ProtectedRoute';
 
 function App() {
-
   return (
     <>
       <Routes>

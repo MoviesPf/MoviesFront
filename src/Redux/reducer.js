@@ -31,7 +31,8 @@ import {
   UPDATE_USER,
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
-  GENRES_FILTERS
+  GENRES_FILTERS,
+  RESET_FILTERS
 } from './actions-type';
 
 const initialState = {
@@ -135,6 +136,14 @@ const reducer = (state = initialState, { type, payload }) => {
         activeFilters: payload
       };
 
+    case RESET_FILTERS:
+      return {
+        ...state,
+        activeFilters: [],
+        filteredPrograms: [],
+        totalPages: 24
+      };
+
     case GENRES_FILTERS:
       if (typeof genresActive === 'undefined') {
         console.log('unde');
@@ -147,12 +156,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         genresActive: data
       };
-    
+
     case FILTER_PROGRAMS_BY_GENRE:
       return {
         ...state,
         similarPrograms: payload
-      }
+      };
 
     case SELECT_DONATION_OPTION:
       return {
@@ -257,14 +266,14 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userById: {}
-      }
+      };
 
     case UPDATE_USER:
       return {
         ...state,
         userUpdated: payload,
         user: payload
-      }
+      };
 
     default:
       return state;

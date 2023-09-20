@@ -34,7 +34,8 @@ import {
   UPDATE_USER,
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
-  GENRES_FILTERS
+  GENRES_FILTERS,
+  RESET_FILTERS
 } from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
@@ -465,6 +466,15 @@ export const activeFilters = (state) => {
     dispatch({
       type: ACTIVE_FILTERS,
       payload: state
+    });
+  };
+};
+
+export const resetFilters = () => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_FILTERS,
+      payload: ''
     });
   };
 };
