@@ -31,7 +31,8 @@ import {
   UPDATE_USER,
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
-  GENRES_FILTERS
+  GENRES_FILTERS,
+  RESET_FILTERS
 } from './actions-type';
 
 const initialState = {
@@ -133,6 +134,14 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         activeFilters: payload
+      };
+
+    case RESET_FILTERS:
+      return {
+        ...state,
+        activeFilters: [],
+        filteredPrograms: [],
+        totalPages: 24
       };
 
     case GENRES_FILTERS:

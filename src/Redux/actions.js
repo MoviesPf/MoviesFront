@@ -32,7 +32,8 @@ import {
   UPDATE_USER,
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
-  GENRES_FILTERS
+  GENRES_FILTERS,
+  RESET_FILTERS
 } from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
@@ -160,39 +161,6 @@ export const filterProgramsByGenre = (genreName, type) => {
     }
   };
 };
-
-// export const filterProgramsByPlatform = (platformName, type) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.get(
-//         URL_API + `programs/filter/platform/${platformName}/${type}`
-//       );
-//       dispatch({
-//         type: FILTER_PROGRAMS_BY_PLATFORM,
-//         payload: data
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
-// export const filterProgramsCombined = (genreName, platformName, type) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.get(
-//         URL_API +
-//           `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
-//       );
-//       dispatch({
-//         type: FILTER_PROGRAMS_COMBINED,
-//         payload: data
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
 
 export const createUsers = ({
   email,
@@ -462,6 +430,15 @@ export const activeFilters = (state) => {
     dispatch({
       type: ACTIVE_FILTERS,
       payload: state
+    });
+  };
+};
+
+export const resetFilters = () => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_FILTERS,
+      payload: ''
     });
   };
 };
