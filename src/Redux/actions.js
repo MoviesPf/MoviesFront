@@ -36,7 +36,8 @@ import {
   ACTIVE_FILTERS,
   GENRES_FILTERS,
   DELETE_PROGRAMS,
-  RESET_FILTERS
+  RESET_FILTERS,
+  RESET_USER
 } from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
@@ -387,6 +388,15 @@ export const resetUserById = () => {
   return (dispatch) => {
     dispatch({
       type: RESET_USER_BY_ID,
+      payload: ''
+    });
+  };
+};
+
+export const resetUserData = () => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_USER,
       payload: ''
     });
   };
