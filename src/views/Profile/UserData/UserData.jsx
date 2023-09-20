@@ -1,7 +1,7 @@
 import { UserBarr, UserNameContainer, NameAndIcon, NameAndNickname, AliasAndNick, Alias, Background, UserPicture, Boina, BoinaIcon, Name} from "./UserData.Styled"
 
-import boinaImg from "../../../assets/Usericons/boinaVerde.png"
-import bIcon from "../../../assets/Usericons/NoEsUnPepino.png"
+import BoinaImagen from "../../../assets/User/boina.png"
+import Pepino from "../../../assets/User/Pepino.png"
 
 export const UserData = ({user}) => {
 
@@ -9,7 +9,7 @@ export const UserData = ({user}) => {
         <UserBarr>
 
             <Background>
-                <Boina src={boinaImg} style={user?.donator?{visibility:"visible"}:{visibility:"hidden"}}/>
+                <Boina src={BoinaImagen} style={user?.donator?{visibility:"visible"}:{visibility:"hidden"}}/>
                 <UserPicture src={user.avatar}/>
             </Background>
 
@@ -17,7 +17,7 @@ export const UserData = ({user}) => {
                 <NameAndNickname>
                     <NameAndIcon>
                         <Name>{user?.name}</Name>
-                        <BoinaIcon src={bIcon} style={user?.donator?{visibility:"visible"}:{visibility:"hidden"}}/>
+                        <BoinaIcon src={Pepino} style={user?.donator?{visibility:"visible"}:{visibility:"hidden"}}/>
                     </NameAndIcon>
                     
                     <AliasAndNick>
