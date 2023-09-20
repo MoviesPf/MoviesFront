@@ -15,7 +15,8 @@ import {
   logoutUser,
   changeTypeMain,
   changeTypeMovie,
-  changeTypeSerie
+  changeTypeSerie,
+  resetFilters
 } from '../../Redux/actions';
 import { useLocalStorage } from '../../utils/useLocalStorage';
 
@@ -41,6 +42,7 @@ export const NavBar = () => {
     dispatch(changeTypeMain());
     dispatch(getAllPrograms());
     dispatch(getGenres());
+    dispatch(resetFilters());
   };
 
   const Movies = () => {
@@ -48,6 +50,7 @@ export const NavBar = () => {
     dispatch(changeTypeMovie());
     dispatch(getAllMovies());
     dispatch(getMovieGenres());
+    dispatch(resetFilters());
   };
 
   const Series = () => {
