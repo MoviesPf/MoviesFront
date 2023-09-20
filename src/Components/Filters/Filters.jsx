@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getGenres, getPlatforms, activeFilters, programsFilters } from '../../Redux/actions';
 
 import BtnResetFilters from '../Buttons/BtnResetFilters';
@@ -12,9 +10,13 @@ export const Filters = () => {
 
   const Genres = useSelector((state) => state.genres);
   const Platforms = useSelector((state) => state.platforms);
+  const genresActive = useSelector((state) => state.genresActive)
+  const platformsFiltered = useSelector((state) => state.platformsFiltered)
 
-  const [filters, setFilters] = useState({});
-
+  const [filters, setFilters] = useState({
+    genres: [genresActive],
+    platforms: [platformsFiltered]
+  });
 
   useEffect(() => {
     if (filters.genres?.length >= 1 || filters.platforms?.length >= 1) {
