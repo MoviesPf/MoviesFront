@@ -1,24 +1,31 @@
-import {SpanComments, StarsReviews, ReviewBy, YearTitleModal, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, ButtonFullComments, SpanSpoiler} from "./DetailReview.Styled";
+import {SpanComments, StarsReviews, ReviewBy, YearTitleModal, Reviews, StarsContainer, AvatarImg, ContainerAvatarImg, ButtonFullComments, SpanSpoiler, DonatorImg} from "./DetailReview.Styled";
 import { useState } from "react";
 import emptyStar from "../../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
+import pepino from "../../../assets/UserIcons/NoEsUnPepino.png"
 
 export const DetailReview = ({r}) => {
     
     const [showFullComments, setShowFullComments] = useState(false);
 
     return (
-        <Reviews key={r.id}>
+        <Reviews key={r.id} isDonator={ r.User.donator}>
             <ContainerAvatarImg>
                 <div>
                     <AvatarImg src={r.User.avatar} alt="" />
-                    <ReviewBy>{`Reveiwed by ${r.User.nickname}`}</ReviewBy>
+                    <ReviewBy>
+                        <span>{`Reveiwed by `}</span>
+                        {r.User.nickname}
+                        {r.User.donator && (
+                            <DonatorImg style={{}} src={pepino} alt="Donator Icon" />
+                        )}    
+                    </ReviewBy>
                 </div>
                 {r.spoiler && <SpanSpoiler>Spoiler Alert!!</SpanSpoiler>}
             </ContainerAvatarImg>
             <SpanComments>
                 {showFullComments ? r.comments : r.comments.slice(0, 500)}
-                {r.comments.length > 500 && (
+                {r.comments?.length > 500 && (
                     <ButtonFullComments onClick={() => setShowFullComments(!showFullComments)}>
                         {showFullComments ? "Read less" : "Read more"}
                     </ButtonFullComments>

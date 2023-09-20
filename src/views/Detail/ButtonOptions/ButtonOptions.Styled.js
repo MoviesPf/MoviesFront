@@ -105,8 +105,13 @@ font-size: 25px;
 font-weight: bold;
 cursor: pointer; 
   &:hover {
-    color: #1b1b1b;
-    background: rgb(25, 213, 118); 
+    ${(props) => 
+      !props.disabled &&
+      css`
+      color: #1b1b1b;
+      background: rgb(25, 213, 118); 
+      `
+    }
 
   }
 `;

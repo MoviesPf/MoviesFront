@@ -1,12 +1,21 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Reviews = styled.div`
+  margin: 10px;
   width: 100%;
   background: #1c1c1c91;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  padding: 5px 15px;
+  padding: 15px;
+  border: 2px solid #1c1c1c91;
+  box-shadow: 0 0 20px #1c1c1c91;
+  ${(props) =>
+    props.isDonator &&
+    css`
+      border: 1px solid rgb(25, 213, 118);
+      box-shadow: 0 0 10px rgb(25, 213, 118);
+    `}
 `;
 
 export const ContainerAvatarImg = styled.div`
@@ -63,6 +72,15 @@ export const StarsContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+`;
+
+export const DonatorImg = styled.img`
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
 `;
 
 export const StarsReviews = styled.img`
