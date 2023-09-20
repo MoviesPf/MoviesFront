@@ -162,39 +162,6 @@ export const filterProgramsByGenre = (genreName, type) => {
   };
 };
 
-// export const filterProgramsByPlatform = (platformName, type) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.get(
-//         URL_API + `programs/filter/platform/${platformName}/${type}`
-//       );
-//       dispatch({
-//         type: FILTER_PROGRAMS_BY_PLATFORM,
-//         payload: data
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
-// export const filterProgramsCombined = (genreName, platformName, type) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.get(
-//         URL_API +
-//           `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
-//       );
-//       dispatch({
-//         type: FILTER_PROGRAMS_COMBINED,
-//         payload: data
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
 export const createUsers = ({
   email,
   avatar,
