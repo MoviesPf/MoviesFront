@@ -10,55 +10,57 @@ import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
-import { ButtonOptionsFake } from "./ButtonOptions/ButtonOptionsFake";
-import { ProgramDetail }  from './DetailData/ProgramDetail';
+import { ButtonOptionsFake } from './ButtonOptions/ButtonOptionsFake';
+import { ProgramDetail } from './DetailData/ProgramDetail';
 import { ButtonOptions } from './ButtonOptions/ButtonOptions';
 import { NavBar } from '../../Components/NavBar/NavBar';
-import { Footer } from "../../Components/Footer/Footer";
-import { ReviewModal } from "./ReviewModal/ReviewModal";
-import { Advertisement } from "../../Components/Advertisement/Advertisement"
+import { Footer } from '../../Components/Footer/Footer';
+import { ReviewModal } from './ReviewModal/ReviewModal';
+import { Advertisement } from '../../Components/Advertisement/Advertisement';
 
 import moment from 'moment';
 
 export const Detail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {ProgramsId} = useParams();
+  const { ProgramsId } = useParams();
 
-  const user = JSON.parse(localStorage.getItem("userStorage"));
-  const playlists = useSelector((state)=> state.userPlaylists);
+  const user = JSON.parse(localStorage.getItem('userStorage'));
+  const playlists = useSelector((state) => state.userPlaylists);
   const programDetail = useSelector((state) => state.programDetail);
   const similarPrograms = useSelector((state) => state.similarPrograms.data);
   const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
   
+  
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId))
-    .then( user?.id ? dispatch(getUserPlaylists(user.id)) : null)
+    .then( user.id ? dispatch(getUserPlaylists(user.id)) : null)
     .then(() => {
       setIdReal(true);
     });
   }, [dispatch, ProgramsId]);
-  
+
   useEffect(() => {
     if (programDetail && programDetail.Genres && programDetail.Genres[0].name) {
       const genre = programDetail.Genres[0].name
-      ? programDetail.Genres[0].name
-      : '';
+        ? programDetail.Genres[0].name
+        : '';
       if (genre !== '')
         dispatch(filterProgramsByGenre(genre, programDetail.type));
     }
   }, [dispatch, programDetail]);
-  
+
   useEffect(() => {
     setPeliculaSimilar(
       encontrarPeliculaMasParecida(
         programDetail?.title,
         similarPrograms ? similarPrograms : []
-        )
-        );
-        console.log(similarPrograms)
+      )
+    );
+    console.log(similarPrograms);
   }, [similarPrograms]);
       
+
   const [review, setReview] = useState({spoiler:false, rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -80,16 +82,19 @@ export const Detail = () => {
 
   const handleCreate = async (event) => {
     event.preventDefault();
-  
+
     const isValidRating = review.rating !== null && review.rating > 0;
-    const isValidComments = review.comments && review.comments.length >= 10 && review.comments.length <= 3500;
-  
+    const isValidComments =
+      review.comments &&
+      review.comments.length >= 10 &&
+      review.comments.length <= 3500;
+
     if (user.id && isValidComments) {
       if (isValidRating) {
         handleCloseModal();
         await dispatch(createReview(review, user.id, programDetail.id));
         dispatch(getProgramDetail(ProgramsId));
-        setReview({ ...review, comments: "" });
+        setReview({ ...review, comments: '' });
       } else {
         setShowError(true);
       }
@@ -101,19 +106,19 @@ export const Detail = () => {
 
   const handleCloseModal = () => {
     setCommentError(false);
-    setShowModal(false) 
-    setReview({ ...review, rating: 0, spoiler: false, comments: ""  })
-    setShowDonation(true) 
-  }
+    setShowModal(false);
+    setReview({ ...review, rating: 0, spoiler: false, comments: '' });
+    setShowDonation(true);
+  };
 
   const handleMovieClick = (ProgramsId) => {
     navigate(`/detail/${ProgramsId}`);
   };
 
   const handleDonate = () => {
-    setShowDonation(false)
-    navigate('/donate')
-  }
+    setShowDonation(false);
+    navigate('/donate');
+  };
 
   function encontrarPeliculaMasParecida(tituloQueTienes, peliculas) {
     function calcularSimilitud(titulo1, titulo2) {
@@ -133,9 +138,14 @@ export const Detail = () => {
 
     const peliculasMasParecidas = peliculas.slice(1, 3);
     return peliculasMasParecidas;
-  };
+  }
 
-  const rating = Math.round(programDetail?.Reviews?.reduce((total, review) => total + review.rating, 0) / programDetail.Reviews?.length);
+  const rating = Math.round(
+    programDetail?.Reviews?.reduce(
+      (total, review) => total + review.rating,
+      0
+    ) / programDetail.Reviews?.length
+  );
 
   let imageBack =
     programDetail.backdrop === 'https://image.tmdb.org/t/p/w500null'
@@ -143,7 +153,7 @@ export const Detail = () => {
       : programDetail.backdrop;
 
   return (
-    <Container>
+    <div className={style.Container}>
       <NavBar />
         <Header backgroundurl={`url(${imageBack})`} />
         { 
@@ -155,36 +165,21 @@ export const Detail = () => {
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
               user.id && playlists.totalPlaylist ?
-
-              <RightContainer>
               <ButtonOptions 
               setShowModal={setShowModal}
-              setShowError={setShowError} 
-              programId={programDetail.id} 
-              rating={rating} 
-              userId={user.id} 
+              setShowError={setShowError}
+              programId={programDetail.id}
+              rating={rating}
+              userId={user.id}
               playlistData={playlists}
-              alreadyReviewed={alreadyReviewed} 
+              alreadyReviewed={alreadyReviewed}
               programDetailType={programDetail.type}
               />
-              <DonationContainer>
-                <Advertisement/>
-              </DonationContainer>
-              </RightContainer>
-              : 
-              <RightContainer>
-                <ButtonOptionsFake/>
-                <DonationContainer>
-                  <Advertisement/>
-                </DonationContainer>
-              </RightContainer>
-
+              : <ButtonOptionsFake/>
              }
           </Top>
         }
-        {showModal && 
-          <ReviewModal handleCloseModal={handleCloseModal} year={year} showError={showError} setShowError={setShowError} handleCreate={handleCreate} setShowModal={setShowModal} programDetail={programDetail} review={review} setReview={setReview}/>
-        }
+        {showModal && <ReviewModal handleCloseModal={handleCloseModal} year={year} showError={showError} setShowError={setShowError} handleCreate={handleCreate} setShowModal={setShowModal} programDetail={programDetail} review={review} setReview={setReview}/>}
         {showDonation &&
           <ContainerModal>
             <Modal>
