@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchBar } from '../SearchBar/SearchBar';
 import css from './NavBar.module.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -32,6 +32,12 @@ export const NavBar = () => {
 
   const [show, setShow] = useState(false);
   const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    if (user.banned) {
+      setUserStorage({});
+    }
+  }, [user]);
 
   const toggleShow = () => {
     setShow(!show);
