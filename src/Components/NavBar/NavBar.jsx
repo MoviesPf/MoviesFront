@@ -111,7 +111,7 @@ export const NavBar = () => {
           </div>
           ) : (
             <div>
-              <button onClick={() => navigate('/login')} className={css.sesion}>{' '}Sign In{' '}</button>
+              <button onClick={() => navigate('/login')} className={css.sesion}>{' '}Login{' '}</button>
               <button onClick={() => navigate('/signin')} className={css.sesion}> {' '} Sign Up </button>
             </div>
           )

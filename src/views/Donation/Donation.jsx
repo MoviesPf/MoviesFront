@@ -155,7 +155,7 @@ const Donations = () => {
                 className={css.btnDono}
                 onClick={() => navigate('/login')}
               >
-                Sign in
+                Login
               </button>
               <button
                 className={css.btnDono}
