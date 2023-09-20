@@ -26,10 +26,13 @@ import {
   GET_USERS_ADMIN,
   RESET_USER_BY_ID,
   DELETE_USER,
+  GET_PROGRAMS_ADMIN,
   UPDATE_USER,
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
   GENRES_FILTERS,
+  DELETE_PROGRAMS,
+  PATCH_PROGRAMS,
   RESET_FILTERS
 } from './actions-type';
 
@@ -42,6 +45,8 @@ const initialState = {
   platformsFilters: [],
   searchedPrograms: [],
   programDetail: [],
+  allPrograms: [],
+  programsInfo: {},
   genres: [],
   platforms: [],
   user: {},
@@ -49,6 +54,8 @@ const initialState = {
   userById: {},
   userPlaylists: {},
   userReviews: {},
+  allUsers: [],
+  usersInfo: {},
   message: '',
   type: 'main',
   selectedOption: null,
@@ -120,6 +127,20 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         programDetail: payload
       };
+
+    case DELETE_PROGRAMS:
+      return {
+        ...state,
+        message: payload.message,
+        programDetail: payload.data
+      }
+
+    case PATCH_PROGRAMS: 
+    return {
+      ...state,
+      message: payload.message,
+      programDetail: payload.data
+    }
 
     case PROGRAMS_FILTERS:
       return {
@@ -257,6 +278,18 @@ const reducer = (state = initialState, { type, payload }) => {
           totalBanned: payload.totalBanned,
           totalDonators: payload.totalDonators,
           totalReviews: payload.totalReviews
+        }
+      };
+
+    case GET_PROGRAMS_ADMIN:
+      return {
+        ...state,
+        allPrograms: payload.data,
+        programsInfo: {
+          total: payload.totalPrograms,
+          totalMovies: payload.totalMovies,
+          totalSeries: payload.totalSeries,
+          bannedPrograms: payload.bannedPrograms
         }
       };
 

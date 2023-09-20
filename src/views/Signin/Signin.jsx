@@ -71,7 +71,7 @@ export const Signin = () => {
                 name='name'
               />
             </label>
-              {error.name && <span className={css.Error}>{error.name}</span>}
+              {error.name && <span className={css.ErrorName}>{error.name}</span>}
 
             <label className={css.label}>
               Nickname <span className={css.span}>*</span>
@@ -85,7 +85,7 @@ export const Signin = () => {
                 name='nickname'
               />
             </label>
-              {error.nickname && <span className={css.Error}>{error.nickname}</span>}
+              {error.nickname && <span className={css.ErrorNick}>{error.nickname}</span>}
 
             <label className={css.label}>
               Email <span className={css.span}>*</span>
@@ -99,7 +99,7 @@ export const Signin = () => {
                 name='email'
               />
             </label>
-              {error.email && <span className={css.Error}>{error.email}</span>}
+              {error.email && <span className={css.ErrorEmail}>{error.email}</span>}
 
             <label className={css.label}>
               Password <span className={css.span}>*</span>
@@ -113,7 +113,7 @@ export const Signin = () => {
                 name='password'
               />
             </label>
-              {error.password && <span className={css.Error}>{error.password}</span>}
+              {error.password && <span className={css.ErrorPass}>{error.password}</span>}
 
             <label className={css.label}>
               Confirm Password <span className={css.span}>*</span>
@@ -127,7 +127,7 @@ export const Signin = () => {
                 name='confirm'
               />
             </label>
-              {error.confirm && <span className={css.Error}>{error.confirm}</span>}
+              {error.confirm && <span className={css.ErrorConfirm}>{error.confirm}</span>}
           </div>
         </div>
 

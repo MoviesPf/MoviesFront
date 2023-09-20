@@ -2,14 +2,18 @@ import React from 'react';
 import css from './SearchedCard.module.css';
 import { Link } from "react-router-dom";
 import defaultImg from "../../assets/defaultMovie.png"
+import { useDispatch } from 'react-redux';
+import { getProgramDetail } from '../../Redux/actions';
 
 export const SearchedCard = ({ program, setshow, show }) => {
+  const dispatch = useDispatch()
 
   const togleShow = () => {
     setshow(false)
+    dispatch(getProgramDetail(program.id))
   }
   return (
-      <Link className={css.link}  onClick={togleShow} to={`/detail/${program.id}`}>
+      <Link className={css.link}  onClick={() => togleShow} to={`/detail/${program.id}`}>
         <div className={css.allInfo}>
 
           <div className={css.imagen}>

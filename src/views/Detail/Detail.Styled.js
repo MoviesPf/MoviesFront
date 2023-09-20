@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: absolute;
@@ -148,4 +148,11 @@ export const RightContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`;
+
+export const ProgramModal = styled.div`
+  position: absolute;
+  top: 25rem;
+  left: 86.5%;
+  z-index: 100;
 `;
