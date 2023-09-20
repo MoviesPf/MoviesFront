@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
 import { Portrait } from '../../Components/Portrait/Portrait';
 import { Carrusel } from '../../Components/Carrusel/Carrusel';
@@ -7,13 +8,9 @@ import { NavBar } from '../../Components/NavBar/NavBar';
 import { Footer } from '../../Components/Footer/Footer';
 import { Cards } from '../../Components/Cards/Cards';
 import Paginate from '../../Components/Paginate/Paginate';
-import { useState } from 'react';
-
-import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
 import { useLocalStorage } from '../../utils/useLocalStorage';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-
+import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
 import styled from 'styled-components';
 import css from './Home.module.css';
 
@@ -41,7 +38,15 @@ export const Home = () => {
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
 
   const [successMessage, setSuccessMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
 
@@ -62,14 +67,15 @@ export const Home = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const successMsg = urlParams.get('message');
     
-    // muestro el mensaje de éxito si está presente
+    // Muestro el mensaje de éxito si está presente
     if (successMsg) {
       console.log('Mensaje de éxito recibido:', successMsg);
       setSuccessMessage(successMsg);
       setUserStorage({
         ...user,
         donator: true,
-      })
+      });
+      openModal(); // Abre el modal cuando hay un mensaje de éxito
     }
   }, []);
 
@@ -124,11 +130,20 @@ export const Home = () => {
           />
 
           <Footer />
-          {successMessage && (
-            <div className={css.donationSuccess}>
-              <span>{successMessage}</span>
-            </div>
-          )}
+          <div>
+            {isModalOpen && (
+              <div className={css.modalOverlay}>
+                <div className={css.modal}>
+                  <button onClick={closeModal} className={css.closeButton}>
+                    x
+                  </button>
+                  <div className={css.modalContent}>
+                    <span>{successMessage}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>
