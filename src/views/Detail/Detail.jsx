@@ -163,8 +163,7 @@ export const Detail = () => {
             <ProgramDetail setIdReal={setIdReal} programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
-              user.id && playlists.totalPlaylist ?
-
+              user?.id && playlists?.totalPlaylist ?
               <RightContainer>
               <ButtonOptions 
               setShowModal={setShowModal}
