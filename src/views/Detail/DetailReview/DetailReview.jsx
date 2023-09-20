@@ -2,7 +2,7 @@ import {SpanComments, StarsReviews, ReviewBy, YearTitleModal, Reviews, StarsCont
 import { useState } from "react";
 import emptyStar from "../../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
-import pepino from "../../../assets/UserIcons/NoEsUnPepino.png"
+import pepino from "../../../assets/User/Pepino.png"
 
 export const DetailReview = ({r}) => {
     

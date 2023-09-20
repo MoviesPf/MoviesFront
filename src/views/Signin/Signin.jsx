@@ -13,7 +13,6 @@ export const Signin = () => {
 
   const user = useSelector((state) => state.user);
 
-
   const [createdUser, setCreatedUser] = useState({
     name: '',
     nickname: '',
@@ -60,7 +59,9 @@ export const Signin = () => {
           <div className={css.formUser}>
 
             <label className={css.label}>
-              Name <span className={css.span}>*</span>
+              <div>
+                <span> Name </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.name}
@@ -74,7 +75,9 @@ export const Signin = () => {
               {error.name && <span className={css.ErrorName}>{error.name}</span>}
 
             <label className={css.label}>
-              Nickname <span className={css.span}>*</span>
+              <div>
+                <span> Nickname </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.nickname}
@@ -88,7 +91,9 @@ export const Signin = () => {
               {error.nickname && <span className={css.ErrorNick}>{error.nickname}</span>}
 
             <label className={css.label}>
-              Email <span className={css.span}>*</span>
+              <div>
+                <span> Email </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.email}
@@ -102,7 +107,9 @@ export const Signin = () => {
               {error.email && <span className={css.ErrorEmail}>{error.email}</span>}
 
             <label className={css.label}>
-              Password <span className={css.span}>*</span>
+              <div>
+                <span> Password </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.password}
@@ -116,7 +123,9 @@ export const Signin = () => {
               {error.password && <span className={css.ErrorPass}>{error.password}</span>}
 
             <label className={css.label}>
-              Confirm Password <span className={css.span}>*</span>
+              <div>
+                <span> Confirm Password </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.confirm}

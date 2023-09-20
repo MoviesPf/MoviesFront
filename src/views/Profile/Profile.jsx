@@ -66,7 +66,7 @@ const Profile = () => {
         <UserBackground src={(user.background !== "default" || !user.background) ? user.background : defaultBackground}/>
 
         <AreaContainer>
-          <UserData avatar={user.avatar} name={user.name} nickname ={user.nickname} status={user.status ? user.status : "Movies Fan!!"}/>
+          <UserData user={user}/>
           <NavProfile setShowModal={setShowModal} menu={menu} setMenu={setMenu} favorites={favorites} watchlist={watchlist} watched={watched}/>
             
           <div>

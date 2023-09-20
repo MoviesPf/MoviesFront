@@ -10,6 +10,30 @@
   user-select: none;
 }
 
+.hiddenText {
+  @media (max-width: 768px) {
+    visibility: hidden;
+  }
+}
+
+.bigTitle{
+  font-size: 120px;
+  @media (max-width: 1300px) {
+  font-size: 100px;
+  }
+  @media (max-width: 1080px) {
+    font-size: 80px;
+    }
+  @media (max-width: 870px) {
+      font-size: 50px;
+      margin-left: 40px;
+
+    }
+    @media (max-width: 768px) {
+      visibility: hidden;
+    }
+}
+
 .txt {
   width: 40%;
   height: 40%;
@@ -36,16 +60,23 @@
 .login {
   width: 45vw;
   display: grid;
-  grid-template-columns: 1;
+  grid-template-columns: 45vw;
+  position: relative;
   grid-template-rows: auto;
   align-items: center;
   margin-left: 55%;
+  @media (max-width: 768px) {
+    margin-left: 0;
+    position: relative;
+    width: 100vW;
+  }
   color: #fff;
   backdrop-filter: blur(10px);
-  background-color: #ffffff47;
+  background-color: #505050a9;
   justify-content: space-evenly;
   padding: 5rem 0;
   box-shadow: -2px 2px 15px #000;
+  
 }
 
 .login h1 {
@@ -58,14 +89,15 @@
 }
 
 .errorLogin{
-  position: absolute;
-  top: 10rem;
+  position: relative;
   color: rgb(173, 15, 15);
 }
 
 .form {
+  width: 45vw;
   grid-row: 2/3;
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -73,8 +105,11 @@
 }
 
 .form_group input {
+  width: 20vw;
+  @media (max-width: 768px) {
+    width: 45vw;
+  }
   height: 2.5rem;
-  width: 20rem;
   padding: 1rem;
   border-radius: 0.3rem;
   border: none;
@@ -82,8 +117,11 @@
 }
 
 .form_group2 input {
+  width: 20vw;
+  @media (max-width: 768px) {
+    width: 45vw;
+  }
   height: 2.5rem;
-  width: 20rem;
   padding: 1rem;
   border-radius: 0.3rem;
   border: none;
@@ -91,19 +129,23 @@
 }
 
 .btn {
-  background-color: #fff;
+  background-color:green;
   height: 3rem;
-  width: 10rem;
+  width: 10vw;
+  @media (max-width: 768px) {
+    width: 25vw;
+  }
+
   border: none;
   border-radius: 0.3rem;
   margin: 1rem;
-  color: #353535;
+  color: white;
   font-weight: 700;
   box-shadow: -2px 2px 5px #000000a6;
 }
 
 .btn:hover {
-  opacity: 0.8;
+  background-color:#288858;
 }
 
 /* Estilos del AUTH */
@@ -120,12 +162,12 @@
 
 .singin {
   margin: 0.5rem;
-  color: #ffffff;
+  color: green;
   font-weight: 500;
 }
 
 .singin:hover {
-  color: #006600;
+  color: rgb(0, 53, 0);
 }
 
 .or {

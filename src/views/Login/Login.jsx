@@ -72,28 +72,23 @@ const Login = () => {
     <div className={css.section}>
       <BtnHome />
       <div className={css.txt}>
-        <h1>Welcome!</h1>
-        <p>
+      <div className={css.bigTitle}>Welcome!</div>
+        <p className={css.hiddenText}>
           Welcome to GreenScreen! Here you can find reviews and movie ratings.
           You can search for movies by genre, release date release date, artist.
         </p>
       </div>
       <div className={css.login}>
-        <h1>SIGN IN</h1>
+        <h1>Login</h1>
 
         <form onSubmit={handleSubmit} className={css.form}>
-          {message === 'Incorrect password' || 'Incorrect password or email' ? (
-            <span className={css.errorLogin}>{message}</span>
-          ) : (
-            ''
-          )}
           <div className={css.form_group}>
             <input
               placeholder='Email'
               type='email'
               value={email}
               onChange={ e => setEmail(e.target.value)}
-            />
+              />
           </div>
           <div className={css.form_group2}>
             <input
@@ -101,8 +96,13 @@ const Login = () => {
               type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-            />
+              />
           </div>
+              {message === 'Incorrect password' || 'Incorrect password or email' ? (
+                <span className={css.errorLogin}>{message}</span>
+              ) : (
+                ''
+              )}
           <button type='submit' className={css.btn}>
             Login
           </button>
