@@ -24,7 +24,7 @@ export const DetailReview = ({r}) => {
                 {r.spoiler && <SpanSpoiler>Spoiler Alert!!</SpanSpoiler>}
             </ContainerAvatarImg>
             <SpanComments>
-                {showFullComments ? r.comments : r.comments.slice(0, 500)}
+                {showFullComments ? r.comments : r.comments?.slice(0, 500)}
                 {r.comments?.length > 500 && (
                     <ButtonFullComments onClick={() => setShowFullComments(!showFullComments)}>
                         {showFullComments ? "Read less" : "Read more"}

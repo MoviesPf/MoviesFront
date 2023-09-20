@@ -92,7 +92,7 @@ export const Detail = () => {
         handleCloseModal();
         await dispatch(createReview(review, user.id, programDetail.id));
         dispatch(getProgramDetail(ProgramsId));
-        setReview({ ...review, comments: '' });
+        setReview({ ...review, rating: 0, spoiler: false, comments: '' });
       } else {
         setShowError(true);
       }
