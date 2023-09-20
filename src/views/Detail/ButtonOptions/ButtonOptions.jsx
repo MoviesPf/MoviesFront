@@ -8,36 +8,7 @@ import PendingIcon from "../../../assets/Icons/icons8-delivery-time-96.png"
 import emptyStar from "../../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
 
-import {styled}from 'styled-components'
-
-
-import {ScoreContainer, IconsC, IconContainer, IconImg, IconLabel, EmptStarC, ReviewButton} from "./ButtonOptions.Styled"
-
-const AlreadyReviewedMessage = styled.div`
-  background-color: #6161611c;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border-radius: 0px 0px 15px 15px;
-`;
-
-const AlreadyReviewedText = styled.h1`
-  background: rgb(0 0 0 / 21%);
-  font-weight: bold;
-  border-radius: 10px;
-  padding: 5px 10px;
-  margin: 10px 0;
-  font-size: 18px;
-  color: rgb(25, 213, 118);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border: 2px solid rgb(25 213 118 / 23%);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-`;
+import {ScoreContainer, IconsC, IconContainer, IconImg, IconLabel, EmptStarC, ReviewButton, AlreadyReviewedMessage, AlreadyReviewedText } from "./ButtonOptions.Styled"
 
 export const ButtonOptions = ({setShowModal, setShowError, programId, rating, userId, alreadyReviewed, programDetailType}) => {
   const playlistData = useSelector( (state) => state.userPlaylists)

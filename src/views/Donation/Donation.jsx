@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocalStorage } from '../../utils/useLocalStorage';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { initiatePayment, selectDonationOption } from '../../Redux/actions';
@@ -7,7 +8,10 @@ import { NavBar } from '../../Components/NavBar/NavBar';
 import css from './Donations.module.css';
 
 const Donations = () => {
-  const user = JSON.parse(localStorage.getItem('userStorage'));
+  const user = JSON.parse(localStorage.getItem("userStorage"));
+  const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
+
+  console.log(user)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,16 +46,20 @@ const Donations = () => {
       }
     }
   };
-
+  
   // obtengo el mensaje de éxito de los query params
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const successMsg = urlParams.get('message');
-
+    
     // muestro el mensaje de éxito si está presente
     if (successMsg) {
       console.log('Mensaje de éxito recibido:', successMsg);
       setSuccessMessage(successMsg);
+      setUserStorage({
+        ...user,
+        donator: true,
+      })
     }
   }, []);
 
@@ -68,8 +76,9 @@ const Donations = () => {
       <div className={css.txt}>
         <h1 className={css.title}>Help us keep the service free!</h1>
       </div>
-      {user.id ? (
-        <div className={css.content}>
+
+        { user?.id ? (
+          <div className={css.content}>
           <h2 className={css.subtitle}>Make your donation</h2>
 
           <div className={css.cards}>

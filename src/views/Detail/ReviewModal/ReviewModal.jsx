@@ -1,6 +1,5 @@
-import { ContainerModalReview, ModalReview, CloseButtonContainer, CloseButton, 
-Comments, Submit, IconImg, ContainerModalImg, ModalImg, StarsContainer, TitleModal, 
-YearTitleModal, TitleModalContainer,CheckboxLabel, CustomCheckbox, CustomKnob, CustomSwitch, HiddenCheckbox, CheckboxContainer, SpanError
+import { ContainerModalReview, ModalReview, CloseButtonContainer, CloseButton, Comments, Submit, IconImg, ContainerModalImg, ModalImg, StarsContainer, TitleModal, 
+YearTitleModal, TitleModalContainer,CheckboxLabel, CustomKnob, CustomSwitch, HiddenCheckbox, CheckboxContainer, SpanError
 } from "./ReviewModal.styled";
 import fullStar from "../../../assets/Icons/icons8-star-100 green.png";
 import emptyStar from "../../../assets/Icons/icons8-star-52.png";
@@ -69,15 +68,7 @@ export const ReviewModal = ({ year, showError, handleCloseModal, handleCreate, p
         <StarsContainer>
           <div>
             {new Array(5).fill("").map((_, index) => (
-              <IconImg 
-              key={index} 
-              onMouseEnter={() => handleHoverRating(index + 1)} 
-              onMouseLeave={() => handleHoverRating(0)}
-              onClick={() => handleRating(index + 1)} 
-              src={ 
-                index < (hoverRating || review.rating) 
-                ? fullStar 
-                : emptyStar}/>
+              <IconImg key={index} onMouseEnter={() => handleHoverRating(index + 1)} onMouseLeave={() => handleHoverRating(0)} onClick={() => handleRating(index + 1)} src={  index < (hoverRating || review.rating) ? fullStar : emptyStar}/>
             ))}
           </div>
           <Submit onClick={handleCreate}>Save</Submit>
