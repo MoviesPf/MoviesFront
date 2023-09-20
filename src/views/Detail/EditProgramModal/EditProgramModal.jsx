@@ -12,8 +12,6 @@ const EditProgramModal = () => {
 
   const [modal, setModal] = useState(false)
 
-  const [modalOverview, setModalOverview] = useState(false)
-
   useEffect(() => {
     setEditedProgram({
       id: String(programDetail.id),
@@ -29,7 +27,7 @@ const EditProgramModal = () => {
       episodes: programDetail.episodes,
       banned: programDetail.banned
     })
-  }, [modalOverview, programDetail])
+  }, [programDetail])
 
   const [editedProgram, setEditedProgram] = useState({
     id: String(programDetail.id),
@@ -163,30 +161,22 @@ const EditProgramModal = () => {
                 </div> : ''
               }
 
-
-              <div className={style.overview} onClick={() => setModalOverview(true)}>Overview</div>
-              {modalOverview ?
-                <div className={style.containerOverview}>
-                  <h1 className={style.h1}>Overview</h1>
-                  <label>
-                    <textarea
-                      onChange={handleChange}
-                      className={style.textarea}
-                      name="overview"
-                      value={programDetail.overview}
-                      type='text'
-                    />
-                  </label>
-                  <div className={style.btnAccept} onClick={() => setModalOverview(false)}>Accept</div>
-                </div>
-                : ''
-              }
+              <div className={style.containerLabel}>
+                <label className={style.labelOverview}> Overview
+                  <textarea
+                    onChange={handleChange}
+                    className={style.textarea}
+                    name="overview"
+                    type='text'
+                  >{programDetail.overview}</textarea>
+                </label>
+              </div>
 
               <div className={style.containbtn}>
                 <div onClick={() => setModal(false)} className={style.cancel}>
                   Cancel
                 </div>
-              
+
                 <button className={style.btnChanges} type="submit">Accept the changes</button>
               </div>
             </form>
