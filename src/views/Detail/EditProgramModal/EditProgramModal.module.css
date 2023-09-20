@@ -1,4 +1,4 @@
-.btnEdit{
+.btnEdit {
   height: 3rem;
   width: 3rem;
   font-size: 2rem;
@@ -7,4 +7,171 @@
   align-items: center;
   background-color: #fff;
   cursor: pointer;
+}
+
+.modal {
+  background-color: #1c1c1cda;
+  height: 100%;
+  width: 100vw;
+  position: fixed;
+  top: 0.5px;
+  z-index: 10000;
+  border-radius: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  background-color: #000;
+  border-radius: 1rem;
+  height: 90vh;
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  height: 100%;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.containerLabel {
+  width: auto;
+}
+
+.label {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-right: 0.5rem;
+  width: 100%;
+}
+
+.input {
+  margin-left: 1rem;
+  border: none;
+  height: 2rem;
+  width: 80%;
+}
+
+.select {
+  width: 8rem;
+  margin-left: 1rem;
+
+}
+
+.inputNumber {
+  margin-left: 1rem;
+
+  width: 10rem;
+}
+
+.inputDate {
+  width: 10rem;
+  margin-left: 1rem;
+  
+}
+
+.ban {
+  background-color: #008000;
+  height: 3.5rem;
+  width: 8rem;
+  font-size: 2rem;
+  text-align: center;
+  border-radius: .5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ban:hover{
+  background-color: #003a00;
+}
+
+.containerOverview {
+  background-color: #2e2e2edc;
+  right: 10%;
+  height: 80%;
+  width: 80%;
+  position: fixed;
+  top: 10%;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 1rem;
+}
+
+.overview{
+  background-color: #008000;
+  height: 3.5rem;
+  width: 10rem;
+  text-align: center;
+  font-size: 2rem;
+  border-radius: .5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.overview:hover{
+  background-color: #003a00;
+}
+
+.h1{
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.textarea {
+  resize: none;
+  height: 20rem !important;
+  width: 40rem !important;
+  font-size: 1.5rem;
+}
+
+.btnAccept{
+  background-color: #008000;
+  font-size: 1.5rem;
+  height: 2.5rem;
+  width: 6rem;
+  text-align: center;
+  border-radius: .5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btnAccept:hover{
+  background-color:  #003a00;
+}
+
+.btnChanges{
+  border: none;
+  background-color: #008000;
+  height: 3.5rem;
+  width: 15rem;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: .5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btnChanges:hover{
+  background-color: #003a00;
+}
+
+.containbtn{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }

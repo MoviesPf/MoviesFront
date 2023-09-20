@@ -63,7 +63,6 @@ export const Detail = () => {
         similarPrograms ? similarPrograms : []
       )
     );
-    console.log(similarPrograms);
   }, [similarPrograms]);
 
   const [review, setReview] = useState({
@@ -165,7 +164,7 @@ export const Detail = () => {
   return (
     <div className={style.Container}>
       <NavBar />
-      <div className={style.Header} style={{background: `url(${imageBack})`}} />
+      <div className={style.Header} style={{ background: `url(${imageBack})` }} />
       {!idReal ? (
         <GreenLoading />
       ) : (
@@ -208,7 +207,7 @@ export const Detail = () => {
         />
       )}
 
-        <EditProgramModal/>
+      <EditProgramModal />
 
       {showDonation && (
         <div className={style.ContainerModal}>

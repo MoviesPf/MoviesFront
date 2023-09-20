@@ -5,6 +5,7 @@ export const GET_MOVIES = "GET_MOVIES";
 export const GET_SERIES = "GET_SERIES";
 export const GET_PROGRAMS_ADMIN = 'GET_PROGRAMS_ADMIN'
 export const DELETE_PROGRAMS = 'DELETE_PROGRAMS'
+export const PATCH_PROGRAMS = 'PATCH_PROGRAMS'
 
 export const GET_PLATFORMS = 'GET_PLATFORMS';
 export const GET_GENRES = 'GET_GENRES';

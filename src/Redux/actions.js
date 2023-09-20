@@ -7,6 +7,7 @@ import {
   GET_PLATFORMS,
   GET_GENRES,
   GET_PROGRAM_DETAIL,
+  PATCH_PROGRAMS,
   FILTER_PROGRAMS_BY_GENRE,
   // FILTER_PROGRAMS_BY_PLATFORM,
   // FILTER_PROGRAMS_COMBINED,
@@ -433,47 +434,95 @@ export const getProgramsAdmin = (page = 1) => {
       const data = await res.json();
 
       return dispatch({
-        type: GET_PROGRAMS_ADMIN,
-      })
+        type: GET_PROGRAMS_ADMIN
+      });
     } catch (error) {
-    console.log(error)
-  }
-}}
-
+      console.log(error);
+    }
+  };
+};
 
 export const updateUser = (updateData) => async (dispatch) => {
   try {
-    const response = await axios.patch(URL_API + `users`, updateData,{
+    const response = await axios.patch(URL_API + `users`, updateData, {
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     });
 
     dispatch({ type: UPDATE_USER, payload: response.data.update });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const deletePrograms = (id) => {
   return async (dispatch) => {
     try {
       const res = await fetch(URL_API + 'programs' + id, {
         method: 'DELETE'
-      })
-      const data = await res.json()
+      });
+      const data = await res.json();
 
       dispatch({
         type: DELETE_PROGRAMS,
         payload: data
-      })
-
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
 
+export const patchPrograms = ({
+  id,
+  title,
+  overview,
+  release_date,
+  backdrop,
+  poster,
+  runtime,
+  adult,
+  type,
+  seasons,
+  episodes,
+  banned
+}) => {
+  return async (dispatch) => {
+    console.log(id)
+    try {
+      const res = await fetch(URL_API + 'programs/' + String(id), {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title,
+          overview,
+          release_date,
+          backdrop,
+          poster,
+          runtime,
+          adult,
+          type,
+          seasons,
+          episodes,
+          banned
+        })
+      });
+
+      const data = await res.json();
+      console.log(data)
+
+      dispatch({
+        type: PATCH_PROGRAMS,
+        payload: data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 // filtros
 

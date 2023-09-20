@@ -33,7 +33,8 @@ import {
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
   GENRES_FILTERS,
-  DELETE_PROGRAMS
+  DELETE_PROGRAMS,
+  PATCH_PROGRAMS
 } from './actions-type';
 
 const initialState = {
@@ -134,6 +135,13 @@ const reducer = (state = initialState, { type, payload }) => {
         message: payload.message,
         programDetail: payload.data
       }
+
+    case PATCH_PROGRAMS: 
+    return {
+      ...state,
+      message: payload.message,
+      programDetail: payload.data
+    }
 
     case PROGRAMS_FILTERS:
       return {

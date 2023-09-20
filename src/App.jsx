@@ -7,6 +7,7 @@ import Login from './views/Login/Login';
 import { Home } from './views/Home/Home';
 import Donation from './views/Donation/Donation';
 import About from './views/About/About';
+import Error404 from './Components/Not Found 404/Error404'
 import {
   DetailUsers,
   Nav,
@@ -20,6 +21,8 @@ function App() {
   return (
     <>
       <Routes>
+
+        <Route path='*' element={<Error404/>}/>
         
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<Signin />} />
