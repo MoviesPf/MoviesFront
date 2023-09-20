@@ -424,7 +424,7 @@ export const updateUser = (updateData) => async (dispatch) => {
 export const deletePrograms = (id) => {
   return async (dispatch) => {
     try {
-      const res = await fetch(URL_API + 'programs' + id, {
+      const res = await fetch(URL_API + 'programs/' + id, {
         method: 'DELETE'
       });
       const data = await res.json();

@@ -49,25 +49,9 @@ const EditProgramModal = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    // if (programDetail.title !== editedProgram.title ||
-    //   programDetail.overview !== editedProgram.overview ||
-    //   programDetail.release_date !== editedProgram.release_date ||
-    //   programDetail.backdrop !== editedProgram.backdrop ||
-    //   programDetail.poster !== editedProgram.poster ||
-    //   programDetail.runtime !== editedProgram.runtime ||
-    //   programDetail.adult !== editedProgram.adult ||
-    //   programDetail.type !== editedProgram.type ||
-    //   programDetail.seasons !== editedProgram.seasons ||
-    //   programDetail.episodes !== editedProgram.episodes ||
-    //   programDetail.banned !== editedProgram.banned) {
     console.log(editedProgram)
     dispatch(patchPrograms(editedProgram))
-    // }
-  }
-
-
-  const handleClickBanned = () => {
-    dispatch(deletePrograms(programDetail.id))
+    setModal(false)
   }
 
   const handleChange = (event) => {
@@ -89,7 +73,7 @@ const EditProgramModal = () => {
           <div className={style.modalContainer}>
             <form className={style.form} onSubmit={handleSubmit}>
 
-              <div className={style.containerLabel}>
+              <div className={style.containerTitle}>
                 <label className={style.label}>Title
                   <input
                     onChange={handleChange}
@@ -199,8 +183,8 @@ const EditProgramModal = () => {
               }
 
               <div className={style.containbtn}>
-                <div className={programDetail?.banned ? style.active : style.ban}>
-                  {programDetail?.banned ? 'Active' : 'Ban'}
+                <div onClick={() => setModal(false)} className={style.cancel}>
+                  Cancel
                 </div>
               
                 <button className={style.btnChanges} type="submit">Accept the changes</button>

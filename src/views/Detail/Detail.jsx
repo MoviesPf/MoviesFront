@@ -1,6 +1,6 @@
 import {
   Container, Top, Header, ContainerModal, ContainerModalHeader, CloseButtonContainerDonate,
-  ContainerModalInfo, ContainerButtons, CancelButton, Submit, Modal, RightContainer, CloseButton, DonationContainer
+  ContainerModalInfo, ContainerButtons, CancelButton, Submit, Modal, RightContainer, CloseButton, DonationContainer, ProgramModal
 } from "./Detail.Styled";
 import defaultBackground from "../../assets/defaultBackground.png";
 
@@ -200,7 +200,13 @@ export const Detail = () => {
         <ReviewModal handleCloseModal={handleCloseModal} year={year} showError={showError} setShowError={setShowError} handleCreate={handleCreate} setShowModal={setShowModal} programDetail={programDetail} review={review} setReview={setReview} />
       }
 
-      <EditProgramModal />
+
+      {user.admin ?
+        <ProgramModal>
+          <EditProgramModal />
+        </ProgramModal>
+        : ''
+      }
 
       {showDonation &&
         <ContainerModal>
