@@ -26,7 +26,7 @@ export const ReviewContainer = ({reviewDate, year, genreA, genreB, overview, pro
             </ContextRow>
 
             <OverviewText>
-                {showFullComments && overview.length > 270 ? overview.slice(0, 270) + " " +  "..." : overview }
+                {showFullComments && overview?.length > 270 ? overview?.slice(0, 270) + " " +  "..." : overview }
                 { overview.length > 270 && (
                   <ButtonFullComments onClick={() => setShowFullComments(!showFullComments)}>
                     {showFullComments ? "Read less" : "Read more"}

@@ -1,7 +1,7 @@
 import { UserBarr, UserNameContainer, NameAndIcon, NameAndNickname, AliasAndNick, Alias, Background, UserPicture, Boina, BoinaIcon, Name} from "./UserData.Styled"
 
-import BoinaImagen from "assets/User/boina.png"
-import Pepino from "assets/User/Pepino.png"
+import BoinaImagen from "../../../assets/User/Boina.png"
+import Pepino from "../../../assets/User/Pepino.png"
 
 export const UserData = ({user}) => {
 
