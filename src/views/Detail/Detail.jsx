@@ -31,10 +31,9 @@ export const Detail = () => {
   const similarPrograms = useSelector((state) => state.similarPrograms.data);
   const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
   
-  
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId))
-    .then( user.id ? dispatch(getUserPlaylists(user.id)) : null)
+    .then( user?.id ? dispatch(getUserPlaylists(user.id)) : null)
     .then(() => {
       setIdReal(true);
     });
@@ -60,7 +59,6 @@ export const Detail = () => {
     console.log(similarPrograms);
   }, [similarPrograms]);
       
-
   const [review, setReview] = useState({spoiler:false, rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   const [showModal, setShowModal] = useState(false);
@@ -153,7 +151,7 @@ export const Detail = () => {
       : programDetail.backdrop;
 
   return (
-    <div className={style.Container}>
+    <Container>
       <NavBar />
         <Header backgroundurl={`url(${imageBack})`} />
         { 
@@ -165,6 +163,8 @@ export const Detail = () => {
              similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
              {
               user.id && playlists.totalPlaylist ?
+
+              <RightContainer>
               <ButtonOptions 
               setShowModal={setShowModal}
               setShowError={setShowError}
@@ -175,11 +175,24 @@ export const Detail = () => {
               alreadyReviewed={alreadyReviewed}
               programDetailType={programDetail.type}
               />
-              : <ButtonOptionsFake/>
+              <DonationContainer>
+                <Advertisement/>
+              </DonationContainer>
+              </RightContainer>
+              : 
+              <RightContainer>
+                <ButtonOptionsFake/>
+                <DonationContainer>
+                  <Advertisement/>
+                </DonationContainer>
+              </RightContainer>
+
              }
           </Top>
         }
-        {showModal && <ReviewModal handleCloseModal={handleCloseModal} year={year} showError={showError} setShowError={setShowError} handleCreate={handleCreate} setShowModal={setShowModal} programDetail={programDetail} review={review} setReview={setReview}/>}
+        {showModal && 
+          <ReviewModal handleCloseModal={handleCloseModal} year={year} showError={showError} setShowError={setShowError} handleCreate={handleCreate} setShowModal={setShowModal} programDetail={programDetail} review={review} setReview={setReview}/>
+        }
         {showDonation &&
           <ContainerModal>
             <Modal>

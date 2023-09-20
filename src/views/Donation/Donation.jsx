@@ -76,7 +76,8 @@ const Donations = () => {
       <div className={css.txt}>
         <h1 className={css.title}>Help us keep the service free!</h1>
       </div>
-        { user?.id ?
+
+        { user?.id ? (
           <div className={css.content}>
           <h2 className={css.subtitle}>Make your donation</h2>
 
