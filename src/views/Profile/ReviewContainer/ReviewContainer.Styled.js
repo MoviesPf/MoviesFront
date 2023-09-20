@@ -77,5 +77,26 @@ display: flex;
 color: white;
 font-size: 20px;
 position: relative;
-flex-direction: row;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: justify;
 `
+
+export const ButtonFullComments = styled.label`
+margin-top: 10px;
+width: max-content;
+border-radius: 5px;
+background: transparent;
+color: rgb(25, 213, 118);
+background: #6161611c;
+font-size: 13px;
+font-weight: bold;
+transition: 0.2s;
+padding: 2px 5px;
+cursor: pointer;
+&:hover {
+  color: #1b1b1b;
+  background: rgb(25, 213, 118);
+}
+`;
