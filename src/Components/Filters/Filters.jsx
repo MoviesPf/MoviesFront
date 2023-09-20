@@ -15,7 +15,6 @@ export const Filters = () => {
 
   const [filters, setFilters] = useState({});
 
-
   useEffect(() => {
     if (filters.genres?.length >= 1 || filters.platforms?.length >= 1) {
       dispatch(programsFilters(filters));
