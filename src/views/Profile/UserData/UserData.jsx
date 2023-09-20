@@ -1,21 +1,31 @@
-import { UserBarr, UserNameContainer, NameAndNickname, AliasAndNick, Alias, Background, UserPicture } from "./UserData.Styled"
+import { UserBarr, UserNameContainer, NameAndIcon, NameAndNickname, AliasAndNick, Alias, Background, UserPicture, Boina, BoinaIcon, Name} from "./UserData.Styled"
 
-export const UserData = ({avatar,name,nickname,status}) => {
+import boinaImg from "../../../assets/Usericons/boinaVerde.png"
+import bIcon from "../../../assets/Usericons/NoEsUnPepino.png"
+
+export const UserData = ({user}) => {
 
     return (
         <UserBarr>
+
             <Background>
-            <UserPicture src={avatar}/>
+                <Boina src={boinaImg} style={user?.donator?{visibility:"visible"}:{visibility:"hidden"}}/>
+                <UserPicture src={user.avatar}/>
             </Background>
+
             <UserNameContainer>
                 <NameAndNickname>
-                    <h1>{name}</h1>
+                    <NameAndIcon>
+                        <Name>{user?.name}</Name>
+                        <BoinaIcon src={bIcon} style={user?.donator?{visibility:"visible"}:{visibility:"hidden"}}/>
+                    </NameAndIcon>
+                    
                     <AliasAndNick>
                         <Alias>Alias:</Alias>
-                        <h1>{nickname}</h1>
+                        <h1>{user?.nickname}</h1>
                     </AliasAndNick>
                 </NameAndNickname>
-                <p>{status}</p>
+                <p>{user?.status ? user.status : "Movies Fan!!"}</p>
             </UserNameContainer>
         </UserBarr>
     );

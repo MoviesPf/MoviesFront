@@ -13,7 +13,6 @@ export const Signin = () => {
 
   const user = useSelector((state) => state.user);
 
-
   const [createdUser, setCreatedUser] = useState({
     name: '',
     nickname: '',
@@ -60,7 +59,9 @@ export const Signin = () => {
           <div className={css.formUser}>
 
             <label className={css.label}>
-              Name <span className={css.span}>*</span>
+              <div>
+                <span> Name </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.name}
@@ -70,11 +71,13 @@ export const Signin = () => {
                 type='text'
                 name='name'
               />
-            </label>
               {error.name && <span className={css.Error}>{error.name}</span>}
+            </label>
 
             <label className={css.label}>
-              Nickname <span className={css.span}>*</span>
+              <div>
+                <span> Nickname </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.nickname}
@@ -84,11 +87,13 @@ export const Signin = () => {
                 type='text'
                 name='nickname'
               />
-            </label>
               {error.nickname && <span className={css.Error}>{error.nickname}</span>}
+            </label>
 
             <label className={css.label}>
-              Email <span className={css.span}>*</span>
+              <div>
+                <span> Email </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.email}
@@ -98,11 +103,13 @@ export const Signin = () => {
                 type='email'
                 name='email'
               />
-            </label>
               {error.email && <span className={css.Error}>{error.email}</span>}
+            </label>
 
             <label className={css.label}>
-              Password <span className={css.span}>*</span>
+              <div>
+                <span> Password </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.password}
@@ -112,11 +119,13 @@ export const Signin = () => {
                 type='password'
                 name='password'
               />
-            </label>
               {error.password && <span className={css.Error}>{error.password}</span>}
+            </label>
 
             <label className={css.label}>
-              Confirm Password <span className={css.span}>*</span>
+              <div>
+                <span> Confirm Password </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
                 value={createdUser.confirm}
@@ -126,8 +135,8 @@ export const Signin = () => {
                 type='password'
                 name='confirm'
               />
-            </label>
               {error.confirm && <span className={css.Error}>{error.confirm}</span>}
+            </label>
           </div>
         </div>
 
