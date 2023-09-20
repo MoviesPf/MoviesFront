@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
@@ -232,6 +232,15 @@ export const Reviews = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5px 15px;
+  border: 2px solid #1c1c1c91;
+  box-shadow: 0 0 20px #1c1c1c91;
+
+  ${(props) =>
+    props.isDonator &&
+    css`
+      border: 1px solid rgb(25, 213, 118);
+      box-shadow: 0 0 10px rgb(25, 213, 118);
+    `}
 `;
 
 export const SpanComments = styled.span`
@@ -246,6 +255,15 @@ export const ReviewBy = styled.span`
   margin-bottom: 10px;
   text-align: center;
   color: #fce8e6;
+`;
+
+export const DonatorImg = styled.img`
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
 `;
 
 export const StarsReviews = styled.img`
@@ -323,6 +341,7 @@ export const StarsContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  padding: 10px 0px 10px 0px;
 `;
 
 export const AreaC = styled.div`

@@ -1,5 +1,5 @@
 import { ContainerLeft, SimilarMoviesList, MovieCard, SpanComments, StarsReviews, ReviewBy, YearTitleModal, ContainerMiddle, ContainerReviews, Reviews, 
-  StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle,ButtonFullComments, SpanSpoiler, DonationContainer} from "./ProgramDetail.Styled";
+  StarsContainer, AvatarImg, ContainerAvatarImg, AreaC, ProgramCard, SimilarTitle,ButtonFullComments, SpanSpoiler, DonationContainer, DonatorImg} from "./ProgramDetail.Styled";
 import { DetailCard } from './DetailCard'
 import defaultImg from "../../../assets/defaultMovie.png"
 import { Advertisement } from "../../../Components/Advertisement/Advertisement";
@@ -44,17 +44,26 @@ export const ProgramDetail = (  {programDetail, year, runtimeFormatted, similarM
         <DetailCard props={{programDetail, year, runtimeFormatted}}/>
         <ContainerReviews>
           {programDetail.Reviews && programDetail.Reviews.map((r)=> (
-              <Reviews key={r.id}>
+              <Reviews 
+                key={r.id}
+                isDonator={/* true */ r.User.donator}
+              >
                 <ContainerAvatarImg>
                   <div>
                   <AvatarImg src={r.User.avatar} alt="" />
-                  <ReviewBy>{`Reveiwed by ${r.User.nickname}`}</ReviewBy>
+                  <ReviewBy>
+                    <span>{`Reveiwed by `}</span>
+                    {r.User.nickname}
+                    {r.User.donator /* true */ && (
+                      <DonatorImg style={{}} src="../../../../src/assets/User icons/NoEsUnPepino.png" alt="Donator Icon" /> 
+                    )}
+                  </ReviewBy>
                   </div>
                   {r.spoiler && <SpanSpoiler>Spoiler Alert!!</SpanSpoiler>}
                 </ContainerAvatarImg>
                 <SpanComments>
-                  {showFullComments ? r.comments : r.comments.slice(0, 500)}
-                  {r.comments.length > 500 && (
+                  {showFullComments ? r.comments : r.comments?.slice(0, 500)}
+                  {r.comments?.length > 500 && (
                     <ButtonFullComments onClick={() => setShowFullComments(!showFullComments)}>
                       {showFullComments ? "Read less" : "Read more"}
                     </ButtonFullComments>
