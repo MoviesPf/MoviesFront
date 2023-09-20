@@ -65,14 +65,6 @@ export const CloseButtonContainerDonate = styled.div`
   width: 100%;
 `;
 
-export const TextDonation = styled.span`
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
-  color: #fce8e6;
-`;
-
 export const ContainerModalInfo = styled.div`
   text-aling: center;
 `;
@@ -141,4 +133,19 @@ export const CloseButton = styled.label`
     color: rgb(25, 213, 118);
     border-color: rgb(25, 213, 118);
   }
+`;
+
+export const DonationContainer = styled.div`
+  margin-top: 100px;
+`;
+
+export const RightContainer = styled.div`
+  top: 0;
+  right: 0;
+  position: relative;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
