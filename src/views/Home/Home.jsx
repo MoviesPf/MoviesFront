@@ -7,6 +7,7 @@ import { NavBar } from '../../Components/NavBar/NavBar';
 import { Footer } from '../../Components/Footer/Footer';
 import { Cards } from '../../Components/Cards/Cards';
 import Paginate from '../../Components/Paginate/Paginate';
+import { useState } from 'react';
 
 import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
 import { useLocalStorage } from '../../utils/useLocalStorage';
@@ -39,6 +40,9 @@ export const Home = () => {
   const limit = useSelector((state) => state.totalPages);
   const filteredPrograms = useSelector((state) => state.filteredPrograms);
 
+  const [successMessage, setSuccessMessage] = useState('');
+
+
   const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
 
   useEffect(() => {
@@ -51,6 +55,21 @@ export const Home = () => {
     if (userInState.id) {
       setUserStorage(userInState);
       user?.id ? dispatch(getUserPlaylists(user.id)) : null;
+    }
+  }, []);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const successMsg = urlParams.get('message');
+    
+    // muestro el mensaje de éxito si está presente
+    if (successMsg) {
+      console.log('Mensaje de éxito recibido:', successMsg);
+      setSuccessMessage(successMsg);
+      setUserStorage({
+        ...user,
+        donator: true,
+      })
     }
   }, []);
 
@@ -105,6 +124,11 @@ export const Home = () => {
           />
 
           <Footer />
+          {successMessage && (
+            <div className={css.donationSuccess}>
+              <span>{successMessage}</span>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -1,7 +1,4 @@
-import {
-  Container, Top, Header, ContainerModal, ContainerModalHeader, CloseButtonContainerDonate,
-  ContainerModalInfo, ContainerButtons, CancelButton, Submit, Modal, RightContainer, CloseButton, DonationContainer, ProgramModal
-} from "./Detail.Styled";
+import { Container, Top, Header, ContainerModal, ContainerModalHeader, CloseButtonContainerDonate, ContainerModalInfo, ContainerButtons, CancelButton, Submit, Modal, RightContainer, CloseButton, DonationContainer, ProgramModal} from "./Detail.Styled";
 import defaultBackground from "../../assets/defaultBackground.png";
 
 import { useParams, useNavigate } from 'react-router-dom';
@@ -201,7 +198,7 @@ export const Detail = () => {
       }
 
 
-      {user.admin ?
+      {user?.admin ?
         <ProgramModal>
           <EditProgramModal />
         </ProgramModal>

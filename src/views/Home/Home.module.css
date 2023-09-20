@@ -31,3 +31,9 @@
 .background::-webkit-scrollbar-thumb{
     background: green;
 }
+
+.donationSuccess {
+    background-color: green;
+    margin-top: 50px;
+    color: white;
+}
