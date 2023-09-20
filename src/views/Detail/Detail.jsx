@@ -110,7 +110,8 @@ export const Detail = () => {
   };
 
   const handleMovieClick = (ProgramsId) => {
-    navigate(`/detail/${ProgramsId}`);
+    navigate(`/detail/${ProgramsId}`)
+    setIdReal(false)
   };
 
   const handleDonate = () => {
