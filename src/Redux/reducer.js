@@ -4,8 +4,6 @@ import {
   GET_GENRES,
   GET_PROGRAM_DETAIL,
   FILTER_PROGRAMS_BY_GENRE,
-  // FILTER_PROGRAMS_BY_PLATFORM,
-  // FILTER_PROGRAMS_COMBINED,
   GET_PROGRAM_BY_NAME,
   GET_MOVIES,
   GET_SERIES,
@@ -34,7 +32,8 @@ import {
   ACTIVE_FILTERS,
   GENRES_FILTERS,
   DELETE_PROGRAMS,
-  PATCH_PROGRAMS
+  PATCH_PROGRAMS,
+  RESET_FILTERS
 } from './actions-type';
 
 const initialState = {
@@ -154,6 +153,14 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         activeFilters: payload
+      };
+
+    case RESET_FILTERS:
+      return {
+        ...state,
+        activeFilters: [],
+        filteredPrograms: [],
+        totalPages: 24
       };
 
     case GENRES_FILTERS:

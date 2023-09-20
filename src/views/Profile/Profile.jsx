@@ -23,6 +23,7 @@ const Profile = () => {
   const playlistData = useSelector((state) => state.userPlaylists);
   const reviewsData = useSelector((state) => state.userReviews);
   const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
+  console.log(user);
 
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);

@@ -1,16 +1,12 @@
-import defaultBackground from '../../assets/defaultBackground.png';
-import style from './Detail.module.css';
+import {Container, Top, Header, ContainerModal, ContainerModalHeader, CloseButtonContainerDonate,
+ContainerModalInfo, ContainerButtons, CancelButton, Submit, Modal, RightContainer, CloseButton, DonationContainer} from "./Detail.Styled";
+import defaultBackground from "../../assets/defaultBackground.png";
 
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import {
-  getProgramDetail,
-  createReview,
-  filterProgramsByGenre,
-  getUserPlaylists
-} from '../../Redux/actions';
+import { getProgramDetail, createReview, filterProgramsByGenre, getUserPlaylists} from '../../Redux/actions';
 import { minutesToHoursAndMinutes } from '../../utils/minutesToHoursAndMinutes';
 
 import { GreenLoading } from '../../Components/GreenLoading/GreenLoading';
@@ -34,16 +30,14 @@ export const Detail = () => {
   const playlists = useSelector((state) => state.userPlaylists);
   const programDetail = useSelector((state) => state.programDetail);
   const similarPrograms = useSelector((state) => state.similarPrograms.data);
-  const alreadyReviewed = !!programDetail.Reviews?.find(
-    (r) => r.UserId === user.id
-  );
-
+  const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
+  
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId))
-      .then(user.id ? dispatch(getUserPlaylists(user.id)) : null)
-      .then(() => {
-        setIdReal(true);
-      });
+    .then( user?.id ? dispatch(getUserPlaylists(user.id)) : null)
+    .then(() => {
+      setIdReal(true);
+    });
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
@@ -64,13 +58,8 @@ export const Detail = () => {
       )
     );
   }, [similarPrograms]);
-
-  const [review, setReview] = useState({
-    spoiler: false,
-    rating: null,
-    comments: null,
-    date: moment().format('YYYY-MM-DD')
-  });
+      
+  const [review, setReview] = useState({spoiler:false, rating:null, comments:null, date:moment().format('YYYY-MM-DD')});
   const [peliculaSimilar, setPeliculaSimilar] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
@@ -103,7 +92,7 @@ export const Detail = () => {
         handleCloseModal();
         await dispatch(createReview(review, user.id, programDetail.id));
         dispatch(getProgramDetail(ProgramsId));
-        setReview({ ...review, comments: '' });
+        setReview({ ...review, rating: 0, spoiler: false, comments: '' });
       } else {
         setShowError(true);
       }
@@ -121,12 +110,17 @@ export const Detail = () => {
   };
 
   const handleMovieClick = (ProgramsId) => {
-    navigate(`/detail/${ProgramsId}`);
+    navigate(`/detail/${ProgramsId}`)
+    setIdReal(false)
   };
 
   const handleDonate = () => {
     setShowDonation(false);
     navigate('/donate');
+  };
+
+  const handleCheckboxChange = (event) => {
+    setReview({ ...review, spoiler: event.target.checked }); 
   };
 
   function encontrarPeliculaMasParecida(tituloQueTienes, peliculas) {
@@ -162,8 +156,9 @@ export const Detail = () => {
       : programDetail.backdrop;
 
   return (
-    <div className={style.Container}>
+    <Container>
       <NavBar />
+<<<<<<< HEAD
       <div className={style.Header} style={{ background: `url(${imageBack})` }} />
       {!idReal ? (
         <GreenLoading />
@@ -179,6 +174,20 @@ export const Detail = () => {
           />
           {user.id && playlists.totalPlaylist ? (
             <ButtonOptions
+=======
+        <Header backgroundurl={`url(${imageBack})`} />
+        { 
+          !idReal ?
+          <GreenLoading/>
+          :
+          <Top>
+            <ProgramDetail setIdReal={setIdReal} programDetail={programDetail} year={year} runtimeFormatted={runtimeFormatted}
+             similarMovies={peliculaSimilar} handleMovieClick={handleMovieClick}/>
+             {
+              user?.id && playlists?.totalPlaylist ?
+              <RightContainer>
+              <ButtonOptions 
+>>>>>>> 6cb52299161c42ac1b62b8637ac5c081e4d2a3b3
               setShowModal={setShowModal}
               setShowError={setShowError}
               programId={programDetail.id}
@@ -187,6 +196,7 @@ export const Detail = () => {
               playlistData={playlists}
               alreadyReviewed={alreadyReviewed}
               programDetailType={programDetail.type}
+<<<<<<< HEAD
             />
           ) : (
             <ButtonOptionsFake />
@@ -244,5 +254,48 @@ export const Detail = () => {
       )}
       <Footer />
     </div>
+=======
+              />
+              <DonationContainer>
+                <Advertisement/>
+              </DonationContainer>
+              </RightContainer>
+              : 
+              <RightContainer>
+                <ButtonOptionsFake/>
+                <DonationContainer>
+                  <Advertisement/>
+                </DonationContainer>
+              </RightContainer>
+
+             }
+          </Top>
+        }
+        {showModal && 
+          <ReviewModal handleCloseModal={handleCloseModal} year={year} showError={showError} setShowError={setShowError} handleCreate={handleCreate} setShowModal={setShowModal} programDetail={programDetail} review={review} setReview={setReview}/>
+        }
+        {showDonation &&
+          <ContainerModal>
+            <Modal>
+              <ContainerModalHeader>
+                <CloseButtonContainerDonate>
+                  <CloseButton onClick={() => setShowDonation(false)}> x </CloseButton>
+                </CloseButtonContainerDonate>              
+              </ContainerModalHeader>
+              <br/>
+              <ContainerModalInfo>
+                <Advertisement/>
+              </ContainerModalInfo>
+              <br/>
+              <ContainerButtons>
+                <CancelButton onClick={() => setShowDonation(false)}>Maybe Later</CancelButton>
+                <Submit onClick={() => handleDonate()}>Donate</Submit >
+              </ContainerButtons>
+            </Modal>
+          </ContainerModal>
+        }
+        <Footer />
+    </Container>
+>>>>>>> 6cb52299161c42ac1b62b8637ac5c081e4d2a3b3
   );
 };

@@ -24,26 +24,50 @@ export const EditProfileModal = ({ setShowModal }) => {
     const openCloudinaryWidget = (imageType) => {
         const cloudName = "greenscreenpf";
         const uploadPreset = "presentNamepf";
-
-        const widgetOptions = {
-            cloudName: cloudName, uploadPreset: uploadPreset,
-            sources: ["local", "url", "camera", "google_drive", "facebook", "dropbox", "instagram", "shutterstock", "istock", "unsplash", "getty"],
-            googleApiKey: "<image_search_google_api_key>", showAdvancedOptions: true, cropping: true, multiple: false, defaultSource: "local",
-            styles: {
-                palette: { window: "#000000", sourceBg: "#000000", windowBorder: "#8E9FBF", tabIcon: "#FFFFFF", inactiveTabIcon: "#8E9FBF", menuIcons: "#19D576", link: "#19D576", action: "#336BFF", inProgress: "#19D576", complete: "#1DFD8C", error: "#EA2727", textDark: "#000000", textLight: "#FFFFFF" },
-                fonts: { default: null, "sans-serif": { url: null, active: true } }
-            }
+    
+        const widgetOptions = { 
+            cloudName: cloudName, uploadPreset: uploadPreset, 
+            sources: ["local","url","camera","google_drive","facebook","dropbox","instagram","shutterstock","istock","unsplash","getty"],
+            googleApiKey: "<image_search_google_api_key>", 
+            showAdvancedOptions: true, 
+            cropping: "server",
+            multiple: false, 
+            defaultSource: "local",
+            styles: { 
+                palette: { 
+                    window: "#000000", 
+                    sourceBg: "#000000", 
+                    windowBorder: "#8E9FBF", 
+                    tabIcon: "#FFFFFF", 
+                    inactiveTabIcon: "#8E9FBF", 
+                    menuIcons: "#19D576", 
+                    ink: "#19D576", 
+                    action: "#336BFF",
+                    inProgress: "#19D576",
+                    complete: "#1DFD8C",
+                    error: "#EA2727",
+                    textDark: "#000000",
+                    textLight: "#FFFFFF"},
+                fonts: { 
+                    default: null, 
+                    "sans-serif": { url: null, active: true } 
+                }
+            },
+            transformation: [
+                {gravity: "face", height: 200, width: 200, crop: "fill"},
+                {fetch_format: "png"},
+                {radius: "max"}
+            ]
         };
-
         // Abre el widget de Cloudinary y maneja el resultado según el tipo de imagen
         const myWidget = window.cloudinary.createUploadWidget(widgetOptions, (error, result) => {
             if (!error && result && result.event === "success") {
                 const imageUrl = result.info.url;
-                if (imageType === "avatar") { setEditedUser({ ...editedUser, avatar: imageUrl }); }
-                if (imageType === "background") { setEditedUser({ ...editedUser, background: imageUrl }); }
-            }
-        });
+                if (imageType === "avatar") { setEditedUser({ ...editedUser, avatar: imageUrl });} 
+                if (imageType === "background") { setEditedUser({ ...editedUser, background: imageUrl });}
+        }});
         myWidget.open();
+
     };
 
     const showModal = () => {
@@ -59,8 +83,7 @@ export const EditProfileModal = ({ setShowModal }) => {
 
     const handleSubmit = () => {
         if (user.avatar !== editedUser.avatar || user.background !== editedUser.background || user.name !== editedUser.name || user.nickname !== editedUser.nickname || user.status !== editedUser.status) {
-            dispatch(updateUser({ id: user.id, name: editedUser.name, nickname: editedUser.nickname, status: editedUser.status, avatarImage: editedUser.avatar, backgroundImage: editedUser.background }))
-        }
+            dispatch(updateUser({ id: user.id, name: editedUser.name, nickname: editedUser.nickname, status: editedUser.status, avatarImage: editedUser.avatar, backgroundImage: editedUser.background})).then(showModal())}
     }
 
     return (

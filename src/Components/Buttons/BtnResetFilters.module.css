@@ -1,0 +1,23 @@
+.reset{
+    font-size: 3rem;
+    background-color: #000;
+    color: #008000;
+    outline: 3px solid #008000;
+    padding: .2rem;
+    cursor: pointer;
+    margin:  1vh 5vw;
+    border-radius: .5rem;
+  }
+  
+  .reset:hover{
+    opacity: .7;
+  }
+  
+  .reset:active{
+    scale: .9;
+  }
+
+  .container {
+    display: flex;
+    justify-content: right;
+  }

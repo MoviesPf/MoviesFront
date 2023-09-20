@@ -7,13 +7,13 @@ export const scaleUp = keyframes`
   100% {
     transform: scale(1.5);
   }
-`
+`;
 
 export const ScoreContainer = styled.div`
   background-color: #1C1C1C;
-  margin-right: 100px;
   display: flex;
   height: min-content;
+  width: min-content;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -43,7 +43,14 @@ span {
     opacity: 1;
   }
 }
-`
+`;
+
+export const IconsC = styled.div`
+display: flex;
+margin-top: 12px;
+margin-right: 10px;
+margin-left: 10px;
+`;
 
 export const IconContainer = styled.div`
 display: flex;
@@ -53,14 +60,7 @@ justify-content: center;
 align-items: center;
 margin-right: 10px;
 margin-left: 10px;
-`
-
-export const IconsC = styled.div`
-display: flex;
-margin-top: 12px;
-margin-right: 10px;
-margin-left: 10px;
-`
+`;
 
 export const IconImg = styled.img`
  filter: brightness(${(props) => (props.$check ? '0.5' : '1')});
@@ -77,19 +77,19 @@ export const IconImg = styled.img`
   }
     
   }
-`
+`;
 
 export const IconLabel = styled.label`
 color: white;
 font-size: 16px;
-`
+`;
 
 export const EmptStarC = styled.div`
 display: flex;
 flex-wrap: nowrap;
 flex-direction: row;
 margin-top: 22px;
-`
+`;
 
 export const ReviewButton = styled.button`
 width: 140px;
@@ -105,8 +105,39 @@ font-size: 25px;
 font-weight: bold;
 cursor: pointer; 
   &:hover {
-    color: #1b1b1b;
-    background: rgb(25, 213, 118); 
+    ${(props) => 
+      !props.disabled &&
+      css`
+      color: #1b1b1b;
+      background: rgb(25, 213, 118); 
+      `
+    }
 
   }
-`
+`;
+
+export const AlreadyReviewedMessage = styled.div`
+  background-color: #6161611c;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 0px 0px 15px 15px;
+`;
+
+export const AlreadyReviewedText = styled.h1`
+  background: rgb(0 0 0 / 21%);
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 10px 0;
+  font-size: 18px;
+  color: rgb(25, 213, 118);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid rgb(25 213 118 / 23%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+`;

@@ -9,8 +9,6 @@ import {
   GET_PROGRAM_DETAIL,
   PATCH_PROGRAMS,
   FILTER_PROGRAMS_BY_GENRE,
-  // FILTER_PROGRAMS_BY_PLATFORM,
-  // FILTER_PROGRAMS_COMBINED,
   GET_MOVIES,
   GET_SERIES,
   GET_MOVIES_GENRES,
@@ -37,7 +35,8 @@ import {
   PROGRAMS_FILTERS,
   ACTIVE_FILTERS,
   GENRES_FILTERS,
-  DELETE_PROGRAMS
+  DELETE_PROGRAMS,
+  RESET_FILTERS
 } from './actions-type';
 
 export const getAllPrograms = (page = 1) => {
@@ -166,39 +165,6 @@ export const filterProgramsByGenre = (genreName, type) => {
   };
 };
 
-// export const filterProgramsByPlatform = (platformName, type) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.get(
-//         URL_API + `programs/filter/platform/${platformName}/${type}`
-//       );
-//       dispatch({
-//         type: FILTER_PROGRAMS_BY_PLATFORM,
-//         payload: data
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
-// export const filterProgramsCombined = (genreName, platformName, type) => {
-//   return async (dispatch) => {
-//     try {
-//       const { data } = await axios.get(
-//         URL_API +
-//           `programs/filter/genre/${genreName}/platform/${platformName}/${type}`
-//       );
-//       dispatch({
-//         type: FILTER_PROGRAMS_COMBINED,
-//         payload: data
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
-
 export const createUsers = ({
   email,
   avatar,
@@ -313,7 +279,7 @@ export const selectDonationOption = (amount) => ({
 export const initiatePayment = (donationData) => async (dispatch) => {
   try {
     const response = await axios.post(
-      'http://localhost:3001/donations/create-order',
+      URL_API + 'donations/create-order',
       donationData,
       {
         headers: {
@@ -360,8 +326,7 @@ export const getUserReviews = (UserId) => {
 export const handleList = (UserId, PlaylistName, ProgramId) => {
   return async (dispatch) => {
     const { data } = await axios.patch(
-      URL_API +
-        `playlists/user/${UserId}/name/${PlaylistName}/program/${ProgramId}`
+      URL_API + `playlists/user/${UserId}/name/${PlaylistName}/program/${ProgramId}`
     );
     console.log(data);
     return dispatch({
@@ -551,6 +516,15 @@ export const activeFilters = (state) => {
     dispatch({
       type: ACTIVE_FILTERS,
       payload: state
+    });
+  };
+};
+
+export const resetFilters = () => {
+  return (dispatch) => {
+    dispatch({
+      type: RESET_FILTERS,
+      payload: ''
     });
   };
 };
