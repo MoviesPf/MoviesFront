@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getGenres, getPlatforms, activeFilters, programsFilters } from '../../Redux/actions';
+import { getAllPrograms, getGenres, getPlatforms, activeFilters, programsFilters } from '../../Redux/actions';
 
 import BtnResetFilters from '../Buttons/BtnResetFilters';
 import css from './filters.module.css';
@@ -19,6 +19,8 @@ export const Filters = () => {
     if (filters.genres?.length >= 1 || filters.platforms?.length >= 1) {
       dispatch(programsFilters(filters));
       dispatch(activeFilters(filters));
+    } else {
+      dispatch(getAllPrograms());
     }
     dispatch(getGenres());
     dispatch(getPlatforms());
