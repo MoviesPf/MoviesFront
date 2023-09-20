@@ -41,15 +41,20 @@ export const Filters = () => {
   const handlerFilters = (type, filter) => {
     if (type === 'genre') {
       if (!filters.genres) {
-        console.log('primer');
         setFilters({
           ...filters,
           genres: [filter]
         });
-      } else {
+      } else if(!filters.genres.includes(filter)){
         setFilters({
           ...filters,
           genres: [...filters.genres, filter]
+        })
+      } else {
+        const updatedGenres = filters.genres.filter((genre) => genre !== filter);
+        setFilters({
+          ...filters,
+          genres: updatedGenres 
         });
       }
     }
@@ -60,12 +65,18 @@ export const Filters = () => {
           ...filters,
           platforms: [filter]
         });
-      } else {
-        setFilters({
-          ...filters,
-          platforms: [...filters.platforms, filter]
-        });
       }
+    } else if(!filters.platforms.includes(filter)){
+      setFilters({
+        ...filters,
+        platforms: [...filters.platforms, filter]
+      })
+    } else {
+      const updatedPlatforms = filters.platforms.filter((plat) => plat !== filter);
+      setFilters({
+        ...filters,
+        platforms: updatedPlatforms
+      });
     }
   };
   // const handleGenreFilter = (genreName) => {
