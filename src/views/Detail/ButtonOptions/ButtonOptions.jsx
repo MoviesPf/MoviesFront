@@ -9,6 +9,7 @@ import emptyStar from "../../../assets/Icons/icons8-star-52.png"
 import fullStar from "../../../assets/Icons/icons8-star-100 green.png"
 
 import {ScoreContainer, IconsC, IconContainer, IconImg, IconLabel, EmptStarC, ReviewButton, AlreadyReviewedMessage, AlreadyReviewedText } from "./ButtonOptions.Styled"
+import { ButtonOptionsFake } from './ButtonOptionsFake';
 
 export const ButtonOptions = ({setShowModal, setShowError, programId, rating, userId, alreadyReviewed, programDetailType}) => {
   const playlistData = useSelector( (state) => state.userPlaylists)
@@ -74,7 +75,7 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating, us
     <div>
     {
       loading ? 
-        <div></div>
+      <ButtonOptionsFake/>
       :
       <ScoreContainer>
         <IconsC>

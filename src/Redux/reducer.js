@@ -4,8 +4,6 @@ import {
   GET_GENRES,
   GET_PROGRAM_DETAIL,
   FILTER_PROGRAMS_BY_GENRE,
-  // FILTER_PROGRAMS_BY_PLATFORM,
-  // FILTER_PROGRAMS_COMBINED,
   GET_PROGRAM_BY_NAME,
   GET_MOVIES,
   GET_SERIES,
@@ -143,8 +141,8 @@ const reducer = (state = initialState, { type, payload }) => {
         filteredPrograms: [],
         totalPages: 24
       };
-      
-      case GENRES_FILTERS:
+
+    case GENRES_FILTERS:
       if (typeof genresActive === 'undefined') {
         console.log('unde');
         data.push(payload);
