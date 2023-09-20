@@ -14,6 +14,7 @@ import {
   programsFilters,
   genresFilters
 } from '../../Redux/actions';
+import BtnResetFilters from '../Buttons/BtnResetFilters';
 import css from './filters.module.css';
 
 export const Filters = () => {
@@ -41,15 +42,20 @@ export const Filters = () => {
   const handlerFilters = (type, filter) => {
     if (type === 'genre') {
       if (!filters.genres) {
-        console.log('primer');
         setFilters({
           ...filters,
           genres: [filter]
         });
-      } else {
+      } else if(!filters.genres.includes(filter)){
         setFilters({
           ...filters,
           genres: [...filters.genres, filter]
+        })
+      } else {
+        const updatedGenres = filters.genres.filter((genre) => genre !== filter);
+        setFilters({
+          ...filters,
+          genres: updatedGenres 
         });
       }
     }
@@ -60,11 +66,17 @@ export const Filters = () => {
           ...filters,
           platforms: [filter]
         });
+      } else if(!filters.platforms.includes(filter)){
+      setFilters({
+        ...filters,
+        platforms: [...filters.platforms, filter]
+      })
       } else {
-        setFilters({
-          ...filters,
-          platforms: [...filters.platforms, filter]
-        });
+      const updatedPlatforms = filters.platforms.filter((plat) => plat !== filter);
+      setFilters({
+        ...filters,
+        platforms: updatedPlatforms
+      });
       }
     }
   };
@@ -148,35 +160,40 @@ export const Filters = () => {
   //   </button>
   // );
   return (
+    <>
     <div className={css.background}>
       <div className={css.filtersContainer}>
         {Genres?.map((gen) => {
           return (
             <div
-              className={css.filters}
               onClick={() => handlerFilters('genre', gen.name)}
+              className={filters.genres?.includes(gen.name) ? css.selected : css.filters}
             >
               {gen.name}
             </div>
           );
         })}
       </div>
-
-      <div>platforms</div>
-
+    </div>
+      <br/>
+    <div className={css.background}>
       <div className={css.filtersContainer}>
         {Platforms?.map((plat) => {
           return (
             <div
-              className={css.filters}
               onClick={() => handlerFilters('platforms', plat.name)}
+              className={filters.platforms?.includes(plat.name) ? css.selected : css.filters}
             >
               {plat.name}
             </div>
           );
         })}
       </div>
-
+    </div>
+      <br/>
+      <div onClick={() =>setFilters({})}>
+      <BtnResetFilters/>
+      </div>
       {/* <Carousel
         key={'genres'}
         wrap={false}
@@ -202,6 +219,6 @@ export const Filters = () => {
           ))}
         </select>
       </div> */}
-    </div>
+    </>
   );
 };

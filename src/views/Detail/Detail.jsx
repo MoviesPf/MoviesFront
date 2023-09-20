@@ -118,6 +118,10 @@ export const Detail = () => {
     navigate('/donate');
   };
 
+  const handleCheckboxChange = (event) => {
+    setReview({ ...review, spoiler: event.target.checked }); 
+  };
+
   function encontrarPeliculaMasParecida(tituloQueTienes, peliculas) {
     function calcularSimilitud(titulo1, titulo2) {
       const s1 = new Set(titulo1.split(' '));
