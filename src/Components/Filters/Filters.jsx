@@ -14,6 +14,7 @@ import {
   programsFilters,
   genresFilters
 } from '../../Redux/actions';
+import BtnResetFilters from '../Buttons/BtnResetFilters';
 import css from './filters.module.css';
 
 export const Filters = () => {
@@ -65,18 +66,18 @@ export const Filters = () => {
           ...filters,
           platforms: [filter]
         });
-      }
-    } else if(!filters.platforms.includes(filter)){
+      } else if(!filters.platforms.includes(filter)){
       setFilters({
         ...filters,
         platforms: [...filters.platforms, filter]
       })
-    } else {
+      } else {
       const updatedPlatforms = filters.platforms.filter((plat) => plat !== filter);
       setFilters({
         ...filters,
         platforms: updatedPlatforms
       });
+      }
     }
   };
   // const handleGenreFilter = (genreName) => {
@@ -190,7 +191,9 @@ export const Filters = () => {
       </div>
     </div>
       <br/>
-        
+      <div onClick={() =>setFilters({})}>
+      <BtnResetFilters/>
+      </div>
       {/* <Carousel
         key={'genres'}
         wrap={false}
