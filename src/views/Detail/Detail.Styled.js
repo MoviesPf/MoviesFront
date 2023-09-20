@@ -15,17 +15,17 @@ export const Container = styled.div`
   &::-webkit-scrollbar {
     width: 10px;
   }
-  
-  &::-webkit-scrollbar-thumb{
+
+  &::-webkit-scrollbar-thumb {
     background: green;
   }
-`
+`;
 
 export const Top = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`
+`;
 
 export const Header = styled.div`
   position: absolute;
@@ -65,6 +65,8 @@ export const CloseButtonContainerDonate = styled.div`
 
 export const ContainerModalInfo = styled.div`
   text-aling: center;
+  margin-left: 50px;
+  width: 100%;
 `;
 
 export const ContainerButtons = styled.div`
@@ -138,12 +140,12 @@ export const DonationContainer = styled.div`
 `;
 
 export const RightContainer = styled.div`
-top: 0;
-right: 0;
-position: relative;
-width: 30%;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-`
+  top: 0;
+  right: 0;
+  position: relative;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
