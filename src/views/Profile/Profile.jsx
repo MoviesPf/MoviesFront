@@ -35,10 +35,14 @@ const ViewContainer = styled.div`
 
 const UserBackground = styled.img`
   width: 100%;
-  height: 40vh;
+  height: 30vh;
   object-fit: cover;
   position: relative;
   z-index: 1;
+  @media (max-width: 768px) {
+    height: 10vh;
+    position: absolute;
+  }
 `
 const AreaContainer = styled.div`
   display: flex;
@@ -51,6 +55,9 @@ const ElementsBarr = styled.div`
   display: flex;
   position: relative;
   flex-direction: column;
+  @media (max-width: 768px) {
+    margin-top: 13vh;
+  }
 `
 
 const IconLabel = styled.label`
@@ -67,7 +74,7 @@ const LineHR = styled.hr`
   background-image: linear-gradient(
     to right,
     rgba(0, 0, 0, 0),
-    rgb(0, 128, 0),
+    rgb(33, 221, 133),
     rgba(0, 0, 0, 0)
   );
 `;
@@ -75,8 +82,7 @@ const LineHR = styled.hr`
 const LineSubHR = styled.hr`
   border: 0;
   height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgb(0, 128, 0);
+  border-bottom: 4px solid #19d576;
 `;
 
 const LineNavHR = styled.hr`
@@ -84,7 +90,7 @@ const LineNavHR = styled.hr`
   margin-bottom: 0;
   border: 0;
   height: 22px;
-  box-shadow: inset 0 22px 30px -29px rgb(0, 128, 0);
+  box-shadow: inset 0 22px 30px -29px #19d576;
 `;
 
 

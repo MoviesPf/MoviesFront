@@ -58,6 +58,7 @@ color: #ffffff;
 `
 
 const Background = styled.div`
+
 border: 5px solid;
 border-color: white;
 position: relative;
@@ -84,8 +85,7 @@ top: -120px;
 `
 const UserPicture = styled.img`
 border-radius: 100%;
-height: 250px;
-width: 250px;
+width:  20vh;
 `
 const BoinaIcon = styled.img`
 height: 50px;

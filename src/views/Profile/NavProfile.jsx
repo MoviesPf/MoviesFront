@@ -9,12 +9,18 @@ background-color: #131212;
 padding-bottom: 10px;
 padding-top: 10px;
 display: flex;
-justify-content: center;
+justify-content: space-between;
+padding-left: 6%;
 width: 100%;
 `
 // #131212
 const LinksContainer = styled.div`
 display: flex;
+
+@media (max-width: 768px) {
+  flex-wrap: nowrap;
+  overflow: scroll;
+  }
 justify-content: center;
 align-items: center;
 `
@@ -28,6 +34,19 @@ border: 2px solid transparent;
 color: white;
 font-size: 25px;
 font-weight: bold;
+@media (max-width: 1000px) {
+  height: 50px;
+  width: 20%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+  }
+@media (max-width: 768px) {
+     flex: 1 0 auto;
+     height: 50px;
+    width: 100px; 
+  }
 
 cursor: pointer; 
   &:hover {
@@ -38,7 +57,9 @@ cursor: pointer;
 
 const IconsC = styled.div`
 display: flex;
-margin-left: 200px
+padding-right: 10%;
+padding-left: 5%;
+
 `
 
 const IconContainer = styled.div`
@@ -61,6 +82,7 @@ font-size: 16px;
 `
 
 const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
+  const screenWidth = window.innerWidth;
 
   const setProfile = ()=> {
     setMenu("Profile")
@@ -83,6 +105,8 @@ const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
   }
 
   return (
+    <div>
+      
     <NavContainer>
       <LinksContainer>
           <ViewButton onClick={setProfile}>Profile</ViewButton>
@@ -105,8 +129,9 @@ const NavProfile = ({menu, setMenu, favorites, watchlist, watched}) => {
           <IconLabel>{ watchlist ? watchlist.programs.length : 0}</IconLabel>
         </IconContainer>
       </IconsC>
-
     </NavContainer>
+    </div>
+
 
   );
 };

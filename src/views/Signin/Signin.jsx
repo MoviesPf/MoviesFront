@@ -19,8 +19,6 @@ export const Signin = () => {
     } else {
       setConfTextPass("Confirm Password");
     }
-    console.log(screenWidth)
-    console.log(confTextPass)
   }
   window.onload = changeLabelText;
   window.onresize = changeLabelText;
