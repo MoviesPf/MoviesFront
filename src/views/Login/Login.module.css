@@ -89,8 +89,7 @@
 }
 
 .errorLogin{
-  position: absolute;
-  top: 10rem;
+  position: relative;
   color: rgb(173, 15, 15);
 }
 
