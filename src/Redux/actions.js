@@ -203,13 +203,14 @@ export const createUsers = ({
   };
 };
 
-export const loginUser = (email, password) => {
+export const loginUser = (source, email, password) => {
+  console.log("email:", email, "password:", password);
   return async (dispatch) => {
     try {
       const res = await fetch(URL_API + 'users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ source, email, password })
       });
       const data = await res.json();
       dispatch({

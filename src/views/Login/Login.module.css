@@ -129,9 +129,10 @@
 }
 
 .btn {
-  background-color: #19d576;
+  background-color: green;
   height: 3rem;
   width: 10vw;
+  transition: all 0.25s;
   @media (max-width: 768px) {
     width: 25vw;
   }
@@ -139,13 +140,13 @@
   border: none;
   border-radius: 0.3rem;
   margin: 1rem;
-  color: rgb(0, 0, 0);
+  color: white;
   font-weight: 700;
   box-shadow: -2px 2px 5px #000000a6;
 }
 
 .btn:hover {
-  background-color: #288858;
+  background-color: rgb(0, 58, 0);
   color: rgb(255, 255, 255);
 }
 
@@ -163,12 +164,12 @@
 
 .singin {
   margin: 0.5rem;
-  color: #19d576;
+  color: green;
   font-weight: 500;
 }
 
 .singin:hover {
-  color:#288858;
+  color: rgb(0, 58, 0);
 }
 
 .or {
@@ -237,7 +238,7 @@
   flex-wrap: wrap;
   width: 80%;
   height: 18rem;
-  outline: 3px solid  #19d576;
+  outline: 3px solid  green;
   background: #000;
   font-size: 2rem;
   padding: 2rem;
@@ -254,7 +255,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  background:  #19d576;
+  background:  green;
   outline: 3px solid #1b3b1b;
   height: 4rem;
   padding: .5rem 1rem;
@@ -272,5 +273,5 @@
 }
 
 .resal{
-  color: #19d576;
+  color: green;
 }
