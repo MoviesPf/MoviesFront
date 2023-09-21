@@ -108,7 +108,7 @@ align-items: center;
 export const Nick = styled.h1`
 font-size: 18px;
 padding-right: 10px;
-color: green;
+color: #288858;
 `
 
 export const AllForm = styled.div`
@@ -164,13 +164,13 @@ export const UpdateButton = styled.button`
 border-radius: 5px;
 width: 20%;
 border: 0px;
-background-color: green;
+background-color: #19d576;
 margin: 5px;
-color: white;
+color: black;
 transition: all 0.3s;
 
 &:hover {
-  background-color: rgb(0, 58, 0);
+  background-color: #185134
 }
 `
 
