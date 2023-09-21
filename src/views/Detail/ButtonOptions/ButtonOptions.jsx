@@ -20,15 +20,15 @@ export const ButtonOptions = ({setShowModal, setShowError, programId, rating, us
     dispatch(getUserPlaylists(userId)).then(()=>{setLoading(false)})
   },[dispatch]);
 
-  let playlists = playlistData.finalPlaylists;
-  let favorites = playlists.length ? playlists.filter(playlist => playlist.name === "Favorites")[0] : [];
-  let isFav = favorites.programs.filter(program => program.id === programId).length === 1 ? true : false;
+  let playlists = playlistData?.finalPlaylists;
+  let favorites = playlists?.length ? playlists?.filter(playlist => playlist?.name === "Favorites")[0] : [];
+  let isFav = favorites?.programs?.filter(program => program?.id === programId).length === 1 ? true : false;
     
-  let watchlist = playlists.length ? playlists.filter(playlist => playlist.name === "WatchList")[0] : [];
-  let isWatchL = watchlist.programs.filter(program => program.id === programId).length === 1 ? true : false;
+  let watchlist = playlists?.length ? playlists?.filter(playlist => playlist?.name === "WatchList")[0] : [];
+  let isWatchL = watchlist?.programs?.filter(program => program?.id === programId).length === 1 ? true : false;
     
-  let watched = playlists.length ? playlists.filter(playlist => playlist.name === "Watched")[0] : [];
-  let isWatch = watched.programs.filter(program => program.id === programId).length === 1 ? true : false;
+  let watched = playlists?.length ? playlists?.filter(playlist => playlist?.name === "Watched")[0] : [];
+  let isWatch = watched?.programs?.filter(program => program?.id === programId).length === 1 ? true : false;
 
   const [checkButtonState,setCheckButtonsSTate] =  useState({
     watched: !isWatch,
