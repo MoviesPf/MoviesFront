@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllPrograms, getGenres, getPlatforms, activeFilters, programsFilters } from '../../Redux/actions';
+import { getAllPrograms, getGenres, getPlatforms, activeFilters, programsFilters, getAllMovies, getAllSeries } from '../../Redux/actions';
 
 import BtnResetFilters from '../Buttons/BtnResetFilters';
 import css from './filters.module.css';
@@ -12,6 +12,7 @@ export const Filters = () => {
 
   const Genres = useSelector((state) => state.genres);
   const Platforms = useSelector((state) => state.platforms);
+  const typeProg = useSelector((state) => state.type);
 
   const [filters, setFilters] = useState({});
 
@@ -20,11 +21,17 @@ export const Filters = () => {
       dispatch(programsFilters(filters));
       dispatch(activeFilters(filters));
     } else {
-      dispatch(getAllPrograms());
+        if (typeProg === 'main'){ dispatch(getAllPrograms()); } 
+        if (typeProg === 'movies'){ dispatch(getAllMovies()); }
+        if (typeProg === 'series'){ dispatch(getAllSeries()); }
     }
     dispatch(getGenres());
     dispatch(getPlatforms());
   }, [filters]);
+
+  useEffect(() => {
+    setFilters({})
+  },[typeProg])
 
   const handlerFilters = (type, filter) => {
     if (type === 'genre') {

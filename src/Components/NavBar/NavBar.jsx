@@ -58,6 +58,7 @@ export const NavBar = () => {
     dispatch(changeTypeSerie());
     dispatch(getAllSeries());
     dispatch(getSeriesGenres());
+    dispatch(resetFilters());
   };
 
   const LogOut = () => {
