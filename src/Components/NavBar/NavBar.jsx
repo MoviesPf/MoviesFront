@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchBar } from '../SearchBar/SearchBar';
 import css from './NavBar.module.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -15,7 +15,8 @@ import {
   logoutUser,
   changeTypeMain,
   changeTypeMovie,
-  changeTypeSerie
+  changeTypeSerie,
+  resetFilters
 } from '../../Redux/actions';
 import { useLocalStorage } from '../../utils/useLocalStorage';
 
@@ -32,6 +33,12 @@ export const NavBar = () => {
   const [show, setShow] = useState(false);
   const [searched, setSearched] = useState(false);
 
+  useEffect(() => {
+    if (user.banned) {
+      setUserStorage({});
+    }
+  }, [user]);
+
   const toggleShow = () => {
     setShow(!show);
   };
@@ -41,6 +48,7 @@ export const NavBar = () => {
     dispatch(changeTypeMain());
     dispatch(getAllPrograms());
     dispatch(getGenres());
+    dispatch(resetFilters());
   };
 
   const Movies = () => {
@@ -48,6 +56,7 @@ export const NavBar = () => {
     dispatch(changeTypeMovie());
     dispatch(getAllMovies());
     dispatch(getMovieGenres());
+    dispatch(resetFilters());
   };
 
   const Series = () => {
@@ -55,6 +64,7 @@ export const NavBar = () => {
     dispatch(changeTypeSerie());
     dispatch(getAllSeries());
     dispatch(getSeriesGenres());
+    dispatch(resetFilters());
   };
 
   const LogOut = () => {
