@@ -43,7 +43,7 @@ const Login = () => {
     return () => {
       if (user.banned) {
         dispatch(resetUserData());
-        //setear localStorage del user
+        // setUser
       }
       dispatch(resetMessage());
     };
