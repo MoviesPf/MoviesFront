@@ -22,7 +22,7 @@ export const validations = ({ password, confirm, email, nickname, name }) => {
     }
   }
   if (password) {
-    if (password.length < 7) {
+    if (password.length < 8) {
       error.password = 'Minimum 8 characters';
     }
   }
