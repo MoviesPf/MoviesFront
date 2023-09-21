@@ -44,21 +44,21 @@ export const NavBar = () => {
 
   const AllPrograms = () => {
     if (type === 'main') return;
-    dispatch(changeTypeMain());
+    // dispatch(changeTypeMain());
     dispatch(getAllPrograms());
     dispatch(getGenres());
   };
 
   const Movies = () => {
     if (type === 'movies') return;
-    dispatch(changeTypeMovie());
+    // dispatch(changeTypeMovie());
     dispatch(getAllMovies());
     dispatch(getMovieGenres());
   };
 
   const Series = () => {
     if (type === 'series') return;
-    dispatch(changeTypeSerie());
+    // dispatch(changeTypeSerie());
     dispatch(getAllSeries());
     dispatch(getSeriesGenres());
   };
