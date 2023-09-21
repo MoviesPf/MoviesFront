@@ -28,11 +28,11 @@ const Paginate = ({ limit, type, filters, programs }) => {
     if (filters === 'filters') {
       console.log('filtros');
       if (type === 'main') {
-        dispatch(programsFilters({filters: actFilt, type}, page));
+        dispatch(programsFilters({filters: actFilt, programType:type}, page));
       } else if (type === 'movies') {
-        dispatch(programsFilters({filters: actFilt, type}, page));
+        dispatch(programsFilters({filters: actFilt, programType:type}, page));
       } else if (type === 'series') {
-        dispatch(programsFilters({filters: actFilt, type}, page));
+        dispatch(programsFilters({filters: actFilt, programType:type}, page));
       }
     } else {
       if (type === 'main') {
