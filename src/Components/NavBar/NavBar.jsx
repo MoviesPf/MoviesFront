@@ -16,7 +16,6 @@ import {
   changeTypeMain,
   changeTypeMovie,
   changeTypeSerie,
-  resetFilters
 } from '../../Redux/actions';
 import { useLocalStorage } from '../../utils/useLocalStorage';
 
@@ -25,8 +24,8 @@ export const NavBar = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
+  
   const user = JSON.parse(localStorage.getItem('userStorage'));
-
   const type = useSelector((state) => state.type);
   const searchedPrograms = useSelector((state) => state.searchedPrograms);
 
@@ -48,7 +47,6 @@ export const NavBar = () => {
     dispatch(changeTypeMain());
     dispatch(getAllPrograms());
     dispatch(getGenres());
-    dispatch(resetFilters());
   };
 
   const Movies = () => {
@@ -56,7 +54,6 @@ export const NavBar = () => {
     dispatch(changeTypeMovie());
     dispatch(getAllMovies());
     dispatch(getMovieGenres());
-    dispatch(resetFilters());
   };
 
   const Series = () => {
@@ -64,7 +61,6 @@ export const NavBar = () => {
     dispatch(changeTypeSerie());
     dispatch(getAllSeries());
     dispatch(getSeriesGenres());
-    dispatch(resetFilters());
   };
 
   const LogOut = () => {

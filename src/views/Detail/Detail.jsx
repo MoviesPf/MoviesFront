@@ -40,9 +40,9 @@ export const Detail = () => {
   }, [dispatch, ProgramsId]);
 
   useEffect(() => {
-    if (programDetail && programDetail.Genres && programDetail.Genres[0].name) {
-      const genre = programDetail.Genres[0].name
-        ? programDetail.Genres[0].name
+    if (programDetail && programDetail?.Genres && programDetail.Genres[0]?.name) {
+      const genre = programDetail?.Genres[0].name
+        ? programDetail?.Genres[0].name
         : '';
       if (genre !== '')
         dispatch(filterProgramsByGenre(genre, programDetail.type));

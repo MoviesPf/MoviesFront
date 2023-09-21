@@ -7,10 +7,7 @@ import { createUsers } from '../../Redux/actions';
 import BtnHome from '../../Components/Buttons/BtnHome';
 import { validations } from './validations';
 
-
-
 export const Signin = () => {
-
 
   function changeLabelText(){
     const screenWidth = window.innerWidth;
@@ -23,12 +20,8 @@ export const Signin = () => {
   window.onload = changeLabelText;
   window.onresize = changeLabelText;
 
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
 
   const [user, setUser] = useState({
     name: '',
@@ -62,7 +55,6 @@ export const Signin = () => {
   const showAvatars = () => {
     if (displayAvatars.display === "none") setDisplayAvatars({ display: 'flex' })
     if (displayAvatars.display === "flex") setDisplayAvatars({ display: 'none' })
-    
   }
 
   const handleSubmit = (event) => {
@@ -75,8 +67,7 @@ export const Signin = () => {
   return (
 
     <div className={css.background}>
-    
-      <BtnHome className={css.btnHome} />
+      <BtnHome/>
       <div className={css.ViewContainer}>
 
         <h1 className={css.title}>SIGN UP</h1>
