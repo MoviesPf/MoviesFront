@@ -176,7 +176,7 @@
 
 .checkbox {
   margin-left: 0.5rem;
-  accent-color:  #19d576;
+  accent-color:  green;
 }
 
 
@@ -193,7 +193,8 @@
   color: #353535;
   font-weight: bold;
   font-size: 1.2rem;
-  background-color: #19d576;
+  background-color: green;
+  color: white;
   letter-spacing: 3px;
   box-shadow: -2px 2px 5px #000000a6;
 }
@@ -215,7 +216,7 @@
 }
 
 .titleAvatar {
-  color:  #19d576;
+  color: green;
   width: 100%;
   margin-bottom: 60px;
   text-align: center;
