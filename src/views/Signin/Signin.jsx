@@ -64,8 +64,6 @@ export const Signin = () => {
   const [displayAvatars,setDisplayAvatars] = useState({ display: 'none' })
   const [chooseAvatar,setChooseAvatar] = useState({visibility: "visible" })
 
-
-
   const showAvatars = () => {
     if (displayAvatars.display === "none") setDisplayAvatars({ display: 'flex' })
     if (displayAvatars.display === "flex") setDisplayAvatars({ display: 'none' })
