@@ -45,7 +45,7 @@ align-items: center;
 
 export const Alias = styled.h1`
 margin-right: 10px;
-color: green;
+color: #288858;
 `
 
 export const Background = styled.div`

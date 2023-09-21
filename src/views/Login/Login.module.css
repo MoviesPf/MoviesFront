@@ -129,7 +129,7 @@
 }
 
 .btn {
-  background-color:green;
+  background-color: #19d576;
   height: 3rem;
   width: 10vw;
   @media (max-width: 768px) {
@@ -139,13 +139,14 @@
   border: none;
   border-radius: 0.3rem;
   margin: 1rem;
-  color: white;
+  color: rgb(0, 0, 0);
   font-weight: 700;
   box-shadow: -2px 2px 5px #000000a6;
 }
 
 .btn:hover {
-  background-color:#288858;
+  background-color: #288858;
+  color: rgb(255, 255, 255);
 }
 
 /* Estilos del AUTH */
@@ -162,12 +163,12 @@
 
 .singin {
   margin: 0.5rem;
-  color: green;
+  color: #19d576;
   font-weight: 500;
 }
 
 .singin:hover {
-  color: rgb(0, 53, 0);
+  color:#288858;
 }
 
 .or {
@@ -236,7 +237,7 @@
   flex-wrap: wrap;
   width: 80%;
   height: 18rem;
-  outline: 3px solid #008000;
+  outline: 3px solid  #19d576;
   background: #000;
   font-size: 2rem;
   padding: 2rem;
@@ -253,7 +254,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  background: #008000;
+  background:  #19d576;
   outline: 3px solid #1b3b1b;
   height: 4rem;
   padding: .5rem 1rem;
@@ -271,5 +272,5 @@
 }
 
 .resal{
-  color: #008000;
+  color: #19d576;
 }
