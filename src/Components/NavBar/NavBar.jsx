@@ -33,7 +33,7 @@ export const NavBar = () => {
   const [searched, setSearched] = useState(false);
 
   useEffect(() => {
-    if (user.banned) {
+    if (user?.banned) {
       setUserStorage({});
     }
   }, [user]);
