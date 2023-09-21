@@ -1,7 +1,7 @@
 import { Container, Top, Header, ContainerModal, ContainerModalHeader, CloseButtonContainerDonate, ContainerModalInfo, ContainerButtons, CancelButton, Submit, Modal, RightContainer, CloseButton, DonationContainer, ProgramModal} from "./Detail.Styled";
 import defaultBackground from "../../assets/defaultBackground.png";
 
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
@@ -23,6 +23,8 @@ import EditProgramModal from './EditProgramModal/EditProgramModal';
 export const Detail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  console.log(pathname);
   const { ProgramsId } = useParams();
 
   const user = JSON.parse(localStorage.getItem('userStorage'));
@@ -30,6 +32,10 @@ export const Detail = () => {
   const programDetail = useSelector((state) => state.programDetail);
   const similarPrograms = useSelector((state) => state.similarPrograms.data);
   const alreadyReviewed = !!programDetail.Reviews?.find((r) => r.UserId === user.id)
+
+  useEffect(() => {
+    setIdReal(false)
+  },[pathname])
 
   useEffect(() => {
     dispatch(getProgramDetail(ProgramsId))
