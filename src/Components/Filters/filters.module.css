@@ -34,13 +34,13 @@
 }
 
 .filters:hover {
-    background-color: rgb(70, 70, 70);
+    background-color: #288858;
 }
 
 .selected {
-    background-color: green;
+    background-color: #19d576;
     border-radius: 5px;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 17px;
     display: flex;
     flex-direction: row;
@@ -51,6 +51,11 @@
     transition: all 0.25s;
     cursor: pointer;
     white-space: nowrap;
+}
+
+.selected:hover{
+    color: rgb(255, 255, 255);
+    background-color: #288858;
 }
 
 .backPlt {
@@ -99,5 +104,5 @@
 }
 
 .filtersContainer::-webkit-scrollbar-thumb{
-    background: green;
+    background:#288858;
 }

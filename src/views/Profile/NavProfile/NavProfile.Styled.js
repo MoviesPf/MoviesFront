@@ -22,7 +22,7 @@ align-items: center;
 `
 
 export const ViewButton = styled.button`
-background:${(props) => (props.$check ? 'green' : "transparent")};
+background:${(props) => (props.$check ? '#19d576' : "transparent")};
 color: ${(props) => (props.$check ? 'black' : "white")};
 width: 140px;
 height: 50px;
@@ -32,7 +32,7 @@ font-size: 25px;
 font-weight: bold;
 cursor: pointer;
   &:hover {
-    ${(props) => (props.$check ? null :` color: green; background: black;`)}
+    ${(props) => (props.$check ? null :` color: #19d576; background: black;`)}
 }
 `
 
@@ -62,7 +62,7 @@ font-size: 16px;
 `
 
 export const EditButton = styled.button`
-background: green;
+background: #288858;
 border: 2px solid transparent;
 border-radius: 10px;
 padding: 5px;
@@ -71,6 +71,6 @@ color: white;
 cursor: pointer;
 transition: all 0.25s;
 &:hover {
-  background: rgb(0, 58, 0);
+  background: #185134
 }
 `

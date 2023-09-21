@@ -12,7 +12,9 @@ export const leonAvatar = "https://i.ibb.co/k6vZdBB/leon-removebg-preview.png"
 export const osoAvatar = "https://i.ibb.co/StCByQm/oso-removebg-preview.png"
 export const tigreAvatar = "https://i.ibb.co/Fnmhv6N/tigre-removebg-preview.png"
 export const unicornioAvatar = "https://i.ibb.co/QM1nkx9/unicornio-removebg-preview.png"
-export const zorroAvatar = "https://i.ibb.co/M1D1Y7W/zorro-removebg-preview.png"
+export const zorroAvatar = "https://i.ibb.co/M1D1Y7W/zorro-removebg-preview.png" 
+// El siguiente Array se añadio para poder iterar sobre todos los iconos
+// y generar los avatares con un .map dentro del signin
 export const avatarsArray = [
     "https://i.ibb.co/M1D1Y7W/zorro-removebg-preview.png",
     "https://i.ibb.co/QM1nkx9/unicornio-removebg-preview.png",
