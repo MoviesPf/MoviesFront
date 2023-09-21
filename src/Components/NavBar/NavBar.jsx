@@ -16,7 +16,6 @@ import {
   changeTypeMain,
   changeTypeMovie,
   changeTypeSerie,
-  resetFilters
 } from '../../Redux/actions';
 import { useLocalStorage } from '../../utils/useLocalStorage';
 
@@ -25,13 +24,14 @@ export const NavBar = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const [userStorage, setUserStorage] = useLocalStorage('userStorage', {});
+  
   const user = JSON.parse(localStorage.getItem('userStorage'));
-
   const type = useSelector((state) => state.type);
   const searchedPrograms = useSelector((state) => state.searchedPrograms);
 
   const [show, setShow] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [localType, setLocalType ] = useState("main");
 
   useEffect(() => {
     if (user.banned) {
@@ -46,25 +46,25 @@ export const NavBar = () => {
   const AllPrograms = () => {
     if (type === 'main') return;
     dispatch(changeTypeMain());
+    setLocalType("main")
     dispatch(getAllPrograms());
     dispatch(getGenres());
-    dispatch(resetFilters());
   };
 
   const Movies = () => {
     if (type === 'movies') return;
     dispatch(changeTypeMovie());
+    setLocalType("movies")
     dispatch(getAllMovies());
     dispatch(getMovieGenres());
-    dispatch(resetFilters());
   };
 
   const Series = () => {
     if (type === 'series') return;
     dispatch(changeTypeSerie());
+    setLocalType("series")
     dispatch(getAllSeries());
     dispatch(getSeriesGenres());
-    dispatch(resetFilters());
   };
 
   const LogOut = () => {
@@ -85,19 +85,19 @@ export const NavBar = () => {
         {pathname === '/' && (
           <div className={css.contMid}>
             <button
-              className={type === 'main' ? css.typesP : css.types}
+              className={localType === 'main' ? css.typesP : css.types}
               onClick={AllPrograms}
             >
               All
             </button>
             <button
-              className={type === 'movies' ? css.typesP : css.types}
+              className={localType === 'movies' ? css.typesP : css.types}
               onClick={Movies}
             >
               Movies
             </button>
             <button
-              className={type === 'series' ? css.typesP : css.types}
+              className={localType === 'series' ? css.typesP : css.types}
               onClick={Series}
             >
               Series

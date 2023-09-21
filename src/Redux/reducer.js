@@ -71,7 +71,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         totalPages: payload.total,
         programs: payload,
-        type: 'main',
+        // type: 'main',
         filteredPrograms: []
       };
 
@@ -80,7 +80,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         totalPages: payload.total,
         programs: payload,
-        type: 'movies',
+        // type: 'movies',
         filteredPrograms: []
       };
 
@@ -89,7 +89,7 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         totalPages: payload.total,
         programs: payload,
-        type: 'series',
+        // type: 'series',
         filteredPrograms: []
       };
 
