@@ -72,6 +72,7 @@ const Donations = () => {
 
   return (
     <div className={css.section}>
+      <div className={css.BGimg}/>
       <div className={css.BGfiltrer}/>
       <NavBar />
       <div className={css.txt}>
