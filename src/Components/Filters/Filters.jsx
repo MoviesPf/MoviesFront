@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllPrograms, getGenres, getPlatforms, activeFilters, programsFilters, getAllMovies, getAllSeries } from '../../Redux/actions';
+import { getGenres, getPlatforms, activeFilters, programsFilters, getAllPrograms, getAllMovies, getAllSeries, getMovieGenres, getSeriesGenres } from '../../Redux/actions';
 
 import BtnResetFilters from '../Buttons/BtnResetFilters';
 import css from './filters.module.css';
@@ -12,26 +12,41 @@ export const Filters = () => {
 
   const Genres = useSelector((state) => state.genres);
   const Platforms = useSelector((state) => state.platforms);
-  const typeProg = useSelector((state) => state.type);
+  const programType = useSelector((state) => state.type)
 
   const [filters, setFilters] = useState({});
 
   useEffect(() => {
     if (filters.genres?.length >= 1 || filters.platforms?.length >= 1) {
-      dispatch(programsFilters(filters));
+      dispatch(programsFilters({filters, programType}));
       dispatch(activeFilters(filters));
-    } else {
-        if (typeProg === 'main'){ dispatch(getAllPrograms()); } 
-        if (typeProg === 'movies'){ dispatch(getAllMovies()); }
-        if (typeProg === 'series'){ dispatch(getAllSeries()); }
+    } 
+    else {
+      if (programType === "main") dispatch(getAllPrograms())
+      if (programType === "movies") dispatch(getAllMovies())
+      if (programType === "series") dispatch(getAllSeries())
     }
-    dispatch(getGenres());
-    dispatch(getPlatforms());
+
+    if (programType === "main") {
+      dispatch(getGenres());
+      dispatch(getPlatforms());
+    }
+
+    if (programType === "movies") {
+      dispatch(getMovieGenres());
+      dispatch(getPlatforms());
+
+    }
+    if (programType === "series") {
+      dispatch(getSeriesGenres());
+      dispatch(getPlatforms());
+    }
+
   }, [filters]);
 
-  useEffect(() => {
-    setFilters({})
-  },[typeProg])
+  useEffect(()=> {
+   setFilters({})
+  },[programType])
 
   const handlerFilters = (type, filter) => {
     if (type === 'genre') {
