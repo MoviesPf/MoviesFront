@@ -21,13 +21,12 @@
   color: black;
   font-weight: 800;
   text-shadow: 10px 0px 10px rgba(0, 255, 0, 0.5);
-
 }
 
 .subtitle {
-    padding: 2vh 0;
-    font-size: 2rem;
-    font-weight: 750;
+  padding: 2vh 0;
+  font-size: 2rem;
+  font-weight: 750;
 }
 
 .content {
@@ -48,6 +47,7 @@
   gap: 3rem;
 }
 
+
 .card {
   position: relative;
   width: 11rem;
@@ -66,20 +66,20 @@
 }
 
 .monto {
-    top: 0%;
-    font-size: 3rem;
-    font-weight: 800;
-    color: green;
+  top: 0%;
+  font-size: 3rem;
+  font-weight: 800;
+  color: green;
 }
 
 .chckMark {
-    position: absolute;
-    bottom: 0%;
-    left: 0%;
-    margin: 5%;
-    width: 3rem;
-    height: 3rem;
-    cursor: pointer;
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  margin: 5%;
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
 }
 
 .btnDono {
@@ -94,42 +94,106 @@
   background-color: green;
   border: 5px solid green;
 }
-.btnDono:hover { background-color: darkgreen; }
-.btnDono:active { background-color: rgb(0, 70, 0); }
+.btnDono:hover {
+  background-color: darkgreen;
+}
+.btnDono:active {
+  background-color: rgb(0, 70, 0);
+}
 
-.donationSuccess {
-  background-color: #fff598;
-  width: auto;
-  position: absolute;
-  top: -5rem;
-  left: 36rem;
-  outline: 4px dashed rgb(214, 6, 6);
+.noLoginMessage {
+  width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 0.5rem;
-  z-index: 110;
-  animation: message 3s linear;
 }
 
-.donationSuccess span {
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+.message {
+  margin-top: 20px;
+  font-size: 2rem;
+  font-weight: 750;
 }
 
-@keyframes message {
-  0% {
-    top: -5rem;
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+}
+
+@media screen and (max-width: 800px) {
+  .section {
+    height: 150%;
+    width: 100%;
+    text-align: center;
   }
-  30% {
-    top: 4rem;
+
+  .title {
+    font-size: 3rem; 
+    text-shadow: none;
   }
-  60% {
-    top: 4rem;
+
+  .subtitle {
+    font-size: 1.5rem; 
   }
-  100% {
-    top: -5rem;
+
+  .content {
+    width: 80%; 
+    margin: 2rem;
+    margin-bottom: 1rem;
+
+  }
+
+  .cards {
+    width: 70%;
+    flex-direction: column; 
+    gap: 1rem;
+  }
+
+  .card {
+    width: 100%; 
+    height: auto; 
+    flex-direction: column;
+  
+  }
+
+  .monto {
+    font-size: 2rem; 
+  }
+
+  .chckMark {
+    position: relative;
+    bottom: 0%;
+    left: 0%;
+    margin: auto;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+
+  .btnDono {
+    width: 80%;
+  }
+
+  .noLoginMessage {
+    margin-top: 1rem; 
+  }
+
+  .message {
+    font-size: 1.2rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    margin: 1rem; 
+  }
+
+  .btnDonoFalse {
+    width: 100%;
+  }
+
+  .donationSuccess {
+    left: 10%; 
   }
 }
+

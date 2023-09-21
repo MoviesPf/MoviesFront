@@ -1,5 +1,5 @@
 .allNavbar {
-  background-color: #202020b9;
+  background-color: #000000b9;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,12 +12,12 @@
 }
 
 .background {
-  background-color: #202020b9;
+  background-color: #000000b9;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  padding: 3px;
   width: 100%;
 }
 
@@ -28,7 +28,7 @@
 
 .logo {
   align-items: center;
-  color: #19d576;
+  color: green;
   text-decoration: none;
   display: flex;
   flex-direction: row;
@@ -37,7 +37,7 @@
 }
 
 .logo:hover {
-  color: #288858;
+  color: rgb(0, 58, 0);
 }
 
 .logo h1 {
@@ -53,13 +53,13 @@
 .types {
   border-radius: 5px;
   border: none;
-  padding: 4px;
   font-size: 16px;
   cursor: pointer;
   color: #ffffff;
   background: transparent;
   transition: all 0.3s;
-  margin-left: .3rem;
+  padding: .2rem .5rem;
+  margin: 0 .5rem;
 }
 
 .types:hover {
@@ -69,13 +69,13 @@
 .typesP {
   border-radius: 5px;
   border: 2px solid;
-  padding: 4px;
   font-size: 1rem;
   cursor: context-menu;
-  color: #19d576;
+  color: green;
   background: transparent;
   transition: all 0.25s;
-  margin-left: .3rem;
+  padding: .2rem .5rem;
+  margin: 0 .5rem;
 }
 
 .contLeft {
@@ -102,10 +102,10 @@
   margin: 0 1rem;
   border: 0;
   font-size: 16px;
-  color: #000000;
+  color: #ffffff;
   font-family: Arial;
   border-radius: 7px;
-  background:  #19d576;
+  background: green;
   padding-bottom: 3px;
   padding-right: 10px;
   padding-left: 10px;
@@ -113,22 +113,22 @@
 }
 
 .searchButton:hover {
-  background: #288858;
+  background: rgb(0, 58, 0);
 }
 
 .searchComponent {
-  width: 40%;
-  height: auto;
-  margin-top: 30vh;
-  border-radius: 10px;
+  width: 90%;
+  height: 100%;
+  margin: 5px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  background-color: #272727e0;
+  position: relative;
+  background-color: #000000e0;
 }
 
 .cartas {
-  color:  #19d576;
+  color: green;
   height: 78vh;
   width: 100%;
   display: flex;
@@ -138,31 +138,8 @@
   flex-direction: column;
 }
 
-.searchContainer {
-  color:  #19d576;
-  width: 100%;
-  overflow: hidden;
-  max-height: 300px;
-  display: flex;
-  position: relative;
-  align-items: center;
-  flex-direction: column;
-}
-
-.searchBackWindow {
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%; 
-  background-color: rgba(0, 0, 0, 0.4); 
-  z-index: -1; 
-  backdrop-filter: blur(10px);
-}
-
 .message {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin: 5em;
 }
 
 .bottom {
@@ -179,7 +156,7 @@
 }
 
 .cartas::-webkit-scrollbar-thumb {
-  background:  #19d576;
+  background: green;
 }
 
 .user{
@@ -205,5 +182,6 @@
 
 .avatarUserImg{
   height: 2rem;
+  width: 2rem;
   border-radius: 50%;
 }

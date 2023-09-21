@@ -1,5 +1,9 @@
 .background {
-    background-color: #131212;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
 }
 
 .backGen {
@@ -14,7 +18,7 @@
     z-index: 2000;
 }
 
-.genres {
+.filters {
     border-radius: 5px;
     color: white;
     font-size: 17px;
@@ -23,25 +27,30 @@
     justify-content: center;
     align-items: center;
     margin: 0 5px;
-    padding: 1rem;
+    padding: .3rem .5rem;
     transition: all 0.25s;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.filters:hover {
+    background-color: rgb(70, 70, 70);
 }
 
 .selected {
-    background-color: #19d576;
+    background-color: green;
     border-radius: 5px;
-    color: rgb(0, 0, 0);
+    color: white;
     font-size: 17px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     margin: 0 5px;
-    padding: 1rem;
+    padding: .3rem .5rem;
     transition: all 0.25s;
-}
-.genres:hover {
-    background-color: rgb(70, 70, 70);
+    cursor: pointer;
+    white-space: nowrap;
 }
 
 .backPlt {
@@ -74,3 +83,21 @@
     color: white;
 }
 
+.filtersContainer {
+    display: flex;
+    width:fit-content;
+    padding: 20%;
+    background-color: black;
+    padding: 1rem;
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.filtersContainer::-webkit-scrollbar {
+    height: 1.5vh;
+}
+
+.filtersContainer::-webkit-scrollbar-thumb{
+    background: green;
+}

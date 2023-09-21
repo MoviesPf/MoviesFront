@@ -2,10 +2,14 @@ import React from 'react';
 import css from './Card.module.css';
 import { Link } from "react-router-dom";
 import defaultImg from "../../assets/defaultMovie.png"
+import { useDispatch } from 'react-redux';
+import { getProgramDetail } from '../../Redux/actions';
 
 export const Card = ({ program }) => {
+  const dispatch = useDispatch()
+
   return (
-    <div className={css.container}>
+    <div className={css.container} onClick={() => dispatch(getProgramDetail(program.id))}>
       <Link to={`/detail/${program.id}`}>
         { program.poster === "card"
         

@@ -1,36 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import css from './Signin.module.css';
-import { useDispatch } from 'react-redux';
-import {avatarsArray} from './Images';
+import { useDispatch, useSelector } from 'react-redux';
+import { caballoAvatar, conejoAvatar, elefanteAvatar, gatoAvatar, gatoBodyAvatar, leonAvatar, monoBodyAvatar, osoAvatar, osoBodyAvatar, perroBodyAvatar, rinoceronteBodyAvatar, tigreAvatar, unicornioAvatar, zorroAvatar, zorroBodyAvatar} from './Images';
 import { useNavigate } from 'react-router-dom';
 import { createUsers } from '../../Redux/actions';
 import BtnHome from '../../Components/Buttons/BtnHome';
 import { validations } from './validations';
 
-
-
 export const Signin = () => {
-
-
-  function changeLabelText(){
-    const screenWidth = window.innerWidth;
-    if (screenWidth <= 768) {
-      setConfTextPass("Confirm");
-    } else {
-      setConfTextPass("Confirm Password");
-    }
-  }
-  window.onload = changeLabelText;
-  window.onresize = changeLabelText;
-
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const user = useSelector((state) => state.user);
 
-
-  const [user, setUser] = useState({
+  const [createdUser, setCreatedUser] = useState({
     name: '',
     nickname: '',
     avatar: 'https://i.ibb.co/4KWqYTS/user-removebg-preview-1.png',
@@ -39,175 +22,328 @@ export const Signin = () => {
     confirm: ''
   });
 
-  const [confTextPass,setConfTextPass] = useState("Confirm Password")
-  const [displayAvatars,setDisplayAvatars] = useState({ display: 'none' })
-  const [chooseAvatar,setChooseAvatar] = useState({visibility: "visible" })
-
   const [error, setError] = useState({});
 
   const handleChange = (event) => {
-    setUser({
-      ...user,
+    setCreatedUser({
+      ...createdUser,
       [event.target.name]: event.target.value
     });
     setError(
       validations({
-        ...user,
+        ...createdUser,
         [event.target.name]: event.target.value
       })
     );
     console.log(error);
   };
 
-  const showAvatars = () => {
-    if (displayAvatars.display === "none") setDisplayAvatars({ display: 'flex' })
-    if (displayAvatars.display === "flex") setDisplayAvatars({ display: 'none' })
-    
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(user);
-    dispatch(createUsers(user));
-    navigate('/');
+    console.log(createdUser)
+    dispatch(createUsers(createdUser)) 
+
+    if(user.id) {
+      navigate("/")
+    }
   };
 
   return (
     <div className={css.background}>
-    
-      <BtnHome className={css.btnHome} />
-      <div className={css.ViewContainer}>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <BtnHome className={css.btnHome} />
 
         <h1 className={css.title}>SIGN UP</h1>
-{/*  /////////////// User Avatar Area //////////////// */}
-        <div className={css.sectionAvatar} >
-
-          <div className={css.avatarUser} onClick={showAvatars}>
-            <img className={css.avatarUserImg}
-              src={user.avatar} alt="avatar" />
-          </div>
-          <p className={css.titleAvatar} style={chooseAvatar}>Choose your avatar</p>
-
-          {/*////////////////  Imagenes ////////////////*/}
-
-          <div className={css.imagenesBGfiltrer} style={displayAvatars} onClick={showAvatars}/> 
-            <div className={css.imagenesContainer} style={displayAvatars}> 
-                {avatarsArray.map( (avatar,index)=>{
-                  return <div
-                  key ={index}
-                  className={css.avatarContainer}
-                  onClick={() =>
-                    {
-                      setUser({...user,avatar: avatar})
-                      setChooseAvatar({visibility: "hidden" })
-                      showAvatars()
-                    }
-                  }
-                >
-                  <img className={css.avatarImg} src={avatar} alt='avatar' />
-                </div>
-                } )}
-            </div>
-        </div>
-
- {/*  /////////////// Form Area //////////////// */}       
-      <form className={css.form} onSubmit={handleSubmit}>
 
         <div className={css.section}>
-           <div className={css.labelSection}>
-            
-           <label className={css.label}>
-              Name <span className={css.span}>*</span>
-            </label>
-            <label className={css.label}>
-              Nickname <span className={css.span}>*</span>
-            </label>
-            <label className={css.label}>
-              Email <span className={css.span}>*</span>
-            </label>
-            <label className={css.label}>
-              Password <span className={css.span}>*</span>
-            </label>
-            <label className={css.label}>
-             {confTextPass} <span className={css.span}>*</span>
-            </label>
+          <div className={css.formUser}>
 
-           </div>
-
-           <div className={css.inputsSection}>
-              {error.name
-              ? <span className={css.Error} style={{visibility:"visible"}}>{error.name}</span>
-              : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
+            <label className={css.label}>
+              <div>
+                <span> Name </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
-                value={user.name}
+                value={createdUser.name}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Name'
                 type='text'
                 name='name'
               />
-              {error.nickname
-              ? <span className={css.Error} style={{visibility:"visible"}}>{error.nickname}</span>
-              : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
+            </label>
+              {error.name && <span className={css.ErrorName}>{error.name}</span>}
+
+            <label className={css.label}>
+              <div>
+                <span> Nickname </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
-                value={user.nickname}
+                value={createdUser.nickname}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Nickname'
                 type='text'
                 name='nickname'
               />
-              {error.email
-              ? <span className={css.Error} style={{visibility:"visible"}}>{error.email}</span>
-              :<span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}  
+            </label>
+              {error.nickname && <span className={css.ErrorNick}>{error.nickname}</span>}
+
+            <label className={css.label}>
+              <div>
+                <span> Email </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
-                value={user.email}
+                value={createdUser.email}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Email'
                 type='email'
                 name='email'
               />
-              {error.password
-              ? <span className={css.Error} style={{visibility:"visible"}}>{error.password}</span>
-              : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
-             <input
+            </label>
+              {error.email && <span className={css.ErrorEmail}>{error.email}</span>}
+
+            <label className={css.label}>
+              <div>
+                <span> Password </span> <span className={css.span}>*</span>
+              </div>
+              <input
                 onChange={handleChange}
-                value={user.password}
+                value={createdUser.password}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Password'
                 type='password'
                 name='password'
               />
-              {error.confirm
-              ? <span className={css.Error} style={{visibility:"visible"}}>{error.confirm}</span>
-              : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
+            </label>
+              {error.password && <span className={css.ErrorPass}>{error.password}</span>}
+
+            <label className={css.label}>
+              <div>
+                <span> Confirm Password </span> <span className={css.span}>*</span>
+              </div>
               <input
                 onChange={handleChange}
-                value={user.confirm}
+                value={createdUser.confirm}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Confirm Password'
                 type='password'
                 name='confirm'
               />
-           </div>
+            </label>
+              {error.confirm && <span className={css.ErrorConfirm}>{error.confirm}</span>}
+          </div>
         </div>
+
         <div className={css.containBtn}>
           <div className={css.policy}>
             <input className={css.checkbox} type='checkbox' name='policy' />
             <p>I agree to the Terms and Privacy Policy</p>
           </div>
+
           <button type='submit' className={css.btn}>
             Sign up
           </button>
         </div>
+
+        <div className={css.sectionAvatar}>
+
+          <div className={css.avatarUser}>
+            <img className={css.avatarUserImg}
+              src={createdUser.avatar} alt="avatar" />
+          </div>
+          <p className={css.titleAvatar}>Choose your avatar</p>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: caballoAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={caballoAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: conejoAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={conejoAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: gatoBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={gatoBodyAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: monoBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={monoBodyAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: osoBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={osoBodyAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: perroBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={perroBodyAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: rinoceronteBodyAvatar
+              })
+            }
+          >
+            <img
+              className={css.avatarImg}
+              src={rinoceronteBodyAvatar}
+              alt='avatar'
+            />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: zorroBodyAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={zorroBodyAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: elefanteAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={elefanteAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: gatoAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={gatoAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: leonAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={leonAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: osoAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={osoAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: tigreAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={tigreAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: unicornioAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={unicornioAvatar} alt='avatar' />
+          </div>
+
+          <div
+            className={css.avatarContainer}
+            onClick={() =>
+              setCreatedUser({
+                ...createdUser,
+                avatar: zorroAvatar
+              })
+            }
+          >
+            <img className={css.avatarImg} src={zorroAvatar} alt='avatar' />
+          </div>
+        </div>
       </form>
-      </div>
     </div>
   );
 };

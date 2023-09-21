@@ -89,8 +89,7 @@
 }
 
 .errorLogin{
-  position: absolute;
-  top: 10rem;
+  position: relative;
   color: rgb(173, 15, 15);
 }
 
@@ -130,7 +129,7 @@
 }
 
 .btn {
-  background-color:  #19d576;
+  background-color:green;
   height: 3rem;
   width: 10vw;
   @media (max-width: 768px) {
@@ -140,7 +139,7 @@
   border: none;
   border-radius: 0.3rem;
   margin: 1rem;
-  color: #353535;
+  color: white;
   font-weight: 700;
   box-shadow: -2px 2px 5px #000000a6;
 }
@@ -163,12 +162,12 @@
 
 .singin {
   margin: 0.5rem;
-  color: #19d576;
+  color: green;
   font-weight: 500;
 }
 
 .singin:hover {
-  color: #288858;
+  color: rgb(0, 53, 0);
 }
 
 .or {
@@ -216,4 +215,61 @@
 .authGoogle span {
   color: #353535;
   font-weight: 700 !important;
+}
+
+.modalBanned{
+  background-color: #50505070;
+  backdrop-filter: blur(3px);
+  color: #000;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 1000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalDiv{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 18rem;
+  outline: 3px solid #008000;
+  background: #000;
+  font-size: 2rem;
+  padding: 2rem;
+}
+
+.modalText{
+  text-align: center;
+  font-size: 2.5rem;
+  width: 100%;
+  color: #fff;
+}
+
+.modalBtn{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  background: #008000;
+  outline: 3px solid #1b3b1b;
+  height: 4rem;
+  padding: .5rem 1rem;
+  color: #fff;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.modalBtn:hover{
+  opacity: .8;
+}
+
+.modalBtn:active{
+ scale: .9;
+}
+
+.resal{
+  color: #008000;
 }

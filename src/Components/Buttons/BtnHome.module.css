@@ -8,11 +8,10 @@
   color: #fff;
   gap: .5rem;
   align-items: center;
-  z-index: 999;
 }
 
 .logo:hover{
-  color:  #19d576;
+  color: #008000;
 }
 
 .logo p{
