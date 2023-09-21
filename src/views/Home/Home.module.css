@@ -32,8 +32,44 @@
     background: green;
 }
 
-.donationSuccess {
-    background-color: green;
-    margin-top: 50px;
-    color: white;
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .modal {
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    font-size: larger;
+    font-weight: bold;
+    color: black;
+    border: 1px solid #dddddd41; /* Borde pequeño en #ddd */
+    
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ddd; 
+  }
+  
+  .modalContent {
+    padding: 25px;
+    background-color: #ddd; 
 }
