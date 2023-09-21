@@ -31,7 +31,6 @@ export const NavBar = () => {
 
   const [show, setShow] = useState(false);
   const [searched, setSearched] = useState(false);
-  const [localType, setLocalType ] = useState("main");
 
   useEffect(() => {
     if (user.banned) {
@@ -46,7 +45,6 @@ export const NavBar = () => {
   const AllPrograms = () => {
     if (type === 'main') return;
     dispatch(changeTypeMain());
-    setLocalType("main")
     dispatch(getAllPrograms());
     dispatch(getGenres());
   };
@@ -54,7 +52,6 @@ export const NavBar = () => {
   const Movies = () => {
     if (type === 'movies') return;
     dispatch(changeTypeMovie());
-    setLocalType("movies")
     dispatch(getAllMovies());
     dispatch(getMovieGenres());
   };
@@ -62,7 +59,6 @@ export const NavBar = () => {
   const Series = () => {
     if (type === 'series') return;
     dispatch(changeTypeSerie());
-    setLocalType("series")
     dispatch(getAllSeries());
     dispatch(getSeriesGenres());
   };
@@ -85,19 +81,19 @@ export const NavBar = () => {
         {pathname === '/' && (
           <div className={css.contMid}>
             <button
-              className={localType === 'main' ? css.typesP : css.types}
+              className={type === 'main' ? css.typesP : css.types}
               onClick={AllPrograms}
             >
               All
             </button>
             <button
-              className={localType === 'movies' ? css.typesP : css.types}
+              className={type === 'movies' ? css.typesP : css.types}
               onClick={Movies}
             >
               Movies
             </button>
             <button
-              className={localType === 'series' ? css.typesP : css.types}
+              className={type === 'series' ? css.typesP : css.types}
               onClick={Series}
             >
               Series
