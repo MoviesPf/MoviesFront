@@ -9,7 +9,7 @@ const BtnResetFilters = () => {
     <div className={style.container}>
     <VscDebugRestart
       onClick={() => {
-        dispatch(getAllPrograms());
+        // dispatch(getAllPrograms());
         dispatch(resetFilters());
       }}
       className={style.reset}

@@ -1,16 +1,52 @@
 import { useEffect, useState } from 'react';
 import css from './Signin.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {avatarsArray} from './Images';
 import { useNavigate } from 'react-router-dom';
 import { createUsers } from '../../Redux/actions';
 import BtnHome from '../../Components/Buttons/BtnHome';
 import { validations } from './validations';
 
-
-
 export const Signin = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const user = useSelector((state) => state.user);
+  
+  const [createdUser, setUser] = useState({
+    name: '',
+    nickname: '',
+    avatar: 'https://i.ibb.co/4KWqYTS/user-removebg-preview-1.png',
+    email: '',
+    password: '',
+    confirm: ''
+  });
+  
+  const [error, setError] = useState({});
+
+  const handleChange = (event) => {
+    setUser({
+      ...createdUser,
+      [event.target.name]: event.target.value
+    });
+    setError(
+      validations({
+        ...createdUser,
+        [event.target.name]: event.target.value
+      })
+    );
+    console.log(error);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(createdUser);
+    dispatch(createUsers(createdUser));
+    
+    if(user?.id) {
+      navigate('/');
+    }
+  };
 
   function changeLabelText(){
     const screenWidth = window.innerWidth;
@@ -24,59 +60,19 @@ export const Signin = () => {
   window.onresize = changeLabelText;
 
 
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-
-
-  const [user, setUser] = useState({
-    name: '',
-    nickname: '',
-    avatar: 'https://i.ibb.co/4KWqYTS/user-removebg-preview-1.png',
-    email: '',
-    password: '',
-    confirm: ''
-  });
-
   const [confTextPass,setConfTextPass] = useState("Confirm Password")
   const [displayAvatars,setDisplayAvatars] = useState({ display: 'none' })
   const [chooseAvatar,setChooseAvatar] = useState({visibility: "visible" })
 
-  const [error, setError] = useState({});
-
-  const handleChange = (event) => {
-    setUser({
-      ...user,
-      [event.target.name]: event.target.value
-    });
-    setError(
-      validations({
-        ...user,
-        [event.target.name]: event.target.value
-      })
-    );
-    console.log(error);
-  };
-
   const showAvatars = () => {
     if (displayAvatars.display === "none") setDisplayAvatars({ display: 'flex' })
     if (displayAvatars.display === "flex") setDisplayAvatars({ display: 'none' })
-    
   }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(user);
-    dispatch(createUsers(user));
-    navigate('/');
-  };
 
   return (
 
     <div className={css.background}>
-    
-      <BtnHome className={css.btnHome} />
+      <BtnHome/>
       <div className={css.ViewContainer}>
 
         <h1 className={css.title}>SIGN UP</h1>
@@ -85,7 +81,7 @@ export const Signin = () => {
 
           <div className={css.avatarUser} onClick={showAvatars}>
             <img className={css.avatarUserImg}
-              src={user.avatar} alt="avatar" />
+              src={createdUser.avatar} alt="avatar" />
           </div>
           <p className={css.titleAvatar} style={chooseAvatar}>Choose your avatar</p>
 
@@ -99,7 +95,7 @@ export const Signin = () => {
                   className={css.avatarContainer}
                   onClick={() =>
                     {
-                      setUser({...user,avatar: avatar})
+                      setUser({...createdUser,avatar: avatar})
                       setChooseAvatar({visibility: "hidden" })
                       showAvatars()
                     }
@@ -141,7 +137,7 @@ export const Signin = () => {
               : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
               <input
                 onChange={handleChange}
-                value={user.name}
+                value={createdUser.name}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Name'
@@ -153,7 +149,7 @@ export const Signin = () => {
               : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
               <input
                 onChange={handleChange}
-                value={user.nickname}
+                value={createdUser.nickname}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Nickname'
@@ -165,7 +161,7 @@ export const Signin = () => {
               :<span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}  
               <input
                 onChange={handleChange}
-                value={user.email}
+                value={createdUser.email}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Email'
@@ -177,7 +173,7 @@ export const Signin = () => {
               : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
              <input
                 onChange={handleChange}
-                value={user.password}
+                value={createdUser.password}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Password'
@@ -189,7 +185,7 @@ export const Signin = () => {
               : <span className={css.Error} style={{visibility:"hidden"}}>{null}</span>}
               <input
                 onChange={handleChange}
-                value={user.confirm}
+                value={createdUser.confirm}
                 autoComplete='none'
                 className={css.input}
                 placeholder='Confirm Password'

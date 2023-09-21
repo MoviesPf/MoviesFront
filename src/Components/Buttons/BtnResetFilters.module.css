@@ -1,8 +1,8 @@
 .reset{
     font-size: 3rem;
     background-color: #000;
-    color: #288858;
-    outline: 3px solid #288858;
+    color: green;
+    outline: 3px solid green;
     padding: .2rem;
     cursor: pointer;
     margin:  1vh 5vw;

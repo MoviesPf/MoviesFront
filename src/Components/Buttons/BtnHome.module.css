@@ -1,4 +1,5 @@
 .logo {
+  z-index: 1000;
   position: absolute;
   justify-content: center;
   margin: 1rem;
@@ -12,7 +13,7 @@
 }
 
 .logo:hover{
-  color: #19d576;
+  color: #008000;
 }
 
 .logo p{

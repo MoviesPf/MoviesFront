@@ -79,6 +79,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email);
+    console.log(password);
     dispatch(loginUser(null, email, password));
 
     if (user.id && !user.banned) {

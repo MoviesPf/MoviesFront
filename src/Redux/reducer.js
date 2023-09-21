@@ -161,7 +161,6 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         activeFilters: [],
         filteredPrograms: [],
-        totalPages: 24
       };
 
     case GENRES_FILTERS:

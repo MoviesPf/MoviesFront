@@ -17,7 +17,7 @@ export const ViewContainer = styled.div`
   }
   
   &::-webkit-scrollbar-thumb{
-    background: #288858;
+    background: green;
   }
 `
 
