@@ -29,7 +29,7 @@
 }
 
 .background::-webkit-scrollbar-thumb{
-    background: #19d576;
+    background: green;
 }
 
 .modalOverlay {

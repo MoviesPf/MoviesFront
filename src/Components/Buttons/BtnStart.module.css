@@ -7,8 +7,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #288858;
-  outline: 3px solid #288858;
+  color: green;
+  outline: 3px solid green;
   position: sticky;
   top: 32rem;
   left: 95%;
