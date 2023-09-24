@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllPrograms, getUserPlaylists } from '../../Redux/actions';
 import styled from 'styled-components';
 import css from './Home.module.css';
+import { BiSolidCameraMovie } from 'react-icons/bi';
 
 const LineHR = styled.hr`
   border: 0;
@@ -131,18 +132,23 @@ export const Home = () => {
 
           <Footer />
           <div>
-            {isModalOpen && (
+            {/* {isModalOpen && ( */}
               <div className={css.modalOverlay}>
                 <div className={css.modal}>
                   <button onClick={closeModal} className={css.closeButton}>
-                    x
+                    X
                   </button>
+                  <div className={css.logo}>
+                    <BiSolidCameraMovie />
+                    <h1>GreenScreen</h1>
+                  </div>
                   <div className={css.modalContent}>
-                    <span>{successMessage}</span>
+                    {/* <span>{successMessage}</span> */}
+                    <span>Thank you very much! Your donation has been successfully completed</span>
                   </div>
                 </div>
               </div>
-            )}
+            {/* )} */}
           </div>
         </div>
       )}
