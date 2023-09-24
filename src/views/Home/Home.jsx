@@ -132,7 +132,7 @@ export const Home = () => {
 
           <Footer />
           <div>
-            {/* {isModalOpen && ( */}
+            {isModalOpen && (
               <div className={css.modalOverlay}>
                 <div className={css.modal}>
                   <button onClick={closeModal} className={css.closeButton}>
@@ -143,12 +143,11 @@ export const Home = () => {
                     <h1>GreenScreen</h1>
                   </div>
                   <div className={css.modalContent}>
-                    {/* <span>{successMessage}</span> */}
-                    <span>Thank you very much! Your donation has been successfully completed</span>
+                    <span>{successMessage}</span>
                   </div>
                 </div>
               </div>
-            {/* )} */}
+            )}
           </div>
         </div>
       )}
