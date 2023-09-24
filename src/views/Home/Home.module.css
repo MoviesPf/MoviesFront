@@ -33,43 +33,64 @@
 }
 
 .modalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-  
-  .modal {
-    background-color: #000000;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-    font-size: larger;
-    font-weight: bold;
-    color: black;
-    border: 1px solid #dddddd41; /* Borde pequeño en #ddd */
-    
-  }
-  
-  .closeButton {
-    position: absolute;
-    top: 1px;
-    right: 1px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    color: #ddd; 
-  }
-  
-  .modalContent {
-    padding: 25px;
-    background-color: #ddd; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background-color: rgb(58, 128, 58);
+  width: 40vw;
+  padding: 1vh 3vh 3vh 3vh;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  font-size: larger;
+  font-weight: bold;
+  color: black;
+  border: 1vh double green;
+  overflow-wrap: break-word;
+}
+
+.closeButton {
+  position: absolute;
+  top: -5vh;
+  right: -3vw;
+  height: 5vh;
+  width: 5vh;
+  background: rgba(0, 128, 0, 0.5);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: rgb(0, 96, 0); 
+}
+
+.modalContent {
+  padding: 1.5rem;
+  font-size: 3vh;
+  text-align: center;
+  background-color: rgb(58, 128, 58); 
+  border: 1vh dashed green; /* Borde pequeño en #ddd */
+}
+
+.logo {
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  font-size: 8vh;
+  transition: all 0.25s;
+}
+.logo h1 {
+  font-weight: 780;
+  margin-top: 2vh;
 }
