@@ -76,6 +76,9 @@ export const Signin = () => {
       <div className={css.ViewContainer}>
 
         <h1 className={css.title}>SIGN UP</h1>
+
+      <div className={css.totalGrid}>
+      <div className={css.leftSide}>
 {/*  /////////////// User Avatar Area //////////////// */}
         <div className={css.sectionAvatar} >
 
@@ -83,32 +86,9 @@ export const Signin = () => {
             <img className={css.avatarUserImg}
               src={createdUser.avatar} alt="avatar" />
           </div>
-          <p className={css.titleAvatar} style={chooseAvatar}>Choose your avatar</p>
-
-          {/*////////////////  Imagenes ////////////////*/}
-
-          <div className={css.imagenesBGfiltrer} style={displayAvatars} onClick={showAvatars}/> 
-            <div className={css.imagenesContainer} style={displayAvatars}> 
-                {avatarsArray.map( (avatar,index)=>{
-                  return <div
-                  key ={index}
-                  className={css.avatarContainer}
-                  onClick={() =>
-                    {
-                      setUser({...createdUser,avatar: avatar})
-                      setChooseAvatar({visibility: "hidden" })
-                      showAvatars()
-                    }
-                  }
-                >
-                  <img className={css.avatarImg} src={avatar} alt='avatar' />
-                </div>
-                } )}
-            </div>
         </div>
-
  {/*  /////////////// Form Area //////////////// */}       
-      <form className={css.form} onSubmit={handleSubmit}>
+      <form id='userForm' className={css.form} onSubmit={handleSubmit}>
 
         <div className={css.section}>
            <div className={css.labelSection}>
@@ -194,16 +174,37 @@ export const Signin = () => {
               />
            </div>
         </div>
+      </form>
+      </div>
+
+      {/*////////////////  Imagenes ////////////////*/}
+      <div className={css.rightSide}>
+        <h1 className={css.chooseTitle}>Choose your avatar</h1>
+        <div className={css.imagenesContainer}> 
+          {avatarsArray.map( (avatar,index)=>{
+            return <div
+            key ={index}
+            className={css.avatarContainer}
+            onClick={() => {
+              setUser({...createdUser,avatar: avatar})
+              setChooseAvatar({visibility: "hidden" })
+              showAvatars()
+            }}>
+            <img className={css.avatarImg} src={avatar} alt='avatar' />
+          </div>
+          } )}
+        </div>
+      </div>
+      </div>
+
         <div className={css.containBtn}>
           <div className={css.policy}>
             <input className={css.checkbox} type='checkbox' name='policy' />
             <p>I agree to the Terms and Privacy Policy</p>
           </div>
-          <button type='submit' className={css.btn}>
-            Sign up
-          </button>
-        </div>
-      </form>
+          <button type='submit' form='userForm' className={css.btn}>Sign up</button>
+        </div> 
+
       </div>
     </div>
   );
