@@ -15,6 +15,11 @@
   align-items: center;
 }
 
+.totalGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
 
 .btnHome {
   position: relative;
@@ -25,14 +30,10 @@
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  margin-bottom: 200px;
-/*   display: grid;
-  grid-template-columns: 40% 60%;
-  grid-template-rows: 10% 70% 20%; */
 }
 
 .title {
-  margin-top: 100px;
+  margin: 0 0 5vh 0;
   display: flex;
   align-items: center;
   font-size: 3.5rem;
@@ -66,10 +67,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
-}
-.avatarUser:hover {
-  scale: 1.1;
 }
 
 .imagenesBGfiltrer{
@@ -83,30 +80,26 @@
   z-index: 70;
 }
 
+.chooseTitle {
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+}
+
 .imagenesContainer{
-  width: 500px;
-  margin-top: 340px;
-  background-color: #242424;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  background: transparent;
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0px 4px 15px #bdbdbd;;
-  position:absolute;
+  margin-top: 5vh;
   z-index: 79;
 }
 
 .avatarUserImg {
   height: 6rem;
-}
-
-
-.formUser {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .label {
@@ -161,7 +154,6 @@
   flex-direction: column;
   align-items: center;
   margin-right: 22px;
-  padding: 1.5rem 0.5rem;
 }
 
 .policy {
@@ -204,11 +196,6 @@
 }
 
 .sectionAvatar {
-  grid-column: 2/3;
-  grid-row: 2/3;
-  width: 80%;
-  height: 100%;
-  margin-top: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
