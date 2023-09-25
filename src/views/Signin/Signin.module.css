@@ -1,5 +1,4 @@
 .background {
-  height: 100vh;
   background-image: url('https://i.ibb.co/PhcQXyq/background.jpg'); /* Ruta a la imagen de fondo */
   background-size: cover;
   background-repeat: no-repeat;
